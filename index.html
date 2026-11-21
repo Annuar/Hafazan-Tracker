@@ -1,0 +1,4175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Hafazan Tracker — Saba · Pra Saba · Mukhtar · Murojaah</title>
+  <style>
+    /* =========================================================================
+       1. SELF-CONTAINED DESIGN TOKENS & RESET (ZERO EXTERNAL CDN DEPENDENCY)
+       ========================================================================= */
+    :root {
+      --emerald-950: #022C22;
+      --emerald-900: #064E3B;
+      --emerald-850: #065F46;
+      --emerald-700: #047857;
+      --emerald-600: #059669;
+      --emerald-100: #D1FAE5;
+      --emerald-50:  #ECFDF5;
+
+      --teal-700: #0F766E;
+      --teal-600: #0D9488;
+      --teal-100: #CCFBF1;
+      --teal-50:  #F0FDFA;
+
+      --amber-700: #B45309;
+      --amber-600: #D97706;
+      --amber-500: #F59E0B;
+      --amber-100: #FEF3C7;
+      --amber-50:  #FFFBEB;
+
+      --indigo-700: #4338CA;
+      --indigo-600: #4F46E5;
+      --indigo-500: #6366F1;
+      --indigo-100: #E0E7FF;
+      --indigo-50:  #EEF2FF;
+
+      --rose-600: #E11D48;
+      --rose-100: #FFE4E6;
+      --rose-50:  #FFF1F2;
+
+      --sky-500: #0EA5E9;
+      --sky-100: #E0F2FE;
+
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-400: #94A3B8;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50:  #F8FAFC;
+      --white:     #FFFFFF;
+
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 18px;
+      --radius-xl: 22px;
+      --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 16px rgba(15, 23, 42, 0.09);
+      --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.18);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding-bottom: 88px;
+    }
+
+    button, input, select {
+      font-family: inherit;
+    }
+
+    button {
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="date"],
+    select {
+      color: var(--slate-900) !important;
+      -webkit-text-fill-color: var(--slate-900) !important;
+      opacity: 1 !important;
+      background-color: var(--slate-50);
+      border: 1.5px solid var(--slate-300);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-size: 15px;
+      font-weight: 600;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+      border-color: var(--teal-600);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.16);
+      background-color: var(--white);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(14px); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+
+    .animate-in {
+      animation: slideUp 0.22s ease-out forwards;
+    }
+
+    /* =========================================================================
+       2. CLEAN TOP HEADER & SYNC STATUS PILL
+       ========================================================================= */
+    .app-header {
+      background: linear-gradient(135deg, var(--emerald-850) 0%, var(--teal-600) 100%);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FCD34D;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      margin: 2px 0 0;
+      font-size: 11.5px;
+      color: rgba(236, 253, 245, 0.94);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .sync-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+    }
+
+    .sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate-700);
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      flex-shrink: 0;
+    }
+
+    .sync-dot.syncing { background: #F59E0B; }
+    .sync-dot.local   { background: #3B82F6; }
+    .sync-dot.error   { background: #F43F5E; }
+
+    .main-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 14px 14px 0;
+    }
+
+    .stack-md {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+    }
+
+    .card-pad {
+      padding: 16px;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--slate-500);
+      margin-bottom: 8px;
+    }
+
+    /* =========================================================================
+       3. UNCROWDED STUDENT PROFILE CARD
+       ========================================================================= */
+    .profile-summary-box {
+      padding: 16px;
+      background: linear-gradient(155deg, var(--white) 0%, var(--slate-50) 65%, var(--emerald-50) 100%);
+    }
+
+    .profile-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .profile-identity {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--emerald-100);
+      color: var(--emerald-850);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .profile-kicker {
+      margin: 0;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--emerald-700);
+    }
+
+    .profile-fullname {
+      margin: 3px 0 0;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .btn-edit-profile {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 13px;
+      border-radius: 11px;
+      background: var(--white);
+      border: 1.5px solid var(--slate-200);
+      color: var(--emerald-850);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .btn-edit-profile:active {
+      background: var(--emerald-50);
+      transform: scale(0.98);
+    }
+
+    .profile-meta-block {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--slate-200);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .profile-school-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-600);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .profile-badges-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .meta-pill-emerald {
+      background: var(--emerald-50);
+      color: var(--emerald-900);
+      border: 1px solid var(--emerald-100);
+    }
+
+    .meta-pill-slate {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+    }
+
+    .profile-form-body {
+      padding: 16px;
+      border-top: 1px solid var(--slate-200);
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate-700);
+      margin-bottom: 5px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .form-actions-end {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding-top: 4px;
+    }
+
+    /* =========================================================================
+       4. MUROJAAH DAY QUICK TOGGLE BANNER
+       ========================================================================= */
+    .murojaah-banner {
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--indigo-100);
+      background: linear-gradient(135deg, var(--indigo-50) 0%, var(--white) 100%);
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-xs);
+      transition: all 0.2s ease;
+    }
+
+    .murojaah-banner.is-on {
+      background: linear-gradient(135deg, var(--indigo-600) 0%, var(--indigo-700) 100%);
+      border-color: var(--indigo-700);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+
+    .murojaah-banner-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .murojaah-banner-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--indigo-100);
+      color: var(--indigo-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .murojaah-banner.is-on .murojaah-banner-icon {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FDE68A;
+    }
+
+    .murojaah-banner-title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate-900);
+    }
+
+    .murojaah-banner.is-on .murojaah-banner-title {
+      color: var(--white);
+    }
+
+    .murojaah-banner-sub {
+      margin: 1px 0 0;
+      font-size: 11px;
+      color: var(--slate-600);
+    }
+
+    .murojaah-banner.is-on .murojaah-banner-sub {
+      color: rgba(224, 231, 255, 0.92);
+    }
+
+    .btn-murojaah-toggle {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1.5px solid var(--indigo-600);
+      background: var(--white);
+      color: var(--indigo-700);
+      font-size: 12px;
+      font-weight: 800;
+      transition: all 0.15s ease;
+    }
+
+    .murojaah-banner.is-on .btn-murojaah-toggle {
+      background: #FBBF24;
+      border-color: #FBBF24;
+      color: var(--slate-900);
+    }
+
+    /* =========================================================================
+       5. BUTTONS, STATUS PILLS & CATEGORY CARDS
+       ========================================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: opacity 0.15s ease, transform 0.1s ease, background-color 0.15s ease;
+    }
+
+    .btn:active:not(:disabled) {
+      transform: scale(0.985);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--emerald-850), var(--teal-600));
+      color: var(--white);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 15px;
+    }
+
+    .btn-amber {
+      background: var(--amber-600);
+      color: var(--white);
+      box-shadow: var(--shadow-sm);
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 15px;
+    }
+
+    .btn-secondary {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+    }
+
+    .btn-outline-teal {
+      background: var(--teal-50);
+      color: var(--teal-700);
+      border: 1.5px solid var(--teal-100);
+      width: 100%;
+    }
+
+    .btn-sm {
+      padding: 7px 11px;
+      font-size: 12px;
+      border-radius: 10px;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    @media (min-width: 480px) {
+      .status-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .status-pill-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 11px 10px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--slate-200);
+      background: var(--white);
+      color: var(--slate-700);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-pill-btn.active-status {
+      background: var(--emerald-850);
+      border-color: var(--emerald-850);
+      color: var(--white);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .status-pill-btn.active-off {
+      background: var(--amber-600);
+      border-color: var(--amber-600);
+      color: var(--white);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip-btn {
+      padding: 6px 11px;
+      border-radius: 9px;
+      border: 1px solid var(--slate-200);
+      background: var(--white);
+      color: var(--slate-700);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .chip-btn.selected {
+      background: var(--amber-600);
+      border-color: var(--amber-600);
+      color: var(--white);
+    }
+
+    .chip-btn.selected-indigo {
+      background: var(--indigo-600);
+      border-color: var(--indigo-600);
+      color: var(--white);
+    }
+
+    .cat-header {
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .cat-header-saba     { background: var(--emerald-50); border-bottom-color: var(--emerald-100); }
+    .cat-header-prasaba  { background: var(--teal-50); border-bottom-color: var(--teal-100); }
+    .cat-header-mukhtar  { background: var(--amber-50); border-bottom-color: var(--amber-100); }
+    .cat-header-murojaah { background: var(--indigo-50); border-bottom-color: var(--indigo-100); }
+
+    .cat-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .cat-num-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cat-title {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate-900);
+    }
+
+    .cat-subtitle {
+      margin: 1px 0 0;
+      font-size: 11px;
+      color: var(--slate-600);
+    }
+
+    .toggle-check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate-800);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-check-label input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--emerald-850);
+      margin: 0;
+    }
+
+    .surah-trigger-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 11px 13px;
+      border-radius: var(--radius-md);
+      background: var(--slate-50);
+      border: 2px solid var(--emerald-600);
+      text-align: left;
+      min-height: 46px;
+    }
+
+    .surah-trigger-btn.teal-border {
+      border-color: var(--teal-600);
+    }
+
+    .surah-trigger-btn.indigo-border {
+      border-color: var(--indigo-600);
+    }
+
+    .surah-trigger-btn:active {
+      background: var(--emerald-50);
+    }
+
+    .surah-trigger-btn * {
+      pointer-events: none;
+    }
+
+    .surah-trigger-main {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .surah-trigger-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate-900);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .surah-ayat-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--emerald-100);
+      color: var(--emerald-900);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .surah-ayat-tag.teal-tag {
+      background: var(--teal-100);
+      color: var(--teal-700);
+    }
+
+    .surah-ayat-tag.indigo-tag {
+      background: var(--indigo-100);
+      color: var(--indigo-700);
+    }
+
+    .surah-change-hint {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--emerald-700);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .range-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 0.85fr;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .num-input-center {
+      text-align: center !important;
+      font-size: 17px !important;
+      font-weight: 800 !important;
+      padding: 10px 6px !important;
+    }
+
+    .total-box {
+      border-radius: var(--radius-md);
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--white);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stepper-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 2px;
+    }
+
+    .stepper-buttons {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .step-btn {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .step-btn-emerald { background: var(--emerald-100); color: var(--emerald-900); }
+    .step-btn-teal    { background: var(--teal-100); color: var(--teal-700); }
+    .step-btn-amber   { background: var(--amber-100); color: var(--amber-700); }
+    .step-btn-indigo  { background: var(--indigo-100); color: var(--indigo-700); }
+
+    .mode-switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: var(--slate-100);
+      padding: 4px;
+      border-radius: var(--radius-md);
+    }
+
+    .mode-switch-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      background: var(--slate-100);
+      padding: 4px;
+      border-radius: var(--radius-md);
+    }
+
+    .mode-tab-btn {
+      padding: 8px 6px;
+      border-radius: 10px;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      background: transparent;
+      color: var(--slate-600);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .mode-tab-btn.active {
+      background: var(--white);
+      color: var(--amber-700);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .mode-tab-btn.active-indigo {
+      background: var(--white);
+      color: var(--indigo-700);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .surah-chips-scroll {
+      max-height: 210px;
+      overflow-y: auto;
+      padding: 8px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* =========================================================================
+       6. PROGRESS TAB & INSIGHTS STYLING
+       ========================================================================= */
+    .hero-milestone {
+      background: linear-gradient(135deg, var(--emerald-850) 0%, var(--emerald-700) 55%, var(--teal-600) 100%);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #FBBF24;
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .kpi-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 13px;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .kpi-label {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--slate-500);
+    }
+
+    .kpi-val {
+      margin: 4px 0 2px;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .kpi-sub {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    @media (min-width: 520px) {
+      .insights-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .insight-tile {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 11px 12px;
+    }
+
+    .mix-bar {
+      display: flex;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--slate-100);
+    }
+
+    .juz-matrix {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+
+    @media (min-width: 500px) {
+      .juz-matrix {
+        grid-template-columns: repeat(10, 1fr);
+      }
+    }
+
+    .juz-cell {
+      padding: 7px 2px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid var(--slate-200);
+      background: var(--slate-100);
+      color: var(--slate-400);
+    }
+
+    .juz-cell.juz-saba {
+      background: var(--emerald-850);
+      border-color: var(--emerald-850);
+      color: var(--white);
+    }
+
+    .juz-cell.juz-mukhtar {
+      background: var(--amber-500);
+      border-color: var(--amber-600);
+      color: var(--white);
+    }
+
+    .juz-cell.juz-murojaah {
+      background: var(--indigo-600);
+      border-color: var(--indigo-700);
+      color: var(--white);
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+    }
+
+    .heat-cell {
+      aspect-ratio: 1 / 1;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      border: 1px solid var(--slate-200);
+      background: var(--slate-100);
+      color: var(--slate-400);
+    }
+
+    .heat-active   { background: var(--emerald-600); border-color: var(--emerald-700); color: var(--white); }
+    .heat-murojaah { background: var(--indigo-600); border-color: var(--indigo-700); color: var(--white); }
+    .heat-weekend  { background: var(--slate-300); border-color: var(--slate-400); color: var(--slate-800); }
+    .heat-cuti     { background: var(--amber-500); border-color: var(--amber-600); color: var(--slate-900); }
+    .heat-riadah   { background: var(--sky-500); border-color: var(--sky-500); color: var(--white); }
+
+    .bar-chart-wrap {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 6px;
+      height: 145px;
+      padding: 16px 6px 4px;
+      border-bottom: 1.5px solid var(--slate-200);
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    .bar-stack {
+      width: 100%;
+      max-width: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 6px 6px 0 0;
+      overflow: hidden;
+    }
+
+    .bar-val-label {
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--slate-600);
+      margin-bottom: 3px;
+    }
+
+    .bar-date-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 5px 6px 0;
+    }
+
+    .bar-date-lbl {
+      flex: 1;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--slate-500);
+    }
+
+    /* =========================================================================
+       7. HISTORY TABLE & EXPORT TAB
+       ========================================================================= */
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      min-width: 520px;
+    }
+
+    table.data-table th {
+      background: var(--slate-50);
+      color: var(--slate-500);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    table.data-table td {
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--slate-100);
+      vertical-align: middle;
+    }
+
+    .badge-tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* =========================================================================
+       8. STICKY BOTTOM NAVIGATION & FULL-SCREEN SURAH PICKER MODAL
+       ========================================================================= */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.97);
+      border-top: 1px solid var(--slate-200);
+      z-index: 50;
+      box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .bottom-nav-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-tab-btn {
+      border: none;
+      background: transparent;
+      padding: 10px 6px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-400);
+    }
+
+    .nav-tab-btn.active {
+      color: var(--emerald-850);
+      font-weight: 800;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(15, 23, 42, 0.68);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    @media (min-width: 560px) {
+      .modal-overlay {
+        align-items: center;
+        padding: 16px;
+      }
+    }
+
+    .modal-sheet {
+      background: var(--white);
+      width: 100%;
+      max-width: 500px;
+      height: 86vh;
+      max-height: 680px;
+      border-radius: 22px 22px 0 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.2s ease-out forwards;
+    }
+
+    @media (min-width: 560px) {
+      .modal-sheet {
+        border-radius: 20px;
+      }
+    }
+
+    .modal-header {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .modal-close-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .modal-search-area {
+      padding: 12px 14px;
+      background: var(--slate-50);
+      border-bottom: 1px solid var(--slate-200);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .modal-list-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .surah-row-item {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 11px 12px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .surah-row-item:active,
+    .surah-row-item:hover {
+      background: var(--slate-50);
+    }
+
+    .surah-row-item.is-selected {
+      background: var(--emerald-50);
+    }
+
+    .surah-row-item * {
+      pointer-events: none;
+    }
+
+    .surah-num-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .surah-row-item.is-selected .surah-num-pill {
+      background: var(--emerald-850);
+      color: var(--white);
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      z-index: 10000;
+      background: var(--slate-900);
+      color: var(--white);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== STICKY HEADER ==================== -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+            <path d="M9 7h6"/>
+            <path d="M9 11h4"/>
+          </svg>
+        </div>
+        <div style="min-width:0; flex:1;">
+          <h1 class="brand-title">Hafazan Tracker</h1>
+          <p class="brand-sub">Saba · Pra Saba · Mukhtar · Murojaah</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-container">
+
+    <!-- =====================================================
+         TAB 1: DAILY LOG
+         ===================================================== -->
+    <section id="tab-daily" class="stack-md animate-in">
+
+      <!-- 1. Uncrowded Student Profile Card -->
+      <div class="card">
+        <div class="profile-summary-box">
+          <div class="profile-top-row">
+            <div class="profile-identity">
+              <div class="profile-avatar" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              </div>
+              <div style="min-width: 0; flex: 1;">
+                <p class="profile-kicker">Student Profile</p>
+                <h2 id="profileSummaryName" class="profile-fullname">Set Student Profile</h2>
+              </div>
+            </div>
+
+            <button type="button" id="btnToggleProfileForm" class="btn-edit-profile">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+              </svg>
+              <span id="btnToggleProfileLabel">Edit</span>
+            </button>
+          </div>
+
+          <div class="profile-meta-block">
+            <div class="profile-school-line">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
+                <path d="m4 6 8-4 8 4"/>
+                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
+                <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
+                <path d="M18 5v17"/>
+                <path d="M6 5v17"/>
+              </svg>
+              <span id="profileSummarySchool">Tap Edit to add student name, age, gender &amp; school</span>
+            </div>
+
+            <div id="profileSummaryBadgesRow" class="profile-badges-line hidden">
+              <span id="profileSummaryAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
+              <span id="profileSummaryGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Expandable Vertical Form -->
+        <div id="studentProfileFormBody" class="profile-form-body hidden">
+          <div>
+            <label for="profName" class="field-label">Student Full Name</label>
+            <input type="text" id="profName" placeholder="e.g., Ahmad Luqman bin Zulkifli" />
+          </div>
+
+          <div class="form-grid-2">
+            <div>
+              <label for="profAge" class="field-label">Age (Years)</label>
+              <input type="number" id="profAge" min="3" max="99" placeholder="e.g., 12" />
+            </div>
+            <div>
+              <label for="profGender" class="field-label">Gender</label>
+              <select id="profGender">
+                <option value="">Unspecified</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="profSchool" class="field-label">School / Tahfiz Institution</label>
+            <input type="text" id="profSchool" placeholder="e.g., Maahad Tahfiz Sains" />
+          </div>
+
+          <div class="form-actions-end">
+            <button type="button" id="btnCancelProfile" class="btn btn-secondary btn-sm">Cancel</button>
+            <button type="button" id="btnSaveProfile" class="btn btn-sm" style="background: var(--emerald-850); color: #fff;">Save Profile</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Date & Day Status Card -->
+      <div class="card card-pad stack-md">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <label for="entryDate" class="section-label" style="margin:0;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+              <line x1="16" x2="16" y1="2" y2="6"/>
+              <line x1="8" x2="8" y1="2" y2="6"/>
+              <line x1="3" x2="21" y1="10" y2="10"/>
+            </svg>
+            Session Date
+          </label>
+          <input type="date" id="entryDate" style="max-width: 175px;" />
+        </div>
+
+        <div>
+          <span class="section-label">Day Status</span>
+          <div id="statusPills" class="status-grid"></div>
+        </div>
+      </div>
+
+      <!-- 3. Non-Active Status Panel (Weekend / Cuti / Riadah) -->
+      <div id="nonActivePanel" class="card card-pad stack-md hidden" style="border-color: #FCD34D;">
+        <div style="background: var(--amber-50); border: 1px solid var(--amber-100); border-radius: 12px; padding: 12px; color: #78350F;">
+          <p id="nonActiveTitle" style="margin:0; font-weight:800; font-size:14px;">Cuti Selected</p>
+          <p style="margin:4px 0 0; font-size:12px;">Logs 1 consolidated row (<strong id="nonActiveCodeLabel">Cuti</strong>) while keeping your Saba sequence intact.</p>
+        </div>
+
+        <div id="cutiReasonSection">
+          <span class="field-label">Quick-Tap Cuti Reason (Populates Notes)</span>
+          <div id="cutiReasonChips" class="chip-row"></div>
+        </div>
+
+        <div>
+          <label for="nonActiveNotes" class="field-label">Notes / Reason Details</label>
+          <input type="text" id="nonActiveNotes" placeholder="e.g., Sakit, Raya, Awal Ramadan, Balik kampung..." />
+        </div>
+
+        <button type="button" id="btnSaveNonActive" class="btn btn-amber">
+          <span id="saveNonActiveBtnLabel">Save Cuti Row to Sheet</span>
+        </button>
+      </div>
+
+      <!-- 4. Active Session Categories Wrapper -->
+      <div id="activeSessionWrapper" class="stack-md">
+
+        <!-- ONE-TAP 'MUROJAAH DAY' QUICK TOGGLE BANNER -->
+        <div id="murojaahDayBanner" class="murojaah-banner">
+          <div class="murojaah-banner-info">
+            <div class="murojaah-banner-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+            </div>
+            <div>
+              <p id="murojaahBannerTitle" class="murojaah-banner-title">Murojaah Day Mode</p>
+              <p id="murojaahBannerSub" class="murojaah-banner-sub">Revision-only day? Tap to skip Saba &amp; focus on Murojaah</p>
+            </div>
+          </div>
+
+          <button type="button" id="btnToggleMurojaahDay" class="btn-murojaah-toggle">Turn ON</button>
+        </div>
+
+        <!-- CATEGORY 1: SABA -->
+        <div class="card" style="border-color: #A7F3D0;">
+          <div class="cat-header cat-header-saba">
+            <div class="cat-title-group">
+              <span class="cat-num-badge" style="background: var(--emerald-850);">1</span>
+              <div>
+                <h2 class="cat-title">Saba <span style="font-weight:500; font-size:12px; color:var(--emerald-700);">(New Hafazan)</span></h2>
+                <p id="sabaLastHint" class="cat-subtitle">Last: Al-Baqarah Ayat 221</p>
+              </div>
+            </div>
+            <label class="toggle-check-label">
+              <input type="checkbox" id="enableSaba" checked />
+              <span>Log</span>
+            </label>
+          </div>
+
+          <div id="body-saba" class="card-pad stack-md">
+            <div style="display:grid; grid-template-columns: 1.8fr 1fr; gap:10px;">
+              <div>
+                <label class="field-label">Surah (All 114 Surahs)</label>
+                <button type="button" id="btnOpenSabaSurah" class="surah-trigger-btn">
+                  <div class="surah-trigger-main">
+                    <span id="sabaSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
+                    <span id="sabaSurahMaxBadge" class="surah-ayat-tag">286 Ayat</span>
+                  </div>
+                  <span class="surah-change-hint">
+                    <span>Change</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </button>
+              </div>
+
+              <div>
+                <label for="sabaUnit" class="field-label">Unit</label>
+                <select id="sabaUnit">
+                  <option value="Ayat">Ayat</option>
+                  <option value="Page">Page</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="range-grid">
+              <div>
+                <label for="sabaStart" class="field-label">Start</label>
+                <input type="number" id="sabaStart" min="1" class="num-input-center" />
+              </div>
+              <div>
+                <label for="sabaEnd" class="field-label">End</label>
+                <input type="number" id="sabaEnd" min="1" class="num-input-center" style="background: var(--emerald-50); border-color: #6EE7B7;" />
+              </div>
+              <div>
+                <label class="field-label" style="text-align:center;">Total</label>
+                <div id="sabaTotalBadge" class="total-box" style="background: var(--emerald-850);">2</div>
+              </div>
+            </div>
+
+            <p id="sabaValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
+
+            <div class="stepper-bar">
+              <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick End:</span>
+              <div class="stepper-buttons">
+                <button type="button" class="step-btn" data-saba-step="-1">-1</button>
+                <button type="button" class="step-btn step-btn-emerald" data-saba-step="1">+1</button>
+                <button type="button" class="step-btn step-btn-emerald" data-saba-step="2">+2</button>
+                <button type="button" class="step-btn step-btn-emerald" data-saba-step="3">+3</button>
+                <button type="button" class="step-btn step-btn-emerald" data-saba-step="5">+5</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 2: PRA SABA -->
+        <div class="card" style="border-color: #99F6E4;">
+          <div class="cat-header cat-header-prasaba">
+            <div class="cat-title-group">
+              <span class="cat-num-badge" style="background: var(--teal-600);">2</span>
+              <div>
+                <h2 class="cat-title">Pra Saba <span style="font-weight:500; font-size:12px; color:var(--teal-700);">(Recent Revision)</span></h2>
+                <p class="cat-subtitle">End auto-syncs with Saba</p>
+              </div>
+            </div>
+            <label class="toggle-check-label">
+              <input type="checkbox" id="enablePraSaba" checked />
+              <span>Log</span>
+            </label>
+          </div>
+
+          <div id="body-prasaba" class="card-pad stack-md">
+            <div style="display:grid; grid-template-columns: 1.8fr 1fr; gap:10px;">
+              <div>
+                <label class="field-label">Surah (All 114 Surahs)</label>
+                <button type="button" id="btnOpenPraSabaSurah" class="surah-trigger-btn teal-border">
+                  <div class="surah-trigger-main">
+                    <span id="praSabaSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
+                    <span id="praSabaSurahMaxBadge" class="surah-ayat-tag teal-tag">286 Ayat</span>
+                  </div>
+                  <span class="surah-change-hint" style="color:var(--teal-700);">
+                    <span>Change</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </button>
+              </div>
+
+              <div>
+                <label for="praSabaUnit" class="field-label">Unit</label>
+                <select id="praSabaUnit">
+                  <option value="Ayat">Ayat</option>
+                  <option value="Page">Page</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="range-grid">
+              <div>
+                <label for="praSabaStart" class="field-label">Start</label>
+                <input type="number" id="praSabaStart" min="1" class="num-input-center" />
+              </div>
+              <div>
+                <label for="praSabaEnd" class="field-label">End</label>
+                <input type="number" id="praSabaEnd" min="1" class="num-input-center" style="background: var(--teal-50); border-color: #5EEAD4;" />
+              </div>
+              <div>
+                <label class="field-label" style="text-align:center;">Total</label>
+                <div id="praSabaTotalBadge" class="total-box" style="background: var(--teal-600);">33</div>
+              </div>
+            </div>
+
+            <p id="praSabaValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
+
+            <div class="stepper-bar">
+              <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Shift Start:</span>
+              <div class="stepper-buttons">
+                <button type="button" class="step-btn" data-prasaba-step="-5">-5</button>
+                <button type="button" class="step-btn" data-prasaba-step="-1">-1</button>
+                <button type="button" class="step-btn step-btn-teal" data-prasaba-step="1">+1</button>
+                <button type="button" class="step-btn step-btn-teal" data-prasaba-step="5">+5</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 3: MUKHTAR -->
+        <div class="card" style="border-color: #FDE68A;">
+          <div class="cat-header cat-header-mukhtar">
+            <div class="cat-title-group">
+              <span class="cat-num-badge" style="background: var(--amber-600);">3</span>
+              <div>
+                <h2 class="cat-title">Mukhtar <span style="font-weight:500; font-size:12px; color:var(--amber-700);">(Selected Revision)</span></h2>
+                <p id="mukhtarLastHint" class="cat-subtitle">Last: Juz 1 Page 20</p>
+              </div>
+            </div>
+            <label class="toggle-check-label">
+              <input type="checkbox" id="enableMukhtar" checked />
+              <span>Log</span>
+            </label>
+          </div>
+
+          <div id="body-mukhtar" class="card-pad stack-md">
+            <div class="mode-switch">
+              <button type="button" id="btnMukhtarModePage" class="mode-tab-btn active">Juz / Page</button>
+              <button type="button" id="btnMukhtarModeSurah" class="mode-tab-btn">Full Surahs (114)</button>
+            </div>
+
+            <!-- Mode A: Juz / Page -->
+            <div id="mukhtarPagePanel" class="stack-md">
+              <div>
+                <label for="mukhtarJuzSelect" class="field-label">Juz (1–30)</label>
+                <select id="mukhtarJuzSelect"></select>
+              </div>
+
+              <div class="range-grid">
+                <div>
+                  <label for="mukhtarPageStart" class="field-label">Start Page</label>
+                  <input type="number" id="mukhtarPageStart" min="1" class="num-input-center" />
+                </div>
+                <div>
+                  <label for="mukhtarPageEnd" class="field-label">End Page</label>
+                  <input type="number" id="mukhtarPageEnd" min="1" class="num-input-center" style="background: var(--amber-50); border-color: #FCD34D;" />
+                </div>
+                <div>
+                  <label class="field-label" style="text-align:center;">Pages</label>
+                  <div id="mukhtarPageTotalBadge" class="total-box" style="background: var(--amber-600);">1</div>
+                </div>
+              </div>
+
+              <div class="stepper-bar">
+                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
+                <div class="stepper-buttons">
+                  <button type="button" class="step-btn" data-mukhtar-offset="0">1 pg</button>
+                  <button type="button" class="step-btn step-btn-amber" data-mukhtar-offset="1">2 pgs</button>
+                  <button type="button" class="step-btn step-btn-amber" data-mukhtar-offset="4">5 pgs</button>
+                  <button type="button" class="step-btn step-btn-amber" data-mukhtar-offset="9">10 pgs</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mode B: Full Surahs (114) -->
+            <div id="mukhtarSurahPanel" class="stack-md hidden">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span class="field-label" style="margin:0;">Select Surahs (<strong id="selectedSurahCount" style="color:var(--amber-700);">0</strong> selected)</span>
+                <button type="button" id="btnClearMukhtarSurahs" style="border:none; background:none; color:var(--rose-600); font-size:12px; font-weight:700;">Clear all</button>
+              </div>
+
+              <input type="text" id="mukhtarSurahSearch" placeholder="Filter 114 Surahs by name or number (e.g. Kahf, 36, Mulk)..." />
+
+              <div class="chip-row">
+                <button type="button" class="chip-btn selected" data-mfilter="ALL">All 114</button>
+                <button type="button" class="chip-btn" data-mfilter="JUZ30">Juz 30</button>
+                <button type="button" class="chip-btn" data-mfilter="JUZ29">Juz 29</button>
+                <button type="button" class="chip-btn" data-mfilter="JUZ28">Juz 28</button>
+                <button type="button" class="chip-btn" id="btnPresetDuhaNas" style="background:var(--amber-50); border-color:#FCD34D; color:#92400E;">+ Ad-Duha–An-Nas</button>
+                <button type="button" class="chip-btn" id="btnPresetLast10" style="background:var(--amber-50); border-color:#FCD34D; color:#92400E;">+ Last 10</button>
+              </div>
+
+              <div id="mukhtarSurahChipsGrid" class="surah-chips-scroll"></div>
+
+              <div style="background:var(--amber-50); border:1px solid #FDE68A; border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <p id="selectedSurahPreview" style="margin:0; font-size:12px; color:var(--slate-600); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">No surahs selected yet...</p>
+                <span id="mukhtarSurahTotalBadge" style="background:var(--amber-600); color:#fff; font-size:12px; font-weight:800; padding:3px 9px; border-radius:8px; flex-shrink:0;">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORY 4: MUROJAAH (GENERAL REVISION) -->
+        <div class="card" style="border-color: #C7D2FE;">
+          <div class="cat-header cat-header-murojaah">
+            <div class="cat-title-group">
+              <span class="cat-num-badge" style="background: var(--indigo-600);">4</span>
+              <div>
+                <h2 class="cat-title">Murojaah <span style="font-weight:500; font-size:12px; color:var(--indigo-700);">(General Revision)</span></h2>
+                <p id="murojaahLastHint" class="cat-subtitle">Ayat range, Juz/Page, or Full Surahs</p>
+              </div>
+            </div>
+            <label class="toggle-check-label">
+              <input type="checkbox" id="enableMurojaah" />
+              <span>Log</span>
+            </label>
+          </div>
+
+          <div id="body-murojaah" class="card-pad stack-md hidden">
+            <!-- 3-Way Mode Switcher: Ayat | Juz / Page | Full Surahs -->
+            <div class="mode-switch-3">
+              <button type="button" id="btnMurojaahModeAyat" class="mode-tab-btn active-indigo">Ayat Range</button>
+              <button type="button" id="btnMurojaahModePage" class="mode-tab-btn">Juz / Page</button>
+              <button type="button" id="btnMurojaahModeSurah" class="mode-tab-btn">Full Surahs</button>
+            </div>
+
+            <!-- Murojaah Mode 1: Ayat Range -->
+            <div id="murojaahAyatPanel" class="stack-md">
+              <div>
+                <label class="field-label">Surah to Revise (All 114 Surahs)</label>
+                <button type="button" id="btnOpenMurojaahSurah" class="surah-trigger-btn indigo-border">
+                  <div class="surah-trigger-main">
+                    <span id="murojaahSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
+                    <span id="murojaahSurahMaxBadge" class="surah-ayat-tag indigo-tag">286 Ayat</span>
+                  </div>
+                  <span class="surah-change-hint" style="color:var(--indigo-700);">
+                    <span>Change</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                  </span>
+                </button>
+              </div>
+
+              <div class="range-grid">
+                <div>
+                  <label for="murojaahAyatStart" class="field-label">Start Ayat</label>
+                  <input type="number" id="murojaahAyatStart" min="1" value="1" class="num-input-center" />
+                </div>
+                <div>
+                  <label for="murojaahAyatEnd" class="field-label">End Ayat</label>
+                  <input type="number" id="murojaahAyatEnd" min="1" value="50" class="num-input-center" style="background: var(--indigo-50); border-color: #A5B4FC;" />
+                </div>
+                <div>
+                  <label class="field-label" style="text-align:center;">Total</label>
+                  <div id="murojaahAyatTotalBadge" class="total-box" style="background: var(--indigo-600);">50</div>
+                </div>
+              </div>
+
+              <p id="murojaahValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
+
+              <div class="stepper-bar">
+                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Span:</span>
+                <div class="stepper-buttons">
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-ayat-step="10">+10</button>
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-ayat-step="25">+25</button>
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-ayat-step="50">+50</button>
+                  <button type="button" class="step-btn step-btn-indigo" id="btnMurojaahFullSurahAyat">Full Surah</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Murojaah Mode 2: Juz / Page -->
+            <div id="murojaahPagePanel" class="stack-md hidden">
+              <div>
+                <label for="murojaahJuzSelect" class="field-label">Juz (1–30)</label>
+                <select id="murojaahJuzSelect"></select>
+              </div>
+
+              <div class="range-grid">
+                <div>
+                  <label for="murojaahPageStart" class="field-label">Start Page</label>
+                  <input type="number" id="murojaahPageStart" min="1" value="1" class="num-input-center" />
+                </div>
+                <div>
+                  <label for="murojaahPageEnd" class="field-label">End Page</label>
+                  <input type="number" id="murojaahPageEnd" min="1" value="5" class="num-input-center" style="background: var(--indigo-50); border-color: #A5B4FC;" />
+                </div>
+                <div>
+                  <label class="field-label" style="text-align:center;">Pages</label>
+                  <div id="murojaahPageTotalBadge" class="total-box" style="background: var(--indigo-600);">5</div>
+                </div>
+              </div>
+
+              <div class="stepper-bar">
+                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
+                <div class="stepper-buttons">
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="4">5 pgs</button>
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="9">10 pgs</button>
+                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="19">Full Juz (20)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Murojaah Mode 3: Full Surahs (114) -->
+            <div id="murojaahSurahPanel" class="stack-md hidden">
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span class="field-label" style="margin:0;">Surahs Revised (<strong id="murojaahSelectedCount" style="color:var(--indigo-700);">0</strong> selected)</span>
+                <button type="button" id="btnClearMurojaahSurahs" style="border:none; background:none; color:var(--rose-600); font-size:12px; font-weight:700;">Clear all</button>
+              </div>
+
+              <input type="text" id="murojaahSurahSearch" placeholder="Filter 114 Surahs (e.g. Naba, Mulk, Kahf, 36)..." />
+
+              <div class="chip-row">
+                <button type="button" class="chip-btn selected-indigo" data-murfilter="ALL">All 114</button>
+                <button type="button" class="chip-btn" data-murfilter="JUZ30">Juz 30</button>
+                <button type="button" class="chip-btn" data-murfilter="JUZ29">Juz 29</button>
+                <button type="button" class="chip-btn" data-murfilter="JUZ28">Juz 28</button>
+                <button type="button" class="chip-btn" id="btnMurPresetFullJuz30" style="background:var(--indigo-50); border-color:#A5B4FC; color:var(--indigo-700);">+ Full Juz 30</button>
+              </div>
+
+              <div id="murojaahSurahChipsGrid" class="surah-chips-scroll"></div>
+
+              <div style="background:var(--indigo-50); border:1px solid #C7D2FE; border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <p id="murojaahSelectedPreview" style="margin:0; font-size:12px; color:var(--slate-600); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">No surahs selected yet...</p>
+                <span id="murojaahSurahTotalBadge" style="background:var(--indigo-600); color:#fff; font-size:12px; font-weight:800; padding:3px 9px; border-radius:8px; flex-shrink:0;">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Session Notes & Save Button -->
+        <div class="card card-pad stack-md">
+          <div>
+            <label for="sessionNotes" class="field-label">Session Notes (Applies to logged rows)</label>
+            <input type="text" id="sessionNotes" placeholder="e.g., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz..." />
+          </div>
+
+          <button type="button" id="btnSaveActiveSession" class="btn btn-primary">
+            <span id="saveBtnLabel">Save Session to Sheet (3 Rows)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         TAB 2: PROGRESS & INSIGHTS
+         ===================================================== -->
+    <section id="tab-stats" class="stack-md hidden animate-in">
+
+      <!-- Official Student Summary Card (Uncrowded) -->
+      <div class="card">
+        <div class="profile-summary-box">
+          <div class="profile-top-row">
+            <div class="profile-identity">
+              <div class="profile-avatar" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              </div>
+              <div style="min-width: 0; flex: 1;">
+                <p class="profile-kicker">Hafazan Student Record</p>
+                <h2 id="statProfileName" class="profile-fullname">Student Profile Not Set</h2>
+              </div>
+            </div>
+
+            <button type="button" id="btnEditProfileFromStats" class="btn-edit-profile">Edit</button>
+          </div>
+
+          <div class="profile-meta-block">
+            <div class="profile-school-line">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
+                <path d="m4 6 8-4 8 4"/>
+                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
+                <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
+                <path d="M18 5v17"/>
+                <path d="M6 5v17"/>
+              </svg>
+              <span id="statProfileSchool">Tap Edit to add school, age &amp; gender</span>
+            </div>
+
+            <div id="statProfileBadgesRow" class="profile-badges-line hidden">
+              <span id="statProfileAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
+              <span id="statProfileGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Current Saba Milestone Card -->
+      <div class="hero-milestone">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#A7F3D0;">Current Saba Milestone</span>
+          <span id="statSurahPercent" style="font-size:12px; font-weight:800; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px;">0%</span>
+        </div>
+
+        <h2 id="statCurrentSurah" style="margin:6px 0 2px; font-size:22px; font-weight:800;">2. Al-Baqarah</h2>
+        <p id="statCurrentAyat" style="margin:0; font-size:13px; color:#D1FAE5;">Ayat 221 of 286 memorized</p>
+
+        <div class="progress-track">
+          <div id="statSurahProgressBar" class="progress-fill" style="width: 77%;"></div>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:11px; color:#ECFDF5; border-top:1px solid rgba(255,255,255,0.18); padding-top:10px;">
+          <span id="statSurahEta">Est. Surah Finish: Calculating...</span>
+          <span id="statQuranOverallPct" style="font-weight:800; color:#FDE68A;">Al-Quran: 0%</span>
+        </div>
+      </div>
+
+      <!-- 4-Category KPI Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <p class="kpi-label">Total Saba</p>
+          <p id="kpiTotalSaba" class="kpi-val" style="color:var(--emerald-850);">0</p>
+          <p id="kpiAvgSabaPace" class="kpi-sub" style="color:var(--emerald-700);">0.0 / active day</p>
+        </div>
+
+        <div class="kpi-card">
+          <p class="kpi-label">Pra Saba</p>
+          <p id="kpiTotalPraSaba" class="kpi-val" style="color:var(--teal-600);">0</p>
+          <p id="kpiAvgPraSabaPace" class="kpi-sub" style="color:var(--teal-700);">0.0 / active day</p>
+        </div>
+
+        <div class="kpi-card">
+          <p class="kpi-label">Mukhtar</p>
+          <p id="kpiTotalMukhtar" class="kpi-val" style="color:var(--amber-600);">0</p>
+          <p class="kpi-sub">Selected revision</p>
+        </div>
+
+        <div class="kpi-card" style="border-color:#C7D2FE; background:linear-gradient(180deg, var(--white) 0%, var(--indigo-50) 100%);">
+          <p class="kpi-label" style="color:var(--indigo-700);">Murojaah</p>
+          <p id="kpiTotalMurojaah" class="kpi-val" style="color:var(--indigo-600);">0</p>
+          <p id="kpiMurojaahSessions" class="kpi-sub" style="color:var(--indigo-700);">0 revision logs</p>
+        </div>
+      </div>
+
+      <!-- Attendance & Streaks Strip -->
+      <div class="card card-pad" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
+        <div>
+          <p class="kpi-label">Overall Attendance</p>
+          <p style="margin:3px 0 0; font-size:18px; font-weight:800; color:var(--slate-900);">
+            <span id="kpiAttendanceRate">0%</span>
+            <span id="kpiCutiSummary" style="font-size:12px; font-weight:600; color:var(--slate-500); margin-left:6px;">Active: 0d • Cuti: 0d</span>
+          </p>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <span id="insightCurStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--emerald-50); color:var(--emerald-850); border:1px solid var(--emerald-100);">Streak: 0d</span>
+          <span id="insightBestStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--amber-50); color:var(--amber-700); border:1px solid #FDE68A;">Best: 0d</span>
+        </div>
+      </div>
+
+      <!-- Hafazan Insights & Rhythm Card -->
+      <div class="card card-pad stack-md">
+        <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Hafazan &amp; Murojaah Rhythm</h3>
+
+        <div class="insights-grid">
+          <div class="insight-tile">
+            <p class="kpi-label" style="font-size:10px;">Peak Performance Day</p>
+            <p id="insightBestDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--slate-900);">—</p>
+            <p id="insightBestDaySub" class="kpi-sub">Highest avg Saba output</p>
+          </div>
+
+          <div class="insight-tile">
+            <p class="kpi-label" style="font-size:10px;">Revision Balance</p>
+            <p id="insightRevisionRatio" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--indigo-700);">1 : 0</p>
+            <p class="kpi-sub">New vs. All Revision</p>
+          </div>
+
+          <div class="insight-tile">
+            <p class="kpi-label" style="font-size:10px;">Personal Best Day</p>
+            <p id="insightRecordDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--emerald-850);">0 units</p>
+            <p id="insightRecordDate" class="kpi-sub">Highest single-day Saba</p>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:11px; font-weight:700; color:var(--slate-600); margin-bottom:5px;">
+            <span>Workload Distribution</span>
+            <span id="workloadMixLabels">Saba 0% · Pra 0% · Mukhtar 0% · Murojaah 0%</span>
+          </div>
+          <div class="mix-bar">
+            <div id="mixBarSaba" style="width:25%; background:var(--emerald-850);"></div>
+            <div id="mixBarPraSaba" style="width:25%; background:var(--teal-600);"></div>
+            <div id="mixBarMukhtar" style="width:25%; background:var(--amber-500);"></div>
+            <div id="mixBarMurojaah" style="width:25%; background:var(--indigo-600);"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 30-Juz Activity Coverage Matrix -->
+      <div class="card card-pad stack-md">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+          <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">30-Juz Activity Coverage</h3>
+          <span id="juzTouchedCountBadge" style="font-size:11px; font-weight:800; color:var(--emerald-850); background:var(--emerald-50); padding:3px 9px; border-radius:999px;">0 / 30 Juz</span>
+        </div>
+        <div id="juzCoverageGrid" class="juz-matrix"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
+          <span><strong style="color:var(--emerald-850);">■</strong> Saba / Pra Saba</span>
+          <span><strong style="color:var(--amber-500);">■</strong> Mukhtar</span>
+          <span><strong style="color:var(--indigo-600);">■</strong> Murojaah</span>
+          <span><strong style="color:var(--slate-400);">■</strong> Not Logged</span>
+        </div>
+      </div>
+
+      <!-- 30-Day Consistency Heatmap -->
+      <div class="card card-pad stack-md">
+        <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Last 30 Days Consistency</h3>
+        <div id="heatmapGrid" class="heatmap-grid"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
+          <span><strong style="color:var(--emerald-600);">■</strong> Active</span>
+          <span><strong style="color:var(--indigo-600);">■</strong> Murojaah-Only</span>
+          <span><strong style="color:var(--slate-400);">■</strong> Weekend</span>
+          <span><strong style="color:var(--amber-500);">■</strong> Cuti</span>
+          <span><strong style="color:var(--sky-500);">■</strong> Riadah</span>
+        </div>
+      </div>
+
+      <!-- Daily Volume Bar Chart -->
+      <div class="card card-pad stack-md">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px;">
+          <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Recent Active Sessions Volume</h3>
+          <span style="font-size:10.5px; font-weight:700; color:var(--slate-500);">
+            <span style="color:var(--emerald-850);">■ Saba</span> ·
+            <span style="color:var(--teal-600);">■ Pra Saba</span> ·
+            <span style="color:var(--indigo-600);">■ Murojaah</span>
+          </span>
+        </div>
+        <div>
+          <div id="volumeBarChart" class="bar-chart-wrap"></div>
+          <div id="volumeBarDates" class="bar-date-row"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =====================================================
+         TAB 3: SHEET & EXPORT
+         ===================================================== -->
+    <section id="tab-history" class="stack-md hidden animate-in">
+
+      <div class="card card-pad stack-md">
+        <div>
+          <h2 style="margin:0; font-size:15px; font-weight:800; color:var(--slate-900);">Google Sheet Sync &amp; Export</h2>
+          <p id="syncModeDescription" style="margin:4px 0 0; font-size:12px; color:var(--slate-500);">Exact 9-column format matching your spreadsheet (Date through Notes).</p>
+        </div>
+
+        <div class="sync-status-row">
+          <div class="sync-badge">
+            <span id="syncStatusDot" class="sync-dot syncing"></span>
+            <span id="syncStatusText">Connecting...</span>
+          </div>
+          <button type="button" id="btnRefreshFromSheet" class="btn btn-secondary btn-sm">Sync Now</button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <button type="button" id="btnCopyTSV" class="btn btn-primary" style="padding:12px 10px; font-size:13px;">Copy for Sheets</button>
+          <button type="button" id="btnDownloadCSV" class="btn btn-outline-teal" style="padding:12px 10px; font-size:13px;">Download CSV</button>
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; padding-top:10px; border-top:1px solid var(--slate-100);">
+          <label style="font-size:12px; font-weight:700; color:var(--teal-700); cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
+            <span>+ Import CSV to Sheet</span>
+            <input type="file" id="csvImportInput" accept=".csv,text/csv" style="display:none;" />
+          </label>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" id="btnResetSampleData" class="btn btn-secondary btn-sm hidden">Reset Sample Data</button>
+            <span id="recordCountBadge" style="font-size:11px; font-weight:700; color:var(--slate-500);">0 rows</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Filter Controls -->
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap:8px;">
+        <input type="text" id="historySearch" placeholder="Search surah, date, notes..." />
+        <select id="historyCategoryFilter">
+          <option value="ALL">All Entries</option>
+          <option value="Saba">Saba</option>
+          <option value="Pra Saba">Pra Saba</option>
+          <option value="Mukhtar">Mukhtar</option>
+          <option value="Murojaah">Murojaah</option>
+          <option value="CUTI_ONLY">Cuti Days</option>
+          <option value="NON_ACTIVE">All Off Days</option>
+        </select>
+      </div>
+
+      <!-- Logged Entries Table -->
+      <div class="card">
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status / Cat</th>
+                <th>Surah / Juz</th>
+                <th style="text-align:center;">Range</th>
+                <th style="text-align:center;">Total</th>
+                <th>Notes</th>
+                <th style="text-align:right;">Del</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyHistoryState" class="hidden" style="padding:28px 16px; text-align:center; font-size:13px; color:var(--slate-400);">
+          No matching records found.
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== STICKY BOTTOM NAVIGATION ==================== -->
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button type="button" id="nav-daily" class="nav-tab-btn active" data-tab="daily">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+        </svg>
+        <span>Daily Log</span>
+      </button>
+
+      <button type="button" id="nav-stats" class="nav-tab-btn" data-tab="stats">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" x2="18" y1="20" y2="10"/>
+          <line x1="12" x2="12" y1="20" y2="4"/>
+          <line x1="6" x2="6" y1="20" y2="14"/>
+        </svg>
+        <span>Progress</span>
+      </button>
+
+      <button type="button" id="nav-history" class="nav-tab-btn" data-tab="history">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="18" x="3" y="3" rx="2"/>
+          <path d="M3 9h18"/>
+          <path d="M9 21V9"/>
+        </svg>
+        <span>Sheet &amp; Export</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== FULLSCREEN 114-SURAH PICKER MODAL ==================== -->
+  <div id="surahPickerModal" class="modal-overlay hidden">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div>
+          <h3 id="surahModalTitle" style="margin:0; font-size:16px; font-weight:800; color:var(--slate-900);">Select Surah (1–114)</h3>
+          <p style="margin:2px 0 0; font-size:11px; color:var(--slate-500);">Tap any Surah below or search by name / number</p>
+        </div>
+        <button type="button" id="btnCloseSurahModal" class="modal-close-btn" aria-label="Close Surah Picker">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-search-area">
+        <input type="text" id="surahModalSearchInput" placeholder="Search e.g. Baqarah, Kahf, 36, Mulk..." />
+        <div class="chip-row" id="modalJuzFilterRow">
+          <button type="button" class="chip-btn selected" data-modal-juz="ALL">All 114</button>
+          <button type="button" class="chip-btn" data-modal-juz="1">Juz 1–2</button>
+          <button type="button" class="chip-btn" data-modal-juz="28">Juz 28</button>
+          <button type="button" class="chip-btn" data-modal-juz="29">Juz 29</button>
+          <button type="button" class="chip-btn" data-modal-juz="30">Juz 30</button>
+        </div>
+      </div>
+
+      <div id="surahPickerList" class="modal-list-scroll"></div>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST BANNER ==================== -->
+  <div id="toastBanner" class="toast-pill">
+    <span id="toastMessage">Saved!</span>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. COMPLETE 114 SURAHS DATA & CONSTANTS
+    // =========================================================================
+    const STORAGE_KEY = 'hafazan_tracker_rows_v4_murojaah';
+    const PROFILE_STORAGE_KEY = 'hafazan_tracker_profile_v4';
+    const IS_GAS_ENV = typeof google !== 'undefined' && google.script && google.script.run;
+
+    const DAY_STATUS_OPTIONS = ['Active', 'Weekend', 'Cuti', 'Riadah'];
+    const CUTI_REASON_CHIPS = [
+      'Sakit',
+      'Raya / Perayaan',
+      'Awal Ramadan',
+      'Akhir Bulan',
+      'Cuti Umum',
+      'Keluarga / Balik Kampung'
+    ];
+
+    const ALL_114_SURAHS = [
+      { num: 1, name: 'Al-Fatihah', ayat: 7, juz: 1 },
+      { num: 2, name: 'Al-Baqarah', ayat: 286, juz: 1 },
+      { num: 3, name: "Ali 'Imran", ayat: 200, juz: 3 },
+      { num: 4, name: 'An-Nisa', ayat: 176, juz: 4 },
+      { num: 5, name: "Al-Ma'idah", ayat: 120, juz: 6 },
+      { num: 6, name: "Al-An'am", ayat: 165, juz: 7 },
+      { num: 7, name: "Al-A'raf", ayat: 206, juz: 8 },
+      { num: 8, name: 'Al-Anfal', ayat: 75, juz: 9 },
+      { num: 9, name: 'At-Tawbah', ayat: 129, juz: 10 },
+      { num: 10, name: 'Yunus', ayat: 109, juz: 11 },
+      { num: 11, name: 'Hud', ayat: 123, juz: 11 },
+      { num: 12, name: 'Yusuf', ayat: 111, juz: 12 },
+      { num: 13, name: "Ar-Ra'd", ayat: 43, juz: 13 },
+      { num: 14, name: 'Ibrahim', ayat: 52, juz: 13 },
+      { num: 15, name: 'Al-Hijr', ayat: 99, juz: 14 },
+      { num: 16, name: 'An-Nahl', ayat: 128, juz: 14 },
+      { num: 17, name: "Al-Isra'", ayat: 111, juz: 15 },
+      { num: 18, name: 'Al-Kahf', ayat: 110, juz: 15 },
+      { num: 19, name: 'Maryam', ayat: 98, juz: 16 },
+      { num: 20, name: 'Ta-Ha', ayat: 135, juz: 16 },
+      { num: 21, name: "Al-Anbiya'", ayat: 112, juz: 17 },
+      { num: 22, name: 'Al-Hajj', ayat: 78, juz: 17 },
+      { num: 23, name: "Al-Mu'minun", ayat: 118, juz: 18 },
+      { num: 24, name: 'An-Nur', ayat: 64, juz: 18 },
+      { num: 25, name: 'Al-Furqan', ayat: 77, juz: 18 },
+      { num: 26, name: "Ash-Shu'ara'", ayat: 227, juz: 19 },
+      { num: 27, name: 'An-Naml', ayat: 93, juz: 19 },
+      { num: 28, name: 'Al-Qasas', ayat: 88, juz: 20 },
+      { num: 29, name: "Al-'Ankabut", ayat: 69, juz: 20 },
+      { num: 30, name: 'Ar-Rum', ayat: 60, juz: 21 },
+      { num: 31, name: 'Luqman', ayat: 34, juz: 21 },
+      { num: 32, name: 'As-Sajdah', ayat: 30, juz: 21 },
+      { num: 33, name: 'Al-Ahzab', ayat: 73, juz: 21 },
+      { num: 34, name: "Saba'", ayat: 54, juz: 22 },
+      { num: 35, name: 'Fatir', ayat: 45, juz: 22 },
+      { num: 36, name: 'Ya-Sin', ayat: 83, juz: 22 },
+      { num: 37, name: 'As-Saffat', ayat: 182, juz: 23 },
+      { num: 38, name: 'Sad', ayat: 88, juz: 23 },
+      { num: 39, name: 'Az-Zumar', ayat: 75, juz: 23 },
+      { num: 40, name: 'Ghafir', ayat: 85, juz: 24 },
+      { num: 41, name: 'Fussilat', ayat: 54, juz: 24 },
+      { num: 42, name: 'Ash-Shura', ayat: 53, juz: 25 },
+      { num: 43, name: 'Az-Zukhruf', ayat: 89, juz: 25 },
+      { num: 44, name: 'Ad-Dukhan', ayat: 59, juz: 25 },
+      { num: 45, name: 'Al-Jathiyah', ayat: 37, juz: 25 },
+      { num: 46, name: 'Al-Ahqaf', ayat: 35, juz: 26 },
+      { num: 47, name: 'Muhammad', ayat: 38, juz: 26 },
+      { num: 48, name: 'Al-Fath', ayat: 29, juz: 26 },
+      { num: 49, name: 'Al-Hujurat', ayat: 18, juz: 26 },
+      { num: 50, name: 'Qaf', ayat: 45, juz: 26 },
+      { num: 51, name: 'Adh-Dhariyat', ayat: 60, juz: 26 },
+      { num: 52, name: 'At-Tur', ayat: 49, juz: 27 },
+      { num: 53, name: 'An-Najm', ayat: 62, juz: 27 },
+      { num: 54, name: 'Al-Qamar', ayat: 55, juz: 27 },
+      { num: 55, name: 'Ar-Rahman', ayat: 78, juz: 27 },
+      { num: 56, name: "Al-Waqi'ah", ayat: 96, juz: 27 },
+      { num: 57, name: 'Al-Hadid', ayat: 29, juz: 27 },
+      { num: 58, name: 'Al-Mujadilah', ayat: 22, juz: 28 },
+      { num: 59, name: 'Al-Hashr', ayat: 24, juz: 28 },
+      { num: 60, name: 'Al-Mumtahanah', ayat: 13, juz: 28 },
+      { num: 61, name: 'As-Saff', ayat: 14, juz: 28 },
+      { num: 62, name: "Al-Jumu'ah", ayat: 11, juz: 28 },
+      { num: 63, name: 'Al-Munafiqun', ayat: 11, juz: 28 },
+      { num: 64, name: 'At-Taghabun', ayat: 18, juz: 28 },
+      { num: 65, name: 'At-Talaq', ayat: 12, juz: 28 },
+      { num: 66, name: 'At-Tahrim', ayat: 12, juz: 28 },
+      { num: 67, name: 'Al-Mulk', ayat: 30, juz: 29 },
+      { num: 68, name: 'Al-Qalam', ayat: 52, juz: 29 },
+      { num: 69, name: 'Al-Haqqah', ayat: 52, juz: 29 },
+      { num: 70, name: "Al-Ma'arij", ayat: 44, juz: 29 },
+      { num: 71, name: 'Nuh', ayat: 28, juz: 29 },
+      { num: 72, name: 'Al-Jinn', ayat: 28, juz: 29 },
+      { num: 73, name: 'Al-Muzzammil', ayat: 20, juz: 29 },
+      { num: 74, name: 'Al-Muddaththir', ayat: 56, juz: 29 },
+      { num: 75, name: 'Al-Qiyamah', ayat: 40, juz: 29 },
+      { num: 76, name: 'Al-Insan', ayat: 31, juz: 29 },
+      { num: 77, name: 'Al-Mursalat', ayat: 50, juz: 29 },
+      { num: 78, name: 'An-Naba', ayat: 40, juz: 30 },
+      { num: 79, name: "An-Nazi'at", ayat: 46, juz: 30 },
+      { num: 80, name: "'Abasa", ayat: 42, juz: 30 },
+      { num: 81, name: 'At-Takwir', ayat: 29, juz: 30 },
+      { num: 82, name: 'Al-Infitar', ayat: 19, juz: 30 },
+      { num: 83, name: 'Al-Mutaffifin', ayat: 36, juz: 30 },
+      { num: 84, name: 'Al-Inshiqaq', ayat: 25, juz: 30 },
+      { num: 85, name: 'Al-Buruj', ayat: 22, juz: 30 },
+      { num: 86, name: 'At-Tariq', ayat: 17, juz: 30 },
+      { num: 87, name: "Al-A'la", ayat: 19, juz: 30 },
+      { num: 88, name: 'Al-Ghashiyah', ayat: 26, juz: 30 },
+      { num: 89, name: 'Al-Fajr', ayat: 30, juz: 30 },
+      { num: 90, name: 'Al-Balad', ayat: 20, juz: 30 },
+      { num: 91, name: 'Ash-Shams', ayat: 15, juz: 30 },
+      { num: 92, name: 'Al-Layl', ayat: 21, juz: 30 },
+      { num: 93, name: 'Ad-Duha', ayat: 11, juz: 30 },
+      { num: 94, name: 'Ash-Sharh', ayat: 8, juz: 30 },
+      { num: 95, name: 'At-Tin', ayat: 8, juz: 30 },
+      { num: 96, name: "Al-'Alaq", ayat: 19, juz: 30 },
+      { num: 97, name: 'Al-Qadr', ayat: 5, juz: 30 },
+      { num: 98, name: 'Al-Bayyinah', ayat: 8, juz: 30 },
+      { num: 99, name: 'Az-Zalzalah', ayat: 8, juz: 30 },
+      { num: 100, name: "Al-'Adiyat", ayat: 11, juz: 30 },
+      { num: 101, name: "Al-Qari'ah", ayat: 11, juz: 30 },
+      { num: 102, name: 'At-Takathur', ayat: 8, juz: 30 },
+      { num: 103, name: "Al-'Asr", ayat: 3, juz: 30 },
+      { num: 104, name: 'Al-Humazah', ayat: 9, juz: 30 },
+      { num: 105, name: 'Al-Fil', ayat: 5, juz: 30 },
+      { num: 106, name: 'Quraysh', ayat: 4, juz: 30 },
+      { num: 107, name: "Al-Ma'un", ayat: 7, juz: 30 },
+      { num: 108, name: 'Al-Kawthar', ayat: 3, juz: 30 },
+      { num: 109, name: 'Al-Kafirun', ayat: 6, juz: 30 },
+      { num: 110, name: 'An-Nasr', ayat: 3, juz: 30 },
+      { num: 111, name: 'Al-Masad', ayat: 5, juz: 30 },
+      { num: 112, name: 'Al-Ikhlas', ayat: 4, juz: 30 },
+      { num: 113, name: 'Al-Falaq', ayat: 5, juz: 30 },
+      { num: 114, name: 'An-Nas', ayat: 6, juz: 30 }
+    ];
+
+    const FALLBACK_SAMPLE_ROWS = [
+      { id: 2, Date: '2026-11-15', Day_Status: 'Active', Category: 'Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 218, End_Unit: 219, Total_Amount: 2, Notes: '' },
+      { id: 3, Date: '2026-11-15', Day_Status: 'Active', Category: 'Pra Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 189, End_Unit: 219, Total_Amount: 31, Notes: '' },
+      { id: 4, Date: '2026-11-15', Day_Status: 'Active', Category: 'Mukhtar', Surah_or_Juz: 'Juz 1', Tracking_Unit: 'Page', Start_Unit: 19, End_Unit: 19, Total_Amount: 1, Notes: '' },
+      { id: 5, Date: '2026-11-16', Day_Status: 'Active', Category: 'Murojaah', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 1, End_Unit: 141, Total_Amount: 141, Notes: 'Murojaah Juz 1 penuh' },
+      { id: 6, Date: '2026-11-17', Day_Status: 'Cuti', Category: '', Surah_or_Juz: '', Tracking_Unit: '', Start_Unit: '', End_Unit: '', Total_Amount: 0, Notes: 'Sakit — Demam selsema' },
+      { id: 7, Date: '2026-11-18', Day_Status: 'Active', Category: 'Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 220, End_Unit: 221, Total_Amount: 2, Notes: '' },
+      { id: 8, Date: '2026-11-18', Day_Status: 'Active', Category: 'Pra Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 191, End_Unit: 221, Total_Amount: 31, Notes: '' },
+      { id: 9, Date: '2026-11-18', Day_Status: 'Active', Category: 'Mukhtar', Surah_or_Juz: 'Juz 1', Tracking_Unit: 'Page', Start_Unit: 20, End_Unit: 20, Total_Amount: 1, Notes: '' }
+    ];
+
+    // =========================================================================
+    // 2. STATE & SYNC STATUS MANAGEMENT
+    // =========================================================================
+    let hafazanRows = [];
+    let studentProfile = { name: '', age: '', gender: '', school: '' };
+    let currentDayStatus = 'Active';
+    let isMurojaahDayActive = false;
+
+    let sabaSelectedSurah = ALL_114_SURAHS[1];
+    let praSabaSelectedSurah = ALL_114_SURAHS[1];
+    let murojaahSelectedSurah = ALL_114_SURAHS[1];
+    let activeSurahPickerTarget = 'saba';
+    let surahModalJuzFilter = 'ALL';
+
+    let mukhtarMode = 'Page';
+    let mukhtarSurahFilter = 'ALL';
+    let selectedMukhtarSurahNums = [];
+
+    let murojaahMode = 'Ayat'; // 'Ayat' | 'Page' | 'Full Surah'
+    let murojaahSurahFilter = 'ALL';
+    let selectedMurojaahSurahNums = [];
+
+    let armedDeleteRowId = null;
+    let deleteArmTimer = null;
+    let resetArmed = false;
+    let resetTimer = null;
+
+    function setSyncStatus(state, label) {
+      const dot = document.getElementById('syncStatusDot');
+      const txt = document.getElementById('syncStatusText');
+      if (!dot || !txt) return;
+      dot.className = 'sync-dot';
+
+      if (state === 'syncing') {
+        dot.classList.add('syncing');
+      } else if (state === 'local') {
+        dot.classList.add('local');
+      } else if (state === 'error') {
+        dot.classList.add('error');
+      }
+      txt.textContent = label;
+    }
+
+    function safeStorageGet(key) {
+      try { return window.localStorage ? window.localStorage.getItem(key) : null; } catch (e) { return null; }
+    }
+
+    function safeStorageSet(key, val) {
+      try { if (window.localStorage) window.localStorage.setItem(key, val); } catch (e) {}
+    }
+
+    function escapeHTML(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function findSurahObj(queryStr) {
+      if (!queryStr) return ALL_114_SURAHS[1];
+      const clean = String(queryStr).trim().toLowerCase();
+      const byExact = ALL_114_SURAHS.find(
+        s => s.name.toLowerCase() === clean || `${s.num}. ${s.name}`.toLowerCase() === clean
+      );
+      if (byExact) return byExact;
+      const numMatch = clean.match(/^(\d+)\./);
+      if (numMatch) {
+        const n = parseInt(numMatch[1], 10);
+        const byNum = ALL_114_SURAHS.find(s => s.num === n);
+        if (byNum) return byNum;
+      }
+      return ALL_114_SURAHS.find(s => s.name.toLowerCase().includes(clean)) || ALL_114_SURAHS[1];
+    }
+
+    function normalizeRowCuti(row) {
+      const rawStatus = (row.Day_Status || '').trim();
+      if (rawStatus.toLowerCase().startsWith('cuti') && rawStatus !== 'Cuti') {
+        const reasonSuffix = rawStatus.replace(/^cuti\s*/i, '').trim();
+        const existingNotes = (row.Notes || '').trim();
+        const combinedNotes = reasonSuffix
+          ? (existingNotes && !existingNotes.toLowerCase().includes(reasonSuffix.toLowerCase())
+              ? `${reasonSuffix} — ${existingNotes}`
+              : (existingNotes || reasonSuffix))
+          : existingNotes;
+        return { ...row, Day_Status: 'Cuti', Notes: combinedNotes };
+      }
+      return row;
+    }
+
+    // =========================================================================
+    // 3. GOOGLE APPS SCRIPT BRIDGE + LOCAL STORAGE FALLBACK
+    // =========================================================================
+    function syncFromGoogleSheet(showFeedbackToast = false) {
+      if (!IS_GAS_ENV) {
+        setSyncStatus('local', 'Offline Local Storage');
+        document.getElementById('syncModeDescription').textContent =
+          'Saved locally in this browser. Deploy in Google Apps Script for live multi-device Sheet sync.';
+        document.getElementById('btnResetSampleData').classList.remove('hidden');
+
+        const rawRows = safeStorageGet(STORAGE_KEY);
+        if (rawRows) {
+          try {
+            hafazanRows = JSON.parse(rawRows).map(normalizeRowCuti);
+          } catch (e) {
+            hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
+          }
+        } else {
+          hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+        }
+
+        const rawProf = safeStorageGet(PROFILE_STORAGE_KEY);
+        if (rawProf) {
+          try { studentProfile = { ...studentProfile, ...JSON.parse(rawProf) }; } catch (e) {}
+        }
+        refreshEntireUI();
+        if (showFeedbackToast) showToast('Refreshed local records');
+        return;
+      }
+
+      setSyncStatus('syncing', 'Syncing...');
+      google.script.run
+        .withSuccessHandler((payload) => {
+          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+          if (payload?.profile) {
+            studentProfile = { ...studentProfile, ...payload.profile };
+          }
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
+          setSyncStatus('connected', 'Synced with Google Sheet');
+          refreshEntireUI();
+          if (showFeedbackToast) showToast(`Synced ${hafazanRows.length} rows from Google Sheet!`);
+        })
+        .withFailureHandler((err) => {
+          setSyncStatus('error', 'Sync Error');
+          showToast('Sheet sync error: ' + (err?.message || 'Check permissions'));
+          const cachedRows = safeStorageGet(STORAGE_KEY);
+          if (cachedRows) {
+            hafazanRows = JSON.parse(cachedRows).map(normalizeRowCuti);
+            refreshEntireUI();
+          }
+        })
+        .getTrackerData();
+    }
+
+    function refreshEntireUI() {
+      renderStudentProfileUI();
+      applySmartAutoFill();
+      updateAllStats();
+      renderHistoryTable();
+    }
+
+    // =========================================================================
+    // 4. INITIALIZATION & DELEGATED EVENT LISTENERS
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const localISO = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+      document.getElementById('entryDate').value = localISO;
+
+      renderStatusPills();
+      renderCutiReasonChips();
+      populateJuzDropdowns();
+      renderMukhtarSurahChips();
+      renderMurojaahSurahChips();
+      bindAllEventListeners();
+
+      syncFromGoogleSheet(false);
+    });
+
+    function bindAllEventListeners() {
+      // Bottom Navigation Tabs
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
+      });
+
+      // Manual Sync Refresh Button (in Sheet & Export tab)
+      document.getElementById('btnRefreshFromSheet').addEventListener('click', () => syncFromGoogleSheet(true));
+
+      // Student Profile Card
+      document.getElementById('btnToggleProfileForm').addEventListener('click', () => toggleStudentProfileEditor());
+      document.getElementById('btnCancelProfile').addEventListener('click', () => toggleStudentProfileEditor(false));
+      document.getElementById('btnSaveProfile').addEventListener('click', saveStudentProfile);
+      document.getElementById('btnEditProfileFromStats').addEventListener('click', () => {
+        switchTab('daily');
+        toggleStudentProfileEditor(true);
+      });
+
+      // One-Tap 'Murojaah Day' Quick Toggle
+      document.getElementById('btnToggleMurojaahDay').addEventListener('click', toggleMurojaahDayMode);
+
+      // Surah Picker Trigger Buttons (Saba, Pra Saba, Murojaah)
+      document.getElementById('btnOpenSabaSurah').addEventListener('click', () => openSurahPickerModal('saba'));
+      document.getElementById('btnOpenPraSabaSurah').addEventListener('click', () => openSurahPickerModal('prasaba'));
+      document.getElementById('btnOpenMurojaahSurah').addEventListener('click', () => openSurahPickerModal('murojaah'));
+
+      // Surah Picker Modal Controls
+      document.getElementById('btnCloseSurahModal').addEventListener('click', closeSurahPickerModal);
+      document.getElementById('surahPickerModal').addEventListener('click', (e) => {
+        if (e.target.id === 'surahPickerModal') closeSurahPickerModal();
+      });
+      document.getElementById('surahModalSearchInput').addEventListener('input', renderSurahPickerList);
+
+      document.getElementById('modalJuzFilterRow').addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-modal-juz]');
+        if (!btn) return;
+        surahModalJuzFilter = btn.getAttribute('data-modal-juz');
+        document.querySelectorAll('#modalJuzFilterRow .chip-btn').forEach(c => c.classList.toggle('selected', c === btn));
+        renderSurahPickerList();
+      });
+
+      document.getElementById('surahPickerList').addEventListener('click', (e) => {
+        const item = e.target.closest('[data-surah-num]');
+        if (!item) return;
+        const num = parseInt(item.getAttribute('data-surah-num'), 10);
+        if (!isNaN(num)) selectSurahFromModal(num);
+      });
+
+      // Category Checkboxes
+      document.getElementById('enableSaba').addEventListener('change', () => {
+        toggleCategoryBody('saba', 'enableSaba');
+        syncMurojaahBannerFromCheckboxes();
+      });
+      document.getElementById('enablePraSaba').addEventListener('change', () => {
+        toggleCategoryBody('prasaba', 'enablePraSaba');
+        syncMurojaahBannerFromCheckboxes();
+      });
+      document.getElementById('enableMukhtar').addEventListener('change', () => {
+        toggleCategoryBody('mukhtar', 'enableMukhtar');
+        syncMurojaahBannerFromCheckboxes();
+      });
+      document.getElementById('enableMurojaah').addEventListener('change', () => {
+        toggleCategoryBody('murojaah', 'enableMurojaah');
+        syncMurojaahBannerFromCheckboxes();
+      });
+
+      // Numeric Inputs & Unit Selectors (Saba, Pra Saba, Mukhtar, Murojaah)
+      document.getElementById('sabaUnit').addEventListener('change', recalculateTotals);
+      document.getElementById('sabaStart').addEventListener('input', recalculateTotals);
+      document.getElementById('sabaEnd').addEventListener('input', () => {
+        const sEnd = parseInt(document.getElementById('sabaEnd').value, 10) || 0;
+        if (sabaSelectedSurah.num === praSabaSelectedSurah.num && sEnd > 0) {
+          document.getElementById('praSabaEnd').value = sEnd;
+        }
+        recalculateTotals();
+      });
+
+      document.getElementById('praSabaUnit').addEventListener('change', recalculateTotals);
+      document.getElementById('praSabaStart').addEventListener('input', recalculateTotals);
+      document.getElementById('praSabaEnd').addEventListener('input', recalculateTotals);
+
+      document.getElementById('mukhtarJuzSelect').addEventListener('change', autoFillMukhtarPageForJuz);
+      document.getElementById('mukhtarPageStart').addEventListener('input', recalculateTotals);
+      document.getElementById('mukhtarPageEnd').addEventListener('input', recalculateTotals);
+
+      document.getElementById('murojaahAyatStart').addEventListener('input', recalculateTotals);
+      document.getElementById('murojaahAyatEnd').addEventListener('input', recalculateTotals);
+      document.getElementById('murojaahPageStart').addEventListener('input', recalculateTotals);
+      document.getElementById('murojaahPageEnd').addEventListener('input', recalculateTotals);
+
+      // Quick Stepper Buttons — Saba
+      document.querySelectorAll('[data-saba-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const delta = parseInt(btn.getAttribute('data-saba-step'), 10);
+          const sStart = parseInt(document.getElementById('sabaStart').value, 10) || 1;
+          const curEnd = parseInt(document.getElementById('sabaEnd').value, 10) || sStart;
+          const maxLim = document.getElementById('sabaUnit').value === 'Ayat' ? sabaSelectedSurah.ayat : 604;
+          const nextEnd = Math.min(maxLim, Math.max(sStart, curEnd + delta));
+          document.getElementById('sabaEnd').value = nextEnd;
+          if (sabaSelectedSurah.num === praSabaSelectedSurah.num) {
+            document.getElementById('praSabaEnd').value = nextEnd;
+          }
+          recalculateTotals();
+        });
+      });
+
+      // Quick Stepper Buttons — Pra Saba
+      document.querySelectorAll('[data-prasaba-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const delta = parseInt(btn.getAttribute('data-prasaba-step'), 10);
+          const pEnd = parseInt(document.getElementById('praSabaEnd').value, 10) || 1;
+          const curStart = parseInt(document.getElementById('praSabaStart').value, 10) || 1;
+          document.getElementById('praSabaStart').value = Math.min(pEnd, Math.max(1, curStart + delta));
+          recalculateTotals();
+        });
+      });
+
+      // Quick Stepper Buttons — Mukhtar Pages
+      document.querySelectorAll('[data-mukhtar-offset]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const offset = parseInt(btn.getAttribute('data-mukhtar-offset'), 10);
+          const mStart = parseInt(document.getElementById('mukhtarPageStart').value, 10) || 1;
+          document.getElementById('mukhtarPageEnd').value = mStart + offset;
+          recalculateTotals();
+        });
+      });
+
+      // Quick Stepper Buttons — Murojaah Ayat & Pages
+      document.querySelectorAll('[data-murojaah-ayat-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const delta = parseInt(btn.getAttribute('data-murojaah-ayat-step'), 10);
+          const mStart = parseInt(document.getElementById('murojaahAyatStart').value, 10) || 1;
+          const curEnd = parseInt(document.getElementById('murojaahAyatEnd').value, 10) || mStart;
+          const nextEnd = Math.min(murojaahSelectedSurah.ayat, Math.max(mStart, curEnd + delta));
+          document.getElementById('murojaahAyatEnd').value = nextEnd;
+          recalculateTotals();
+        });
+      });
+
+      document.getElementById('btnMurojaahFullSurahAyat').addEventListener('click', () => {
+        document.getElementById('murojaahAyatStart').value = 1;
+        document.getElementById('murojaahAyatEnd').value = murojaahSelectedSurah.ayat;
+        recalculateTotals();
+      });
+
+      document.querySelectorAll('[data-murojaah-page-offset]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const offset = parseInt(btn.getAttribute('data-murojaah-page-offset'), 10);
+          const pStart = parseInt(document.getElementById('murojaahPageStart').value, 10) || 1;
+          document.getElementById('murojaahPageEnd').value = pStart + offset;
+          recalculateTotals();
+        });
+      });
+
+      // Mukhtar Mode Switch & Full Surahs Controls
+      document.getElementById('btnMukhtarModePage').addEventListener('click', () => setMukhtarMode('Page'));
+      document.getElementById('btnMukhtarModeSurah').addEventListener('click', () => setMukhtarMode('Full Surah'));
+      document.getElementById('mukhtarSurahSearch').addEventListener('input', renderMukhtarSurahChips);
+      document.getElementById('btnClearMukhtarSurahs').addEventListener('click', () => {
+        selectedMukhtarSurahNums = [];
+        renderMukhtarSurahChips();
+      });
+
+      document.querySelectorAll('[data-mfilter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          mukhtarSurahFilter = btn.getAttribute('data-mfilter');
+          document.querySelectorAll('[data-mfilter]').forEach(b => b.classList.toggle('selected', b === btn));
+          renderMukhtarSurahChips();
+        });
+      });
+
+      document.getElementById('btnPresetDuhaNas').addEventListener('click', () => {
+        for (let n = 93; n <= 114; n++) {
+          if (!selectedMukhtarSurahNums.includes(n)) selectedMukhtarSurahNums.push(n);
+        }
+        renderMukhtarSurahChips();
+      });
+
+      document.getElementById('btnPresetLast10').addEventListener('click', () => {
+        for (let n = 105; n <= 114; n++) {
+          if (!selectedMukhtarSurahNums.includes(n)) selectedMukhtarSurahNums.push(n);
+        }
+        renderMukhtarSurahChips();
+      });
+
+      document.getElementById('mukhtarSurahChipsGrid').addEventListener('click', (e) => {
+        const chip = e.target.closest('[data-msurah-num]');
+        if (!chip) return;
+        const num = parseInt(chip.getAttribute('data-msurah-num'), 10);
+        const idx = selectedMukhtarSurahNums.indexOf(num);
+        if (idx >= 0) selectedMukhtarSurahNums.splice(idx, 1);
+        else selectedMukhtarSurahNums.push(num);
+        renderMukhtarSurahChips();
+      });
+
+      // Murojaah 3-Way Mode Switch & Full Surahs Controls
+      document.getElementById('btnMurojaahModeAyat').addEventListener('click', () => setMurojaahMode('Ayat'));
+      document.getElementById('btnMurojaahModePage').addEventListener('click', () => setMurojaahMode('Page'));
+      document.getElementById('btnMurojaahModeSurah').addEventListener('click', () => setMurojaahMode('Full Surah'));
+      document.getElementById('murojaahSurahSearch').addEventListener('input', renderMurojaahSurahChips);
+      document.getElementById('btnClearMurojaahSurahs').addEventListener('click', () => {
+        selectedMurojaahSurahNums = [];
+        renderMurojaahSurahChips();
+      });
+
+      document.querySelectorAll('[data-murfilter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          murojaahSurahFilter = btn.getAttribute('data-murfilter');
+          document.querySelectorAll('[data-murfilter]').forEach(b => b.classList.toggle('selected-indigo', b === btn));
+          renderMurojaahSurahChips();
+        });
+      });
+
+      document.getElementById('btnMurPresetFullJuz30').addEventListener('click', () => {
+        for (let n = 78; n <= 114; n++) {
+          if (!selectedMurojaahSurahNums.includes(n)) selectedMurojaahSurahNums.push(n);
+        }
+        renderMurojaahSurahChips();
+      });
+
+      document.getElementById('murojaahSurahChipsGrid').addEventListener('click', (e) => {
+        const chip = e.target.closest('[data-mursurah-num]');
+        if (!chip) return;
+        const num = parseInt(chip.getAttribute('data-mursurah-num'), 10);
+        const idx = selectedMurojaahSurahNums.indexOf(num);
+        if (idx >= 0) selectedMurojaahSurahNums.splice(idx, 1);
+        else selectedMurojaahSurahNums.push(num);
+        renderMurojaahSurahChips();
+      });
+
+      // Save Daily Session Buttons
+      document.getElementById('btnSaveActiveSession').addEventListener('click', saveDailySession);
+      document.getElementById('btnSaveNonActive').addEventListener('click', saveDailySession);
+
+      // Export, Import & Local Reset
+      document.getElementById('btnCopyTSV').addEventListener('click', copyTSVForSheets);
+      document.getElementById('btnDownloadCSV').addEventListener('click', downloadCSV);
+      document.getElementById('csvImportInput').addEventListener('change', handleCSVImport);
+      document.getElementById('btnResetSampleData').addEventListener('click', handleResetSampleData);
+      document.getElementById('historySearch').addEventListener('input', renderHistoryTable);
+      document.getElementById('historyCategoryFilter').addEventListener('change', renderHistoryTable);
+
+      // Two-tap Delete Row in History Table
+      document.getElementById('historyTableBody').addEventListener('click', (e) => {
+        const delBtn = e.target.closest('[data-del-id]');
+        if (!delBtn) return;
+        const rowId = Number(delBtn.getAttribute('data-del-id'));
+
+        if (armedDeleteRowId !== rowId) {
+          armedDeleteRowId = rowId;
+          delBtn.textContent = 'Confirm?';
+          delBtn.style.background = 'var(--rose-600)';
+          delBtn.style.color = '#fff';
+          delBtn.style.borderRadius = '6px';
+          clearTimeout(deleteArmTimer);
+          deleteArmTimer = setTimeout(() => {
+            armedDeleteRowId = null;
+            renderHistoryTable();
+          }, 3500);
+          return;
+        }
+
+        clearTimeout(deleteArmTimer);
+        armedDeleteRowId = null;
+        deleteRowFromSheet(rowId);
+      });
+    }
+
+    // =========================================================================
+    // 5. ONE-TAP 'MUROJAAH DAY' QUICK TOGGLE LOGIC
+    // =========================================================================
+    function toggleMurojaahDayMode() {
+      isMurojaahDayActive = !isMurojaahDayActive;
+
+      if (isMurojaahDayActive) {
+        // Uncheck Saba & Pra Saba, keep Mukhtar optional (or unchecked), check & expand Murojaah
+        document.getElementById('enableSaba').checked = false;
+        document.getElementById('enablePraSaba').checked = false;
+        document.getElementById('enableMurojaah').checked = true;
+      } else {
+        // Restore standard daily memorization mode
+        document.getElementById('enableSaba').checked = true;
+        document.getElementById('enablePraSaba').checked = true;
+        document.getElementById('enableMukhtar').checked = true;
+        document.getElementById('enableMurojaah').checked = false;
+      }
+
+      toggleCategoryBody('saba', 'enableSaba');
+      toggleCategoryBody('prasaba', 'enablePraSaba');
+      toggleCategoryBody('mukhtar', 'enableMukhtar');
+      toggleCategoryBody('murojaah', 'enableMurojaah');
+      renderMurojaahBannerState();
+      showToast(isMurojaahDayActive ? 'Murojaah Day ON — Saba skipped' : 'Standard Daily Mode restored');
+    }
+
+    function syncMurojaahBannerFromCheckboxes() {
+      const sabaOn = document.getElementById('enableSaba').checked;
+      const praOn = document.getElementById('enablePraSaba').checked;
+      const murOn = document.getElementById('enableMurojaah').checked;
+      isMurojaahDayActive = !sabaOn && !praOn && murOn;
+      renderMurojaahBannerState();
+    }
+
+    function renderMurojaahBannerState() {
+      const banner = document.getElementById('murojaahDayBanner');
+      const title = document.getElementById('murojaahBannerTitle');
+      const sub = document.getElementById('murojaahBannerSub');
+      const btn = document.getElementById('btnToggleMurojaahDay');
+
+      banner.classList.toggle('is-on', isMurojaahDayActive);
+      if (isMurojaahDayActive) {
+        title.textContent = 'Murojaah Day Active';
+        sub.textContent = 'Saba & Pra Saba skipped · Focusing on revision';
+        btn.textContent = 'Turn OFF';
+      } else {
+        title.textContent = 'Murojaah Day Mode';
+        sub.textContent = 'Revision-only day? Tap to skip Saba & focus on Murojaah';
+        btn.textContent = 'Turn ON';
+      }
+    }
+
+    // =========================================================================
+    // 6. STUDENT PROFILE CARD LOGIC
+    // =========================================================================
+    function toggleStudentProfileEditor(forceOpen) {
+      const formBody = document.getElementById('studentProfileFormBody');
+      const label = document.getElementById('btnToggleProfileLabel');
+      const isHidden = formBody.classList.contains('hidden');
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : isHidden;
+
+      if (shouldOpen) {
+        document.getElementById('profName').value = studentProfile.name || '';
+        document.getElementById('profAge').value = studentProfile.age || '';
+        document.getElementById('profGender').value = studentProfile.gender || '';
+        document.getElementById('profSchool').value = studentProfile.school || '';
+        formBody.classList.remove('hidden');
+        label.textContent = 'Close';
+      } else {
+        formBody.classList.add('hidden');
+        label.textContent = 'Edit';
+      }
+    }
+
+    function saveStudentProfile() {
+      const updated = {
+        name: document.getElementById('profName').value.trim(),
+        age: document.getElementById('profAge').value.trim(),
+        gender: document.getElementById('profGender').value.trim(),
+        school: document.getElementById('profSchool').value.trim()
+      };
+
+      const saveBtn = document.getElementById('btnSaveProfile');
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+
+      if (!IS_GAS_ENV) {
+        studentProfile = updated;
+        safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
+        renderStudentProfileUI();
+        toggleStudentProfileEditor(false);
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Profile';
+        showToast('Student profile saved!');
+        return;
+      }
+
+      setSyncStatus('syncing', 'Saving Profile...');
+      google.script.run
+        .withSuccessHandler(() => {
+          studentProfile = updated;
+          safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
+          renderStudentProfileUI();
+          toggleStudentProfileEditor(false);
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Profile';
+          setSyncStatus('connected', 'Synced with Google Sheet');
+          showToast('Profile synced to Google Sheet!');
+        })
+        .withFailureHandler((err) => {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Profile';
+          setSyncStatus('error', 'Sync Error');
+          showToast('Failed to save profile: ' + (err?.message || 'Error'));
+        })
+        .saveStudentProfile(updated);
+    }
+
+    function renderStudentProfileUI() {
+      const hasName = Boolean(studentProfile.name);
+      document.getElementById('profileSummaryName').textContent = hasName ? studentProfile.name : 'Set Student Profile';
+      document.getElementById('profileSummarySchool').textContent = studentProfile.school
+        ? studentProfile.school
+        : (hasName ? 'No school / institution specified' : 'Tap Edit to add student name, age, gender & school');
+
+      const badgesRow = document.getElementById('profileSummaryBadgesRow');
+      const ageBadge = document.getElementById('profileSummaryAgeBadge');
+      const genderBadge = document.getElementById('profileSummaryGenderBadge');
+
+      if (studentProfile.age) {
+        ageBadge.textContent = `${studentProfile.age} years old`;
+        ageBadge.classList.remove('hidden');
+      } else {
+        ageBadge.classList.add('hidden');
+      }
+
+      if (studentProfile.gender) {
+        genderBadge.textContent = studentProfile.gender;
+        genderBadge.classList.remove('hidden');
+      } else {
+        genderBadge.classList.add('hidden');
+      }
+
+      badgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
+
+      // Sync Progress Tab Summary Card
+      document.getElementById('statProfileName').textContent = hasName ? studentProfile.name : 'Student Profile Not Set';
+      document.getElementById('statProfileSchool').textContent = studentProfile.school || 'Tap Edit to add school, age & gender';
+
+      const statBadgesRow = document.getElementById('statProfileBadgesRow');
+      const statAge = document.getElementById('statProfileAgeBadge');
+      const statGender = document.getElementById('statProfileGenderBadge');
+
+      if (studentProfile.age) {
+        statAge.textContent = `${studentProfile.age} years old`;
+        statAge.classList.remove('hidden');
+      } else {
+        statAge.classList.add('hidden');
+      }
+
+      if (studentProfile.gender) {
+        statGender.textContent = studentProfile.gender;
+        statGender.classList.remove('hidden');
+      } else {
+        statGender.classList.add('hidden');
+      }
+
+      statBadgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
+    }
+
+    // =========================================================================
+    // 7. DAY STATUS, CUTI CHIPS & 114-SURAH PICKER MODAL
+    // =========================================================================
+    function renderStatusPills() {
+      const container = document.getElementById('statusPills');
+      container.innerHTML = DAY_STATUS_OPTIONS.map(st => {
+        const isSelected = st === currentDayStatus;
+        let cls = 'status-pill-btn';
+        if (isSelected) cls += st === 'Active' ? ' active-status' : ' active-off';
+        return `<button type="button" class="${cls}" data-status-val="${st}">${st}</button>`;
+      }).join('');
+
+      container.querySelectorAll('[data-status-val]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentDayStatus = btn.getAttribute('data-status-val');
+          renderStatusPills();
+
+          const isActive = currentDayStatus === 'Active';
+          document.getElementById('activeSessionWrapper').classList.toggle('hidden', !isActive);
+          document.getElementById('nonActivePanel').classList.toggle('hidden', isActive);
+
+          if (!isActive) {
+            document.getElementById('nonActiveTitle').textContent = `${currentDayStatus} Selected`;
+            document.getElementById('nonActiveCodeLabel').textContent = currentDayStatus;
+            document.getElementById('saveNonActiveBtnLabel').textContent = `Save ${currentDayStatus} Row to Sheet`;
+            document.getElementById('cutiReasonSection').classList.toggle('hidden', currentDayStatus !== 'Cuti');
+          }
+        });
+      });
+    }
+
+    function renderCutiReasonChips() {
+      const container = document.getElementById('cutiReasonChips');
+      container.innerHTML = CUTI_REASON_CHIPS.map(r =>
+        `<button type="button" class="chip-btn" data-cuti-reason="${escapeHTML(r)}">${escapeHTML(r)}</button>`
+      ).join('');
+
+      container.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-cuti-reason]');
+        if (!btn) return;
+        const reason = btn.getAttribute('data-cuti-reason');
+        const notesInput = document.getElementById('nonActiveNotes');
+        const cur = notesInput.value.trim();
+        if (!cur) notesInput.value = reason;
+        else if (!cur.toLowerCase().includes(reason.toLowerCase())) notesInput.value = `${reason} — ${cur}`;
+      });
+    }
+
+    function populateJuzDropdowns() {
+      let html = '';
+      for (let i = 1; i <= 30; i++) {
+        html += `<option value="Juz ${i}">Juz ${i}</option>`;
+      }
+      document.getElementById('mukhtarJuzSelect').innerHTML = html;
+      document.getElementById('murojaahJuzSelect').innerHTML = html;
+    }
+
+    function openSurahPickerModal(target) {
+      activeSurahPickerTarget = ['saba', 'prasaba', 'murojaah'].includes(target) ? target : 'saba';
+      surahModalJuzFilter = 'ALL';
+      document.querySelectorAll('#modalJuzFilterRow .chip-btn').forEach(c => {
+        c.classList.toggle('selected', c.getAttribute('data-modal-juz') === 'ALL');
+      });
+
+      const titleMap = {
+        saba: 'Select Saba Surah (1–114)',
+        prasaba: 'Select Pra Saba Surah (1–114)',
+        murojaah: 'Select Murojaah Surah (1–114)'
+      };
+      document.getElementById('surahModalTitle').textContent = titleMap[activeSurahPickerTarget];
+      document.getElementById('surahModalSearchInput').value = '';
+
+      renderSurahPickerList();
+      document.getElementById('surahPickerModal').classList.remove('hidden');
+    }
+
+    function closeSurahPickerModal() {
+      document.getElementById('surahPickerModal').classList.add('hidden');
+    }
+
+    function renderSurahPickerList() {
+      const listEl = document.getElementById('surahPickerList');
+      const q = document.getElementById('surahModalSearchInput').value.toLowerCase().trim();
+      const selectedObj =
+        activeSurahPickerTarget === 'saba'
+          ? sabaSelectedSurah
+          : activeSurahPickerTarget === 'prasaba'
+            ? praSabaSelectedSurah
+            : murojaahSelectedSurah;
+
+      const filtered = ALL_114_SURAHS.filter(s => {
+        if (surahModalJuzFilter !== 'ALL') {
+          if (surahModalJuzFilter === '1' && s.juz > 2) return false;
+          if (surahModalJuzFilter !== '1' && String(s.juz) !== surahModalJuzFilter) return false;
+        }
+        if (!q) return true;
+        return String(s.num) === q || s.name.toLowerCase().includes(q) || `${s.num}. ${s.name}`.toLowerCase().includes(q);
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `<div style="padding:24px; text-align:center; font-size:13px; color:var(--slate-400);">No Surah found matching "${escapeHTML(q)}"</div>`;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(s => {
+        const isCurrent = selectedObj && selectedObj.num === s.num;
+        return `
+          <button type="button" class="surah-row-item ${isCurrent ? 'is-selected' : ''}" data-surah-num="${s.num}">
+            <div style="display:flex; align-items:center; gap:10px; min-width:0;">
+              <span class="surah-num-pill">${s.num}</span>
+              <div style="min-width:0;">
+                <div style="font-size:14px; font-weight:800; color:var(--slate-900);">${escapeHTML(s.name)}</div>
+                <div style="font-size:11px; color:var(--slate-500);">Juz ${s.juz}</div>
+              </div>
+            </div>
+            <span class="surah-ayat-tag ${isCurrent ? '' : 'teal-tag'}">${s.ayat} Ayat</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectSurahFromModal(surahNum) {
+      const chosen = ALL_114_SURAHS.find(s => s.num === surahNum);
+      if (!chosen) return;
+
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
+      if (activeSurahPickerTarget === 'saba') {
+        sabaSelectedSurah = chosen;
+        const pastSaba = [...sorted].reverse().find(
+          r => r.Category === 'Saba' && findSurahObj(r.Surah_or_Juz).num === chosen.num
+        );
+        const nextStart = pastSaba ? Math.min(chosen.ayat, (parseInt(pastSaba.End_Unit, 10) || 0) + 1) : 1;
+        const nextEnd = Math.min(chosen.ayat, nextStart + 1);
+
+        document.getElementById('sabaStart').value = nextStart;
+        document.getElementById('sabaEnd').value = nextEnd;
+
+        praSabaSelectedSurah = chosen;
+        document.getElementById('praSabaStart').value = 1;
+        document.getElementById('praSabaEnd').value = nextEnd;
+      } else if (activeSurahPickerTarget === 'prasaba') {
+        praSabaSelectedSurah = chosen;
+        const pastPra = [...sorted].reverse().find(
+          r => r.Category === 'Pra Saba' && findSurahObj(r.Surah_or_Juz).num === chosen.num
+        );
+        if (pastPra) {
+          document.getElementById('praSabaStart').value = parseInt(pastPra.Start_Unit, 10) || 1;
+          document.getElementById('praSabaEnd').value = parseInt(pastPra.End_Unit, 10) || 1;
+        } else {
+          document.getElementById('praSabaStart').value = 1;
+          document.getElementById('praSabaEnd').value = Math.min(chosen.ayat, 10);
+        }
+      } else if (activeSurahPickerTarget === 'murojaah') {
+        murojaahSelectedSurah = chosen;
+        document.getElementById('murojaahAyatStart').value = 1;
+        document.getElementById('murojaahAyatEnd').value = chosen.ayat;
+      }
+
+      updateSurahDisplayBadges();
+      recalculateTotals();
+      closeSurahPickerModal();
+      showToast(`Selected ${chosen.num}. ${chosen.name}`);
+    }
+
+    function updateSurahDisplayBadges() {
+      document.getElementById('sabaSurahDisplay').textContent = `${sabaSelectedSurah.num}. ${sabaSelectedSurah.name}`;
+      document.getElementById('sabaSurahMaxBadge').textContent = `${sabaSelectedSurah.ayat} Ayat`;
+
+      document.getElementById('praSabaSurahDisplay').textContent = `${praSabaSelectedSurah.num}. ${praSabaSelectedSurah.name}`;
+      document.getElementById('praSabaSurahMaxBadge').textContent = `${praSabaSelectedSurah.ayat} Ayat`;
+
+      document.getElementById('murojaahSurahDisplay').textContent = `${murojaahSelectedSurah.num}. ${murojaahSelectedSurah.name}`;
+      document.getElementById('murojaahSurahMaxBadge').textContent = `${murojaahSelectedSurah.ayat} Ayat`;
+    }
+
+    // =========================================================================
+    // 8. SMART AUTO-FILL & CALCULATIONS
+    // =========================================================================
+    function applySmartAutoFill() {
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
+      const lastSaba = [...sorted].reverse().find(r => r.Category === 'Saba');
+      if (lastSaba) {
+        sabaSelectedSurah = findSurahObj(lastSaba.Surah_or_Juz);
+        const unit = lastSaba.Tracking_Unit || 'Ayat';
+        const lastEnd = parseInt(lastSaba.End_Unit, 10) || 0;
+        const maxLim = unit === 'Ayat' ? sabaSelectedSurah.ayat : 604;
+        const nextStart = lastEnd < maxLim ? lastEnd + 1 : maxLim;
+        const nextEnd = Math.min(maxLim, nextStart + 1);
+
+        document.getElementById('sabaUnit').value = unit;
+        document.getElementById('sabaStart').value = nextStart;
+        document.getElementById('sabaEnd').value = nextEnd;
+        document.getElementById('sabaLastHint').textContent = `Last: ${sabaSelectedSurah.name} ${unit} ${lastEnd}`;
+
+        // Pre-fill Murojaah Ayat Range to cover memorized range 1..lastEnd of current Saba Surah
+        murojaahSelectedSurah = sabaSelectedSurah;
+        document.getElementById('murojaahAyatStart').value = 1;
+        document.getElementById('murojaahAyatEnd').value = Math.max(1, lastEnd);
+      } else {
+        sabaSelectedSurah = ALL_114_SURAHS[1];
+        document.getElementById('sabaUnit').value = 'Ayat';
+        document.getElementById('sabaStart').value = 1;
+        document.getElementById('sabaEnd').value = 2;
+        document.getElementById('sabaLastHint').textContent = 'Starting fresh: Al-Baqarah Ayat 1';
+
+        murojaahSelectedSurah = ALL_114_SURAHS[1];
+        document.getElementById('murojaahAyatStart').value = 1;
+        document.getElementById('murojaahAyatEnd').value = 20;
+      }
+
+      const lastPra = [...sorted].reverse().find(r => r.Category === 'Pra Saba');
+      const curSabaEnd = parseInt(document.getElementById('sabaEnd').value, 10) || 1;
+      if (lastPra) {
+        praSabaSelectedSurah = findSurahObj(lastPra.Surah_or_Juz);
+        document.getElementById('praSabaUnit').value = lastPra.Tracking_Unit || 'Ayat';
+        const prevStart = parseInt(lastPra.Start_Unit, 10) || 1;
+        document.getElementById('praSabaStart').value =
+          praSabaSelectedSurah.num === sabaSelectedSurah.num ? Math.min(curSabaEnd, prevStart + 2) : prevStart;
+        document.getElementById('praSabaEnd').value =
+          praSabaSelectedSurah.num === sabaSelectedSurah.num ? curSabaEnd : (parseInt(lastPra.End_Unit, 10) || curSabaEnd);
+      } else {
+        praSabaSelectedSurah = sabaSelectedSurah;
+        document.getElementById('praSabaUnit').value = 'Ayat';
+        document.getElementById('praSabaStart').value = 1;
+        document.getElementById('praSabaEnd').value = curSabaEnd;
+      }
+
+      const lastMukhtar = [...sorted].reverse().find(r => r.Category === 'Mukhtar');
+      if (lastMukhtar && lastMukhtar.Tracking_Unit === 'Page') {
+        const juzStr = lastMukhtar.Surah_or_Juz || 'Juz 1';
+        const nextPg = (parseInt(lastMukhtar.End_Unit, 10) || 0) + 1;
+        document.getElementById('mukhtarJuzSelect').value = juzStr;
+        document.getElementById('mukhtarPageStart').value = nextPg;
+        document.getElementById('mukhtarPageEnd').value = nextPg;
+        document.getElementById('mukhtarLastHint').textContent = `Last: ${juzStr} Page ${lastMukhtar.End_Unit}`;
+      } else if (lastMukhtar) {
+        document.getElementById('mukhtarPageStart').value = 1;
+        document.getElementById('mukhtarPageEnd').value = 1;
+        document.getElementById('mukhtarLastHint').textContent = `Last: ${lastMukhtar.Total_Amount} Full Surahs`;
+      } else {
+        document.getElementById('mukhtarJuzSelect').value = 'Juz 1';
+        document.getElementById('mukhtarPageStart').value = 1;
+        document.getElementById('mukhtarPageEnd').value = 1;
+        document.getElementById('mukhtarLastHint').textContent = 'Starting fresh: Juz 1 Page 1';
+      }
+
+      const lastMurojaah = [...sorted].reverse().find(r => r.Category === 'Murojaah');
+      if (lastMurojaah) {
+        document.getElementById('murojaahLastHint').textContent =
+          `Last: ${lastMurojaah.Surah_or_Juz} (${lastMurojaah.Total_Amount} ${lastMurojaah.Tracking_Unit})`;
+      } else {
+        document.getElementById('murojaahLastHint').textContent = 'Ayat range, Juz/Page, or Full Surahs';
+      }
+
+      updateSurahDisplayBadges();
+      recalculateTotals();
+    }
+
+    function autoFillMukhtarPageForJuz() {
+      const selectedJuz = document.getElementById('mukhtarJuzSelect').value;
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+      const lastForJuz = [...sorted].reverse().find(
+        r => r.Category === 'Mukhtar' && r.Tracking_Unit === 'Page' && r.Surah_or_Juz === selectedJuz
+      );
+      const nextPg = lastForJuz ? (parseInt(lastForJuz.End_Unit, 10) || 0) + 1 : 1;
+      document.getElementById('mukhtarPageStart').value = nextPg;
+      document.getElementById('mukhtarPageEnd').value = nextPg;
+      recalculateTotals();
+    }
+
+    function recalculateTotals() {
+      // 1. Saba
+      const sStart = parseInt(document.getElementById('sabaStart').value, 10) || 0;
+      const sEnd = parseInt(document.getElementById('sabaEnd').value, 10) || 0;
+      const sUnit = document.getElementById('sabaUnit').value;
+      const sTotal = sEnd >= sStart && sStart > 0 ? (sEnd - sStart + 1) : 0;
+      document.getElementById('sabaTotalBadge').textContent = sTotal;
+
+      const sValEl = document.getElementById('sabaValidationMsg');
+      if (sUnit === 'Ayat' && sEnd > sabaSelectedSurah.ayat) {
+        sValEl.textContent = `Note: ${sabaSelectedSurah.name} has ${sabaSelectedSurah.ayat} Ayat total.`;
+        sValEl.classList.remove('hidden');
+      } else {
+        sValEl.classList.add('hidden');
+      }
+
+      // 2. Pra Saba
+      const pStart = parseInt(document.getElementById('praSabaStart').value, 10) || 0;
+      const pEnd = parseInt(document.getElementById('praSabaEnd').value, 10) || 0;
+      const pUnit = document.getElementById('praSabaUnit').value;
+      const pTotal = pEnd >= pStart && pStart > 0 ? (pEnd - pStart + 1) : 0;
+      document.getElementById('praSabaTotalBadge').textContent = pTotal;
+
+      const pValEl = document.getElementById('praSabaValidationMsg');
+      if (pUnit === 'Ayat' && pEnd > praSabaSelectedSurah.ayat) {
+        pValEl.textContent = `Note: ${praSabaSelectedSurah.name} has ${praSabaSelectedSurah.ayat} Ayat total.`;
+        pValEl.classList.remove('hidden');
+      } else {
+        pValEl.classList.add('hidden');
+      }
+
+      // 3. Mukhtar Pages
+      const mStart = parseInt(document.getElementById('mukhtarPageStart').value, 10) || 0;
+      const mEnd = parseInt(document.getElementById('mukhtarPageEnd').value, 10) || 0;
+      const mTotal = mEnd >= mStart && mStart > 0 ? (mEnd - mStart + 1) : 0;
+      document.getElementById('mukhtarPageTotalBadge').textContent = mTotal;
+
+      // 4. Murojaah Ayat & Pages
+      const murAStart = parseInt(document.getElementById('murojaahAyatStart').value, 10) || 0;
+      const murAEnd = parseInt(document.getElementById('murojaahAyatEnd').value, 10) || 0;
+      const murATotal = murAEnd >= murAStart && murAStart > 0 ? (murAEnd - murAStart + 1) : 0;
+      document.getElementById('murojaahAyatTotalBadge').textContent = murATotal;
+
+      const murValEl = document.getElementById('murojaahValidationMsg');
+      if (murAEnd > murojaahSelectedSurah.ayat) {
+        murValEl.textContent = `Note: ${murojaahSelectedSurah.name} has ${murojaahSelectedSurah.ayat} Ayat total.`;
+        murValEl.classList.remove('hidden');
+      } else {
+        murValEl.classList.add('hidden');
+      }
+
+      const murPStart = parseInt(document.getElementById('murojaahPageStart').value, 10) || 0;
+      const murPEnd = parseInt(document.getElementById('murojaahPageEnd').value, 10) || 0;
+      const murPTotal = murPEnd >= murPStart && murPStart > 0 ? (murPEnd - murPStart + 1) : 0;
+      document.getElementById('murojaahPageTotalBadge').textContent = murPTotal;
+
+      updateSaveButtonLabel();
+    }
+
+    function toggleCategoryBody(key, checkboxId) {
+      const isChecked = document.getElementById(checkboxId).checked;
+      document.getElementById(`body-${key}`).classList.toggle('hidden', !isChecked);
+      updateSaveButtonLabel();
+    }
+
+    function updateSaveButtonLabel() {
+      let count = 0;
+      if (document.getElementById('enableSaba').checked) count++;
+      if (document.getElementById('enablePraSaba').checked) count++;
+      if (document.getElementById('enableMukhtar').checked) count++;
+      if (document.getElementById('enableMurojaah').checked) count++;
+      document.getElementById('saveBtnLabel').textContent =
+        count === 1 ? 'Save Session to Sheet (1 Row)' : `Save Session to Sheet (${count} Rows)`;
+    }
+
+    // Mukhtar Mode Switcher & Chips
+    function setMukhtarMode(mode) {
+      mukhtarMode = mode;
+      document.getElementById('btnMukhtarModePage').classList.toggle('active', mode === 'Page');
+      document.getElementById('btnMukhtarModeSurah').classList.toggle('active', mode === 'Full Surah');
+      document.getElementById('mukhtarPagePanel').classList.toggle('hidden', mode !== 'Page');
+      document.getElementById('mukhtarSurahPanel').classList.toggle('hidden', mode !== 'Full Surah');
+      if (mode === 'Full Surah') renderMukhtarSurahChips();
+    }
+
+    function renderMukhtarSurahChips() {
+      const grid = document.getElementById('mukhtarSurahChipsGrid');
+      const q = document.getElementById('mukhtarSurahSearch').value.toLowerCase().trim();
+
+      const filtered = ALL_114_SURAHS.filter(s => {
+        if (mukhtarSurahFilter === 'JUZ30' && s.juz !== 30) return false;
+        if (mukhtarSurahFilter === 'JUZ29' && s.juz !== 29) return false;
+        if (mukhtarSurahFilter === 'JUZ28' && s.juz !== 28) return false;
+        if (!q) return true;
+        return String(s.num) === q || s.name.toLowerCase().includes(q);
+      });
+
+      grid.innerHTML = filtered.map(s => {
+        const isSel = selectedMukhtarSurahNums.includes(s.num);
+        return `<button type="button" class="chip-btn ${isSel ? 'selected' : ''}" data-msurah-num="${s.num}">${s.num}. ${escapeHTML(s.name)}</button>`;
+      }).join('');
+
+      const count = selectedMukhtarSurahNums.length;
+      document.getElementById('selectedSurahCount').textContent = count;
+      document.getElementById('mukhtarSurahTotalBadge').textContent = count;
+      const names = selectedMukhtarSurahNums
+        .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
+        .filter(Boolean);
+      document.getElementById('selectedSurahPreview').textContent =
+        names.length > 0 ? names.join(', ') : 'No surahs selected yet...';
+    }
+
+    // Murojaah 3-Way Mode Switcher & Chips
+    function setMurojaahMode(mode) {
+      murojaahMode = mode;
+      document.getElementById('btnMurojaahModeAyat').classList.toggle('active-indigo', mode === 'Ayat');
+      document.getElementById('btnMurojaahModePage').classList.toggle('active-indigo', mode === 'Page');
+      document.getElementById('btnMurojaahModeSurah').classList.toggle('active-indigo', mode === 'Full Surah');
+
+      document.getElementById('murojaahAyatPanel').classList.toggle('hidden', mode !== 'Ayat');
+      document.getElementById('murojaahPagePanel').classList.toggle('hidden', mode !== 'Page');
+      document.getElementById('murojaahSurahPanel').classList.toggle('hidden', mode !== 'Full Surah');
+
+      if (mode === 'Full Surah') renderMurojaahSurahChips();
+    }
+
+    function renderMurojaahSurahChips() {
+      const grid = document.getElementById('murojaahSurahChipsGrid');
+      const q = document.getElementById('murojaahSurahSearch').value.toLowerCase().trim();
+
+      const filtered = ALL_114_SURAHS.filter(s => {
+        if (murojaahSurahFilter === 'JUZ30' && s.juz !== 30) return false;
+        if (murojaahSurahFilter === 'JUZ29' && s.juz !== 29) return false;
+        if (murojaahSurahFilter === 'JUZ28' && s.juz !== 28) return false;
+        if (!q) return true;
+        return String(s.num) === q || s.name.toLowerCase().includes(q);
+      });
+
+      grid.innerHTML = filtered.map(s => {
+        const isSel = selectedMurojaahSurahNums.includes(s.num);
+        return `<button type="button" class="chip-btn ${isSel ? 'selected-indigo' : ''}" data-mursurah-num="${s.num}">${s.num}. ${escapeHTML(s.name)}</button>`;
+      }).join('');
+
+      const count = selectedMurojaahSurahNums.length;
+      document.getElementById('murojaahSelectedCount').textContent = count;
+      document.getElementById('murojaahSurahTotalBadge').textContent = count;
+      const names = selectedMurojaahSurahNums
+        .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
+        .filter(Boolean);
+      document.getElementById('murojaahSelectedPreview').textContent =
+        names.length > 0 ? names.join(', ') : 'No surahs selected yet...';
+    }
+
+    // =========================================================================
+    // 9. SAVE DAILY SESSION & DELETE / RESET ACTIONS
+    // =========================================================================
+    function saveDailySession() {
+      const dateVal = document.getElementById('entryDate').value;
+      if (!dateVal) {
+        showToast('Please choose a session date');
+        return;
+      }
+
+      const newRows = [];
+      let baseId = Date.now();
+
+      if (currentDayStatus !== 'Active') {
+        const notes = document.getElementById('nonActiveNotes').value.trim();
+        newRows.push({
+          id: baseId,
+          Date: dateVal,
+          Day_Status: currentDayStatus,
+          Category: '',
+          Surah_or_Juz: '',
+          Tracking_Unit: '',
+          Start_Unit: '',
+          End_Unit: '',
+          Total_Amount: 0,
+          Notes: notes
+        });
+      } else {
+        const notes = document.getElementById('sessionNotes').value.trim();
+        let noteAttached = false;
+
+        // 1. Saba
+        if (document.getElementById('enableSaba').checked) {
+          const sStart = parseInt(document.getElementById('sabaStart').value, 10) || 0;
+          const sEnd = parseInt(document.getElementById('sabaEnd').value, 10) || 0;
+          if (sStart <= 0 || sEnd < sStart) {
+            showToast('Saba End must be >= Start');
+            return;
+          }
+          newRows.push({
+            id: baseId++,
+            Date: dateVal,
+            Day_Status: 'Active',
+            Category: 'Saba',
+            Surah_or_Juz: sabaSelectedSurah.name,
+            Tracking_Unit: document.getElementById('sabaUnit').value,
+            Start_Unit: sStart,
+            End_Unit: sEnd,
+            Total_Amount: sEnd - sStart + 1,
+            Notes: notes
+          });
+          noteAttached = true;
+        }
+
+        // 2. Pra Saba
+        if (document.getElementById('enablePraSaba').checked) {
+          const pStart = parseInt(document.getElementById('praSabaStart').value, 10) || 0;
+          const pEnd = parseInt(document.getElementById('praSabaEnd').value, 10) || 0;
+          if (pStart <= 0 || pEnd < pStart) {
+            showToast('Pra Saba End must be >= Start');
+            return;
+          }
+          newRows.push({
+            id: baseId++,
+            Date: dateVal,
+            Day_Status: 'Active',
+            Category: 'Pra Saba',
+            Surah_or_Juz: praSabaSelectedSurah.name,
+            Tracking_Unit: document.getElementById('praSabaUnit').value,
+            Start_Unit: pStart,
+            End_Unit: pEnd,
+            Total_Amount: pEnd - pStart + 1,
+            Notes: !noteAttached ? notes : ''
+          });
+          noteAttached = true;
+        }
+
+        // 3. Mukhtar
+        if (document.getElementById('enableMukhtar').checked) {
+          if (mukhtarMode === 'Page') {
+            const mStart = parseInt(document.getElementById('mukhtarPageStart').value, 10) || 0;
+            const mEnd = parseInt(document.getElementById('mukhtarPageEnd').value, 10) || 0;
+            if (mStart <= 0 || mEnd < mStart) {
+              showToast('Mukhtar End Page must be >= Start');
+              return;
+            }
+            newRows.push({
+              id: baseId++,
+              Date: dateVal,
+              Day_Status: 'Active',
+              Category: 'Mukhtar',
+              Surah_or_Juz: document.getElementById('mukhtarJuzSelect').value,
+              Tracking_Unit: 'Page',
+              Start_Unit: mStart,
+              End_Unit: mEnd,
+              Total_Amount: mEnd - mStart + 1,
+              Notes: !noteAttached ? notes : ''
+            });
+          } else {
+            if (selectedMukhtarSurahNums.length === 0) {
+              showToast('Select at least 1 Surah for Mukhtar');
+              return;
+            }
+            const surahNames = selectedMukhtarSurahNums
+              .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
+              .filter(Boolean);
+            newRows.push({
+              id: baseId++,
+              Date: dateVal,
+              Day_Status: 'Active',
+              Category: 'Mukhtar',
+              Surah_or_Juz: surahNames.join(', '),
+              Tracking_Unit: 'Full Surah',
+              Start_Unit: 1,
+              End_Unit: surahNames.length,
+              Total_Amount: surahNames.length,
+              Notes: !noteAttached ? notes : ''
+            });
+          }
+          noteAttached = true;
+        }
+
+        // 4. Murojaah (General Revision)
+        if (document.getElementById('enableMurojaah').checked) {
+          if (murojaahMode === 'Ayat') {
+            const murStart = parseInt(document.getElementById('murojaahAyatStart').value, 10) || 0;
+            const murEnd = parseInt(document.getElementById('murojaahAyatEnd').value, 10) || 0;
+            if (murStart <= 0 || murEnd < murStart) {
+              showToast('Murojaah End Ayat must be >= Start');
+              return;
+            }
+            newRows.push({
+              id: baseId++,
+              Date: dateVal,
+              Day_Status: 'Active',
+              Category: 'Murojaah',
+              Surah_or_Juz: murojaahSelectedSurah.name,
+              Tracking_Unit: 'Ayat',
+              Start_Unit: murStart,
+              End_Unit: murEnd,
+              Total_Amount: murEnd - murStart + 1,
+              Notes: !noteAttached ? notes : ''
+            });
+          } else if (murojaahMode === 'Page') {
+            const pStart = parseInt(document.getElementById('murojaahPageStart').value, 10) || 0;
+            const pEnd = parseInt(document.getElementById('murojaahPageEnd').value, 10) || 0;
+            if (pStart <= 0 || pEnd < pStart) {
+              showToast('Murojaah End Page must be >= Start');
+              return;
+            }
+            newRows.push({
+              id: baseId++,
+              Date: dateVal,
+              Day_Status: 'Active',
+              Category: 'Murojaah',
+              Surah_or_Juz: document.getElementById('murojaahJuzSelect').value,
+              Tracking_Unit: 'Page',
+              Start_Unit: pStart,
+              End_Unit: pEnd,
+              Total_Amount: pEnd - pStart + 1,
+              Notes: !noteAttached ? notes : ''
+            });
+          } else {
+            if (selectedMurojaahSurahNums.length === 0) {
+              showToast('Select at least 1 Surah for Murojaah');
+              return;
+            }
+            const surahNames = selectedMurojaahSurahNums
+              .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
+              .filter(Boolean);
+            newRows.push({
+              id: baseId++,
+              Date: dateVal,
+              Day_Status: 'Active',
+              Category: 'Murojaah',
+              Surah_or_Juz: surahNames.join(', '),
+              Tracking_Unit: 'Full Surah',
+              Start_Unit: 1,
+              End_Unit: surahNames.length,
+              Total_Amount: surahNames.length,
+              Notes: !noteAttached ? notes : ''
+            });
+          }
+          noteAttached = true;
+        }
+
+        if (newRows.length === 0) {
+          showToast('Enable at least one category to save');
+          return;
+        }
+      }
+
+      const activeBtn = document.getElementById('btnSaveActiveSession');
+      const offBtn = document.getElementById('btnSaveNonActive');
+      activeBtn.disabled = true;
+      offBtn.disabled = true;
+      document.getElementById('saveBtnLabel').textContent = 'Saving to Sheet...';
+      document.getElementById('saveNonActiveBtnLabel').textContent = 'Saving to Sheet...';
+
+      const resetFormAfterSave = () => {
+        activeBtn.disabled = false;
+        offBtn.disabled = false;
+        document.getElementById('sessionNotes').value = '';
+        document.getElementById('nonActiveNotes').value = '';
+        selectedMukhtarSurahNums = [];
+        selectedMurojaahSurahNums = [];
+        renderMukhtarSurahChips();
+        renderMurojaahSurahChips();
+        document.getElementById('saveNonActiveBtnLabel').textContent = `Save ${currentDayStatus} Row to Sheet`;
+        updateSaveButtonLabel();
+      };
+
+      if (!IS_GAS_ENV) {
+        hafazanRows.push(...newRows);
+        safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+        resetFormAfterSave();
+        refreshEntireUI();
+        showToast(`Saved ${newRows.length} row(s) locally!`);
+        return;
+      }
+
+      setSyncStatus('syncing', 'Saving...');
+      google.script.run
+        .withSuccessHandler((payload) => {
+          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          resetFormAfterSave();
+          setSyncStatus('connected', 'Synced with Google Sheet');
+          refreshEntireUI();
+          showToast(`Saved ${newRows.length} row(s) to Google Sheet!`);
+        })
+        .withFailureHandler((err) => {
+          resetFormAfterSave();
+          setSyncStatus('error', 'Save Failed');
+          showToast('Error saving to Sheet: ' + (err?.message || 'Check connection'));
+        })
+        .appendLogs(newRows);
+    }
+
+    function deleteRowFromSheet(rowId) {
+      if (!IS_GAS_ENV) {
+        hafazanRows = hafazanRows.filter(r => r.id !== rowId);
+        safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+        refreshEntireUI();
+        showToast('Row deleted locally');
+        return;
+      }
+
+      setSyncStatus('syncing', 'Deleting...');
+      google.script.run
+        .withSuccessHandler((payload) => {
+          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          setSyncStatus('connected', 'Synced with Google Sheet');
+          refreshEntireUI();
+          showToast('Row deleted from Google Sheet');
+        })
+        .withFailureHandler((err) => {
+          setSyncStatus('error', 'Delete Error');
+          showToast('Could not delete row: ' + (err?.message || 'Check Code.gs'));
+          renderHistoryTable();
+        })
+        .deleteLogRow(rowId);
+    }
+
+    function handleResetSampleData() {
+      const btn = document.getElementById('btnResetSampleData');
+      if (!resetArmed) {
+        resetArmed = true;
+        btn.textContent = 'Confirm Reset?';
+        btn.style.background = 'var(--amber-600)';
+        btn.style.color = '#fff';
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          resetArmed = false;
+          btn.textContent = 'Reset Sample Data';
+          btn.style.background = '';
+          btn.style.color = '';
+        }, 4000);
+        return;
+      }
+      clearTimeout(resetTimer);
+      resetArmed = false;
+      btn.textContent = 'Reset Sample Data';
+      btn.style.background = '';
+      btn.style.color = '';
+
+      hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
+      safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+      refreshEntireUI();
+      showToast('Sample data restored!');
+    }
+
+    // =========================================================================
+    // 10. PROGRESS, INSIGHTS (INCLUDING MUROJAAH) & BAR CHART
+    // =========================================================================
+    function updateAllStats() {
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
+      let totalSaba = 0;
+      let totalPraSaba = 0;
+      let totalMukhtar = 0;
+      let totalMurojaah = 0;
+      let murojaahLogCount = 0;
+
+      const activeDatesSet = new Set();
+      const sabaDatesSet = new Set();
+      const murojaahOnlyDatesSet = new Set();
+      const cutiDatesSet = new Set();
+      const allUniqueDates = new Set();
+
+      sorted.forEach(r => {
+        if (r.Date) allUniqueDates.add(r.Date);
+        if (r.Day_Status === 'Active') {
+          activeDatesSet.add(r.Date);
+          const amt = Number(r.Total_Amount) || 0;
+          if (r.Category === 'Saba') {
+            totalSaba += amt;
+            sabaDatesSet.add(r.Date);
+          } else if (r.Category === 'Pra Saba') {
+            totalPraSaba += amt;
+          } else if (r.Category === 'Mukhtar') {
+            totalMukhtar += amt;
+          } else if (r.Category === 'Murojaah') {
+            totalMurojaah += amt;
+            murojaahLogCount++;
+          }
+        } else if (r.Day_Status === 'Cuti') {
+          cutiDatesSet.add(r.Date);
+        }
+      });
+
+      // Identify dates where Murojaah was logged without Saba
+      sorted.forEach(r => {
+        if (r.Day_Status === 'Active' && r.Category === 'Murojaah' && !sabaDatesSet.has(r.Date)) {
+          murojaahOnlyDatesSet.add(r.Date);
+        }
+      });
+
+      const activeDaysCount = activeDatesSet.size;
+      const sabaDaysCount = sabaDatesSet.size || activeDaysCount;
+      const avgSabaPerDay = sabaDaysCount > 0 ? totalSaba / sabaDaysCount : 0;
+      const avgPraPerDay = activeDaysCount > 0 ? totalPraSaba / activeDaysCount : 0;
+      const attendancePct = allUniqueDates.size > 0 ? Math.round((activeDaysCount / allUniqueDates.size) * 100) : 0;
+
+      // Current Surah Milestone & ETA
+      const lastSaba = [...sorted].reverse().find(r => r.Category === 'Saba');
+      if (lastSaba) {
+        const sObj = findSurahObj(lastSaba.Surah_or_Juz);
+        const curEnd = parseInt(lastSaba.End_Unit, 10) || 0;
+        const maxUnits = lastSaba.Tracking_Unit === 'Ayat' ? sObj.ayat : 604;
+        const pct = Math.min(100, Math.round((curEnd / maxUnits) * 100));
+
+        document.getElementById('statCurrentSurah').textContent = `${sObj.num}. ${sObj.name}`;
+        document.getElementById('statCurrentAyat').textContent = `${lastSaba.Tracking_Unit} ${curEnd} of ${maxUnits} memorized`;
+        document.getElementById('statSurahPercent').textContent = `${pct}%`;
+        document.getElementById('statSurahProgressBar').style.width = `${pct}%`;
+
+        const remaining = Math.max(0, maxUnits - curEnd);
+        if (remaining === 0) {
+          document.getElementById('statSurahEta').textContent = `Surah Completed!`;
+        } else if (avgSabaPerDay > 0) {
+          const estSessions = Math.ceil(remaining / avgSabaPerDay);
+          const etaDate = new Date();
+          etaDate.setDate(etaDate.getDate() + Math.ceil(estSessions * 1.35));
+          const etaLabel = etaDate.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
+          document.getElementById('statSurahEta').textContent = `Est. Finish: ~${etaLabel} (${estSessions} sessions)`;
+        } else {
+          document.getElementById('statSurahEta').textContent = `Est. Finish: Log sessions to project`;
+        }
+
+        const ayatsBefore = ALL_114_SURAHS.filter(s => s.num < sObj.num).reduce((acc, s) => acc + s.ayat, 0);
+        const totalMemorizedAyat = ayatsBefore + (lastSaba.Tracking_Unit === 'Ayat' ? curEnd : 0);
+        document.getElementById('statQuranOverallPct').textContent = `Al-Quran: ${((totalMemorizedAyat / 6236) * 100).toFixed(1)}%`;
+      } else {
+        document.getElementById('statCurrentSurah').textContent = 'Not Started Yet';
+        document.getElementById('statCurrentAyat').textContent = 'Log your first Saba session to begin';
+        document.getElementById('statSurahPercent').textContent = '0%';
+        document.getElementById('statSurahProgressBar').style.width = '0%';
+        document.getElementById('statSurahEta').textContent = 'Est. Finish: —';
+        document.getElementById('statQuranOverallPct').textContent = 'Al-Quran: 0%';
+      }
+
+      // Streaks
+      const dateStatusMap = {};
+      sorted.forEach(r => { dateStatusMap[r.Date] = r.Day_Status; });
+      const ascDates = Object.keys(dateStatusMap).sort();
+      const descDates = [...ascDates].reverse();
+
+      let currentStreak = 0;
+      for (const d of descDates) {
+        if (dateStatusMap[d] === 'Active') currentStreak++;
+        else if (['Weekend', 'Cuti', 'Riadah'].includes(dateStatusMap[d])) continue;
+        else break;
+      }
+
+      let bestStreak = 0;
+      let run = 0;
+      for (const d of ascDates) {
+        if (dateStatusMap[d] === 'Active') {
+          run++;
+          if (run > bestStreak) bestStreak = run;
+        } else if (!['Weekend', 'Cuti', 'Riadah'].includes(dateStatusMap[d])) {
+          run = 0;
+        }
+      }
+
+      // Peak Day of Week & Personal Best Day
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const dayBuckets = Array.from({ length: 7 }, () => ({ sum: 0, count: 0 }));
+      const sabaPerDate = {};
+      let bestSingleUnits = 0;
+      let bestSingleDate = '';
+
+      sorted.forEach(r => {
+        if (r.Day_Status === 'Active' && r.Category === 'Saba') {
+          const amt = Number(r.Total_Amount) || 0;
+          sabaPerDate[r.Date] = (sabaPerDate[r.Date] || 0) + amt;
+        }
+      });
+
+      Object.entries(sabaPerDate).forEach(([dStr, totalU]) => {
+        if (totalU > bestSingleUnits) {
+          bestSingleUnits = totalU;
+          bestSingleDate = dStr;
+        }
+        const dt = new Date(`${dStr}T00:00:00`);
+        if (!isNaN(dt.getTime())) {
+          dayBuckets[dt.getDay()].sum += totalU;
+          dayBuckets[dt.getDay()].count += 1;
+        }
+      });
+
+      let peakDayIdx = -1;
+      let peakDayAvg = 0;
+      dayBuckets.forEach((b, idx) => {
+        if (b.count > 0 && b.sum / b.count > peakDayAvg) {
+          peakDayAvg = b.sum / b.count;
+          peakDayIdx = idx;
+        }
+      });
+
+      // 4-Category Workload Distribution & Revision Ratio
+      const allRevisionTotal = totalPraSaba + totalMukhtar + totalMurojaah;
+      const revRatio = totalSaba > 0 ? (allRevisionTotal / totalSaba).toFixed(1) : '0.0';
+      const grandTotal = totalSaba + allRevisionTotal;
+
+      const sPct = grandTotal > 0 ? Math.round((totalSaba / grandTotal) * 100) : 25;
+      const pPct = grandTotal > 0 ? Math.round((totalPraSaba / grandTotal) * 100) : 25;
+      const mPct = grandTotal > 0 ? Math.round((totalMukhtar / grandTotal) * 100) : 25;
+      const murPct = grandTotal > 0 ? Math.max(0, 100 - sPct - pPct - mPct) : 25;
+
+      document.getElementById('kpiTotalSaba').textContent = totalSaba.toLocaleString();
+      document.getElementById('kpiAvgSabaPace').textContent = `${avgSabaPerDay.toFixed(1)} / saba day`;
+      document.getElementById('kpiTotalPraSaba').textContent = totalPraSaba.toLocaleString();
+      document.getElementById('kpiAvgPraSabaPace').textContent = `${avgPraPerDay.toFixed(1)} / active day`;
+      document.getElementById('kpiTotalMukhtar').textContent = totalMukhtar.toLocaleString();
+      document.getElementById('kpiTotalMurojaah').textContent = totalMurojaah.toLocaleString();
+      document.getElementById('kpiMurojaahSessions').textContent = `${murojaahLogCount} revision log${murojaahLogCount === 1 ? '' : 's'}`;
+
+      document.getElementById('kpiAttendanceRate').textContent = `${attendancePct}%`;
+      document.getElementById('kpiCutiSummary').textContent = `Active: ${activeDaysCount}d • Cuti: ${cutiDatesSet.size}d`;
+
+      document.getElementById('insightCurStreakBadge').textContent = `Streak: ${currentStreak}d`;
+      document.getElementById('insightBestStreakBadge').textContent = `Best: ${bestStreak}d`;
+      document.getElementById('insightBestDay').textContent = peakDayIdx >= 0 ? `${dayNames[peakDayIdx]}s` : '—';
+      document.getElementById('insightBestDaySub').textContent = peakDayIdx >= 0 ? `Avg ${peakDayAvg.toFixed(1)} Saba units` : 'Highest avg Saba output';
+      document.getElementById('insightRevisionRatio').textContent = `1 : ${revRatio}`;
+      document.getElementById('insightRecordDay').textContent = `${bestSingleUnits} units`;
+      document.getElementById('insightRecordDate').textContent = bestSingleDate ? `On ${bestSingleDate}` : 'Highest single-day Saba';
+
+      document.getElementById('workloadMixLabels').textContent = `Saba ${sPct}% · Pra ${pPct}% · Mukhtar ${mPct}% · Murojaah ${murPct}%`;
+      document.getElementById('mixBarSaba').style.width = `${sPct}%`;
+      document.getElementById('mixBarPraSaba').style.width = `${pPct}%`;
+      document.getElementById('mixBarMukhtar').style.width = `${mPct}%`;
+      document.getElementById('mixBarMurojaah').style.width = `${murPct}%`;
+
+      renderJuzMatrix(sorted);
+      render30DayHeatmap(dateStatusMap, murojaahOnlyDatesSet);
+      renderHTMLBarChart(sorted);
+    }
+
+    function renderJuzMatrix(sorted) {
+      const juzMap = {};
+      sorted.forEach(r => {
+        if (r.Day_Status !== 'Active' || !r.Surah_or_Juz) return;
+        const jMatch = r.Surah_or_Juz.trim().match(/^Juz\s+(\d+)$/i);
+        if (jMatch) {
+          const jNum = parseInt(jMatch[1], 10);
+          if (jNum >= 1 && jNum <= 30) {
+            if (r.Category === 'Saba' || r.Category === 'Pra Saba') juzMap[jNum] = 'saba';
+            else if (r.Category === 'Murojaah' && juzMap[jNum] !== 'saba') juzMap[jNum] = 'murojaah';
+            else if (!juzMap[jNum]) juzMap[jNum] = 'mukhtar';
+          }
+          return;
+        }
+        r.Surah_or_Juz.split(',').map(x => x.trim()).filter(Boolean).forEach(sName => {
+          const sObj = findSurahObj(sName);
+          if (sObj && sObj.juz >= 1 && sObj.juz <= 30) {
+            if (r.Category === 'Saba' || r.Category === 'Pra Saba') juzMap[sObj.juz] = 'saba';
+            else if (r.Category === 'Murojaah' && juzMap[sObj.juz] !== 'saba') juzMap[sObj.juz] = 'murojaah';
+            else if (!juzMap[sObj.juz]) juzMap[sObj.juz] = 'mukhtar';
+          }
+        });
+      });
+
+      document.getElementById('juzTouchedCountBadge').textContent = `${Object.keys(juzMap).length} / 30 Juz`;
+      let html = '';
+      for (let j = 1; j <= 30; j++) {
+        let cls = '';
+        if (juzMap[j] === 'saba') cls = 'juz-saba';
+        else if (juzMap[j] === 'murojaah') cls = 'juz-murojaah';
+        else if (juzMap[j] === 'mukhtar') cls = 'juz-mukhtar';
+        html += `<div class="juz-cell ${cls}">${j}</div>`;
+      }
+      document.getElementById('juzCoverageGrid').innerHTML = html;
+    }
+
+    function render30DayHeatmap(dateStatusMap, murojaahOnlyDatesSet) {
+      const today = new Date();
+      let html = '';
+      for (let i = 29; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(today.getDate() - i);
+        const iso = new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+        const st = dateStatusMap[iso];
+        let cls = '';
+        let label = st || 'No entry';
+        if (st === 'Active') {
+          if (murojaahOnlyDatesSet.has(iso)) {
+            cls = 'heat-murojaah';
+            label = 'Murojaah-Only Day';
+          } else {
+            cls = 'heat-active';
+          }
+        } else if (st === 'Weekend') cls = 'heat-weekend';
+        else if (st === 'Cuti') cls = 'heat-cuti';
+        else if (st === 'Riadah') cls = 'heat-riadah';
+        html += `<div class="heat-cell ${cls}" title="${iso}: ${label}">${d.getDate()}</div>`;
+      }
+      document.getElementById('heatmapGrid').innerHTML = html;
+    }
+
+    function renderHTMLBarChart(sorted) {
+      const chartEl = document.getElementById('volumeBarChart');
+      const datesEl = document.getElementById('volumeBarDates');
+
+      const byDate = {};
+      sorted.forEach(r => {
+        if (r.Day_Status === 'Active') {
+          if (!byDate[r.Date]) byDate[r.Date] = { saba: 0, prasaba: 0, murojaah: 0 };
+          if (r.Category === 'Saba') byDate[r.Date].saba += Number(r.Total_Amount) || 0;
+          if (r.Category === 'Pra Saba') byDate[r.Date].prasaba += Number(r.Total_Amount) || 0;
+          if (r.Category === 'Murojaah') byDate[r.Date].murojaah += Number(r.Total_Amount) || 0;
+        }
+      });
+
+      const recentDates = Object.keys(byDate).sort().slice(-8);
+      if (recentDates.length === 0) {
+        chartEl.innerHTML = `<div style="width:100%; text-align:center; font-size:12px; color:var(--slate-400); padding-bottom:45px;">No active session data yet</div>`;
+        datesEl.innerHTML = '';
+        return;
+      }
+
+      const maxVal = Math.max(...recentDates.map(d => byDate[d].saba + byDate[d].prasaba + byDate[d].murojaah), 10);
+
+      chartEl.innerHTML = recentDates.map(d => {
+        const { saba, prasaba, murojaah } = byDate[d];
+        const tot = saba + prasaba + murojaah;
+        const sabaPct = Math.round((saba / maxVal) * 100);
+        const praPct = Math.round((prasaba / maxVal) * 100);
+        const murPct = Math.round((murojaah / maxVal) * 100);
+        return `
+          <div class="bar-col">
+            <span class="bar-val-label">${tot}</span>
+            <div class="bar-stack" style="height:105px;">
+              <div style="height:${murPct}%; background:var(--indigo-600);"></div>
+              <div style="height:${sabaPct}%; background:var(--emerald-850);"></div>
+              <div style="height:${praPct}%; background:var(--teal-600);"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      datesEl.innerHTML = recentDates.map(d => `<span class="bar-date-lbl">${d.slice(5)}</span>`).join('');
+    }
+
+    // =========================================================================
+    // 11. HISTORY TABLE, COPY TSV, CSV EXPORT & IMPORT TO SHEET
+    // =========================================================================
+    function renderHistoryTable() {
+      const tbody = document.getElementById('historyTableBody');
+      const emptyEl = document.getElementById('emptyHistoryState');
+      const query = document.getElementById('historySearch').value.toLowerCase().trim();
+      const filter = document.getElementById('historyCategoryFilter').value;
+
+      document.getElementById('recordCountBadge').textContent = `${hafazanRows.length} rows`;
+
+      const filtered = [...hafazanRows]
+        .sort((a, b) => b.Date.localeCompare(a.Date) || b.id - a.id)
+        .filter(r => {
+          if (filter === 'CUTI_ONLY' && r.Day_Status !== 'Cuti') return false;
+          if (filter === 'NON_ACTIVE' && r.Day_Status === 'Active') return false;
+          if (!['ALL', 'CUTI_ONLY', 'NON_ACTIVE'].includes(filter) && r.Category !== filter) return false;
+          if (!query) return true;
+          return `${r.Date} ${r.Day_Status} ${r.Category} ${r.Surah_or_Juz} ${r.Notes}`.toLowerCase().includes(query);
+        });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      emptyEl.classList.add('hidden');
+      tbody.innerHTML = filtered.map(r => {
+        const isOff = r.Day_Status !== 'Active';
+        let badgeStyle = 'background:var(--slate-100); color:var(--slate-700);';
+        let badgeLabel = r.Day_Status;
+
+        if (r.Day_Status === 'Cuti') {
+          badgeStyle = 'background:var(--amber-100); color:#92400E;';
+        } else if (r.Day_Status === 'Riadah') {
+          badgeStyle = 'background:var(--sky-100); color:#0369A1;';
+        } else if (!isOff) {
+          badgeLabel = r.Category;
+          if (r.Category === 'Saba') badgeStyle = 'background:var(--emerald-100); color:var(--emerald-900);';
+          else if (r.Category === 'Pra Saba') badgeStyle = 'background:var(--teal-100); color:var(--teal-700);';
+          else if (r.Category === 'Murojaah') badgeStyle = 'background:var(--indigo-100); color:var(--indigo-700);';
+          else badgeStyle = 'background:var(--amber-50); color:#92400E; border:1px solid #FDE68A;';
+        }
+
+        const rangeTxt = isOff ? '—' : (r.Tracking_Unit === 'Full Surah' ? 'Full Surah' : `${r.Start_Unit}–${r.End_Unit}`);
+
+        return `
+          <tr>
+            <td style="font-weight:700; white-space:nowrap;">${escapeHTML(r.Date)}</td>
+            <td><span class="badge-tag" style="${badgeStyle}">${escapeHTML(badgeLabel)}</span></td>
+            <td style="font-weight:700; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHTML(r.Surah_or_Juz || '—')}</td>
+            <td style="text-align:center; white-space:nowrap;">${escapeHTML(rangeTxt)}</td>
+            <td style="text-align:center; font-weight:800;">${isOff ? '0' : escapeHTML(r.Total_Amount)}</td>
+            <td style="color:var(--slate-500); max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHTML(r.Notes || '')}</td>
+            <td style="text-align:right;">
+              <button type="button" data-del-id="${r.id}" style="border:none; background:none; color:var(--rose-600); font-weight:800; padding:4px 6px;" title="Delete">✕</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function copyTSVForSheets() {
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+      const tsv = sorted.map(r => [
+        r.Date,
+        r.Day_Status,
+        r.Category,
+        r.Surah_or_Juz,
+        r.Tracking_Unit,
+        r.Start_Unit,
+        r.End_Unit,
+        r.Total_Amount,
+        (r.Notes || '').replace(/\t|\n/g, ' ')
+      ].join('\t')).join('\n');
+
+      const ta = document.createElement('textarea');
+      ta.value = tsv;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(`Copied ${sorted.length} rows!`);
+      } catch (e) {
+        showToast('Could not copy automatically');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function downloadCSV() {
+      const headers = ['Date', 'Day_Status', 'Category', 'Surah_or_Juz', 'Tracking_Unit', 'Start_Unit', 'End_Unit', 'Total_Amount', 'Notes'];
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+      const esc = (v) => {
+        const s = String(v ?? '');
+        return (s.includes(',') || s.includes('"') || s.includes('\n')) ? `"${s.replace(/"/g, '""')}"` : s;
+      };
+      const csvStr = [headers.join(','), ...sorted.map(r => headers.map(h => esc(r[h])).join(','))].join('\n');
+
+      const slug = studentProfile.name ? studentProfile.name.replace(/[^a-z0-9]+/gi, '_') : 'Student';
+      const filename = `Hafazan_Tracker_${slug}_${new Date().toISOString().split('T')[0]}.csv`;
+
+      try {
+        const blob = new Blob([csvStr], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('CSV downloaded!');
+      } catch (e) {
+        const dataUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvStr);
+        window.open(dataUri, '_blank');
+        showToast('CSV opened for download');
+      }
+    }
+
+    function handleCSVImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const lines = (e.target.result || '').split(/\r?\n/).filter(l => l.trim());
+        if (lines.length < 2) {
+          showToast('CSV file appears empty');
+          return;
+        }
+        const imported = [];
+        let baseId = Date.now();
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
+          if (!cols[0] || !/^\d{4}-\d{2}-\d{2}$/.test(cols[0])) continue;
+          imported.push(normalizeRowCuti({
+            id: baseId++,
+            Date: cols[0],
+            Day_Status: cols[1] || 'Active',
+            Category: cols[2] || '',
+            Surah_or_Juz: cols[3] || '',
+            Tracking_Unit: cols[4] || '',
+            Start_Unit: cols[5] ? Number(cols[5]) : '',
+            End_Unit: cols[6] ? Number(cols[6]) : '',
+            Total_Amount: cols[7] ? Number(cols[7]) : 0,
+            Notes: cols[8] || ''
+          }));
+        }
+        if (imported.length === 0) {
+          showToast('No valid YYYY-MM-DD rows found');
+          return;
+        }
+
+        if (!IS_GAS_ENV) {
+          hafazanRows = imported;
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          refreshEntireUI();
+          showToast(`Imported ${imported.length} rows locally!`);
+          return;
+        }
+
+        setSyncStatus('syncing', 'Uploading CSV...');
+        google.script.run
+          .withSuccessHandler((payload) => {
+            hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+            safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+            setSyncStatus('connected', 'Synced with Google Sheet');
+            refreshEntireUI();
+            showToast(`Appended ${imported.length} CSV rows to Sheet!`);
+          })
+          .withFailureHandler((err) => {
+            setSyncStatus('error', 'Import Error');
+            showToast('CSV import error: ' + (err?.message || 'Failed'));
+          })
+          .appendLogs(imported);
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    // =========================================================================
+    // 12. TAB SWITCHING & TOAST NOTIFICATIONS
+    // =========================================================================
+    function switchTab(tabName) {
+      ['daily', 'stats', 'history'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tabName);
+        document.getElementById(`nav-${t}`).classList.toggle('active', t === tabName);
+      });
+      if (tabName === 'stats') updateAllStats();
+      if (tabName === 'history') renderHistoryTable();
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastMessage').textContent = msg;
+      banner.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        banner.classList.remove('show');
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
