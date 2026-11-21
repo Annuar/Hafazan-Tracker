@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,10 +17,12 @@
       --emerald-100: #D1FAE5;
       --emerald-50:  #ECFDF5;
 
+
       --teal-700: #0F766E;
       --teal-600: #0D9488;
       --teal-100: #CCFBF1;
       --teal-50:  #F0FDFA;
+
 
       --amber-700: #B45309;
       --amber-600: #D97706;
@@ -28,18 +30,22 @@
       --amber-100: #FEF3C7;
       --amber-50:  #FFFBEB;
 
+
       --indigo-700: #4338CA;
       --indigo-600: #4F46E5;
       --indigo-500: #6366F1;
       --indigo-100: #E0E7FF;
       --indigo-50:  #EEF2FF;
 
+
       --rose-600: #E11D48;
       --rose-100: #FFE4E6;
       --rose-50:  #FFF1F2;
 
+
       --sky-500: #0EA5E9;
       --sky-100: #E0F2FE;
+
 
       --slate-900: #0F172A;
       --slate-800: #1E293B;
@@ -53,6 +59,7 @@
       --slate-50:  #F8FAFC;
       --white:     #FFFFFF;
 
+
       --radius-sm: 10px;
       --radius-md: 14px;
       --radius-lg: 18px;
@@ -63,10 +70,12 @@
       --shadow-lg: 0 16px 36px rgba(15, 23, 42, 0.18);
     }
 
+
     *, *::before, *::after {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
+
 
     html, body {
       margin: 0;
@@ -80,23 +89,28 @@
       overflow-x: hidden;
     }
 
+
     body {
       padding-bottom: 88px;
     }
 
+
     button, input, select {
       font-family: inherit;
     }
+
 
     button {
       touch-action: manipulation;
       cursor: pointer;
     }
 
+
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
+
 
     input[type="number"],
     input[type="text"],
@@ -116,6 +130,7 @@
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
+
     input[type="number"]:focus,
     input[type="text"]:focus,
     input[type="date"]:focus,
@@ -125,18 +140,22 @@
       background-color: var(--white);
     }
 
+
     .hidden {
       display: none !important;
     }
+
 
     @keyframes slideUp {
       from { transform: translateY(14px); opacity: 0; }
       to   { transform: translateY(0); opacity: 1; }
     }
 
+
     .animate-in {
       animation: slideUp 0.22s ease-out forwards;
     }
+
 
     /* =========================================================================
        2. CLEAN TOP HEADER & SYNC STATUS PILL
@@ -150,6 +169,7 @@
       box-shadow: var(--shadow-md);
     }
 
+
     .header-inner {
       max-width: 680px;
       margin: 0 auto;
@@ -160,6 +180,7 @@
       gap: 10px;
     }
 
+
     .brand-group {
       display: flex;
       align-items: center;
@@ -167,6 +188,7 @@
       min-width: 0;
       flex: 1;
     }
+
 
     .brand-icon {
       width: 40px;
@@ -181,6 +203,7 @@
       flex-shrink: 0;
     }
 
+
     .brand-title {
       margin: 0;
       font-size: 17px;
@@ -189,6 +212,7 @@
       line-height: 1.2;
     }
 
+
     .brand-sub {
       margin: 2px 0 0;
       font-size: 11.5px;
@@ -196,6 +220,39 @@
       font-weight: 500;
       line-height: 1.3;
     }
+
+
+    .lang-pill-switch {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+
+    .lang-opt-btn {
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.03em;
+      transition: all 0.15s ease;
+    }
+
+
+    .lang-opt-btn.active {
+      background: var(--white);
+      color: var(--emerald-900);
+      box-shadow: var(--shadow-xs);
+    }
+
 
     .sync-status-row {
       display: flex;
@@ -208,6 +265,7 @@
       border: 1px solid var(--slate-200);
     }
 
+
     .sync-badge {
       display: inline-flex;
       align-items: center;
@@ -217,6 +275,7 @@
       color: var(--slate-700);
     }
 
+
     .sync-dot {
       width: 8px;
       height: 8px;
@@ -225,9 +284,11 @@
       flex-shrink: 0;
     }
 
+
     .sync-dot.syncing { background: #F59E0B; }
     .sync-dot.local   { background: #3B82F6; }
     .sync-dot.error   { background: #F43F5E; }
+
 
     .main-container {
       max-width: 680px;
@@ -235,11 +296,13 @@
       padding: 14px 14px 0;
     }
 
+
     .stack-md {
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
+
 
     .card {
       background: var(--white);
@@ -249,9 +312,11 @@
       overflow: hidden;
     }
 
+
     .card-pad {
       padding: 16px;
     }
+
 
     .section-label {
       display: flex;
@@ -265,6 +330,7 @@
       margin-bottom: 8px;
     }
 
+
     /* =========================================================================
        3. UNCROWDED STUDENT PROFILE CARD
        ========================================================================= */
@@ -273,12 +339,14 @@
       background: linear-gradient(155deg, var(--white) 0%, var(--slate-50) 65%, var(--emerald-50) 100%);
     }
 
+
     .profile-top-row {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
     }
+
 
     .profile-identity {
       display: flex;
@@ -287,6 +355,7 @@
       min-width: 0;
       flex: 1;
     }
+
 
     .profile-avatar {
       width: 42px;
@@ -301,6 +370,7 @@
       margin-top: 2px;
     }
 
+
     .profile-kicker {
       margin: 0;
       font-size: 10px;
@@ -310,6 +380,7 @@
       color: var(--emerald-700);
     }
 
+
     .profile-fullname {
       margin: 3px 0 0;
       font-size: 17px;
@@ -318,6 +389,7 @@
       line-height: 1.3;
       word-break: break-word;
     }
+
 
     .btn-edit-profile {
       flex-shrink: 0;
@@ -334,10 +406,12 @@
       box-shadow: var(--shadow-xs);
     }
 
+
     .btn-edit-profile:active {
       background: var(--emerald-50);
       transform: scale(0.98);
     }
+
 
     .profile-meta-block {
       margin-top: 12px;
@@ -347,6 +421,7 @@
       flex-direction: column;
       gap: 8px;
     }
+
 
     .profile-school-line {
       display: flex;
@@ -359,11 +434,13 @@
       word-break: break-word;
     }
 
+
     .profile-badges-line {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
+
 
     .meta-pill {
       display: inline-flex;
@@ -375,17 +452,20 @@
       font-weight: 700;
     }
 
+
     .meta-pill-emerald {
       background: var(--emerald-50);
       color: var(--emerald-900);
       border: 1px solid var(--emerald-100);
     }
 
+
     .meta-pill-slate {
       background: var(--slate-100);
       color: var(--slate-700);
       border: 1px solid var(--slate-200);
     }
+
 
     .profile-form-body {
       padding: 16px;
@@ -396,6 +476,7 @@
       gap: 12px;
     }
 
+
     .field-label {
       display: block;
       font-size: 12px;
@@ -404,11 +485,13 @@
       margin-bottom: 5px;
     }
 
+
     .form-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
+
 
     .form-actions-end {
       display: flex;
@@ -416,6 +499,7 @@
       gap: 8px;
       padding-top: 4px;
     }
+
 
     /* =========================================================================
        4. MUROJAAH DAY QUICK TOGGLE BANNER
@@ -433,6 +517,7 @@
       transition: all 0.2s ease;
     }
 
+
     .murojaah-banner.is-on {
       background: linear-gradient(135deg, var(--indigo-600) 0%, var(--indigo-700) 100%);
       border-color: var(--indigo-700);
@@ -440,12 +525,14 @@
       box-shadow: var(--shadow-md);
     }
 
+
     .murojaah-banner-info {
       display: flex;
       align-items: center;
       gap: 10px;
       min-width: 0;
     }
+
 
     .murojaah-banner-icon {
       width: 36px;
@@ -459,10 +546,12 @@
       flex-shrink: 0;
     }
 
+
     .murojaah-banner.is-on .murojaah-banner-icon {
       background: rgba(255, 255, 255, 0.18);
       color: #FDE68A;
     }
+
 
     .murojaah-banner-title {
       margin: 0;
@@ -471,9 +560,11 @@
       color: var(--slate-900);
     }
 
+
     .murojaah-banner.is-on .murojaah-banner-title {
       color: var(--white);
     }
+
 
     .murojaah-banner-sub {
       margin: 1px 0 0;
@@ -481,9 +572,11 @@
       color: var(--slate-600);
     }
 
+
     .murojaah-banner.is-on .murojaah-banner-sub {
       color: rgba(224, 231, 255, 0.92);
     }
+
 
     .btn-murojaah-toggle {
       flex-shrink: 0;
@@ -497,11 +590,13 @@
       transition: all 0.15s ease;
     }
 
+
     .murojaah-banner.is-on .btn-murojaah-toggle {
       background: #FBBF24;
       border-color: #FBBF24;
       color: var(--slate-900);
     }
+
 
     /* =========================================================================
        5. BUTTONS, STATUS PILLS & CATEGORY CARDS
@@ -519,9 +614,11 @@
       transition: opacity 0.15s ease, transform 0.1s ease, background-color 0.15s ease;
     }
 
+
     .btn:active:not(:disabled) {
       transform: scale(0.985);
     }
+
 
     .btn-primary {
       background: linear-gradient(135deg, var(--emerald-850), var(--teal-600));
@@ -532,6 +629,7 @@
       font-size: 15px;
     }
 
+
     .btn-amber {
       background: var(--amber-600);
       color: var(--white);
@@ -541,11 +639,13 @@
       font-size: 15px;
     }
 
+
     .btn-secondary {
       background: var(--slate-100);
       color: var(--slate-700);
       border: 1px solid var(--slate-200);
     }
+
 
     .btn-outline-teal {
       background: var(--teal-50);
@@ -554,11 +654,13 @@
       width: 100%;
     }
 
+
     .btn-sm {
       padding: 7px 11px;
       font-size: 12px;
       border-radius: 10px;
     }
+
 
     .status-grid {
       display: grid;
@@ -566,11 +668,13 @@
       gap: 8px;
     }
 
+
     @media (min-width: 480px) {
       .status-grid {
         grid-template-columns: repeat(4, 1fr);
       }
     }
+
 
     .status-pill-btn {
       display: flex;
@@ -586,12 +690,14 @@
       font-weight: 700;
     }
 
+
     .status-pill-btn.active-status {
       background: var(--emerald-850);
       border-color: var(--emerald-850);
       color: var(--white);
       box-shadow: var(--shadow-xs);
     }
+
 
     .status-pill-btn.active-off {
       background: var(--amber-600);
@@ -600,11 +706,13 @@
       box-shadow: var(--shadow-xs);
     }
 
+
     .chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
     }
+
 
     .chip-btn {
       padding: 6px 11px;
@@ -616,17 +724,20 @@
       font-weight: 600;
     }
 
+
     .chip-btn.selected {
       background: var(--amber-600);
       border-color: var(--amber-600);
       color: var(--white);
     }
 
+
     .chip-btn.selected-indigo {
       background: var(--indigo-600);
       border-color: var(--indigo-600);
       color: var(--white);
     }
+
 
     .cat-header {
       padding: 12px 15px;
@@ -637,10 +748,12 @@
       border-bottom: 1px solid var(--slate-100);
     }
 
+
     .cat-header-saba     { background: var(--emerald-50); border-bottom-color: var(--emerald-100); }
     .cat-header-prasaba  { background: var(--teal-50); border-bottom-color: var(--teal-100); }
     .cat-header-mukhtar  { background: var(--amber-50); border-bottom-color: var(--amber-100); }
     .cat-header-murojaah { background: var(--indigo-50); border-bottom-color: var(--indigo-100); }
+
 
     .cat-title-group {
       display: flex;
@@ -648,6 +761,7 @@
       gap: 10px;
       min-width: 0;
     }
+
 
     .cat-num-badge {
       width: 28px;
@@ -662,6 +776,7 @@
       flex-shrink: 0;
     }
 
+
     .cat-title {
       margin: 0;
       font-size: 14px;
@@ -669,11 +784,13 @@
       color: var(--slate-900);
     }
 
+
     .cat-subtitle {
       margin: 1px 0 0;
       font-size: 11px;
       color: var(--slate-600);
     }
+
 
     .toggle-check-label {
       display: inline-flex;
@@ -686,12 +803,14 @@
       user-select: none;
     }
 
+
     .toggle-check-label input {
       width: 18px;
       height: 18px;
       accent-color: var(--emerald-850);
       margin: 0;
     }
+
 
     .surah-trigger-btn {
       width: 100%;
@@ -707,21 +826,26 @@
       min-height: 46px;
     }
 
+
     .surah-trigger-btn.teal-border {
       border-color: var(--teal-600);
     }
+
 
     .surah-trigger-btn.indigo-border {
       border-color: var(--indigo-600);
     }
 
+
     .surah-trigger-btn:active {
       background: var(--emerald-50);
     }
 
+
     .surah-trigger-btn * {
       pointer-events: none;
     }
+
 
     .surah-trigger-main {
       display: flex;
@@ -731,6 +855,7 @@
       flex: 1;
     }
 
+
     .surah-trigger-name {
       font-size: 14px;
       font-weight: 800;
@@ -739,6 +864,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
 
     .surah-ayat-tag {
       font-size: 11px;
@@ -751,15 +877,18 @@
       flex-shrink: 0;
     }
 
+
     .surah-ayat-tag.teal-tag {
       background: var(--teal-100);
       color: var(--teal-700);
     }
 
+
     .surah-ayat-tag.indigo-tag {
       background: var(--indigo-100);
       color: var(--indigo-700);
     }
+
 
     .surah-change-hint {
       font-size: 12px;
@@ -771,6 +900,7 @@
       flex-shrink: 0;
     }
 
+
     .range-grid {
       display: grid;
       grid-template-columns: 1fr 1.15fr 0.85fr;
@@ -778,12 +908,14 @@
       align-items: end;
     }
 
+
     .num-input-center {
       text-align: center !important;
       font-size: 17px !important;
       font-weight: 800 !important;
       padding: 10px 6px !important;
     }
+
 
     .total-box {
       border-radius: var(--radius-md);
@@ -798,6 +930,7 @@
       justify-content: center;
     }
 
+
     .stepper-bar {
       display: flex;
       align-items: center;
@@ -806,11 +939,13 @@
       padding-top: 2px;
     }
 
+
     .stepper-buttons {
       display: flex;
       gap: 5px;
       flex-wrap: wrap;
     }
+
 
     .step-btn {
       padding: 6px 10px;
@@ -822,10 +957,12 @@
       color: var(--slate-700);
     }
 
+
     .step-btn-emerald { background: var(--emerald-100); color: var(--emerald-900); }
     .step-btn-teal    { background: var(--teal-100); color: var(--teal-700); }
     .step-btn-amber   { background: var(--amber-100); color: var(--amber-700); }
     .step-btn-indigo  { background: var(--indigo-100); color: var(--indigo-700); }
+
 
     .mode-switch {
       display: grid;
@@ -836,6 +973,7 @@
       border-radius: var(--radius-md);
     }
 
+
     .mode-switch-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -844,6 +982,7 @@
       padding: 4px;
       border-radius: var(--radius-md);
     }
+
 
     .mode-tab-btn {
       padding: 8px 6px;
@@ -860,17 +999,20 @@
       white-space: nowrap;
     }
 
+
     .mode-tab-btn.active {
       background: var(--white);
       color: var(--amber-700);
       box-shadow: var(--shadow-xs);
     }
 
+
     .mode-tab-btn.active-indigo {
       background: var(--white);
       color: var(--indigo-700);
       box-shadow: var(--shadow-xs);
     }
+
 
     .surah-chips-scroll {
       max-height: 210px;
@@ -884,6 +1026,7 @@
       gap: 6px;
     }
 
+
     /* =========================================================================
        6. PROGRESS TAB & INSIGHTS STYLING
        ========================================================================= */
@@ -895,6 +1038,7 @@
       box-shadow: var(--shadow-md);
     }
 
+
     .progress-track {
       width: 100%;
       height: 10px;
@@ -904,6 +1048,7 @@
       margin: 12px 0;
     }
 
+
     .progress-fill {
       height: 100%;
       background: #FBBF24;
@@ -911,11 +1056,13 @@
       transition: width 0.35s ease;
     }
 
+
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
+
 
     .kpi-card {
       background: var(--white);
@@ -925,6 +1072,7 @@
       box-shadow: var(--shadow-xs);
     }
 
+
     .kpi-label {
       margin: 0;
       font-size: 11px;
@@ -933,12 +1081,14 @@
       color: var(--slate-500);
     }
 
+
     .kpi-val {
       margin: 4px 0 2px;
       font-size: 22px;
       font-weight: 800;
       line-height: 1.15;
     }
+
 
     .kpi-sub {
       margin: 0;
@@ -947,11 +1097,13 @@
       color: var(--slate-500);
     }
 
+
     .insights-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 9px;
     }
+
 
     @media (min-width: 520px) {
       .insights-grid {
@@ -959,12 +1111,14 @@
       }
     }
 
+
     .insight-tile {
       background: var(--slate-50);
       border: 1px solid var(--slate-200);
       border-radius: var(--radius-md);
       padding: 11px 12px;
     }
+
 
     .mix-bar {
       display: flex;
@@ -974,17 +1128,20 @@
       background: var(--slate-100);
     }
 
+
     .juz-matrix {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 6px;
     }
 
+
     @media (min-width: 500px) {
       .juz-matrix {
         grid-template-columns: repeat(10, 1fr);
       }
     }
+
 
     .juz-cell {
       padding: 7px 2px;
@@ -997,11 +1154,13 @@
       color: var(--slate-400);
     }
 
+
     .juz-cell.juz-saba {
       background: var(--emerald-850);
       border-color: var(--emerald-850);
       color: var(--white);
     }
+
 
     .juz-cell.juz-mukhtar {
       background: var(--amber-500);
@@ -1009,17 +1168,20 @@
       color: var(--white);
     }
 
+
     .juz-cell.juz-murojaah {
       background: var(--indigo-600);
       border-color: var(--indigo-700);
       color: var(--white);
     }
 
+
     .heatmap-grid {
       display: grid;
       grid-template-columns: repeat(10, 1fr);
       gap: 5px;
     }
+
 
     .heat-cell {
       aspect-ratio: 1 / 1;
@@ -1034,11 +1196,13 @@
       color: var(--slate-400);
     }
 
+
     .heat-active   { background: var(--emerald-600); border-color: var(--emerald-700); color: var(--white); }
     .heat-murojaah { background: var(--indigo-600); border-color: var(--indigo-700); color: var(--white); }
     .heat-weekend  { background: var(--slate-300); border-color: var(--slate-400); color: var(--slate-800); }
     .heat-cuti     { background: var(--amber-500); border-color: var(--amber-600); color: var(--slate-900); }
     .heat-riadah   { background: var(--sky-500); border-color: var(--sky-500); color: var(--white); }
+
 
     .bar-chart-wrap {
       display: flex;
@@ -1050,6 +1214,7 @@
       border-bottom: 1.5px solid var(--slate-200);
     }
 
+
     .bar-col {
       flex: 1;
       display: flex;
@@ -1059,6 +1224,7 @@
       justify-content: flex-end;
       min-width: 0;
     }
+
 
     .bar-stack {
       width: 100%;
@@ -1070,12 +1236,14 @@
       overflow: hidden;
     }
 
+
     .bar-val-label {
       font-size: 9px;
       font-weight: 800;
       color: var(--slate-600);
       margin-bottom: 3px;
     }
+
 
     .bar-date-row {
       display: flex;
@@ -1084,6 +1252,7 @@
       padding: 5px 6px 0;
     }
 
+
     .bar-date-lbl {
       flex: 1;
       text-align: center;
@@ -1091,6 +1260,7 @@
       font-weight: 700;
       color: var(--slate-500);
     }
+
 
     /* =========================================================================
        7. HISTORY TABLE & EXPORT TAB
@@ -1101,12 +1271,14 @@
       -webkit-overflow-scrolling: touch;
     }
 
+
     table.data-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 12px;
       min-width: 520px;
     }
+
 
     table.data-table th {
       background: var(--slate-50);
@@ -1120,11 +1292,13 @@
       border-bottom: 1px solid var(--slate-200);
     }
 
+
     table.data-table td {
       padding: 10px 8px;
       border-bottom: 1px solid var(--slate-100);
       vertical-align: middle;
     }
+
 
     .badge-tag {
       display: inline-block;
@@ -1134,6 +1308,7 @@
       font-weight: 800;
       white-space: nowrap;
     }
+
 
     /* =========================================================================
        8. STICKY BOTTOM NAVIGATION & FULL-SCREEN SURAH PICKER MODAL
@@ -1149,12 +1324,14 @@
       box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.04);
     }
 
+
     .bottom-nav-inner {
       max-width: 680px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
     }
+
 
     .nav-tab-btn {
       border: none;
@@ -1170,10 +1347,12 @@
       color: var(--slate-400);
     }
 
+
     .nav-tab-btn.active {
       color: var(--emerald-850);
       font-weight: 800;
     }
+
 
     .modal-overlay {
       position: fixed;
@@ -1185,12 +1364,14 @@
       justify-content: center;
     }
 
+
     @media (min-width: 560px) {
       .modal-overlay {
         align-items: center;
         padding: 16px;
       }
     }
+
 
     .modal-sheet {
       background: var(--white);
@@ -1206,11 +1387,13 @@
       animation: slideUp 0.2s ease-out forwards;
     }
 
+
     @media (min-width: 560px) {
       .modal-sheet {
         border-radius: 20px;
       }
     }
+
 
     .modal-header {
       padding: 15px 16px;
@@ -1220,6 +1403,7 @@
       justify-content: space-between;
       gap: 10px;
     }
+
 
     .modal-close-btn {
       width: 36px;
@@ -1234,6 +1418,7 @@
       flex-shrink: 0;
     }
 
+
     .modal-search-area {
       padding: 12px 14px;
       background: var(--slate-50);
@@ -1243,11 +1428,13 @@
       gap: 8px;
     }
 
+
     .modal-list-scroll {
       flex: 1;
       overflow-y: auto;
       padding: 8px;
     }
+
 
     .surah-row-item {
       width: 100%;
@@ -1263,18 +1450,22 @@
       border-bottom: 1px solid var(--slate-100);
     }
 
+
     .surah-row-item:active,
     .surah-row-item:hover {
       background: var(--slate-50);
     }
 
+
     .surah-row-item.is-selected {
       background: var(--emerald-50);
     }
 
+
     .surah-row-item * {
       pointer-events: none;
     }
+
 
     .surah-num-pill {
       width: 32px;
@@ -1290,10 +1481,12 @@
       flex-shrink: 0;
     }
 
+
     .surah-row-item.is-selected .surah-num-pill {
       background: var(--emerald-850);
       color: var(--white);
     }
+
 
     /* Toast Notification */
     .toast-pill {
@@ -1319,6 +1512,7 @@
       text-align: center;
     }
 
+
     .toast-pill.show {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
@@ -1326,6 +1520,7 @@
   </style>
 </head>
 <body>
+
 
   <!-- ==================== STICKY HEADER ==================== -->
   <header class="app-header">
@@ -1339,20 +1534,29 @@
           </svg>
         </div>
         <div style="min-width:0; flex:1;">
-          <h1 class="brand-title">Hafazan Tracker</h1>
+          <h1 id="appHeaderTitle" class="brand-title">Hafazan Tracker</h1>
           <p class="brand-sub">Saba · Pra Saba · Mukhtar · Murojaah</p>
         </div>
+      </div>
+
+
+      <div class="lang-pill-switch" role="group" aria-label="Language Switch">
+        <button type="button" id="btnLangMY" class="lang-opt-btn" data-lang="MY">MY</button>
+        <button type="button" id="btnLangEN" class="lang-opt-btn active" data-lang="EN">EN</button>
       </div>
     </div>
   </header>
 
+
   <!-- ==================== MAIN CONTENT ==================== -->
   <main class="main-container">
+
 
     <!-- =====================================================
          TAB 1: DAILY LOG
          ===================================================== -->
     <section id="tab-daily" class="stack-md animate-in">
+
 
       <!-- 1. Uncrowded Student Profile Card -->
       <div class="card">
@@ -1366,10 +1570,11 @@
                 </svg>
               </div>
               <div style="min-width: 0; flex: 1;">
-                <p class="profile-kicker">Student Profile</p>
+                <p id="profileKickerLabel" class="profile-kicker">Student Profile</p>
                 <h2 id="profileSummaryName" class="profile-fullname">Set Student Profile</h2>
               </div>
             </div>
+
 
             <button type="button" id="btnToggleProfileForm" class="btn-edit-profile">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -1378,6 +1583,7 @@
               <span id="btnToggleProfileLabel">Edit</span>
             </button>
           </div>
+
 
           <div class="profile-meta-block">
             <div class="profile-school-line">
@@ -1391,6 +1597,7 @@
               <span id="profileSummarySchool">Tap Edit to add student name, age, gender &amp; school</span>
             </div>
 
+
             <div id="profileSummaryBadgesRow" class="profile-badges-line hidden">
               <span id="profileSummaryAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
               <span id="profileSummaryGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
@@ -1398,32 +1605,36 @@
           </div>
         </div>
 
+
         <!-- Expandable Vertical Form -->
         <div id="studentProfileFormBody" class="profile-form-body hidden">
           <div>
-            <label for="profName" class="field-label">Student Full Name</label>
+            <label for="profName" id="lblProfName" class="field-label">Student Full Name</label>
             <input type="text" id="profName" placeholder="e.g., Ahmad Luqman bin Zulkifli" />
           </div>
 
+
           <div class="form-grid-2">
             <div>
-              <label for="profAge" class="field-label">Age (Years)</label>
+              <label for="profAge" id="lblProfAge" class="field-label">Age (Years)</label>
               <input type="number" id="profAge" min="3" max="99" placeholder="e.g., 12" />
             </div>
             <div>
-              <label for="profGender" class="field-label">Gender</label>
+              <label for="profGender" id="lblProfGender" class="field-label">Gender</label>
               <select id="profGender">
-                <option value="">Unspecified</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="" id="optGenderEmpty">Unspecified</option>
+                <option value="Male" id="optGenderMale">Male</option>
+                <option value="Female" id="optGenderFemale">Female</option>
               </select>
             </div>
           </div>
 
+
           <div>
-            <label for="profSchool" class="field-label">School / Tahfiz Institution</label>
+            <label for="profSchool" id="lblProfSchool" class="field-label">School / Tahfiz Institution</label>
             <input type="text" id="profSchool" placeholder="e.g., Maahad Tahfiz Sains" />
           </div>
+
 
           <div class="form-actions-end">
             <button type="button" id="btnCancelProfile" class="btn btn-secondary btn-sm">Cancel</button>
@@ -1431,6 +1642,7 @@
           </div>
         </div>
       </div>
+
 
       <!-- 2. Date & Day Status Card -->
       <div class="card card-pad stack-md">
@@ -1442,41 +1654,48 @@
               <line x1="8" x2="8" y1="2" y2="6"/>
               <line x1="3" x2="21" y1="10" y2="10"/>
             </svg>
-            Session Date
+            <span id="lblSessionDate">Session Date</span>
           </label>
           <input type="date" id="entryDate" style="max-width: 175px;" />
         </div>
 
+
         <div>
-          <span class="section-label">Day Status</span>
+          <span id="lblDayStatus" class="section-label">Day Status</span>
           <div id="statusPills" class="status-grid"></div>
         </div>
       </div>
+
 
       <!-- 3. Non-Active Status Panel (Weekend / Cuti / Riadah) -->
       <div id="nonActivePanel" class="card card-pad stack-md hidden" style="border-color: #FCD34D;">
         <div style="background: var(--amber-50); border: 1px solid var(--amber-100); border-radius: 12px; padding: 12px; color: #78350F;">
           <p id="nonActiveTitle" style="margin:0; font-weight:800; font-size:14px;">Cuti Selected</p>
-          <p style="margin:4px 0 0; font-size:12px;">Logs 1 consolidated row (<strong id="nonActiveCodeLabel">Cuti</strong>) while keeping your Saba sequence intact.</p>
+          <p id="nonActiveDesc" style="margin:4px 0 0; font-size:12px;">Logs 1 consolidated row (<strong id="nonActiveCodeLabel">Cuti</strong>) while keeping your Saba sequence intact.</p>
         </div>
 
+
         <div id="cutiReasonSection">
-          <span class="field-label">Quick-Tap Cuti Reason (Populates Notes)</span>
+          <span id="lblCutiReason" class="field-label">Quick-Tap Cuti Reason (Populates Notes)</span>
           <div id="cutiReasonChips" class="chip-row"></div>
         </div>
 
+
         <div>
-          <label for="nonActiveNotes" class="field-label">Notes / Reason Details</label>
+          <label for="nonActiveNotes" id="lblNonActiveNotes" class="field-label">Notes / Reason Details</label>
           <input type="text" id="nonActiveNotes" placeholder="e.g., Sakit, Raya, Awal Ramadan, Balik kampung..." />
         </div>
+
 
         <button type="button" id="btnSaveNonActive" class="btn btn-amber">
           <span id="saveNonActiveBtnLabel">Save Cuti Row to Sheet</span>
         </button>
       </div>
 
+
       <!-- 4. Active Session Categories Wrapper -->
       <div id="activeSessionWrapper" class="stack-md">
+
 
         <!-- ONE-TAP 'MUROJAAH DAY' QUICK TOGGLE BANNER -->
         <div id="murojaahDayBanner" class="murojaah-banner">
@@ -1493,8 +1712,10 @@
             </div>
           </div>
 
+
           <button type="button" id="btnToggleMurojaahDay" class="btn-murojaah-toggle">Turn ON</button>
         </div>
+
 
         <!-- CATEGORY 1: SABA -->
         <div class="card" style="border-color: #A7F3D0;">
@@ -1502,34 +1723,36 @@
             <div class="cat-title-group">
               <span class="cat-num-badge" style="background: var(--emerald-850);">1</span>
               <div>
-                <h2 class="cat-title">Saba <span style="font-weight:500; font-size:12px; color:var(--emerald-700);">(New Hafazan)</span></h2>
+                <h2 class="cat-title">Saba <span id="subSabaTag" style="font-weight:500; font-size:12px; color:var(--emerald-700);">(New Hafazan)</span></h2>
                 <p id="sabaLastHint" class="cat-subtitle">Last: Al-Baqarah Ayat 221</p>
               </div>
             </div>
             <label class="toggle-check-label">
               <input type="checkbox" id="enableSaba" checked />
-              <span>Log</span>
+              <span class="lbl-log-check">Log</span>
             </label>
           </div>
+
 
           <div id="body-saba" class="card-pad stack-md">
             <div style="display:grid; grid-template-columns: 1.8fr 1fr; gap:10px;">
               <div>
-                <label class="field-label">Surah (All 114 Surahs)</label>
+                <label class="field-label lbl-surah-all">Surah (All 114 Surahs)</label>
                 <button type="button" id="btnOpenSabaSurah" class="surah-trigger-btn">
                   <div class="surah-trigger-main">
                     <span id="sabaSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
                     <span id="sabaSurahMaxBadge" class="surah-ayat-tag">286 Ayat</span>
                   </div>
                   <span class="surah-change-hint">
-                    <span>Change</span>
+                    <span class="lbl-change">Change</span>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </span>
                 </button>
               </div>
 
+
               <div>
-                <label for="sabaUnit" class="field-label">Unit</label>
+                <label for="sabaUnit" class="field-label lbl-unit">Unit</label>
                 <select id="sabaUnit">
                   <option value="Ayat">Ayat</option>
                   <option value="Page">Page</option>
@@ -1537,25 +1760,28 @@
               </div>
             </div>
 
+
             <div class="range-grid">
               <div>
-                <label for="sabaStart" class="field-label">Start</label>
+                <label for="sabaStart" class="field-label lbl-start">Start</label>
                 <input type="number" id="sabaStart" min="1" class="num-input-center" />
               </div>
               <div>
-                <label for="sabaEnd" class="field-label">End</label>
+                <label for="sabaEnd" class="field-label lbl-end">End</label>
                 <input type="number" id="sabaEnd" min="1" class="num-input-center" style="background: var(--emerald-50); border-color: #6EE7B7;" />
               </div>
               <div>
-                <label class="field-label" style="text-align:center;">Total</label>
+                <label class="field-label lbl-total" style="text-align:center;">Total</label>
                 <div id="sabaTotalBadge" class="total-box" style="background: var(--emerald-850);">2</div>
               </div>
             </div>
 
+
             <p id="sabaValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
 
+
             <div class="stepper-bar">
-              <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick End:</span>
+              <span id="lblQuickEnd" style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick End:</span>
               <div class="stepper-buttons">
                 <button type="button" class="step-btn" data-saba-step="-1">-1</button>
                 <button type="button" class="step-btn step-btn-emerald" data-saba-step="1">+1</button>
@@ -1567,40 +1793,43 @@
           </div>
         </div>
 
+
         <!-- CATEGORY 2: PRA SABA -->
         <div class="card" style="border-color: #99F6E4;">
           <div class="cat-header cat-header-prasaba">
             <div class="cat-title-group">
               <span class="cat-num-badge" style="background: var(--teal-600);">2</span>
               <div>
-                <h2 class="cat-title">Pra Saba <span style="font-weight:500; font-size:12px; color:var(--teal-700);">(Recent Revision)</span></h2>
-                <p class="cat-subtitle">End auto-syncs with Saba</p>
+                <h2 class="cat-title">Pra Saba <span id="subPraSabaTag" style="font-weight:500; font-size:12px; color:var(--teal-700);">(Recent Revision)</span></h2>
+                <p id="praSabaHintSub" class="cat-subtitle">End auto-syncs with Saba</p>
               </div>
             </div>
             <label class="toggle-check-label">
               <input type="checkbox" id="enablePraSaba" checked />
-              <span>Log</span>
+              <span class="lbl-log-check">Log</span>
             </label>
           </div>
+
 
           <div id="body-prasaba" class="card-pad stack-md">
             <div style="display:grid; grid-template-columns: 1.8fr 1fr; gap:10px;">
               <div>
-                <label class="field-label">Surah (All 114 Surahs)</label>
+                <label class="field-label lbl-surah-all">Surah (All 114 Surahs)</label>
                 <button type="button" id="btnOpenPraSabaSurah" class="surah-trigger-btn teal-border">
                   <div class="surah-trigger-main">
                     <span id="praSabaSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
                     <span id="praSabaSurahMaxBadge" class="surah-ayat-tag teal-tag">286 Ayat</span>
                   </div>
                   <span class="surah-change-hint" style="color:var(--teal-700);">
-                    <span>Change</span>
+                    <span class="lbl-change">Change</span>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </span>
                 </button>
               </div>
 
+
               <div>
-                <label for="praSabaUnit" class="field-label">Unit</label>
+                <label for="praSabaUnit" class="field-label lbl-unit">Unit</label>
                 <select id="praSabaUnit">
                   <option value="Ayat">Ayat</option>
                   <option value="Page">Page</option>
@@ -1608,25 +1837,28 @@
               </div>
             </div>
 
+
             <div class="range-grid">
               <div>
-                <label for="praSabaStart" class="field-label">Start</label>
+                <label for="praSabaStart" class="field-label lbl-start">Start</label>
                 <input type="number" id="praSabaStart" min="1" class="num-input-center" />
               </div>
               <div>
-                <label for="praSabaEnd" class="field-label">End</label>
+                <label for="praSabaEnd" class="field-label lbl-end">End</label>
                 <input type="number" id="praSabaEnd" min="1" class="num-input-center" style="background: var(--teal-50); border-color: #5EEAD4;" />
               </div>
               <div>
-                <label class="field-label" style="text-align:center;">Total</label>
+                <label class="field-label lbl-total" style="text-align:center;">Total</label>
                 <div id="praSabaTotalBadge" class="total-box" style="background: var(--teal-600);">33</div>
               </div>
             </div>
 
+
             <p id="praSabaValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
 
+
             <div class="stepper-bar">
-              <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Shift Start:</span>
+              <span id="lblShiftStart" style="font-size:11px; font-weight:600; color:var(--slate-500);">Shift Start:</span>
               <div class="stepper-buttons">
                 <button type="button" class="step-btn" data-prasaba-step="-5">-5</button>
                 <button type="button" class="step-btn" data-prasaba-step="-1">-1</button>
@@ -1637,21 +1869,23 @@
           </div>
         </div>
 
+
         <!-- CATEGORY 3: MUKHTAR -->
         <div class="card" style="border-color: #FDE68A;">
           <div class="cat-header cat-header-mukhtar">
             <div class="cat-title-group">
               <span class="cat-num-badge" style="background: var(--amber-600);">3</span>
               <div>
-                <h2 class="cat-title">Mukhtar <span style="font-weight:500; font-size:12px; color:var(--amber-700);">(Selected Revision)</span></h2>
+                <h2 class="cat-title">Mukhtar <span id="subMukhtarTag" style="font-weight:500; font-size:12px; color:var(--amber-700);">(Selected Revision)</span></h2>
                 <p id="mukhtarLastHint" class="cat-subtitle">Last: Juz 1 Page 20</p>
               </div>
             </div>
             <label class="toggle-check-label">
               <input type="checkbox" id="enableMukhtar" checked />
-              <span>Log</span>
+              <span class="lbl-log-check">Log</span>
             </label>
           </div>
+
 
           <div id="body-mukhtar" class="card-pad stack-md">
             <div class="mode-switch">
@@ -1659,30 +1893,33 @@
               <button type="button" id="btnMukhtarModeSurah" class="mode-tab-btn">Full Surahs (114)</button>
             </div>
 
+
             <!-- Mode A: Juz / Page -->
             <div id="mukhtarPagePanel" class="stack-md">
               <div>
-                <label for="mukhtarJuzSelect" class="field-label">Juz (1–30)</label>
+                <label for="mukhtarJuzSelect" class="field-label lbl-juz-range">Juz (1–30)</label>
                 <select id="mukhtarJuzSelect"></select>
               </div>
 
+
               <div class="range-grid">
                 <div>
-                  <label for="mukhtarPageStart" class="field-label">Start Page</label>
+                  <label for="mukhtarPageStart" class="field-label lbl-start-page">Start Page</label>
                   <input type="number" id="mukhtarPageStart" min="1" class="num-input-center" />
                 </div>
                 <div>
-                  <label for="mukhtarPageEnd" class="field-label">End Page</label>
+                  <label for="mukhtarPageEnd" class="field-label lbl-end-page">End Page</label>
                   <input type="number" id="mukhtarPageEnd" min="1" class="num-input-center" style="background: var(--amber-50); border-color: #FCD34D;" />
                 </div>
                 <div>
-                  <label class="field-label" style="text-align:center;">Pages</label>
+                  <label class="field-label lbl-pages-col" style="text-align:center;">Pages</label>
                   <div id="mukhtarPageTotalBadge" class="total-box" style="background: var(--amber-600);">1</div>
                 </div>
               </div>
 
+
               <div class="stepper-bar">
-                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
+                <span class="lbl-quick-pages" style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
                 <div class="stepper-buttons">
                   <button type="button" class="step-btn" data-mukhtar-offset="0">1 pg</button>
                   <button type="button" class="step-btn step-btn-amber" data-mukhtar-offset="1">2 pgs</button>
@@ -1692,14 +1929,17 @@
               </div>
             </div>
 
+
             <!-- Mode B: Full Surahs (114) -->
             <div id="mukhtarSurahPanel" class="stack-md hidden">
               <div style="display:flex; align-items:center; justify-content:space-between;">
-                <span class="field-label" style="margin:0;">Select Surahs (<strong id="selectedSurahCount" style="color:var(--amber-700);">0</strong> selected)</span>
+                <span class="field-label" style="margin:0;"><span id="lblSelectSurahs">Select Surahs</span> (<strong id="selectedSurahCount" style="color:var(--amber-700);">0</strong> <span class="lbl-selected-word">selected</span>)</span>
                 <button type="button" id="btnClearMukhtarSurahs" style="border:none; background:none; color:var(--rose-600); font-size:12px; font-weight:700;">Clear all</button>
               </div>
 
+
               <input type="text" id="mukhtarSurahSearch" placeholder="Filter 114 Surahs by name or number (e.g. Kahf, 36, Mulk)..." />
+
 
               <div class="chip-row">
                 <button type="button" class="chip-btn selected" data-mfilter="ALL">All 114</button>
@@ -1710,7 +1950,9 @@
                 <button type="button" class="chip-btn" id="btnPresetLast10" style="background:var(--amber-50); border-color:#FCD34D; color:#92400E;">+ Last 10</button>
               </div>
 
+
               <div id="mukhtarSurahChipsGrid" class="surah-chips-scroll"></div>
+
 
               <div style="background:var(--amber-50); border:1px solid #FDE68A; border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
                 <p id="selectedSurahPreview" style="margin:0; font-size:12px; color:var(--slate-600); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">No surahs selected yet...</p>
@@ -1720,65 +1962,70 @@
           </div>
         </div>
 
+
         <!-- CATEGORY 4: MUROJAAH (GENERAL REVISION) -->
         <div class="card" style="border-color: #C7D2FE;">
           <div class="cat-header cat-header-murojaah">
             <div class="cat-title-group">
               <span class="cat-num-badge" style="background: var(--indigo-600);">4</span>
               <div>
-                <h2 class="cat-title">Murojaah <span style="font-weight:500; font-size:12px; color:var(--indigo-700);">(General Revision)</span></h2>
+                <h2 class="cat-title">Murojaah <span id="subMurojaahTag" style="font-weight:500; font-size:12px; color:var(--indigo-700);">(General Revision)</span></h2>
                 <p id="murojaahLastHint" class="cat-subtitle">Ayat range, Juz/Page, or Full Surahs</p>
               </div>
             </div>
             <label class="toggle-check-label">
               <input type="checkbox" id="enableMurojaah" />
-              <span>Log</span>
+              <span class="lbl-log-check">Log</span>
             </label>
           </div>
 
+
           <div id="body-murojaah" class="card-pad stack-md hidden">
-            <!-- 3-Way Mode Switcher: Ayat | Juz / Page | Full Surahs -->
             <div class="mode-switch-3">
               <button type="button" id="btnMurojaahModeAyat" class="mode-tab-btn active-indigo">Ayat Range</button>
               <button type="button" id="btnMurojaahModePage" class="mode-tab-btn">Juz / Page</button>
               <button type="button" id="btnMurojaahModeSurah" class="mode-tab-btn">Full Surahs</button>
             </div>
 
+
             <!-- Murojaah Mode 1: Ayat Range -->
             <div id="murojaahAyatPanel" class="stack-md">
               <div>
-                <label class="field-label">Surah to Revise (All 114 Surahs)</label>
+                <label id="lblSurahToRevise" class="field-label">Surah to Revise (All 114 Surahs)</label>
                 <button type="button" id="btnOpenMurojaahSurah" class="surah-trigger-btn indigo-border">
                   <div class="surah-trigger-main">
                     <span id="murojaahSurahDisplay" class="surah-trigger-name">2. Al-Baqarah</span>
                     <span id="murojaahSurahMaxBadge" class="surah-ayat-tag indigo-tag">286 Ayat</span>
                   </div>
                   <span class="surah-change-hint" style="color:var(--indigo-700);">
-                    <span>Change</span>
+                    <span class="lbl-change">Change</span>
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                   </span>
                 </button>
               </div>
 
+
               <div class="range-grid">
                 <div>
-                  <label for="murojaahAyatStart" class="field-label">Start Ayat</label>
+                  <label for="murojaahAyatStart" id="lblMurStartAyat" class="field-label">Start Ayat</label>
                   <input type="number" id="murojaahAyatStart" min="1" value="1" class="num-input-center" />
                 </div>
                 <div>
-                  <label for="murojaahAyatEnd" class="field-label">End Ayat</label>
+                  <label for="murojaahAyatEnd" id="lblMurEndAyat" class="field-label">End Ayat</label>
                   <input type="number" id="murojaahAyatEnd" min="1" value="50" class="num-input-center" style="background: var(--indigo-50); border-color: #A5B4FC;" />
                 </div>
                 <div>
-                  <label class="field-label" style="text-align:center;">Total</label>
+                  <label class="field-label lbl-total" style="text-align:center;">Total</label>
                   <div id="murojaahAyatTotalBadge" class="total-box" style="background: var(--indigo-600);">50</div>
                 </div>
               </div>
 
+
               <p id="murojaahValidationMsg" class="hidden" style="margin:0; font-size:12px; font-weight:700; color:var(--rose-600);"></p>
 
+
               <div class="stepper-bar">
-                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Span:</span>
+                <span id="lblQuickSpan" style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Span:</span>
                 <div class="stepper-buttons">
                   <button type="button" class="step-btn step-btn-indigo" data-murojaah-ayat-step="10">+10</button>
                   <button type="button" class="step-btn step-btn-indigo" data-murojaah-ayat-step="25">+25</button>
@@ -1788,46 +2035,52 @@
               </div>
             </div>
 
+
             <!-- Murojaah Mode 2: Juz / Page -->
             <div id="murojaahPagePanel" class="stack-md hidden">
               <div>
-                <label for="murojaahJuzSelect" class="field-label">Juz (1–30)</label>
+                <label for="murojaahJuzSelect" class="field-label lbl-juz-range">Juz (1–30)</label>
                 <select id="murojaahJuzSelect"></select>
               </div>
 
+
               <div class="range-grid">
                 <div>
-                  <label for="murojaahPageStart" class="field-label">Start Page</label>
+                  <label for="murojaahPageStart" class="field-label lbl-start-page">Start Page</label>
                   <input type="number" id="murojaahPageStart" min="1" value="1" class="num-input-center" />
                 </div>
                 <div>
-                  <label for="murojaahPageEnd" class="field-label">End Page</label>
+                  <label for="murojaahPageEnd" class="field-label lbl-end-page">End Page</label>
                   <input type="number" id="murojaahPageEnd" min="1" value="5" class="num-input-center" style="background: var(--indigo-50); border-color: #A5B4FC;" />
                 </div>
                 <div>
-                  <label class="field-label" style="text-align:center;">Pages</label>
+                  <label class="field-label lbl-pages-col" style="text-align:center;">Pages</label>
                   <div id="murojaahPageTotalBadge" class="total-box" style="background: var(--indigo-600);">5</div>
                 </div>
               </div>
 
+
               <div class="stepper-bar">
-                <span style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
+                <span class="lbl-quick-pages" style="font-size:11px; font-weight:600; color:var(--slate-500);">Quick Pages:</span>
                 <div class="stepper-buttons">
                   <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="4">5 pgs</button>
                   <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="9">10 pgs</button>
-                  <button type="button" class="step-btn step-btn-indigo" data-murojaah-page-offset="19">Full Juz (20)</button>
+                  <button type="button" id="btnMurFullJuz20" class="step-btn step-btn-indigo" data-murojaah-page-offset="19">Full Juz (20)</button>
                 </div>
               </div>
             </div>
 
+
             <!-- Murojaah Mode 3: Full Surahs (114) -->
             <div id="murojaahSurahPanel" class="stack-md hidden">
               <div style="display:flex; align-items:center; justify-content:space-between;">
-                <span class="field-label" style="margin:0;">Surahs Revised (<strong id="murojaahSelectedCount" style="color:var(--indigo-700);">0</strong> selected)</span>
+                <span class="field-label" style="margin:0;"><span id="lblSurahsRevised">Surahs Revised</span> (<strong id="murojaahSelectedCount" style="color:var(--indigo-700);">0</strong> <span class="lbl-selected-word">selected</span>)</span>
                 <button type="button" id="btnClearMurojaahSurahs" style="border:none; background:none; color:var(--rose-600); font-size:12px; font-weight:700;">Clear all</button>
               </div>
 
+
               <input type="text" id="murojaahSurahSearch" placeholder="Filter 114 Surahs (e.g. Naba, Mulk, Kahf, 36)..." />
+
 
               <div class="chip-row">
                 <button type="button" class="chip-btn selected-indigo" data-murfilter="ALL">All 114</button>
@@ -1837,7 +2090,9 @@
                 <button type="button" class="chip-btn" id="btnMurPresetFullJuz30" style="background:var(--indigo-50); border-color:#A5B4FC; color:var(--indigo-700);">+ Full Juz 30</button>
               </div>
 
+
               <div id="murojaahSurahChipsGrid" class="surah-chips-scroll"></div>
+
 
               <div style="background:var(--indigo-50); border:1px solid #C7D2FE; border-radius:12px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px;">
                 <p id="murojaahSelectedPreview" style="margin:0; font-size:12px; color:var(--slate-600); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">No surahs selected yet...</p>
@@ -1847,12 +2102,14 @@
           </div>
         </div>
 
+
         <!-- Session Notes & Save Button -->
         <div class="card card-pad stack-md">
           <div>
-            <label for="sessionNotes" class="field-label">Session Notes (Applies to logged rows)</label>
+            <label for="sessionNotes" id="lblSessionNotes" class="field-label">Session Notes (Applies to logged rows)</label>
             <input type="text" id="sessionNotes" placeholder="e.g., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz..." />
           </div>
+
 
           <button type="button" id="btnSaveActiveSession" class="btn btn-primary">
             <span id="saveBtnLabel">Save Session to Sheet (3 Rows)</span>
@@ -1861,10 +2118,12 @@
       </div>
     </section>
 
+
     <!-- =====================================================
          TAB 2: PROGRESS & INSIGHTS
          ===================================================== -->
     <section id="tab-stats" class="stack-md hidden animate-in">
+
 
       <!-- Official Student Summary Card (Uncrowded) -->
       <div class="card">
@@ -1878,13 +2137,15 @@
                 </svg>
               </div>
               <div style="min-width: 0; flex: 1;">
-                <p class="profile-kicker">Hafazan Student Record</p>
+                <p id="statProfileKicker" class="profile-kicker">Hafazan Student Record</p>
                 <h2 id="statProfileName" class="profile-fullname">Student Profile Not Set</h2>
               </div>
             </div>
 
+
             <button type="button" id="btnEditProfileFromStats" class="btn-edit-profile">Edit</button>
           </div>
+
 
           <div class="profile-meta-block">
             <div class="profile-school-line">
@@ -1898,6 +2159,7 @@
               <span id="statProfileSchool">Tap Edit to add school, age &amp; gender</span>
             </div>
 
+
             <div id="statProfileBadgesRow" class="profile-badges-line hidden">
               <span id="statProfileAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
               <span id="statProfileGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
@@ -1906,19 +2168,23 @@
         </div>
       </div>
 
+
       <!-- Hero Current Saba Milestone Card -->
       <div class="hero-milestone">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-          <span style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#A7F3D0;">Current Saba Milestone</span>
+          <span id="lblHeroMilestone" style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#A7F3D0;">Current Saba Milestone</span>
           <span id="statSurahPercent" style="font-size:12px; font-weight:800; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px;">0%</span>
         </div>
+
 
         <h2 id="statCurrentSurah" style="margin:6px 0 2px; font-size:22px; font-weight:800;">2. Al-Baqarah</h2>
         <p id="statCurrentAyat" style="margin:0; font-size:13px; color:#D1FAE5;">Ayat 221 of 286 memorized</p>
 
+
         <div class="progress-track">
           <div id="statSurahProgressBar" class="progress-fill" style="width: 77%;"></div>
         </div>
+
 
         <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:11px; color:#ECFDF5; border-top:1px solid rgba(255,255,255,0.18); padding-top:10px;">
           <span id="statSurahEta">Est. Surah Finish: Calculating...</span>
@@ -1926,37 +2192,42 @@
         </div>
       </div>
 
+
       <!-- 4-Category KPI Grid -->
       <div class="kpi-grid">
         <div class="kpi-card">
-          <p class="kpi-label">Total Saba</p>
+          <p id="kpiLabelSaba" class="kpi-label">Total Saba</p>
           <p id="kpiTotalSaba" class="kpi-val" style="color:var(--emerald-850);">0</p>
           <p id="kpiAvgSabaPace" class="kpi-sub" style="color:var(--emerald-700);">0.0 / active day</p>
         </div>
 
+
         <div class="kpi-card">
-          <p class="kpi-label">Pra Saba</p>
+          <p id="kpiLabelPraSaba" class="kpi-label">Pra Saba</p>
           <p id="kpiTotalPraSaba" class="kpi-val" style="color:var(--teal-600);">0</p>
           <p id="kpiAvgPraSabaPace" class="kpi-sub" style="color:var(--teal-700);">0.0 / active day</p>
         </div>
 
+
         <div class="kpi-card">
-          <p class="kpi-label">Mukhtar</p>
+          <p id="kpiLabelMukhtar" class="kpi-label">Mukhtar</p>
           <p id="kpiTotalMukhtar" class="kpi-val" style="color:var(--amber-600);">0</p>
-          <p class="kpi-sub">Selected revision</p>
+          <p id="kpiSubMukhtar" class="kpi-sub">Selected revision</p>
         </div>
 
+
         <div class="kpi-card" style="border-color:#C7D2FE; background:linear-gradient(180deg, var(--white) 0%, var(--indigo-50) 100%);">
-          <p class="kpi-label" style="color:var(--indigo-700);">Murojaah</p>
+          <p id="kpiLabelMurojaah" class="kpi-label" style="color:var(--indigo-700);">Murojaah</p>
           <p id="kpiTotalMurojaah" class="kpi-val" style="color:var(--indigo-600);">0</p>
           <p id="kpiMurojaahSessions" class="kpi-sub" style="color:var(--indigo-700);">0 revision logs</p>
         </div>
       </div>
 
+
       <!-- Attendance & Streaks Strip -->
       <div class="card card-pad" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
         <div>
-          <p class="kpi-label">Overall Attendance</p>
+          <p id="kpiLabelAttendance" class="kpi-label">Overall Attendance</p>
           <p style="margin:3px 0 0; font-size:18px; font-weight:800; color:var(--slate-900);">
             <span id="kpiAttendanceRate">0%</span>
             <span id="kpiCutiSummary" style="font-size:12px; font-weight:600; color:var(--slate-500); margin-left:6px;">Active: 0d • Cuti: 0d</span>
@@ -1968,33 +2239,38 @@
         </div>
       </div>
 
+
       <!-- Hafazan Insights & Rhythm Card -->
       <div class="card card-pad stack-md">
-        <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Hafazan &amp; Murojaah Rhythm</h3>
+        <h3 id="lblRhythmTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Hafazan &amp; Murojaah Rhythm</h3>
+
 
         <div class="insights-grid">
           <div class="insight-tile">
-            <p class="kpi-label" style="font-size:10px;">Peak Performance Day</p>
+            <p id="lblInsightPeak" class="kpi-label" style="font-size:10px;">Peak Performance Day</p>
             <p id="insightBestDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--slate-900);">—</p>
             <p id="insightBestDaySub" class="kpi-sub">Highest avg Saba output</p>
           </div>
 
-          <div class="insight-tile">
-            <p class="kpi-label" style="font-size:10px;">Revision Balance</p>
-            <p id="insightRevisionRatio" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--indigo-700);">1 : 0</p>
-            <p class="kpi-sub">New vs. All Revision</p>
-          </div>
 
           <div class="insight-tile">
-            <p class="kpi-label" style="font-size:10px;">Personal Best Day</p>
+            <p id="lblInsightBalance" class="kpi-label" style="font-size:10px;">Revision Balance</p>
+            <p id="insightRevisionRatio" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--indigo-700);">1 : 0</p>
+            <p id="lblInsightBalanceSub" class="kpi-sub">New vs. All Revision</p>
+          </div>
+
+
+          <div class="insight-tile">
+            <p id="lblInsightRecord" class="kpi-label" style="font-size:10px;">Personal Best Day</p>
             <p id="insightRecordDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--emerald-850);">0 units</p>
             <p id="insightRecordDate" class="kpi-sub">Highest single-day Saba</p>
           </div>
         </div>
 
+
         <div>
           <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:11px; font-weight:700; color:var(--slate-600); margin-bottom:5px;">
-            <span>Workload Distribution</span>
+            <span id="lblWorkloadDist">Workload Distribution</span>
             <span id="workloadMixLabels">Saba 0% · Pra 0% · Mukhtar 0% · Murojaah 0%</span>
           </div>
           <div class="mix-bar">
@@ -2006,10 +2282,11 @@
         </div>
       </div>
 
+
       <!-- 30-Juz Activity Coverage Matrix -->
       <div class="card card-pad stack-md">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-          <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">30-Juz Activity Coverage</h3>
+          <h3 id="lblJuzCoverageTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">30-Juz Activity Coverage</h3>
           <span id="juzTouchedCountBadge" style="font-size:11px; font-weight:800; color:var(--emerald-850); background:var(--emerald-50); padding:3px 9px; border-radius:999px;">0 / 30 Juz</span>
         </div>
         <div id="juzCoverageGrid" class="juz-matrix"></div>
@@ -2017,27 +2294,29 @@
           <span><strong style="color:var(--emerald-850);">■</strong> Saba / Pra Saba</span>
           <span><strong style="color:var(--amber-500);">■</strong> Mukhtar</span>
           <span><strong style="color:var(--indigo-600);">■</strong> Murojaah</span>
-          <span><strong style="color:var(--slate-400);">■</strong> Not Logged</span>
+          <span id="lblLegendNotLogged"><strong style="color:var(--slate-400);">■</strong> Not Logged</span>
         </div>
       </div>
 
+
       <!-- 30-Day Consistency Heatmap -->
       <div class="card card-pad stack-md">
-        <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Last 30 Days Consistency</h3>
+        <h3 id="lblHeatmapTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Last 30 Days Consistency</h3>
         <div id="heatmapGrid" class="heatmap-grid"></div>
         <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
-          <span><strong style="color:var(--emerald-600);">■</strong> Active</span>
-          <span><strong style="color:var(--indigo-600);">■</strong> Murojaah-Only</span>
-          <span><strong style="color:var(--slate-400);">■</strong> Weekend</span>
+          <span id="lblHeatActive"><strong style="color:var(--emerald-600);">■</strong> Active</span>
+          <span id="lblHeatMurojaah"><strong style="color:var(--indigo-600);">■</strong> Murojaah-Only</span>
+          <span id="lblHeatWeekend"><strong style="color:var(--slate-400);">■</strong> Weekend</span>
           <span><strong style="color:var(--amber-500);">■</strong> Cuti</span>
           <span><strong style="color:var(--sky-500);">■</strong> Riadah</span>
         </div>
       </div>
 
+
       <!-- Daily Volume Bar Chart -->
       <div class="card card-pad stack-md">
         <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px;">
-          <h3 style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Recent Active Sessions Volume</h3>
+          <h3 id="lblVolumeChartTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Recent Active Sessions Volume</h3>
           <span style="font-size:10.5px; font-weight:700; color:var(--slate-500);">
             <span style="color:var(--emerald-850);">■ Saba</span> ·
             <span style="color:var(--teal-600);">■ Pra Saba</span> ·
@@ -2050,18 +2329,22 @@
         </div>
       </div>
 
+
     </section>
+
 
     <!-- =====================================================
          TAB 3: SHEET & EXPORT
          ===================================================== -->
     <section id="tab-history" class="stack-md hidden animate-in">
 
+
       <div class="card card-pad stack-md">
         <div>
-          <h2 style="margin:0; font-size:15px; font-weight:800; color:var(--slate-900);">Google Sheet Sync &amp; Export</h2>
+          <h2 id="lblSyncTitle" style="margin:0; font-size:15px; font-weight:800; color:var(--slate-900);">Google Sheet Sync &amp; Export</h2>
           <p id="syncModeDescription" style="margin:4px 0 0; font-size:12px; color:var(--slate-500);">Exact 9-column format matching your spreadsheet (Date through Notes).</p>
         </div>
+
 
         <div class="sync-status-row">
           <div class="sync-badge">
@@ -2071,37 +2354,43 @@
           <button type="button" id="btnRefreshFromSheet" class="btn btn-secondary btn-sm">Sync Now</button>
         </div>
 
+
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <button type="button" id="btnCopyTSV" class="btn btn-primary" style="padding:12px 10px; font-size:13px;">Copy for Sheets</button>
           <button type="button" id="btnDownloadCSV" class="btn btn-outline-teal" style="padding:12px 10px; font-size:13px;">Download CSV</button>
         </div>
 
+
         <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; padding-top:10px; border-top:1px solid var(--slate-100);">
           <label style="font-size:12px; font-weight:700; color:var(--teal-700); cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
-            <span>+ Import CSV to Sheet</span>
+            <span id="lblImportCSV">+ Import CSV to Sheet</span>
             <input type="file" id="csvImportInput" accept=".csv,text/csv" style="display:none;" />
           </label>
 
-          <div style="display:flex; align-items:center; gap:8px;">
+
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px;">
+            <button type="button" id="btnClearAllData" class="btn btn-secondary btn-sm" style="color:var(--rose-600); border-color:#FECDD3; background:var(--rose-50);">Clear All</button>
             <button type="button" id="btnResetSampleData" class="btn btn-secondary btn-sm hidden">Reset Sample Data</button>
             <span id="recordCountBadge" style="font-size:11px; font-weight:700; color:var(--slate-500);">0 rows</span>
           </div>
         </div>
       </div>
 
+
       <!-- Search & Filter Controls -->
       <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap:8px;">
         <input type="text" id="historySearch" placeholder="Search surah, date, notes..." />
         <select id="historyCategoryFilter">
-          <option value="ALL">All Entries</option>
+          <option value="ALL" id="optFilterAll">All Entries</option>
           <option value="Saba">Saba</option>
           <option value="Pra Saba">Pra Saba</option>
           <option value="Mukhtar">Mukhtar</option>
           <option value="Murojaah">Murojaah</option>
-          <option value="CUTI_ONLY">Cuti Days</option>
-          <option value="NON_ACTIVE">All Off Days</option>
+          <option value="CUTI_ONLY" id="optFilterCuti">Cuti Days</option>
+          <option value="NON_ACTIVE" id="optFilterOff">All Off Days</option>
         </select>
       </div>
+
 
       <!-- Logged Entries Table -->
       <div class="card">
@@ -2109,13 +2398,13 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th>Date</th>
-                <th>Status / Cat</th>
-                <th>Surah / Juz</th>
-                <th style="text-align:center;">Range</th>
-                <th style="text-align:center;">Total</th>
-                <th>Notes</th>
-                <th style="text-align:right;">Del</th>
+                <th id="thDate">Date</th>
+                <th id="thStatusCat">Status / Cat</th>
+                <th id="thSurahJuz">Surah / Juz</th>
+                <th id="thRange" style="text-align:center;">Range</th>
+                <th id="thTotal" style="text-align:center;">Total</th>
+                <th id="thNotes">Notes</th>
+                <th id="thDel" style="text-align:right;">Del</th>
               </tr>
             </thead>
             <tbody id="historyTableBody"></tbody>
@@ -2126,9 +2415,12 @@
         </div>
       </div>
 
+
     </section>
 
+
   </main>
+
 
   <!-- ==================== STICKY BOTTOM NAVIGATION ==================== -->
   <nav class="bottom-nav">
@@ -2138,8 +2430,9 @@
           <path d="M12 20h9"/>
           <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
         </svg>
-        <span>Daily Log</span>
+        <span id="navLblDaily">Daily Log</span>
       </button>
+
 
       <button type="button" id="nav-stats" class="nav-tab-btn" data-tab="stats">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2147,8 +2440,9 @@
           <line x1="12" x2="12" y1="20" y2="4"/>
           <line x1="6" x2="6" y1="20" y2="14"/>
         </svg>
-        <span>Progress</span>
+        <span id="navLblStats">Progress</span>
       </button>
+
 
       <button type="button" id="nav-history" class="nav-tab-btn" data-tab="history">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -2156,10 +2450,11 @@
           <path d="M3 9h18"/>
           <path d="M9 21V9"/>
         </svg>
-        <span>Sheet &amp; Export</span>
+        <span id="navLblHistory">Sheet &amp; Export</span>
       </button>
     </div>
   </nav>
+
 
   <!-- ==================== FULLSCREEN 114-SURAH PICKER MODAL ==================== -->
   <div id="surahPickerModal" class="modal-overlay hidden">
@@ -2167,7 +2462,7 @@
       <div class="modal-header">
         <div>
           <h3 id="surahModalTitle" style="margin:0; font-size:16px; font-weight:800; color:var(--slate-900);">Select Surah (1–114)</h3>
-          <p style="margin:2px 0 0; font-size:11px; color:var(--slate-500);">Tap any Surah below or search by name / number</p>
+          <p id="surahModalSub" style="margin:2px 0 0; font-size:11px; color:var(--slate-500);">Tap any Surah below or search by name / number</p>
         </div>
         <button type="button" id="btnCloseSurahModal" class="modal-close-btn" aria-label="Close Surah Picker">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2175,6 +2470,7 @@
           </svg>
         </button>
       </div>
+
 
       <div class="modal-search-area">
         <input type="text" id="surahModalSearchInput" placeholder="Search e.g. Baqarah, Kahf, 36, Mulk..." />
@@ -2187,22 +2483,628 @@
         </div>
       </div>
 
+
       <div id="surahPickerList" class="modal-list-scroll"></div>
     </div>
   </div>
+
 
   <!-- ==================== TOAST BANNER ==================== -->
   <div id="toastBanner" class="toast-pill">
     <span id="toastMessage">Saved!</span>
   </div>
 
-  <script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
+    import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDDtIIY9tnCwUHtzL8xjq0ZeIVKBeK9XDU",
+      authDomain: "hafazan-tracker-e31c7.firebaseapp.com",
+      databaseURL: "https://hafazan-tracker-e31c7-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "hafazan-tracker-e31c7",
+      storageBucket: "hafazan-tracker-e31c7.firebasestorage.app",
+      messagingSenderId: "790561401301",
+      appId: "1:790561401301:web:1b9b79486d48df5486355c",
+      measurementId: "G-0NDK7ET1EF"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    try { getAnalytics(app); } catch (e) {}
+    const db = getDatabase(app);
+    const fbRowsRef = ref(db, 'hafazan_tracker/rows');
+    const fbProfileRef = ref(db, 'hafazan_tracker/profile');
     // =========================================================================
-    // 1. COMPLETE 114 SURAHS DATA & CONSTANTS
+    // 1. BILINGUAL DICTIONARY (ENGLISH & BAHASA MELAYU MALAYSIA)
+    // =========================================================================
+    const LANG_STORAGE_KEY = 'hafazan_lang';
+    let currentLang = 'EN';
+
+
+    const I18N = {
+      EN: {
+        appTitle: 'Hafazan Tracker',
+        profileKicker: 'Student Profile',
+        statProfileKicker: 'Hafazan Student Record',
+        setStudentProfile: 'Set Student Profile',
+        studentProfileNotSet: 'Student Profile Not Set',
+        tapEditProfile: 'Tap Edit to add student name, age, gender & school',
+        tapEditStats: 'Tap Edit to add school, age & gender',
+        noSchoolSpec: 'No school / institution specified',
+        edit: 'Edit',
+        close: 'Close',
+        lblProfName: 'Student Full Name',
+        phProfName: 'e.g., Ahmad Luqman bin Zulkifli',
+        lblProfAge: 'Age (Years)',
+        phProfAge: 'e.g., 12',
+        lblProfGender: 'Gender',
+        optGenderEmpty: 'Unspecified',
+        optGenderMale: 'Male',
+        optGenderFemale: 'Female',
+        lblProfSchool: 'School / Tahfiz Institution',
+        phProfSchool: 'e.g., Maahad Tahfiz Sains',
+        cancel: 'Cancel',
+        saveProfile: 'Save Profile',
+        saving: 'Saving...',
+        yearsOld: 'years old',
+        lblSessionDate: 'Session Date',
+        lblDayStatus: 'Day Status',
+        statusLabels: {
+          Active: 'Active',
+          Weekend: 'Weekend',
+          Cuti: 'Cuti',
+          Riadah: 'Riadah'
+        },
+        selectedSuffix: 'Selected',
+        nonActiveDescPre: 'Logs 1 consolidated row (',
+        nonActiveDescPost: ') while keeping your Saba sequence intact.',
+        lblCutiReason: 'Quick-Tap Cuti Reason (Populates Notes)',
+        lblNonActiveNotes: 'Notes / Reason Details',
+        phNonActiveNotes: 'e.g., Sakit, Raya, Awal Ramadan, Balik kampung...',
+        saveOffRow: (st) => `Save ${st} Row to Sheet`,
+        murojaahDayOffTitle: 'Murojaah Day Mode',
+        murojaahDayOffSub: 'Revision-only day? Tap to skip Saba & focus on Murojaah',
+        murojaahDayOnTitle: 'Murojaah Day Active',
+        murojaahDayOnSub: 'Saba & Pra Saba skipped · Focusing on revision',
+        turnOn: 'Turn ON',
+        turnOff: 'Turn OFF',
+        subSabaTag: '(New Hafazan)',
+        subPraSabaTag: '(Recent Revision)',
+        subMukhtarTag: '(Selected Revision)',
+        subMurojaahTag: '(General Revision)',
+        praSabaHintSub: 'End auto-syncs with Saba',
+        murojaahDefaultHint: 'Ayat range, Juz/Page, or Full Surahs',
+        logCheck: 'Log',
+        surahAll114: 'Surah (All 114 Surahs)',
+        surahToRevise: 'Surah to Revise (All 114 Surahs)',
+        change: 'Change',
+        unit: 'Unit',
+        optAyat: 'Ayat',
+        optPage: 'Page',
+        start: 'Start',
+        end: 'End',
+        total: 'Total',
+        quickEnd: 'Quick End:',
+        shiftStart: 'Shift Start:',
+        modeJuzPage: 'Juz / Page',
+        modeFullSurahs114: 'Full Surahs (114)',
+        modeFullSurahs: 'Full Surahs',
+        modeAyatRange: 'Ayat Range',
+        juzRange: 'Juz (1–30)',
+        startPage: 'Start Page',
+        endPage: 'End Page',
+        pagesCol: 'Pages',
+        quickPages: 'Quick Pages:',
+        selectSurahs: 'Select Surahs',
+        surahsRevised: 'Surahs Revised',
+        selectedWord: 'selected',
+        clearAll: 'Clear all',
+        phFilterSurahs: 'Filter 114 Surahs by name or number (e.g. Kahf, 36, Mulk)...',
+        noSurahsSelected: 'No surahs selected yet...',
+        last10: '+ Last 10',
+        fullJuz30: '+ Full Juz 30',
+        startAyat: 'Start Ayat',
+        endAyat: 'End Ayat',
+        quickSpan: 'Quick Span:',
+        fullSurahBtn: 'Full Surah',
+        fullJuz20Btn: 'Full Juz (20)',
+        lblSessionNotes: 'Session Notes (Applies to logged rows)',
+        phSessionNotes: "e.g., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz...",
+        saveSessionRows: (n) => n === 1 ? 'Save Session to Sheet (1 Row)' : `Save Session to Sheet (${n} Rows)`,
+        lblHeroMilestone: 'Current Saba Milestone',
+        memorizedOf: (unit, cur, max) => `${unit === 'Page' ? 'Page' : 'Ayat'} ${cur} of ${max} memorized`,
+        estFinishCalc: 'Est. Surah Finish: Calculating...',
+        estFinishEta: (dateStr, sess) => `Est. Finish: ~${dateStr} (${sess} sessions)`,
+        estFinishLogMore: 'Est. Finish: Log sessions to project',
+        surahCompleted: 'Surah Completed!',
+        notStartedYet: 'Not Started Yet',
+        logFirstSaba: 'Log your first Saba session to begin',
+        kpiTotalSaba: 'Total Saba',
+        kpiPraSaba: 'Pra Saba',
+        kpiMukhtar: 'Mukhtar',
+        kpiMurojaah: 'Murojaah',
+        perSabaDay: (v) => `${v} / saba day`,
+        perActiveDay: (v) => `${v} / active day`,
+        selectedRevisionSub: 'Selected revision',
+        revisionLogsCount: (n) => `${n} revision log${n === 1 ? '' : 's'}`,
+        kpiAttendance: 'Overall Attendance',
+        activeCutiSummary: (a, c) => `Active: ${a}d • Cuti: ${c}d`,
+        streakBadge: (n) => `Streak: ${n}d`,
+        bestBadge: (n) => `Best: ${n}d`,
+        rhythmTitle: 'Hafazan & Murojaah Rhythm',
+        peakDayTitle: 'Peak Performance Day',
+        highestAvgSaba: 'Highest avg Saba output',
+        avgSabaUnits: (v) => `Avg ${v} Saba units`,
+        revisionBalanceTitle: 'Revision Balance',
+        newVsAllRev: 'New vs. All Revision',
+        personalBestTitle: 'Personal Best Day',
+        highestSingleDay: 'Highest single-day Saba',
+        onDate: (d) => `On ${d}`,
+        unitsWord: 'units',
+        workloadDist: 'Workload Distribution',
+        juzCoverageTitle: '30-Juz Activity Coverage',
+        notLoggedLegend: 'Not Logged',
+        heatmapTitle: 'Last 30 Days Consistency',
+        activeLegend: 'Active',
+        murojaahOnlyLegend: 'Murojaah-Only',
+        weekendLegend: 'Weekend',
+        volumeChartTitle: 'Recent Active Sessions Volume',
+        noActiveChartData: 'No active session data yet',
+        syncTitle: 'Google Sheet Sync & Export',
+        syncDescLocal: 'Saved locally in this browser. Deploy in Google Apps Script for live multi-device Sheet sync.',
+        syncDescSheet: 'Live real-time cloud sync active across all devices (9-column format).',
+        statusConnecting: 'Connecting...',
+        statusLocal: 'Offline Local Storage',
+        statusSyncing: 'Syncing...',
+        statusSynced: 'Live Cloud Synced',
+        statusSyncError: 'Sync Error',
+        syncNow: 'Sync Now',
+        copyForSheets: 'Copy for Sheets',
+        downloadCSV: 'Download CSV',
+        importCSV: '+ Import CSV to Sheet',
+        clearAllBtn: 'Clear All',
+        confirmClearAllBtn: 'Confirm Clear All?',
+        resetSampleBtn: 'Reset Sample Data',
+        confirmResetBtn: 'Confirm Reset?',
+        rowsSuffix: (n) => `${n} rows`,
+        phSearchHistory: 'Search surah, date, notes...',
+        filterAll: 'All Entries',
+        filterCuti: 'Cuti Days',
+        filterOff: 'All Off Days',
+        thDate: 'Date',
+        thStatusCat: 'Status / Cat',
+        thSurahJuz: 'Surah / Juz',
+        thRange: 'Range',
+        thTotal: 'Total',
+        thNotes: 'Notes',
+        thDel: 'Del',
+        emptyHistory: 'No matching records found.',
+        navDaily: 'Daily Log',
+        navStats: 'Progress',
+        navHistory: 'Sheet & Export',
+        modalTitleSaba: 'Select Saba Surah (1–114)',
+        modalTitlePraSaba: 'Select Pra Saba Surah (1–114)',
+        modalTitleMurojaah: 'Select Murojaah Surah (1–114)',
+        modalSub: 'Tap any Surah below or search by name / number',
+        phModalSearch: 'Search e.g. Baqarah, Kahf, 36, Mulk...',
+        noSurahFound: (q) => `No Surah found matching "${q}"`,
+        dayNames: ['Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays'],
+        toastProfileSaved: 'Student profile saved!',
+        toastProfileSynced: 'Profile synced to Cloud!',
+        toastMurojaahOn: 'Murojaah Day ON — Saba skipped',
+        toastMurojaahOff: 'Standard Daily Mode restored',
+        toastChooseDate: 'Please choose a session date',
+        toastSavedRows: (n) => `Saved ${n} row(s)!`,
+        toastSavedSheet: (n) => `Saved ${n} row(s) to Cloud!`,
+        toastDeleted: 'Row deleted',
+        toastCleared: 'All records cleared!',
+        toastReset: 'Sample data restored!',
+        toastCopied: (n) => `Copied ${n} rows for Google Sheets!`,
+        toastCsvDown: 'CSV downloaded!',
+        toastImported: (n) => `Imported ${n} rows!`,
+        toastRefreshed: 'Refreshed local records',
+        toastSyncedRows: (n) => `Synced ${n} rows from Cloud!`,
+        noteMaxAyat: (name, max) => `Note: ${name} has ${max} Ayat total.`,
+        lastHintPrefix: 'Last:',
+        startingFreshSaba: 'Starting fresh: Al-Baqarah Ayat 1',
+        startingFreshMukhtar: 'Starting fresh: Juz 1 Page 1',
+        confirmDelBtn: 'Confirm?'
+      },
+      MY: {
+        appTitle: 'Penjejak Hafazan',
+        profileKicker: 'Profil Pelajar',
+        statProfileKicker: 'Rekod Hafazan Pelajar',
+        setStudentProfile: 'Tetapkan Profil Pelajar',
+        studentProfileNotSet: 'Profil Pelajar Belum Diisi',
+        tapEditProfile: 'Tekan Edit untuk isi nama, umur, jantina & sekolah',
+        tapEditStats: 'Tekan Edit untuk isi sekolah, umur & jantina',
+        noSchoolSpec: 'Tiada sekolah / institusi dinyatakan',
+        edit: 'Edit',
+        close: 'Tutup',
+        lblProfName: 'Nama Penuh Pelajar',
+        phProfName: 'cth., Ahmad Luqman bin Zulkifli',
+        lblProfAge: 'Umur (Tahun)',
+        phProfAge: 'cth., 12',
+        lblProfGender: 'Jantina',
+        optGenderEmpty: 'Tidak Dinyatakan',
+        optGenderMale: 'Lelaki',
+        optGenderFemale: 'Perempuan',
+        lblProfSchool: 'Sekolah / Maahad Tahfiz',
+        phProfSchool: 'cth., Maahad Tahfiz Sains',
+        cancel: 'Batal',
+        saveProfile: 'Simpan Profil',
+        saving: 'Menyimpan...',
+        yearsOld: 'tahun',
+        lblSessionDate: 'Tarikh Sesi',
+        lblDayStatus: 'Status Hari',
+        statusLabels: {
+          Active: 'Aktif',
+          Weekend: 'Hujung Minggu',
+          Cuti: 'Cuti',
+          Riadah: 'Riadah'
+        },
+        selectedSuffix: 'Dipilih',
+        nonActiveDescPre: 'Merekodkan 1 baris status (',
+        nonActiveDescPost: ') tanpa mengganggu turutan ayat Saba.',
+        lblCutiReason: 'Pilihan Pantas Sebab Cuti (Isi Catatan)',
+        lblNonActiveNotes: 'Catatan / Sebab Terperinci',
+        phNonActiveNotes: 'cth., Sakit, Raya, Awal Ramadan, Balik kampung...',
+        saveOffRow: (st) => `Simpan Rekod ${st}`,
+        murojaahDayOffTitle: 'Mod Hari Murojaah',
+        murojaahDayOffSub: 'Hari ulang kaji sahaja? Tekan untuk langkau Saba',
+        murojaahDayOnTitle: 'Mod Hari Murojaah Aktif',
+        murojaahDayOnSub: 'Saba & Pra Saba dilangkau · Fokus ulang kaji',
+        turnOn: 'Aktifkan',
+        turnOff: 'Matikan',
+        subSabaTag: '(Hafazan Baharu)',
+        subPraSabaTag: '(Ulang Kaji Terkini)',
+        subMukhtarTag: '(Hafazan Terpilih)',
+        subMurojaahTag: '(Ulang Kaji Umum)',
+        praSabaHintSub: 'Ayat tamat selaras dengan Saba',
+        murojaahDefaultHint: 'Julat ayat, Juzuk/Muka surat, atau Surah penuh',
+        logCheck: 'Rekod',
+        surahAll114: 'Surah (Semua 114 Surah)',
+        surahToRevise: 'Surah Diulang Kaji (Semua 114 Surah)',
+        change: 'Tukar',
+        unit: 'Unit',
+        optAyat: 'Ayat',
+        optPage: 'Muka Surat',
+        start: 'Mula',
+        end: 'Tamat',
+        total: 'Jumlah',
+        quickEnd: 'Tamat Pantas:',
+        shiftStart: 'Anjak Mula:',
+        modeJuzPage: 'Juzuk / Muka Surat',
+        modeFullSurahs114: 'Surah Penuh (114)',
+        modeFullSurahs: 'Surah Penuh',
+        modeAyatRange: 'Julat Ayat',
+        juzRange: 'Juzuk (1–30)',
+        startPage: 'Muka Surat Mula',
+        endPage: 'Muka Surat Tamat',
+        pagesCol: 'M/S',
+        quickPages: 'Muka Surat Pantas:',
+        selectSurahs: 'Pilih Surah',
+        surahsRevised: 'Surah Diulang Kaji',
+        selectedWord: 'dipilih',
+        clearAll: 'Padam pilihan',
+        phFilterSurahs: 'Cari 114 Surah ikut nama atau nombor (cth. Kahf, 36, Mulk)...',
+        noSurahsSelected: 'Tiada surah dipilih lagi...',
+        last10: '+ 10 Surah Akhir',
+        fullJuz30: '+ Penuh Juzuk 30',
+        startAyat: 'Ayat Mula',
+        endAyat: 'Ayat Tamat',
+        quickSpan: 'Tambah Pantas:',
+        fullSurahBtn: 'Surah Penuh',
+        fullJuz20Btn: '1 Juzuk (20)',
+        lblSessionNotes: 'Catatan Sesi (Untuk baris yang direkodkan)',
+        phSessionNotes: "cth., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz...",
+        saveSessionRows: (n) => n === 1 ? 'Simpan Rekod Harian (1 Baris)' : `Simpan Rekod Harian (${n} Baris)`,
+        lblHeroMilestone: 'Pencapaian Saba Semasa',
+        memorizedOf: (unit, cur, max) => `${unit === 'Page' ? 'Muka Surat' : 'Ayat'} ${cur} daripada ${max} dihafaz`,
+        estFinishCalc: 'Anggaran Tamat Surah: Mengira...',
+        estFinishEta: (dateStr, sess) => `Anggaran Tamat: ~${dateStr} (${sess} sesi)`,
+        estFinishLogMore: 'Anggaran Tamat: Rekod sesi untuk unjuran',
+        surahCompleted: 'Surah Tamat!',
+        notStartedYet: 'Belum Bermula',
+        logFirstSaba: 'Rekod sesi Saba pertama untuk bermula',
+        kpiTotalSaba: 'Jumlah Saba',
+        kpiPraSaba: 'Pra Saba',
+        kpiMukhtar: 'Mukhtar',
+        kpiMurojaah: 'Murojaah',
+        perSabaDay: (v) => `${v} / hari saba`,
+        perActiveDay: (v) => `${v} / hari aktif`,
+        selectedRevisionSub: 'Hafazan terpilih',
+        revisionLogsCount: (n) => `${n} rekod ulang kaji`,
+        kpiAttendance: 'Kadar Kehadiran',
+        activeCutiSummary: (a, c) => `Aktif: ${a}h • Cuti: ${c}h`,
+        streakBadge: (n) => `Berturut: ${n}h`,
+        bestBadge: (n) => `Terbaik: ${n}h`,
+        rhythmTitle: 'Analisis & Rentak Hafazan',
+        peakDayTitle: 'Hari Paling Produktif',
+        highestAvgSaba: 'Purata hafazan Saba tertinggi',
+        avgSabaUnits: (v) => `Purata ${v} unit Saba`,
+        revisionBalanceTitle: 'Nisbah Ulang Kaji',
+        newVsAllRev: 'Baharu lwn. Ulang Kaji',
+        personalBestTitle: 'Rekod Tertinggi Sehari',
+        highestSingleDay: 'Saba tertinggi dalam sehari',
+        onDate: (d) => `Pada ${d}`,
+        unitsWord: 'unit',
+        workloadDist: 'Agihan Beban Hafazan',
+        juzCoverageTitle: 'Liputan Aktiviti 30 Juzuk',
+        notLoggedLegend: 'Belum Direkod',
+        heatmapTitle: 'Peta Konsistensi 30 Hari',
+        activeLegend: 'Aktif',
+        murojaahOnlyLegend: 'Murojaah Sahaja',
+        weekendLegend: 'Hujung Minggu',
+        volumeChartTitle: 'Jumlah Sesi Aktif Terkini',
+        noActiveChartData: 'Tiada data sesi aktif lagi',
+        syncTitle: 'Segerak & Eksport Google Sheet',
+        syncDescLocal: 'Disimpan dalam pelayar ini. Pasang Google Apps Script untuk segerak terus ke Google Sheet.',
+        syncDescSheet: 'Segerak awan masa nyata aktif merentas semua peranti (format 9 lajur).',
+        statusConnecting: 'Menyambung...',
+        statusLocal: 'Storan Tempatan Luar Talian',
+        statusSyncing: 'Menyegerakkan...',
+        statusSynced: 'Segerak Awan Langsung',
+        statusSyncError: 'Ralat Segerak',
+        syncNow: 'Segerak Sekarang',
+        copyForSheets: 'Salin untuk Sheets',
+        downloadCSV: 'Muat Turun CSV',
+        importCSV: '+ Import CSV ke Sheet',
+        clearAllBtn: 'Padam Semua',
+        confirmClearAllBtn: 'Sahkan Padam Semua?',
+        resetSampleBtn: 'Set Semula Data Contoh',
+        confirmResetBtn: 'Sahkan Set Semula?',
+        rowsSuffix: (n) => `${n} baris`,
+        phSearchHistory: 'Cari surah, tarikh, catatan...',
+        filterAll: 'Semua Rekod',
+        filterCuti: 'Hari Cuti',
+        filterOff: 'Semua Hari Tidak Aktif',
+        thDate: 'Tarikh',
+        thStatusCat: 'Status / Kat',
+        thSurahJuz: 'Surah / Juzuk',
+        thRange: 'Julat',
+        thTotal: 'Jumlah',
+        thNotes: 'Catatan',
+        thDel: 'Padam',
+        emptyHistory: 'Tiada rekod sepadan ditemui.',
+        navDaily: 'Rekod Harian',
+        navStats: 'Prestasi',
+        navHistory: 'Jadual & Eksport',
+        modalTitleSaba: 'Pilih Surah Saba (1–114)',
+        modalTitlePraSaba: 'Pilih Surah Pra Saba (1–114)',
+        modalTitleMurojaah: 'Pilih Surah Murojaah (1–114)',
+        modalSub: 'Tekan mana-mana Surah atau cari ikut nama / nombor',
+        phModalSearch: 'Cari cth. Baqarah, Kahf, 36, Mulk...',
+        noSurahFound: (q) => `Tiada Surah ditemui untuk "${q}"`,
+        dayNames: ['Hari Ahad', 'Hari Isnin', 'Hari Selasa', 'Hari Rabu', 'Hari Khamis', 'Hari Jumaat', 'Hari Sabtu'],
+        toastProfileSaved: 'Profil pelajar disimpan!',
+        toastProfileSynced: 'Profil disegerakkan ke Awan!',
+        toastMurojaahOn: 'Hari Murojaah AKTIF — Saba dilangkau',
+        toastMurojaahOff: 'Mod Harian Biasa dipulihkan',
+        toastChooseDate: 'Sila pilih tarikh sesi',
+        toastSavedRows: (n) => `${n} baris rekod disimpan!`,
+        toastSavedSheet: (n) => `${n} baris disimpan ke Awan!`,
+        toastDeleted: 'Baris dipadamkan',
+        toastCleared: 'Semua rekod telah dipadam!',
+        toastReset: 'Data contoh dipulihkan!',
+        toastCopied: (n) => `${n} baris disalin untuk Google Sheets!`,
+        toastCsvDown: 'Fail CSV dimuat turun!',
+        toastImported: (n) => `${n} baris berjaya diimport!`,
+        toastRefreshed: 'Rekod tempatan dikemas kini',
+        toastSyncedRows: (n) => `${n} baris disegerakkan dari Awan!`,
+        noteMaxAyat: (name, max) => `Nota: Surah ${name} mempunyai ${max} Ayat kesemuanya.`,
+        lastHintPrefix: 'Terkini:',
+        startingFreshSaba: 'Mula baharu: Al-Baqarah Ayat 1',
+        startingFreshMukhtar: 'Mula baharu: Juzuk 1 Muka Surat 1',
+        confirmDelBtn: 'Sahkan?'
+      }
+    };
+
+
+    function t() {
+      return I18N[currentLang] || I18N.EN;
+    }
+
+
+    function setLanguage(lang) {
+      currentLang = lang === 'MY' ? 'MY' : 'EN';
+      safeStorageSet(LANG_STORAGE_KEY, currentLang);
+
+
+      document.getElementById('btnLangMY').classList.toggle('active', currentLang === 'MY');
+      document.getElementById('btnLangEN').classList.toggle('active', currentLang === 'EN');
+
+
+      applyTranslations();
+      refreshEntireUI();
+    }
+
+
+    function applyTranslations() {
+      const tr = t();
+      document.getElementById('appHeaderTitle').textContent = tr.appTitle;
+      document.getElementById('profileKickerLabel').textContent = tr.profileKicker;
+      document.getElementById('statProfileKicker').textContent = tr.statProfileKicker;
+
+
+      const formHidden = document.getElementById('studentProfileFormBody').classList.contains('hidden');
+      document.getElementById('btnToggleProfileLabel').textContent = formHidden ? tr.edit : tr.close;
+      document.getElementById('btnEditProfileFromStats').textContent = tr.edit;
+
+
+      document.getElementById('lblProfName').textContent = tr.lblProfName;
+      document.getElementById('profName').placeholder = tr.phProfName;
+      document.getElementById('lblProfAge').textContent = tr.lblProfAge;
+      document.getElementById('profAge').placeholder = tr.phProfAge;
+      document.getElementById('lblProfGender').textContent = tr.lblProfGender;
+      document.getElementById('optGenderEmpty').textContent = tr.optGenderEmpty;
+      document.getElementById('optGenderMale').textContent = tr.optGenderMale;
+      document.getElementById('optGenderFemale').textContent = tr.optGenderFemale;
+      document.getElementById('lblProfSchool').textContent = tr.lblProfSchool;
+      document.getElementById('profSchool').placeholder = tr.phProfSchool;
+      document.getElementById('btnCancelProfile').textContent = tr.cancel;
+      document.getElementById('btnSaveProfile').textContent = tr.saveProfile;
+
+
+      document.getElementById('lblSessionDate').textContent = tr.lblSessionDate;
+      document.getElementById('lblDayStatus').textContent = tr.lblDayStatus;
+      renderStatusPills();
+
+
+      const statusDisplay = tr.statusLabels[currentDayStatus] || currentDayStatus;
+      document.getElementById('nonActiveTitle').textContent = `${statusDisplay} ${tr.selectedSuffix}`;
+      document.getElementById('nonActiveDesc').innerHTML =
+        `${tr.nonActiveDescPre}<strong id="nonActiveCodeLabel">${currentDayStatus}</strong>${tr.nonActiveDescPost}`;
+      document.getElementById('lblCutiReason').textContent = tr.lblCutiReason;
+      document.getElementById('lblNonActiveNotes').textContent = tr.lblNonActiveNotes;
+      document.getElementById('nonActiveNotes').placeholder = tr.phNonActiveNotes;
+      document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(statusDisplay);
+
+
+      renderMurojaahBannerState();
+
+
+      document.getElementById('subSabaTag').textContent = tr.subSabaTag;
+      document.getElementById('subPraSabaTag').textContent = tr.subPraSabaTag;
+      document.getElementById('subMukhtarTag').textContent = tr.subMukhtarTag;
+      document.getElementById('subMurojaahTag').textContent = tr.subMurojaahTag;
+      document.getElementById('praSabaHintSub').textContent = tr.praSabaHintSub;
+
+
+      document.querySelectorAll('.lbl-log-check').forEach(el => { el.textContent = tr.logCheck; });
+      document.querySelectorAll('.lbl-surah-all').forEach(el => { el.textContent = tr.surahAll114; });
+      document.getElementById('lblSurahToRevise').textContent = tr.surahToRevise;
+      document.querySelectorAll('.lbl-change').forEach(el => { el.textContent = tr.change; });
+      document.querySelectorAll('.lbl-unit').forEach(el => { el.textContent = tr.unit; });
+
+
+      ['sabaUnit', 'praSabaUnit'].forEach(selId => {
+        const sel = document.getElementById(selId);
+        if (sel && sel.options.length >= 2) {
+          sel.options[0].text = tr.optAyat;
+          sel.options[1].text = tr.optPage;
+        }
+      });
+
+
+      document.querySelectorAll('.lbl-start').forEach(el => { el.textContent = tr.start; });
+      document.querySelectorAll('.lbl-end').forEach(el => { el.textContent = tr.end; });
+      document.querySelectorAll('.lbl-total').forEach(el => { el.textContent = tr.total; });
+      document.getElementById('lblQuickEnd').textContent = tr.quickEnd;
+      document.getElementById('lblShiftStart').textContent = tr.shiftStart;
+
+
+      document.getElementById('btnMukhtarModePage').textContent = tr.modeJuzPage;
+      document.getElementById('btnMukhtarModeSurah').textContent = tr.modeFullSurahs114;
+      document.getElementById('btnMurojaahModeAyat').textContent = tr.modeAyatRange;
+      document.getElementById('btnMurojaahModePage').textContent = tr.modeJuzPage;
+      document.getElementById('btnMurojaahModeSurah').textContent = tr.modeFullSurahs;
+
+
+      document.querySelectorAll('.lbl-juz-range').forEach(el => { el.textContent = tr.juzRange; });
+      document.querySelectorAll('.lbl-start-page').forEach(el => { el.textContent = tr.startPage; });
+      document.querySelectorAll('.lbl-end-page').forEach(el => { el.textContent = tr.endPage; });
+      document.querySelectorAll('.lbl-pages-col').forEach(el => { el.textContent = tr.pagesCol; });
+      document.querySelectorAll('.lbl-quick-pages').forEach(el => { el.textContent = tr.quickPages; });
+
+
+      document.getElementById('lblSelectSurahs').textContent = tr.selectSurahs;
+      document.getElementById('lblSurahsRevised').textContent = tr.surahsRevised;
+      document.querySelectorAll('.lbl-selected-word').forEach(el => { el.textContent = tr.selectedWord; });
+      document.getElementById('btnClearMukhtarSurahs').textContent = tr.clearAll;
+      document.getElementById('btnClearMurojaahSurahs').textContent = tr.clearAll;
+      document.getElementById('mukhtarSurahSearch').placeholder = tr.phFilterSurahs;
+      document.getElementById('murojaahSurahSearch').placeholder = tr.phFilterSurahs;
+      document.getElementById('btnPresetLast10').textContent = tr.last10;
+      document.getElementById('btnMurPresetFullJuz30').textContent = tr.fullJuz30;
+
+
+      document.getElementById('lblMurStartAyat').textContent = tr.startAyat;
+      document.getElementById('lblMurEndAyat').textContent = tr.endAyat;
+      document.getElementById('lblQuickSpan').textContent = tr.quickSpan;
+      document.getElementById('btnMurojaahFullSurahAyat').textContent = tr.fullSurahBtn;
+      document.getElementById('btnMurFullJuz20').textContent = tr.fullJuz20Btn;
+
+
+      document.getElementById('lblSessionNotes').textContent = tr.lblSessionNotes;
+      document.getElementById('sessionNotes').placeholder = tr.phSessionNotes;
+      updateSaveButtonLabel();
+
+
+      // Progress Tab Static Labels
+      document.getElementById('lblHeroMilestone').textContent = tr.lblHeroMilestone;
+      document.getElementById('kpiLabelSaba').textContent = tr.kpiTotalSaba;
+      document.getElementById('kpiLabelPraSaba').textContent = tr.kpiPraSaba;
+      document.getElementById('kpiLabelMukhtar').textContent = tr.kpiMukhtar;
+      document.getElementById('kpiSubMukhtar').textContent = tr.selectedRevisionSub;
+      document.getElementById('kpiLabelMurojaah').textContent = tr.kpiMurojaah;
+      document.getElementById('kpiLabelAttendance').textContent = tr.kpiAttendance;
+      document.getElementById('lblRhythmTitle').textContent = tr.rhythmTitle;
+      document.getElementById('lblInsightPeak').textContent = tr.peakDayTitle;
+      document.getElementById('lblInsightBalance').textContent = tr.revisionBalanceTitle;
+      document.getElementById('lblInsightBalanceSub').textContent = tr.newVsAllRev;
+      document.getElementById('lblInsightRecord').textContent = tr.personalBestTitle;
+      document.getElementById('lblWorkloadDist').textContent = tr.workloadDist;
+      document.getElementById('lblJuzCoverageTitle').textContent = tr.juzCoverageTitle;
+      document.getElementById('lblLegendNotLogged').innerHTML = `<strong style="color:var(--slate-400);">■</strong> ${tr.notLoggedLegend}`;
+      document.getElementById('lblHeatmapTitle').textContent = tr.heatmapTitle;
+      document.getElementById('lblHeatActive').innerHTML = `<strong style="color:var(--emerald-600);">■</strong> ${tr.activeLegend}`;
+      document.getElementById('lblHeatMurojaah').innerHTML = `<strong style="color:var(--indigo-600);">■</strong> ${tr.murojaahOnlyLegend}`;
+      document.getElementById('lblHeatWeekend').innerHTML = `<strong style="color:var(--slate-400);">■</strong> ${tr.weekendLegend}`;
+      document.getElementById('lblVolumeChartTitle').textContent = tr.volumeChartTitle;
+
+
+      // Sheet & Export Tab Labels
+      document.getElementById('lblSyncTitle').textContent = tr.syncTitle;
+      document.getElementById('syncModeDescription').textContent = IS_GAS_ENV ? tr.syncDescSheet : tr.syncDescLocal;
+      document.getElementById('btnRefreshFromSheet').textContent = tr.syncNow;
+      document.getElementById('btnCopyTSV').textContent = tr.copyForSheets;
+      document.getElementById('btnDownloadCSV').textContent = tr.downloadCSV;
+      document.getElementById('lblImportCSV').textContent = tr.importCSV;
+      if (!clearArmed) document.getElementById('btnClearAllData').textContent = tr.clearAllBtn;
+      if (!resetArmed) document.getElementById('btnResetSampleData').textContent = tr.resetSampleBtn;
+      document.getElementById('historySearch').placeholder = tr.phSearchHistory;
+      document.getElementById('optFilterAll').textContent = tr.filterAll;
+      document.getElementById('optFilterCuti').textContent = tr.filterCuti;
+      document.getElementById('optFilterOff').textContent = tr.filterOff;
+      document.getElementById('thDate').textContent = tr.thDate;
+      document.getElementById('thStatusCat').textContent = tr.thStatusCat;
+      document.getElementById('thSurahJuz').textContent = tr.thSurahJuz;
+      document.getElementById('thRange').textContent = tr.thRange;
+      document.getElementById('thTotal').textContent = tr.thTotal;
+      document.getElementById('thNotes').textContent = tr.thNotes;
+      document.getElementById('thDel').textContent = tr.thDel;
+      document.getElementById('emptyHistoryState').textContent = tr.emptyHistory;
+
+
+      // Bottom Nav & Modal
+      document.getElementById('navLblDaily').textContent = tr.navDaily;
+      document.getElementById('navLblStats').textContent = tr.navStats;
+      document.getElementById('navLblHistory').textContent = tr.navHistory;
+      document.getElementById('surahModalSub').textContent = tr.modalSub;
+      document.getElementById('surahModalSearchInput').placeholder = tr.phModalSearch;
+
+
+      // Refresh sync badge text
+      const dot = document.getElementById('syncStatusDot');
+      if (dot.classList.contains('local')) setSyncStatus('local', tr.statusLocal);
+      else if (dot.classList.contains('syncing')) setSyncStatus('syncing', tr.statusSyncing);
+      else if (dot.classList.contains('error')) setSyncStatus('error', tr.statusSyncError);
+      else setSyncStatus('connected', tr.statusSynced);
+    }
+
+
+    // =========================================================================
+    // 2. COMPLETE 114 SURAHS DATA & CONSTANTS
     // =========================================================================
     const STORAGE_KEY = 'hafazan_tracker_rows_v4_murojaah';
     const PROFILE_STORAGE_KEY = 'hafazan_tracker_profile_v4';
-    const IS_GAS_ENV = typeof google !== 'undefined' && google.script && google.script.run;
+    const IS_GAS_ENV = true;
+
 
     const DAY_STATUS_OPTIONS = ['Active', 'Weekend', 'Cuti', 'Riadah'];
     const CUTI_REASON_CHIPS = [
@@ -2213,6 +3115,7 @@
       'Cuti Umum',
       'Keluarga / Balik Kampung'
     ];
+
 
     const ALL_114_SURAHS = [
       { num: 1, name: 'Al-Fatihah', ayat: 7, juz: 1 },
@@ -2331,6 +3234,7 @@
       { num: 114, name: 'An-Nas', ayat: 6, juz: 30 }
     ];
 
+
     const FALLBACK_SAMPLE_ROWS = [
       { id: 2, Date: '2026-11-15', Day_Status: 'Active', Category: 'Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 218, End_Unit: 219, Total_Amount: 2, Notes: '' },
       { id: 3, Date: '2026-11-15', Day_Status: 'Active', Category: 'Pra Saba', Surah_or_Juz: 'Al-Baqarah', Tracking_Unit: 'Ayat', Start_Unit: 189, End_Unit: 219, Total_Amount: 31, Notes: '' },
@@ -2342,6 +3246,7 @@
       { id: 9, Date: '2026-11-18', Day_Status: 'Active', Category: 'Mukhtar', Surah_or_Juz: 'Juz 1', Tracking_Unit: 'Page', Start_Unit: 20, End_Unit: 20, Total_Amount: 1, Notes: '' }
     ];
 
+
     // =========================================================================
     // 2. STATE & SYNC STATUS MANAGEMENT
     // =========================================================================
@@ -2350,30 +3255,38 @@
     let currentDayStatus = 'Active';
     let isMurojaahDayActive = false;
 
+
     let sabaSelectedSurah = ALL_114_SURAHS[1];
     let praSabaSelectedSurah = ALL_114_SURAHS[1];
     let murojaahSelectedSurah = ALL_114_SURAHS[1];
     let activeSurahPickerTarget = 'saba';
     let surahModalJuzFilter = 'ALL';
 
+
     let mukhtarMode = 'Page';
     let mukhtarSurahFilter = 'ALL';
     let selectedMukhtarSurahNums = [];
+
 
     let murojaahMode = 'Ayat'; // 'Ayat' | 'Page' | 'Full Surah'
     let murojaahSurahFilter = 'ALL';
     let selectedMurojaahSurahNums = [];
 
+
     let armedDeleteRowId = null;
     let deleteArmTimer = null;
     let resetArmed = false;
     let resetTimer = null;
+    let clearArmed = false;
+    let clearTimer = null;
+
 
     function setSyncStatus(state, label) {
       const dot = document.getElementById('syncStatusDot');
       const txt = document.getElementById('syncStatusText');
       if (!dot || !txt) return;
       dot.className = 'sync-dot';
+
 
       if (state === 'syncing') {
         dot.classList.add('syncing');
@@ -2385,13 +3298,16 @@
       txt.textContent = label;
     }
 
+
     function safeStorageGet(key) {
       try { return window.localStorage ? window.localStorage.getItem(key) : null; } catch (e) { return null; }
     }
 
+
     function safeStorageSet(key, val) {
       try { if (window.localStorage) window.localStorage.setItem(key, val); } catch (e) {}
     }
+
 
     function escapeHTML(str) {
       return String(str ?? '')
@@ -2401,6 +3317,7 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+
 
     function findSurahObj(queryStr) {
       if (!queryStr) return ALL_114_SURAHS[1];
@@ -2418,6 +3335,7 @@
       return ALL_114_SURAHS.find(s => s.name.toLowerCase().includes(clean)) || ALL_114_SURAHS[1];
     }
 
+
     function normalizeRowCuti(row) {
       const rawStatus = (row.Day_Status || '').trim();
       if (rawStatus.toLowerCase().startsWith('cuti') && rawStatus !== 'Cuti') {
@@ -2433,76 +3351,110 @@
       return row;
     }
 
+
     // =========================================================================
-    // 3. GOOGLE APPS SCRIPT BRIDGE + LOCAL STORAGE FALLBACK
+    // 3. FIREBASE REALTIME CLOUD SYNC + LOCAL CACHE FALLBACK
     // =========================================================================
+    let isFirebaseListenerBound = false;
+
+
     function syncFromGoogleSheet(showFeedbackToast = false) {
-      if (!IS_GAS_ENV) {
-        setSyncStatus('local', 'Offline Local Storage');
-        document.getElementById('syncModeDescription').textContent =
-          'Saved locally in this browser. Deploy in Google Apps Script for live multi-device Sheet sync.';
-        document.getElementById('btnResetSampleData').classList.remove('hidden');
+      const tr = t();
+      if (!isFirebaseListenerBound) {
+        isFirebaseListenerBound = true;
 
-        const rawRows = safeStorageGet(STORAGE_KEY);
-        if (rawRows) {
-          try {
-            hafazanRows = JSON.parse(rawRows).map(normalizeRowCuti);
-          } catch (e) {
-            hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
-          }
-        } else {
-          hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
-          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+
+        const cachedRows = safeStorageGet(STORAGE_KEY);
+        if (cachedRows) {
+          try { hafazanRows = JSON.parse(cachedRows).map(normalizeRowCuti); } catch (e) {}
         }
-
-        const rawProf = safeStorageGet(PROFILE_STORAGE_KEY);
-        if (rawProf) {
-          try { studentProfile = { ...studentProfile, ...JSON.parse(rawProf) }; } catch (e) {}
+        const cachedProf = safeStorageGet(PROFILE_STORAGE_KEY);
+        if (cachedProf) {
+          try { studentProfile = { ...studentProfile, ...JSON.parse(cachedProf) }; } catch (e) {}
         }
         refreshEntireUI();
-        if (showFeedbackToast) showToast('Refreshed local records');
+        setSyncStatus('syncing', tr.statusConnecting);
+
+
+        onValue(fbRowsRef, (snapshot) => {
+          const val = snapshot.val();
+          if (val === null) {
+            const initialRows = hafazanRows.length > 0 ? hafazanRows : FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
+            hafazanRows = initialRows;
+            set(fbRowsRef, initialRows).catch(() => {});
+          } else {
+            const list = Array.isArray(val) ? val.filter(Boolean) : Object.values(val);
+            hafazanRows = list.map(normalizeRowCuti);
+          }
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          setSyncStatus('connected', t().statusSynced);
+          refreshEntireUI();
+        }, (err) => {
+          console.error('Firebase rows sync error:', err);
+          setSyncStatus('error', t().statusSyncError);
+        });
+
+
+        onValue(fbProfileRef, (snapshot) => {
+          const profVal = snapshot.val();
+          if (profVal) {
+            studentProfile = { ...studentProfile, ...profVal };
+            safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
+            renderStudentProfileUI();
+          }
+        });
         return;
       }
 
-      setSyncStatus('syncing', 'Syncing...');
-      google.script.run
-        .withSuccessHandler((payload) => {
-          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
-          if (payload?.profile) {
-            studentProfile = { ...studentProfile, ...payload.profile };
+
+      setSyncStatus('syncing', tr.statusSyncing);
+      Promise.all([get(fbRowsRef), get(fbProfileRef)])
+        .then(([rowsSnap, profSnap]) => {
+          const val = rowsSnap.val();
+          if (val !== null) {
+            const list = Array.isArray(val) ? val.filter(Boolean) : Object.values(val);
+            hafazanRows = list.map(normalizeRowCuti);
+            safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
           }
-          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-          safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
-          setSyncStatus('connected', 'Synced with Google Sheet');
+          if (profSnap.val()) {
+            studentProfile = { ...studentProfile, ...profSnap.val() };
+            safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
+          }
+          setSyncStatus('connected', tr.statusSynced);
           refreshEntireUI();
-          if (showFeedbackToast) showToast(`Synced ${hafazanRows.length} rows from Google Sheet!`);
+          if (showFeedbackToast) showToast(tr.toastSyncedRows(hafazanRows.length));
         })
-        .withFailureHandler((err) => {
-          setSyncStatus('error', 'Sync Error');
-          showToast('Sheet sync error: ' + (err?.message || 'Check permissions'));
-          const cachedRows = safeStorageGet(STORAGE_KEY);
-          if (cachedRows) {
-            hafazanRows = JSON.parse(cachedRows).map(normalizeRowCuti);
-            refreshEntireUI();
-          }
-        })
-        .getTrackerData();
+        .catch((err) => {
+          setSyncStatus('error', tr.statusSyncError);
+          showToast(tr.statusSyncError + ': ' + (err?.message || ''));
+        });
     }
+
 
     function refreshEntireUI() {
       renderStudentProfileUI();
       applySmartAutoFill();
+      renderMukhtarSurahChips();
+      renderMurojaahSurahChips();
       updateAllStats();
       renderHistoryTable();
     }
+
 
     // =========================================================================
     // 4. INITIALIZATION & DELEGATED EVENT LISTENERS
     // =========================================================================
     document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = safeStorageGet(LANG_STORAGE_KEY);
+      if (savedLang === 'MY' || savedLang === 'EN') {
+        currentLang = savedLang;
+      }
+
+
       const today = new Date();
       const localISO = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().split('T')[0];
       document.getElementById('entryDate').value = localISO;
+
 
       renderStatusPills();
       renderCutiReasonChips();
@@ -2511,17 +3463,27 @@
       renderMurojaahSurahChips();
       bindAllEventListeners();
 
+
+      setLanguage(currentLang);
       syncFromGoogleSheet(false);
     });
 
+
     function bindAllEventListeners() {
+      // Language Toggle Buttons (MY / EN)
+      document.getElementById('btnLangMY').addEventListener('click', () => setLanguage('MY'));
+      document.getElementById('btnLangEN').addEventListener('click', () => setLanguage('EN'));
+
+
       // Bottom Navigation Tabs
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
       });
 
+
       // Manual Sync Refresh Button (in Sheet & Export tab)
       document.getElementById('btnRefreshFromSheet').addEventListener('click', () => syncFromGoogleSheet(true));
+
 
       // Student Profile Card
       document.getElementById('btnToggleProfileForm').addEventListener('click', () => toggleStudentProfileEditor());
@@ -2532,13 +3494,16 @@
         toggleStudentProfileEditor(true);
       });
 
+
       // One-Tap 'Murojaah Day' Quick Toggle
       document.getElementById('btnToggleMurojaahDay').addEventListener('click', toggleMurojaahDayMode);
+
 
       // Surah Picker Trigger Buttons (Saba, Pra Saba, Murojaah)
       document.getElementById('btnOpenSabaSurah').addEventListener('click', () => openSurahPickerModal('saba'));
       document.getElementById('btnOpenPraSabaSurah').addEventListener('click', () => openSurahPickerModal('prasaba'));
       document.getElementById('btnOpenMurojaahSurah').addEventListener('click', () => openSurahPickerModal('murojaah'));
+
 
       // Surah Picker Modal Controls
       document.getElementById('btnCloseSurahModal').addEventListener('click', closeSurahPickerModal);
@@ -2546,6 +3511,7 @@
         if (e.target.id === 'surahPickerModal') closeSurahPickerModal();
       });
       document.getElementById('surahModalSearchInput').addEventListener('input', renderSurahPickerList);
+
 
       document.getElementById('modalJuzFilterRow').addEventListener('click', (e) => {
         const btn = e.target.closest('[data-modal-juz]');
@@ -2555,12 +3521,14 @@
         renderSurahPickerList();
       });
 
+
       document.getElementById('surahPickerList').addEventListener('click', (e) => {
         const item = e.target.closest('[data-surah-num]');
         if (!item) return;
         const num = parseInt(item.getAttribute('data-surah-num'), 10);
         if (!isNaN(num)) selectSurahFromModal(num);
       });
+
 
       // Category Checkboxes
       document.getElementById('enableSaba').addEventListener('change', () => {
@@ -2580,6 +3548,7 @@
         syncMurojaahBannerFromCheckboxes();
       });
 
+
       // Numeric Inputs & Unit Selectors (Saba, Pra Saba, Mukhtar, Murojaah)
       document.getElementById('sabaUnit').addEventListener('change', recalculateTotals);
       document.getElementById('sabaStart').addEventListener('input', recalculateTotals);
@@ -2591,18 +3560,22 @@
         recalculateTotals();
       });
 
+
       document.getElementById('praSabaUnit').addEventListener('change', recalculateTotals);
       document.getElementById('praSabaStart').addEventListener('input', recalculateTotals);
       document.getElementById('praSabaEnd').addEventListener('input', recalculateTotals);
+
 
       document.getElementById('mukhtarJuzSelect').addEventListener('change', autoFillMukhtarPageForJuz);
       document.getElementById('mukhtarPageStart').addEventListener('input', recalculateTotals);
       document.getElementById('mukhtarPageEnd').addEventListener('input', recalculateTotals);
 
+
       document.getElementById('murojaahAyatStart').addEventListener('input', recalculateTotals);
       document.getElementById('murojaahAyatEnd').addEventListener('input', recalculateTotals);
       document.getElementById('murojaahPageStart').addEventListener('input', recalculateTotals);
       document.getElementById('murojaahPageEnd').addEventListener('input', recalculateTotals);
+
 
       // Quick Stepper Buttons — Saba
       document.querySelectorAll('[data-saba-step]').forEach(btn => {
@@ -2620,6 +3593,7 @@
         });
       });
 
+
       // Quick Stepper Buttons — Pra Saba
       document.querySelectorAll('[data-prasaba-step]').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2631,6 +3605,7 @@
         });
       });
 
+
       // Quick Stepper Buttons — Mukhtar Pages
       document.querySelectorAll('[data-mukhtar-offset]').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2640,6 +3615,7 @@
           recalculateTotals();
         });
       });
+
 
       // Quick Stepper Buttons — Murojaah Ayat & Pages
       document.querySelectorAll('[data-murojaah-ayat-step]').forEach(btn => {
@@ -2653,11 +3629,13 @@
         });
       });
 
+
       document.getElementById('btnMurojaahFullSurahAyat').addEventListener('click', () => {
         document.getElementById('murojaahAyatStart').value = 1;
         document.getElementById('murojaahAyatEnd').value = murojaahSelectedSurah.ayat;
         recalculateTotals();
       });
+
 
       document.querySelectorAll('[data-murojaah-page-offset]').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2668,6 +3646,7 @@
         });
       });
 
+
       // Mukhtar Mode Switch & Full Surahs Controls
       document.getElementById('btnMukhtarModePage').addEventListener('click', () => setMukhtarMode('Page'));
       document.getElementById('btnMukhtarModeSurah').addEventListener('click', () => setMukhtarMode('Full Surah'));
@@ -2677,6 +3656,7 @@
         renderMukhtarSurahChips();
       });
 
+
       document.querySelectorAll('[data-mfilter]').forEach(btn => {
         btn.addEventListener('click', () => {
           mukhtarSurahFilter = btn.getAttribute('data-mfilter');
@@ -2685,6 +3665,7 @@
         });
       });
 
+
       document.getElementById('btnPresetDuhaNas').addEventListener('click', () => {
         for (let n = 93; n <= 114; n++) {
           if (!selectedMukhtarSurahNums.includes(n)) selectedMukhtarSurahNums.push(n);
@@ -2692,12 +3673,14 @@
         renderMukhtarSurahChips();
       });
 
+
       document.getElementById('btnPresetLast10').addEventListener('click', () => {
         for (let n = 105; n <= 114; n++) {
           if (!selectedMukhtarSurahNums.includes(n)) selectedMukhtarSurahNums.push(n);
         }
         renderMukhtarSurahChips();
       });
+
 
       document.getElementById('mukhtarSurahChipsGrid').addEventListener('click', (e) => {
         const chip = e.target.closest('[data-msurah-num]');
@@ -2709,6 +3692,7 @@
         renderMukhtarSurahChips();
       });
 
+
       // Murojaah 3-Way Mode Switch & Full Surahs Controls
       document.getElementById('btnMurojaahModeAyat').addEventListener('click', () => setMurojaahMode('Ayat'));
       document.getElementById('btnMurojaahModePage').addEventListener('click', () => setMurojaahMode('Page'));
@@ -2719,6 +3703,7 @@
         renderMurojaahSurahChips();
       });
 
+
       document.querySelectorAll('[data-murfilter]').forEach(btn => {
         btn.addEventListener('click', () => {
           murojaahSurahFilter = btn.getAttribute('data-murfilter');
@@ -2727,12 +3712,14 @@
         });
       });
 
+
       document.getElementById('btnMurPresetFullJuz30').addEventListener('click', () => {
         for (let n = 78; n <= 114; n++) {
           if (!selectedMurojaahSurahNums.includes(n)) selectedMurojaahSurahNums.push(n);
         }
         renderMurojaahSurahChips();
       });
+
 
       document.getElementById('murojaahSurahChipsGrid').addEventListener('click', (e) => {
         const chip = e.target.closest('[data-mursurah-num]');
@@ -2744,23 +3731,28 @@
         renderMurojaahSurahChips();
       });
 
+
       // Save Daily Session Buttons
       document.getElementById('btnSaveActiveSession').addEventListener('click', saveDailySession);
       document.getElementById('btnSaveNonActive').addEventListener('click', saveDailySession);
+
 
       // Export, Import & Local Reset
       document.getElementById('btnCopyTSV').addEventListener('click', copyTSVForSheets);
       document.getElementById('btnDownloadCSV').addEventListener('click', downloadCSV);
       document.getElementById('csvImportInput').addEventListener('change', handleCSVImport);
+      document.getElementById('btnClearAllData').addEventListener('click', handleClearAllData);
       document.getElementById('btnResetSampleData').addEventListener('click', handleResetSampleData);
       document.getElementById('historySearch').addEventListener('input', renderHistoryTable);
       document.getElementById('historyCategoryFilter').addEventListener('change', renderHistoryTable);
+
 
       // Two-tap Delete Row in History Table
       document.getElementById('historyTableBody').addEventListener('click', (e) => {
         const delBtn = e.target.closest('[data-del-id]');
         if (!delBtn) return;
         const rowId = Number(delBtn.getAttribute('data-del-id'));
+
 
         if (armedDeleteRowId !== rowId) {
           armedDeleteRowId = rowId;
@@ -2776,17 +3768,20 @@
           return;
         }
 
+
         clearTimeout(deleteArmTimer);
         armedDeleteRowId = null;
         deleteRowFromSheet(rowId);
       });
     }
 
+
     // =========================================================================
     // 5. ONE-TAP 'MUROJAAH DAY' QUICK TOGGLE LOGIC
     // =========================================================================
     function toggleMurojaahDayMode() {
       isMurojaahDayActive = !isMurojaahDayActive;
+
 
       if (isMurojaahDayActive) {
         // Uncheck Saba & Pra Saba, keep Mukhtar optional (or unchecked), check & expand Murojaah
@@ -2801,13 +3796,15 @@
         document.getElementById('enableMurojaah').checked = false;
       }
 
+
       toggleCategoryBody('saba', 'enableSaba');
       toggleCategoryBody('prasaba', 'enablePraSaba');
       toggleCategoryBody('mukhtar', 'enableMukhtar');
       toggleCategoryBody('murojaah', 'enableMurojaah');
       renderMurojaahBannerState();
-      showToast(isMurojaahDayActive ? 'Murojaah Day ON — Saba skipped' : 'Standard Daily Mode restored');
+      showToast(isMurojaahDayActive ? t().toastMurojaahOn : t().toastMurojaahOff);
     }
+
 
     function syncMurojaahBannerFromCheckboxes() {
       const sabaOn = document.getElementById('enableSaba').checked;
@@ -2817,32 +3814,38 @@
       renderMurojaahBannerState();
     }
 
+
     function renderMurojaahBannerState() {
+      const tr = t();
       const banner = document.getElementById('murojaahDayBanner');
       const title = document.getElementById('murojaahBannerTitle');
       const sub = document.getElementById('murojaahBannerSub');
       const btn = document.getElementById('btnToggleMurojaahDay');
 
+
       banner.classList.toggle('is-on', isMurojaahDayActive);
       if (isMurojaahDayActive) {
-        title.textContent = 'Murojaah Day Active';
-        sub.textContent = 'Saba & Pra Saba skipped · Focusing on revision';
-        btn.textContent = 'Turn OFF';
+        title.textContent = tr.murojaahDayOnTitle;
+        sub.textContent = tr.murojaahDayOnSub;
+        btn.textContent = tr.turnOff;
       } else {
-        title.textContent = 'Murojaah Day Mode';
-        sub.textContent = 'Revision-only day? Tap to skip Saba & focus on Murojaah';
-        btn.textContent = 'Turn ON';
+        title.textContent = tr.murojaahDayOffTitle;
+        sub.textContent = tr.murojaahDayOffSub;
+        btn.textContent = tr.turnOn;
       }
     }
+
 
     // =========================================================================
     // 6. STUDENT PROFILE CARD LOGIC
     // =========================================================================
     function toggleStudentProfileEditor(forceOpen) {
+      const tr = t();
       const formBody = document.getElementById('studentProfileFormBody');
       const label = document.getElementById('btnToggleProfileLabel');
       const isHidden = formBody.classList.contains('hidden');
       const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : isHidden;
+
 
       if (shouldOpen) {
         document.getElementById('profName').value = studentProfile.name || '';
@@ -2850,14 +3853,16 @@
         document.getElementById('profGender').value = studentProfile.gender || '';
         document.getElementById('profSchool').value = studentProfile.school || '';
         formBody.classList.remove('hidden');
-        label.textContent = 'Close';
+        label.textContent = tr.close;
       } else {
         formBody.classList.add('hidden');
-        label.textContent = 'Edit';
+        label.textContent = tr.edit;
       }
     }
 
-    function saveStudentProfile() {
+
+    async function saveStudentProfile() {
+      const tr = t();
       const updated = {
         name: document.getElementById('profName').value.trim(),
         age: document.getElementById('profAge').value.trim(),
@@ -2865,130 +3870,143 @@
         school: document.getElementById('profSchool').value.trim()
       };
 
+
       const saveBtn = document.getElementById('btnSaveProfile');
       saveBtn.disabled = true;
-      saveBtn.textContent = 'Saving...';
+      saveBtn.textContent = tr.saving;
+      setSyncStatus('syncing', tr.statusSyncing);
 
-      if (!IS_GAS_ENV) {
+
+      try {
+        await set(fbProfileRef, updated);
         studentProfile = updated;
         safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
         renderStudentProfileUI();
         toggleStudentProfileEditor(false);
+        setSyncStatus('connected', tr.statusSynced);
+        showToast(tr.toastProfileSynced);
+      } catch (err) {
+        setSyncStatus('error', tr.statusSyncError);
+        showToast(tr.statusSyncError + ': ' + (err?.message || ''));
+      } finally {
         saveBtn.disabled = false;
-        saveBtn.textContent = 'Save Profile';
-        showToast('Student profile saved!');
-        return;
+        saveBtn.textContent = tr.saveProfile;
       }
-
-      setSyncStatus('syncing', 'Saving Profile...');
-      google.script.run
-        .withSuccessHandler(() => {
-          studentProfile = updated;
-          safeStorageSet(PROFILE_STORAGE_KEY, JSON.stringify(studentProfile));
-          renderStudentProfileUI();
-          toggleStudentProfileEditor(false);
-          saveBtn.disabled = false;
-          saveBtn.textContent = 'Save Profile';
-          setSyncStatus('connected', 'Synced with Google Sheet');
-          showToast('Profile synced to Google Sheet!');
-        })
-        .withFailureHandler((err) => {
-          saveBtn.disabled = false;
-          saveBtn.textContent = 'Save Profile';
-          setSyncStatus('error', 'Sync Error');
-          showToast('Failed to save profile: ' + (err?.message || 'Error'));
-        })
-        .saveStudentProfile(updated);
     }
 
+
     function renderStudentProfileUI() {
+      const tr = t();
       const hasName = Boolean(studentProfile.name);
-      document.getElementById('profileSummaryName').textContent = hasName ? studentProfile.name : 'Set Student Profile';
+      const genderLocalized = studentProfile.gender === 'Male'
+        ? tr.optGenderMale
+        : (studentProfile.gender === 'Female' ? tr.optGenderFemale : studentProfile.gender);
+
+
+      document.getElementById('profileSummaryName').textContent = hasName ? studentProfile.name : tr.setStudentProfile;
       document.getElementById('profileSummarySchool').textContent = studentProfile.school
         ? studentProfile.school
-        : (hasName ? 'No school / institution specified' : 'Tap Edit to add student name, age, gender & school');
+        : (hasName ? tr.noSchoolSpec : tr.tapEditProfile);
+
 
       const badgesRow = document.getElementById('profileSummaryBadgesRow');
       const ageBadge = document.getElementById('profileSummaryAgeBadge');
       const genderBadge = document.getElementById('profileSummaryGenderBadge');
 
+
       if (studentProfile.age) {
-        ageBadge.textContent = `${studentProfile.age} years old`;
+        ageBadge.textContent = `${studentProfile.age} ${tr.yearsOld}`;
         ageBadge.classList.remove('hidden');
       } else {
         ageBadge.classList.add('hidden');
       }
 
+
       if (studentProfile.gender) {
-        genderBadge.textContent = studentProfile.gender;
+        genderBadge.textContent = genderLocalized;
         genderBadge.classList.remove('hidden');
       } else {
         genderBadge.classList.add('hidden');
       }
 
+
       badgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
 
+
       // Sync Progress Tab Summary Card
-      document.getElementById('statProfileName').textContent = hasName ? studentProfile.name : 'Student Profile Not Set';
-      document.getElementById('statProfileSchool').textContent = studentProfile.school || 'Tap Edit to add school, age & gender';
+      document.getElementById('statProfileName').textContent = hasName ? studentProfile.name : tr.studentProfileNotSet;
+      document.getElementById('statProfileSchool').textContent = studentProfile.school || tr.tapEditStats;
+
 
       const statBadgesRow = document.getElementById('statProfileBadgesRow');
       const statAge = document.getElementById('statProfileAgeBadge');
       const statGender = document.getElementById('statProfileGenderBadge');
 
+
       if (studentProfile.age) {
-        statAge.textContent = `${studentProfile.age} years old`;
+        statAge.textContent = `${studentProfile.age} ${tr.yearsOld}`;
         statAge.classList.remove('hidden');
       } else {
         statAge.classList.add('hidden');
       }
 
+
       if (studentProfile.gender) {
-        statGender.textContent = studentProfile.gender;
+        statGender.textContent = genderLocalized;
         statGender.classList.remove('hidden');
       } else {
         statGender.classList.add('hidden');
       }
 
+
       statBadgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
     }
+
 
     // =========================================================================
     // 7. DAY STATUS, CUTI CHIPS & 114-SURAH PICKER MODAL
     // =========================================================================
     function renderStatusPills() {
+      const tr = t();
       const container = document.getElementById('statusPills');
       container.innerHTML = DAY_STATUS_OPTIONS.map(st => {
         const isSelected = st === currentDayStatus;
         let cls = 'status-pill-btn';
         if (isSelected) cls += st === 'Active' ? ' active-status' : ' active-off';
-        return `<button type="button" class="${cls}" data-status-val="${st}">${st}</button>`;
+        const label = tr.statusLabels[st] || st;
+        return `<button type="button" class="${cls}" data-status-val="${st}">${escapeHTML(label)}</button>`;
       }).join('');
+
 
       container.querySelectorAll('[data-status-val]').forEach(btn => {
         btn.addEventListener('click', () => {
           currentDayStatus = btn.getAttribute('data-status-val');
           renderStatusPills();
 
+
           const isActive = currentDayStatus === 'Active';
           document.getElementById('activeSessionWrapper').classList.toggle('hidden', !isActive);
           document.getElementById('nonActivePanel').classList.toggle('hidden', isActive);
 
+
           if (!isActive) {
-            document.getElementById('nonActiveTitle').textContent = `${currentDayStatus} Selected`;
+            const disp = tr.statusLabels[currentDayStatus] || currentDayStatus;
+            document.getElementById('nonActiveTitle').textContent = `${disp} ${tr.selectedSuffix}`;
             document.getElementById('nonActiveCodeLabel').textContent = currentDayStatus;
-            document.getElementById('saveNonActiveBtnLabel').textContent = `Save ${currentDayStatus} Row to Sheet`;
+            document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(disp);
             document.getElementById('cutiReasonSection').classList.toggle('hidden', currentDayStatus !== 'Cuti');
           }
         });
       });
     }
 
+
     function renderCutiReasonChips() {
       const container = document.getElementById('cutiReasonChips');
       container.innerHTML = CUTI_REASON_CHIPS.map(r =>
         `<button type="button" class="chip-btn" data-cuti-reason="${escapeHTML(r)}">${escapeHTML(r)}</button>`
       ).join('');
+
 
       container.addEventListener('click', (e) => {
         const btn = e.target.closest('[data-cuti-reason]');
@@ -3001,6 +4019,7 @@
       });
     }
 
+
     function populateJuzDropdowns() {
       let html = '';
       for (let i = 1; i <= 30; i++) {
@@ -3010,28 +4029,34 @@
       document.getElementById('murojaahJuzSelect').innerHTML = html;
     }
 
+
     function openSurahPickerModal(target) {
+      const tr = t();
       activeSurahPickerTarget = ['saba', 'prasaba', 'murojaah'].includes(target) ? target : 'saba';
       surahModalJuzFilter = 'ALL';
       document.querySelectorAll('#modalJuzFilterRow .chip-btn').forEach(c => {
         c.classList.toggle('selected', c.getAttribute('data-modal-juz') === 'ALL');
       });
 
+
       const titleMap = {
-        saba: 'Select Saba Surah (1–114)',
-        prasaba: 'Select Pra Saba Surah (1–114)',
-        murojaah: 'Select Murojaah Surah (1–114)'
+        saba: tr.modalTitleSaba,
+        prasaba: tr.modalTitlePraSaba,
+        murojaah: tr.modalTitleMurojaah
       };
       document.getElementById('surahModalTitle').textContent = titleMap[activeSurahPickerTarget];
       document.getElementById('surahModalSearchInput').value = '';
+
 
       renderSurahPickerList();
       document.getElementById('surahPickerModal').classList.remove('hidden');
     }
 
+
     function closeSurahPickerModal() {
       document.getElementById('surahPickerModal').classList.add('hidden');
     }
+
 
     function renderSurahPickerList() {
       const listEl = document.getElementById('surahPickerList');
@@ -3043,6 +4068,7 @@
             ? praSabaSelectedSurah
             : murojaahSelectedSurah;
 
+
       const filtered = ALL_114_SURAHS.filter(s => {
         if (surahModalJuzFilter !== 'ALL') {
           if (surahModalJuzFilter === '1' && s.juz > 2) return false;
@@ -3052,10 +4078,12 @@
         return String(s.num) === q || s.name.toLowerCase().includes(q) || `${s.num}. ${s.name}`.toLowerCase().includes(q);
       });
 
+
       if (filtered.length === 0) {
-        listEl.innerHTML = `<div style="padding:24px; text-align:center; font-size:13px; color:var(--slate-400);">No Surah found matching "${escapeHTML(q)}"</div>`;
+        listEl.innerHTML = `<div style="padding:24px; text-align:center; font-size:13px; color:var(--slate-400);">${escapeHTML(t().noSurahFound(q))}</div>`;
         return;
       }
+
 
       listEl.innerHTML = filtered.map(s => {
         const isCurrent = selectedObj && selectedObj.num === s.num;
@@ -3074,11 +4102,14 @@
       }).join('');
     }
 
+
     function selectSurahFromModal(surahNum) {
       const chosen = ALL_114_SURAHS.find(s => s.num === surahNum);
       if (!chosen) return;
 
+
       const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
 
       if (activeSurahPickerTarget === 'saba') {
         sabaSelectedSurah = chosen;
@@ -3088,8 +4119,10 @@
         const nextStart = pastSaba ? Math.min(chosen.ayat, (parseInt(pastSaba.End_Unit, 10) || 0) + 1) : 1;
         const nextEnd = Math.min(chosen.ayat, nextStart + 1);
 
+
         document.getElementById('sabaStart').value = nextStart;
         document.getElementById('sabaEnd').value = nextEnd;
+
 
         praSabaSelectedSurah = chosen;
         document.getElementById('praSabaStart').value = 1;
@@ -3112,44 +4145,53 @@
         document.getElementById('murojaahAyatEnd').value = chosen.ayat;
       }
 
+
       updateSurahDisplayBadges();
       recalculateTotals();
       closeSurahPickerModal();
       showToast(`Selected ${chosen.num}. ${chosen.name}`);
     }
 
+
     function updateSurahDisplayBadges() {
       document.getElementById('sabaSurahDisplay').textContent = `${sabaSelectedSurah.num}. ${sabaSelectedSurah.name}`;
       document.getElementById('sabaSurahMaxBadge').textContent = `${sabaSelectedSurah.ayat} Ayat`;
 
+
       document.getElementById('praSabaSurahDisplay').textContent = `${praSabaSelectedSurah.num}. ${praSabaSelectedSurah.name}`;
       document.getElementById('praSabaSurahMaxBadge').textContent = `${praSabaSelectedSurah.ayat} Ayat`;
+
 
       document.getElementById('murojaahSurahDisplay').textContent = `${murojaahSelectedSurah.num}. ${murojaahSelectedSurah.name}`;
       document.getElementById('murojaahSurahMaxBadge').textContent = `${murojaahSelectedSurah.ayat} Ayat`;
     }
 
+
     // =========================================================================
     // 8. SMART AUTO-FILL & CALCULATIONS
     // =========================================================================
     function applySmartAutoFill() {
+      const tr = t();
       const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
 
       const lastSaba = [...sorted].reverse().find(r => r.Category === 'Saba');
       if (lastSaba) {
         sabaSelectedSurah = findSurahObj(lastSaba.Surah_or_Juz);
         const unit = lastSaba.Tracking_Unit || 'Ayat';
+        const unitDisp = unit === 'Page' ? tr.optPage : tr.optAyat;
         const lastEnd = parseInt(lastSaba.End_Unit, 10) || 0;
         const maxLim = unit === 'Ayat' ? sabaSelectedSurah.ayat : 604;
         const nextStart = lastEnd < maxLim ? lastEnd + 1 : maxLim;
         const nextEnd = Math.min(maxLim, nextStart + 1);
 
+
         document.getElementById('sabaUnit').value = unit;
         document.getElementById('sabaStart').value = nextStart;
         document.getElementById('sabaEnd').value = nextEnd;
-        document.getElementById('sabaLastHint').textContent = `Last: ${sabaSelectedSurah.name} ${unit} ${lastEnd}`;
+        document.getElementById('sabaLastHint').textContent = `${tr.lastHintPrefix} ${sabaSelectedSurah.name} ${unitDisp} ${lastEnd}`;
 
-        // Pre-fill Murojaah Ayat Range to cover memorized range 1..lastEnd of current Saba Surah
+
         murojaahSelectedSurah = sabaSelectedSurah;
         document.getElementById('murojaahAyatStart').value = 1;
         document.getElementById('murojaahAyatEnd').value = Math.max(1, lastEnd);
@@ -3158,12 +4200,14 @@
         document.getElementById('sabaUnit').value = 'Ayat';
         document.getElementById('sabaStart').value = 1;
         document.getElementById('sabaEnd').value = 2;
-        document.getElementById('sabaLastHint').textContent = 'Starting fresh: Al-Baqarah Ayat 1';
+        document.getElementById('sabaLastHint').textContent = tr.startingFreshSaba;
+
 
         murojaahSelectedSurah = ALL_114_SURAHS[1];
         document.getElementById('murojaahAyatStart').value = 1;
         document.getElementById('murojaahAyatEnd').value = 20;
       }
+
 
       const lastPra = [...sorted].reverse().find(r => r.Category === 'Pra Saba');
       const curSabaEnd = parseInt(document.getElementById('sabaEnd').value, 10) || 1;
@@ -3182,6 +4226,7 @@
         document.getElementById('praSabaEnd').value = curSabaEnd;
       }
 
+
       const lastMukhtar = [...sorted].reverse().find(r => r.Category === 'Mukhtar');
       if (lastMukhtar && lastMukhtar.Tracking_Unit === 'Page') {
         const juzStr = lastMukhtar.Surah_or_Juz || 'Juz 1';
@@ -3189,29 +4234,35 @@
         document.getElementById('mukhtarJuzSelect').value = juzStr;
         document.getElementById('mukhtarPageStart').value = nextPg;
         document.getElementById('mukhtarPageEnd').value = nextPg;
-        document.getElementById('mukhtarLastHint').textContent = `Last: ${juzStr} Page ${lastMukhtar.End_Unit}`;
+        document.getElementById('mukhtarLastHint').textContent = `${tr.lastHintPrefix} ${juzStr} ${tr.optPage} ${lastMukhtar.End_Unit}`;
       } else if (lastMukhtar) {
         document.getElementById('mukhtarPageStart').value = 1;
         document.getElementById('mukhtarPageEnd').value = 1;
-        document.getElementById('mukhtarLastHint').textContent = `Last: ${lastMukhtar.Total_Amount} Full Surahs`;
+        document.getElementById('mukhtarLastHint').textContent = `${tr.lastHintPrefix} ${lastMukhtar.Total_Amount} ${tr.modeFullSurahs}`;
       } else {
         document.getElementById('mukhtarJuzSelect').value = 'Juz 1';
         document.getElementById('mukhtarPageStart').value = 1;
         document.getElementById('mukhtarPageEnd').value = 1;
-        document.getElementById('mukhtarLastHint').textContent = 'Starting fresh: Juz 1 Page 1';
+        document.getElementById('mukhtarLastHint').textContent = tr.startingFreshMukhtar;
       }
+
 
       const lastMurojaah = [...sorted].reverse().find(r => r.Category === 'Murojaah');
       if (lastMurojaah) {
+        const uDisp = lastMurojaah.Tracking_Unit === 'Page'
+          ? tr.optPage
+          : (lastMurojaah.Tracking_Unit === 'Full Surah' ? tr.modeFullSurahs : tr.optAyat);
         document.getElementById('murojaahLastHint').textContent =
-          `Last: ${lastMurojaah.Surah_or_Juz} (${lastMurojaah.Total_Amount} ${lastMurojaah.Tracking_Unit})`;
+          `${tr.lastHintPrefix} ${lastMurojaah.Surah_or_Juz} (${lastMurojaah.Total_Amount} ${uDisp})`;
       } else {
-        document.getElementById('murojaahLastHint').textContent = 'Ayat range, Juz/Page, or Full Surahs';
+        document.getElementById('murojaahLastHint').textContent = tr.murojaahDefaultHint;
       }
+
 
       updateSurahDisplayBadges();
       recalculateTotals();
     }
+
 
     function autoFillMukhtarPageForJuz() {
       const selectedJuz = document.getElementById('mukhtarJuzSelect').value;
@@ -3225,6 +4276,7 @@
       recalculateTotals();
     }
 
+
     function recalculateTotals() {
       // 1. Saba
       const sStart = parseInt(document.getElementById('sabaStart').value, 10) || 0;
@@ -3233,13 +4285,15 @@
       const sTotal = sEnd >= sStart && sStart > 0 ? (sEnd - sStart + 1) : 0;
       document.getElementById('sabaTotalBadge').textContent = sTotal;
 
+
       const sValEl = document.getElementById('sabaValidationMsg');
       if (sUnit === 'Ayat' && sEnd > sabaSelectedSurah.ayat) {
-        sValEl.textContent = `Note: ${sabaSelectedSurah.name} has ${sabaSelectedSurah.ayat} Ayat total.`;
+        sValEl.textContent = t().noteMaxAyat(sabaSelectedSurah.name, sabaSelectedSurah.ayat);
         sValEl.classList.remove('hidden');
       } else {
         sValEl.classList.add('hidden');
       }
+
 
       // 2. Pra Saba
       const pStart = parseInt(document.getElementById('praSabaStart').value, 10) || 0;
@@ -3248,13 +4302,15 @@
       const pTotal = pEnd >= pStart && pStart > 0 ? (pEnd - pStart + 1) : 0;
       document.getElementById('praSabaTotalBadge').textContent = pTotal;
 
+
       const pValEl = document.getElementById('praSabaValidationMsg');
       if (pUnit === 'Ayat' && pEnd > praSabaSelectedSurah.ayat) {
-        pValEl.textContent = `Note: ${praSabaSelectedSurah.name} has ${praSabaSelectedSurah.ayat} Ayat total.`;
+        pValEl.textContent = t().noteMaxAyat(praSabaSelectedSurah.name, praSabaSelectedSurah.ayat);
         pValEl.classList.remove('hidden');
       } else {
         pValEl.classList.add('hidden');
       }
+
 
       // 3. Mukhtar Pages
       const mStart = parseInt(document.getElementById('mukhtarPageStart').value, 10) || 0;
@@ -3262,27 +4318,32 @@
       const mTotal = mEnd >= mStart && mStart > 0 ? (mEnd - mStart + 1) : 0;
       document.getElementById('mukhtarPageTotalBadge').textContent = mTotal;
 
+
       // 4. Murojaah Ayat & Pages
       const murAStart = parseInt(document.getElementById('murojaahAyatStart').value, 10) || 0;
       const murAEnd = parseInt(document.getElementById('murojaahAyatEnd').value, 10) || 0;
       const murATotal = murAEnd >= murAStart && murAStart > 0 ? (murAEnd - murAStart + 1) : 0;
       document.getElementById('murojaahAyatTotalBadge').textContent = murATotal;
 
+
       const murValEl = document.getElementById('murojaahValidationMsg');
       if (murAEnd > murojaahSelectedSurah.ayat) {
-        murValEl.textContent = `Note: ${murojaahSelectedSurah.name} has ${murojaahSelectedSurah.ayat} Ayat total.`;
+        murValEl.textContent = t().noteMaxAyat(murojaahSelectedSurah.name, murojaahSelectedSurah.ayat);
         murValEl.classList.remove('hidden');
       } else {
         murValEl.classList.add('hidden');
       }
+
 
       const murPStart = parseInt(document.getElementById('murojaahPageStart').value, 10) || 0;
       const murPEnd = parseInt(document.getElementById('murojaahPageEnd').value, 10) || 0;
       const murPTotal = murPEnd >= murPStart && murPStart > 0 ? (murPEnd - murPStart + 1) : 0;
       document.getElementById('murojaahPageTotalBadge').textContent = murPTotal;
 
+
       updateSaveButtonLabel();
     }
+
 
     function toggleCategoryBody(key, checkboxId) {
       const isChecked = document.getElementById(checkboxId).checked;
@@ -3290,15 +4351,16 @@
       updateSaveButtonLabel();
     }
 
+
     function updateSaveButtonLabel() {
       let count = 0;
       if (document.getElementById('enableSaba').checked) count++;
       if (document.getElementById('enablePraSaba').checked) count++;
       if (document.getElementById('enableMukhtar').checked) count++;
       if (document.getElementById('enableMurojaah').checked) count++;
-      document.getElementById('saveBtnLabel').textContent =
-        count === 1 ? 'Save Session to Sheet (1 Row)' : `Save Session to Sheet (${count} Rows)`;
+      document.getElementById('saveBtnLabel').textContent = t().saveSessionRows(count);
     }
+
 
     // Mukhtar Mode Switcher & Chips
     function setMukhtarMode(mode) {
@@ -3310,9 +4372,11 @@
       if (mode === 'Full Surah') renderMukhtarSurahChips();
     }
 
+
     function renderMukhtarSurahChips() {
       const grid = document.getElementById('mukhtarSurahChipsGrid');
       const q = document.getElementById('mukhtarSurahSearch').value.toLowerCase().trim();
+
 
       const filtered = ALL_114_SURAHS.filter(s => {
         if (mukhtarSurahFilter === 'JUZ30' && s.juz !== 30) return false;
@@ -3322,10 +4386,12 @@
         return String(s.num) === q || s.name.toLowerCase().includes(q);
       });
 
+
       grid.innerHTML = filtered.map(s => {
         const isSel = selectedMukhtarSurahNums.includes(s.num);
         return `<button type="button" class="chip-btn ${isSel ? 'selected' : ''}" data-msurah-num="${s.num}">${s.num}. ${escapeHTML(s.name)}</button>`;
       }).join('');
+
 
       const count = selectedMukhtarSurahNums.length;
       document.getElementById('selectedSurahCount').textContent = count;
@@ -3334,8 +4400,9 @@
         .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
         .filter(Boolean);
       document.getElementById('selectedSurahPreview').textContent =
-        names.length > 0 ? names.join(', ') : 'No surahs selected yet...';
+        names.length > 0 ? names.join(', ') : t().noSurahsSelected;
     }
+
 
     // Murojaah 3-Way Mode Switcher & Chips
     function setMurojaahMode(mode) {
@@ -3344,16 +4411,20 @@
       document.getElementById('btnMurojaahModePage').classList.toggle('active-indigo', mode === 'Page');
       document.getElementById('btnMurojaahModeSurah').classList.toggle('active-indigo', mode === 'Full Surah');
 
+
       document.getElementById('murojaahAyatPanel').classList.toggle('hidden', mode !== 'Ayat');
       document.getElementById('murojaahPagePanel').classList.toggle('hidden', mode !== 'Page');
       document.getElementById('murojaahSurahPanel').classList.toggle('hidden', mode !== 'Full Surah');
 
+
       if (mode === 'Full Surah') renderMurojaahSurahChips();
     }
+
 
     function renderMurojaahSurahChips() {
       const grid = document.getElementById('murojaahSurahChipsGrid');
       const q = document.getElementById('murojaahSurahSearch').value.toLowerCase().trim();
+
 
       const filtered = ALL_114_SURAHS.filter(s => {
         if (murojaahSurahFilter === 'JUZ30' && s.juz !== 30) return false;
@@ -3363,10 +4434,12 @@
         return String(s.num) === q || s.name.toLowerCase().includes(q);
       });
 
+
       grid.innerHTML = filtered.map(s => {
         const isSel = selectedMurojaahSurahNums.includes(s.num);
         return `<button type="button" class="chip-btn ${isSel ? 'selected-indigo' : ''}" data-mursurah-num="${s.num}">${s.num}. ${escapeHTML(s.name)}</button>`;
       }).join('');
+
 
       const count = selectedMurojaahSurahNums.length;
       document.getElementById('murojaahSelectedCount').textContent = count;
@@ -3375,21 +4448,25 @@
         .map(num => ALL_114_SURAHS.find(s => s.num === num)?.name)
         .filter(Boolean);
       document.getElementById('murojaahSelectedPreview').textContent =
-        names.length > 0 ? names.join(', ') : 'No surahs selected yet...';
+        names.length > 0 ? names.join(', ') : t().noSurahsSelected;
     }
+
 
     // =========================================================================
     // 9. SAVE DAILY SESSION & DELETE / RESET ACTIONS
     // =========================================================================
     function saveDailySession() {
+      const tr = t();
       const dateVal = document.getElementById('entryDate').value;
       if (!dateVal) {
-        showToast('Please choose a session date');
+        showToast(tr.toastChooseDate);
         return;
       }
 
+
       const newRows = [];
       let baseId = Date.now();
+
 
       if (currentDayStatus !== 'Active') {
         const notes = document.getElementById('nonActiveNotes').value.trim();
@@ -3408,6 +4485,7 @@
       } else {
         const notes = document.getElementById('sessionNotes').value.trim();
         let noteAttached = false;
+
 
         // 1. Saba
         if (document.getElementById('enableSaba').checked) {
@@ -3432,6 +4510,7 @@
           noteAttached = true;
         }
 
+
         // 2. Pra Saba
         if (document.getElementById('enablePraSaba').checked) {
           const pStart = parseInt(document.getElementById('praSabaStart').value, 10) || 0;
@@ -3454,6 +4533,7 @@
           });
           noteAttached = true;
         }
+
 
         // 3. Mukhtar
         if (document.getElementById('enableMukhtar').checked) {
@@ -3499,6 +4579,7 @@
           }
           noteAttached = true;
         }
+
 
         // 4. Murojaah (General Revision)
         if (document.getElementById('enableMurojaah').checked) {
@@ -3564,18 +4645,21 @@
           noteAttached = true;
         }
 
+
         if (newRows.length === 0) {
           showToast('Enable at least one category to save');
           return;
         }
       }
 
+
       const activeBtn = document.getElementById('btnSaveActiveSession');
       const offBtn = document.getElementById('btnSaveNonActive');
       activeBtn.disabled = true;
       offBtn.disabled = true;
-      document.getElementById('saveBtnLabel').textContent = 'Saving to Sheet...';
-      document.getElementById('saveNonActiveBtnLabel').textContent = 'Saving to Sheet...';
+      document.getElementById('saveBtnLabel').textContent = tr.saving;
+      document.getElementById('saveNonActiveBtnLabel').textContent = tr.saving;
+
 
       const resetFormAfterSave = () => {
         activeBtn.disabled = false;
@@ -3586,74 +4670,63 @@
         selectedMurojaahSurahNums = [];
         renderMukhtarSurahChips();
         renderMurojaahSurahChips();
-        document.getElementById('saveNonActiveBtnLabel').textContent = `Save ${currentDayStatus} Row to Sheet`;
+        const disp = tr.statusLabels[currentDayStatus] || currentDayStatus;
+        document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(disp);
         updateSaveButtonLabel();
       };
 
-      if (!IS_GAS_ENV) {
-        hafazanRows.push(...newRows);
-        safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-        resetFormAfterSave();
-        refreshEntireUI();
-        showToast(`Saved ${newRows.length} row(s) locally!`);
-        return;
-      }
 
-      setSyncStatus('syncing', 'Saving...');
-      google.script.run
-        .withSuccessHandler((payload) => {
-          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+      setSyncStatus('syncing', tr.statusSyncing);
+      const updatedRows = [...hafazanRows, ...newRows];
+      set(fbRowsRef, updatedRows)
+        .then(() => {
+          hafazanRows = updatedRows;
           safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
           resetFormAfterSave();
-          setSyncStatus('connected', 'Synced with Google Sheet');
+          setSyncStatus('connected', tr.statusSynced);
           refreshEntireUI();
-          showToast(`Saved ${newRows.length} row(s) to Google Sheet!`);
+          showToast(tr.toastSavedSheet(newRows.length));
         })
-        .withFailureHandler((err) => {
+        .catch((err) => {
           resetFormAfterSave();
-          setSyncStatus('error', 'Save Failed');
-          showToast('Error saving to Sheet: ' + (err?.message || 'Check connection'));
-        })
-        .appendLogs(newRows);
+          setSyncStatus('error', tr.statusSyncError);
+          showToast(tr.statusSyncError + ': ' + (err?.message || ''));
+        });
     }
+
 
     function deleteRowFromSheet(rowId) {
-      if (!IS_GAS_ENV) {
-        hafazanRows = hafazanRows.filter(r => r.id !== rowId);
-        safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-        refreshEntireUI();
-        showToast('Row deleted locally');
-        return;
-      }
-
-      setSyncStatus('syncing', 'Deleting...');
-      google.script.run
-        .withSuccessHandler((payload) => {
-          hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+      const tr = t();
+      setSyncStatus('syncing', tr.statusSyncing);
+      const updatedRows = hafazanRows.filter(r => r.id !== rowId);
+      set(fbRowsRef, updatedRows)
+        .then(() => {
+          hafazanRows = updatedRows;
           safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-          setSyncStatus('connected', 'Synced with Google Sheet');
+          setSyncStatus('connected', tr.statusSynced);
           refreshEntireUI();
-          showToast('Row deleted from Google Sheet');
+          showToast(tr.toastDeleted);
         })
-        .withFailureHandler((err) => {
-          setSyncStatus('error', 'Delete Error');
-          showToast('Could not delete row: ' + (err?.message || 'Check Code.gs'));
+        .catch((err) => {
+          setSyncStatus('error', tr.statusSyncError);
+          showToast(tr.statusSyncError + ': ' + (err?.message || ''));
           renderHistoryTable();
-        })
-        .deleteLogRow(rowId);
+        });
     }
 
+
     function handleResetSampleData() {
+      const tr = t();
       const btn = document.getElementById('btnResetSampleData');
       if (!resetArmed) {
         resetArmed = true;
-        btn.textContent = 'Confirm Reset?';
+        btn.textContent = tr.confirmResetBtn;
         btn.style.background = 'var(--amber-600)';
         btn.style.color = '#fff';
         clearTimeout(resetTimer);
         resetTimer = setTimeout(() => {
           resetArmed = false;
-          btn.textContent = 'Reset Sample Data';
+          btn.textContent = t().resetSampleBtn;
           btn.style.background = '';
           btn.style.color = '';
         }, 4000);
@@ -3661,21 +4734,70 @@
       }
       clearTimeout(resetTimer);
       resetArmed = false;
-      btn.textContent = 'Reset Sample Data';
+      btn.textContent = tr.resetSampleBtn;
       btn.style.background = '';
       btn.style.color = '';
+
 
       hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
       safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
       refreshEntireUI();
-      showToast('Sample data restored!');
+      showToast(tr.toastReset);
     }
+
+
+    function handleClearAllData() {
+      const tr = t();
+      const btn = document.getElementById('btnClearAllData');
+      if (!clearArmed) {
+        clearArmed = true;
+        btn.textContent = tr.confirmClearAllBtn;
+        btn.style.background = 'var(--rose-600)';
+        btn.style.borderColor = 'var(--rose-600)';
+        btn.style.color = '#fff';
+        clearTimeout(clearTimer);
+        clearTimer = setTimeout(() => {
+          clearArmed = false;
+          btn.textContent = t().clearAllBtn;
+          btn.style.background = 'var(--rose-50)';
+          btn.style.borderColor = '#FECDD3';
+          btn.style.color = 'var(--rose-600)';
+        }, 4000);
+        return;
+      }
+
+
+      clearTimeout(clearTimer);
+      clearArmed = false;
+      btn.textContent = tr.clearAllBtn;
+      btn.style.background = 'var(--rose-50)';
+      btn.style.borderColor = '#FECDD3';
+      btn.style.color = 'var(--rose-600)';
+
+
+      setSyncStatus('syncing', tr.statusSyncing);
+      set(fbRowsRef, [])
+        .then(() => {
+          hafazanRows = [];
+          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
+          setSyncStatus('connected', tr.statusSynced);
+          refreshEntireUI();
+          showToast(tr.toastCleared);
+        })
+        .catch((err) => {
+          setSyncStatus('error', tr.statusSyncError);
+          showToast(tr.statusSyncError + ': ' + (err?.message || ''));
+        });
+    }
+
 
     // =========================================================================
     // 10. PROGRESS, INSIGHTS (INCLUDING MUROJAAH) & BAR CHART
     // =========================================================================
     function updateAllStats() {
+      const tr = t();
       const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
 
       let totalSaba = 0;
       let totalPraSaba = 0;
@@ -3683,11 +4805,13 @@
       let totalMurojaah = 0;
       let murojaahLogCount = 0;
 
+
       const activeDatesSet = new Set();
       const sabaDatesSet = new Set();
       const murojaahOnlyDatesSet = new Set();
       const cutiDatesSet = new Set();
       const allUniqueDates = new Set();
+
 
       sorted.forEach(r => {
         if (r.Date) allUniqueDates.add(r.Date);
@@ -3710,6 +4834,7 @@
         }
       });
 
+
       // Identify dates where Murojaah was logged without Saba
       sorted.forEach(r => {
         if (r.Day_Status === 'Active' && r.Category === 'Murojaah' && !sabaDatesSet.has(r.Date)) {
@@ -3717,11 +4842,13 @@
         }
       });
 
+
       const activeDaysCount = activeDatesSet.size;
       const sabaDaysCount = sabaDatesSet.size || activeDaysCount;
       const avgSabaPerDay = sabaDaysCount > 0 ? totalSaba / sabaDaysCount : 0;
       const avgPraPerDay = activeDaysCount > 0 ? totalPraSaba / activeDaysCount : 0;
       const attendancePct = allUniqueDates.size > 0 ? Math.round((activeDaysCount / allUniqueDates.size) * 100) : 0;
+
 
       // Current Surah Milestone & ETA
       const lastSaba = [...sorted].reverse().find(r => r.Category === 'Saba');
@@ -3731,35 +4858,40 @@
         const maxUnits = lastSaba.Tracking_Unit === 'Ayat' ? sObj.ayat : 604;
         const pct = Math.min(100, Math.round((curEnd / maxUnits) * 100));
 
+
         document.getElementById('statCurrentSurah').textContent = `${sObj.num}. ${sObj.name}`;
-        document.getElementById('statCurrentAyat').textContent = `${lastSaba.Tracking_Unit} ${curEnd} of ${maxUnits} memorized`;
+        document.getElementById('statCurrentAyat').textContent = tr.memorizedOf(lastSaba.Tracking_Unit, curEnd, maxUnits);
         document.getElementById('statSurahPercent').textContent = `${pct}%`;
         document.getElementById('statSurahProgressBar').style.width = `${pct}%`;
 
+
         const remaining = Math.max(0, maxUnits - curEnd);
         if (remaining === 0) {
-          document.getElementById('statSurahEta').textContent = `Surah Completed!`;
+          document.getElementById('statSurahEta').textContent = tr.surahCompleted;
         } else if (avgSabaPerDay > 0) {
           const estSessions = Math.ceil(remaining / avgSabaPerDay);
           const etaDate = new Date();
           etaDate.setDate(etaDate.getDate() + Math.ceil(estSessions * 1.35));
-          const etaLabel = etaDate.toLocaleDateString('en-MY', { day: 'numeric', month: 'short', year: 'numeric' });
-          document.getElementById('statSurahEta').textContent = `Est. Finish: ~${etaLabel} (${estSessions} sessions)`;
+          const localeCode = currentLang === 'MY' ? 'ms-MY' : 'en-MY';
+          const etaLabel = etaDate.toLocaleDateString(localeCode, { day: 'numeric', month: 'short', year: 'numeric' });
+          document.getElementById('statSurahEta').textContent = tr.estFinishEta(etaLabel, estSessions);
         } else {
-          document.getElementById('statSurahEta').textContent = `Est. Finish: Log sessions to project`;
+          document.getElementById('statSurahEta').textContent = tr.estFinishLogMore;
         }
+
 
         const ayatsBefore = ALL_114_SURAHS.filter(s => s.num < sObj.num).reduce((acc, s) => acc + s.ayat, 0);
         const totalMemorizedAyat = ayatsBefore + (lastSaba.Tracking_Unit === 'Ayat' ? curEnd : 0);
         document.getElementById('statQuranOverallPct').textContent = `Al-Quran: ${((totalMemorizedAyat / 6236) * 100).toFixed(1)}%`;
       } else {
-        document.getElementById('statCurrentSurah').textContent = 'Not Started Yet';
-        document.getElementById('statCurrentAyat').textContent = 'Log your first Saba session to begin';
+        document.getElementById('statCurrentSurah').textContent = tr.notStartedYet;
+        document.getElementById('statCurrentAyat').textContent = tr.logFirstSaba;
         document.getElementById('statSurahPercent').textContent = '0%';
         document.getElementById('statSurahProgressBar').style.width = '0%';
-        document.getElementById('statSurahEta').textContent = 'Est. Finish: —';
+        document.getElementById('statSurahEta').textContent = tr.estFinishLogMore;
         document.getElementById('statQuranOverallPct').textContent = 'Al-Quran: 0%';
       }
+
 
       // Streaks
       const dateStatusMap = {};
@@ -3767,12 +4899,14 @@
       const ascDates = Object.keys(dateStatusMap).sort();
       const descDates = [...ascDates].reverse();
 
+
       let currentStreak = 0;
       for (const d of descDates) {
         if (dateStatusMap[d] === 'Active') currentStreak++;
         else if (['Weekend', 'Cuti', 'Riadah'].includes(dateStatusMap[d])) continue;
         else break;
       }
+
 
       let bestStreak = 0;
       let run = 0;
@@ -3785,12 +4919,14 @@
         }
       }
 
+
       // Peak Day of Week & Personal Best Day
-      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const dayNames = tr.dayNames;
       const dayBuckets = Array.from({ length: 7 }, () => ({ sum: 0, count: 0 }));
       const sabaPerDate = {};
       let bestSingleUnits = 0;
       let bestSingleDate = '';
+
 
       sorted.forEach(r => {
         if (r.Day_Status === 'Active' && r.Category === 'Saba') {
@@ -3798,6 +4934,7 @@
           sabaPerDate[r.Date] = (sabaPerDate[r.Date] || 0) + amt;
         }
       });
+
 
       Object.entries(sabaPerDate).forEach(([dStr, totalU]) => {
         if (totalU > bestSingleUnits) {
@@ -3811,6 +4948,7 @@
         }
       });
 
+
       let peakDayIdx = -1;
       let peakDayAvg = 0;
       dayBuckets.forEach((b, idx) => {
@@ -3820,34 +4958,40 @@
         }
       });
 
+
       // 4-Category Workload Distribution & Revision Ratio
       const allRevisionTotal = totalPraSaba + totalMukhtar + totalMurojaah;
       const revRatio = totalSaba > 0 ? (allRevisionTotal / totalSaba).toFixed(1) : '0.0';
       const grandTotal = totalSaba + allRevisionTotal;
+
 
       const sPct = grandTotal > 0 ? Math.round((totalSaba / grandTotal) * 100) : 25;
       const pPct = grandTotal > 0 ? Math.round((totalPraSaba / grandTotal) * 100) : 25;
       const mPct = grandTotal > 0 ? Math.round((totalMukhtar / grandTotal) * 100) : 25;
       const murPct = grandTotal > 0 ? Math.max(0, 100 - sPct - pPct - mPct) : 25;
 
+
       document.getElementById('kpiTotalSaba').textContent = totalSaba.toLocaleString();
-      document.getElementById('kpiAvgSabaPace').textContent = `${avgSabaPerDay.toFixed(1)} / saba day`;
+      document.getElementById('kpiAvgSabaPace').textContent = tr.perSabaDay(avgSabaPerDay.toFixed(1));
       document.getElementById('kpiTotalPraSaba').textContent = totalPraSaba.toLocaleString();
-      document.getElementById('kpiAvgPraSabaPace').textContent = `${avgPraPerDay.toFixed(1)} / active day`;
+      document.getElementById('kpiAvgPraSabaPace').textContent = tr.perActiveDay(avgPraPerDay.toFixed(1));
       document.getElementById('kpiTotalMukhtar').textContent = totalMukhtar.toLocaleString();
       document.getElementById('kpiTotalMurojaah').textContent = totalMurojaah.toLocaleString();
-      document.getElementById('kpiMurojaahSessions').textContent = `${murojaahLogCount} revision log${murojaahLogCount === 1 ? '' : 's'}`;
+      document.getElementById('kpiMurojaahSessions').textContent = tr.revisionLogsCount(murojaahLogCount);
+
 
       document.getElementById('kpiAttendanceRate').textContent = `${attendancePct}%`;
-      document.getElementById('kpiCutiSummary').textContent = `Active: ${activeDaysCount}d • Cuti: ${cutiDatesSet.size}d`;
+      document.getElementById('kpiCutiSummary').textContent = tr.activeCutiSummary(activeDaysCount, cutiDatesSet.size);
 
-      document.getElementById('insightCurStreakBadge').textContent = `Streak: ${currentStreak}d`;
-      document.getElementById('insightBestStreakBadge').textContent = `Best: ${bestStreak}d`;
-      document.getElementById('insightBestDay').textContent = peakDayIdx >= 0 ? `${dayNames[peakDayIdx]}s` : '—';
-      document.getElementById('insightBestDaySub').textContent = peakDayIdx >= 0 ? `Avg ${peakDayAvg.toFixed(1)} Saba units` : 'Highest avg Saba output';
+
+      document.getElementById('insightCurStreakBadge').textContent = tr.streakBadge(currentStreak);
+      document.getElementById('insightBestStreakBadge').textContent = tr.bestBadge(bestStreak);
+      document.getElementById('insightBestDay').textContent = peakDayIdx >= 0 ? dayNames[peakDayIdx] : '—';
+      document.getElementById('insightBestDaySub').textContent = peakDayIdx >= 0 ? tr.avgSabaUnits(peakDayAvg.toFixed(1)) : tr.highestAvgSaba;
       document.getElementById('insightRevisionRatio').textContent = `1 : ${revRatio}`;
-      document.getElementById('insightRecordDay').textContent = `${bestSingleUnits} units`;
-      document.getElementById('insightRecordDate').textContent = bestSingleDate ? `On ${bestSingleDate}` : 'Highest single-day Saba';
+      document.getElementById('insightRecordDay').textContent = `${bestSingleUnits} ${tr.unitsWord}`;
+      document.getElementById('insightRecordDate').textContent = bestSingleDate ? tr.onDate(bestSingleDate) : tr.highestSingleDay;
+
 
       document.getElementById('workloadMixLabels').textContent = `Saba ${sPct}% · Pra ${pPct}% · Mukhtar ${mPct}% · Murojaah ${murPct}%`;
       document.getElementById('mixBarSaba').style.width = `${sPct}%`;
@@ -3855,10 +4999,12 @@
       document.getElementById('mixBarMukhtar').style.width = `${mPct}%`;
       document.getElementById('mixBarMurojaah').style.width = `${murPct}%`;
 
+
       renderJuzMatrix(sorted);
       render30DayHeatmap(dateStatusMap, murojaahOnlyDatesSet);
       renderHTMLBarChart(sorted);
     }
+
 
     function renderJuzMatrix(sorted) {
       const juzMap = {};
@@ -3884,6 +5030,7 @@
         });
       });
 
+
       document.getElementById('juzTouchedCountBadge').textContent = `${Object.keys(juzMap).length} / 30 Juz`;
       let html = '';
       for (let j = 1; j <= 30; j++) {
@@ -3895,6 +5042,7 @@
       }
       document.getElementById('juzCoverageGrid').innerHTML = html;
     }
+
 
     function render30DayHeatmap(dateStatusMap, murojaahOnlyDatesSet) {
       const today = new Date();
@@ -3921,9 +5069,11 @@
       document.getElementById('heatmapGrid').innerHTML = html;
     }
 
+
     function renderHTMLBarChart(sorted) {
       const chartEl = document.getElementById('volumeBarChart');
       const datesEl = document.getElementById('volumeBarDates');
+
 
       const byDate = {};
       sorted.forEach(r => {
@@ -3935,14 +5085,17 @@
         }
       });
 
+
       const recentDates = Object.keys(byDate).sort().slice(-8);
       if (recentDates.length === 0) {
-        chartEl.innerHTML = `<div style="width:100%; text-align:center; font-size:12px; color:var(--slate-400); padding-bottom:45px;">No active session data yet</div>`;
+        chartEl.innerHTML = `<div style="width:100%; text-align:center; font-size:12px; color:var(--slate-400); padding-bottom:45px;">${escapeHTML(t().noActiveChartData)}</div>`;
         datesEl.innerHTML = '';
         return;
       }
 
+
       const maxVal = Math.max(...recentDates.map(d => byDate[d].saba + byDate[d].prasaba + byDate[d].murojaah), 10);
+
 
       chartEl.innerHTML = recentDates.map(d => {
         const { saba, prasaba, murojaah } = byDate[d];
@@ -3962,19 +5115,24 @@
         `;
       }).join('');
 
+
       datesEl.innerHTML = recentDates.map(d => `<span class="bar-date-lbl">${d.slice(5)}</span>`).join('');
     }
+
 
     // =========================================================================
     // 11. HISTORY TABLE, COPY TSV, CSV EXPORT & IMPORT TO SHEET
     // =========================================================================
     function renderHistoryTable() {
+      const tr = t();
       const tbody = document.getElementById('historyTableBody');
       const emptyEl = document.getElementById('emptyHistoryState');
       const query = document.getElementById('historySearch').value.toLowerCase().trim();
       const filter = document.getElementById('historyCategoryFilter').value;
 
-      document.getElementById('recordCountBadge').textContent = `${hafazanRows.length} rows`;
+
+      document.getElementById('recordCountBadge').textContent = tr.rowsSuffix(hafazanRows.length);
+
 
       const filtered = [...hafazanRows]
         .sort((a, b) => b.Date.localeCompare(a.Date) || b.id - a.id)
@@ -3986,17 +5144,20 @@
           return `${r.Date} ${r.Day_Status} ${r.Category} ${r.Surah_or_Juz} ${r.Notes}`.toLowerCase().includes(query);
         });
 
+
       if (filtered.length === 0) {
         tbody.innerHTML = '';
         emptyEl.classList.remove('hidden');
         return;
       }
 
+
       emptyEl.classList.add('hidden');
       tbody.innerHTML = filtered.map(r => {
         const isOff = r.Day_Status !== 'Active';
         let badgeStyle = 'background:var(--slate-100); color:var(--slate-700);';
-        let badgeLabel = r.Day_Status;
+        let badgeLabel = tr.statusLabels[r.Day_Status] || r.Day_Status;
+
 
         if (r.Day_Status === 'Cuti') {
           badgeStyle = 'background:var(--amber-100); color:#92400E;';
@@ -4010,7 +5171,9 @@
           else badgeStyle = 'background:var(--amber-50); color:#92400E; border:1px solid #FDE68A;';
         }
 
-        const rangeTxt = isOff ? '—' : (r.Tracking_Unit === 'Full Surah' ? 'Full Surah' : `${r.Start_Unit}–${r.End_Unit}`);
+
+        const rangeTxt = isOff ? '—' : (r.Tracking_Unit === 'Full Surah' ? tr.modeFullSurahs : `${r.Start_Unit}–${r.End_Unit}`);
+
 
         return `
           <tr>
@@ -4028,6 +5191,7 @@
       }).join('');
     }
 
+
     function copyTSVForSheets() {
       const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
       const tsv = sorted.map(r => [
@@ -4042,6 +5206,7 @@
         (r.Notes || '').replace(/\t|\n/g, ' ')
       ].join('\t')).join('\n');
 
+
       const ta = document.createElement('textarea');
       ta.value = tsv;
       ta.style.position = 'fixed';
@@ -4051,12 +5216,13 @@
       ta.select();
       try {
         document.execCommand('copy');
-        showToast(`Copied ${sorted.length} rows!`);
+        showToast(t().toastCopied(sorted.length));
       } catch (e) {
         showToast('Could not copy automatically');
       }
       document.body.removeChild(ta);
     }
+
 
     function downloadCSV() {
       const headers = ['Date', 'Day_Status', 'Category', 'Surah_or_Juz', 'Tracking_Unit', 'Start_Unit', 'End_Unit', 'Total_Amount', 'Notes'];
@@ -4067,8 +5233,10 @@
       };
       const csvStr = [headers.join(','), ...sorted.map(r => headers.map(h => esc(r[h])).join(','))].join('\n');
 
+
       const slug = studentProfile.name ? studentProfile.name.replace(/[^a-z0-9]+/gi, '_') : 'Student';
       const filename = `Hafazan_Tracker_${slug}_${new Date().toISOString().split('T')[0]}.csv`;
+
 
       try {
         const blob = new Blob([csvStr], { type: 'text/csv;charset=utf-8;' });
@@ -4080,13 +5248,14 @@
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast('CSV downloaded!');
+        showToast(t().toastCsvDown);
       } catch (e) {
         const dataUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csvStr);
         window.open(dataUri, '_blank');
-        showToast('CSV opened for download');
+        showToast(t().toastCsvDown);
       }
     }
+
 
     function handleCSVImport(event) {
       const file = event.target.files[0];
@@ -4121,32 +5290,25 @@
           return;
         }
 
-        if (!IS_GAS_ENV) {
-          hafazanRows = imported;
-          safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-          refreshEntireUI();
-          showToast(`Imported ${imported.length} rows locally!`);
-          return;
-        }
 
-        setSyncStatus('syncing', 'Uploading CSV...');
-        google.script.run
-          .withSuccessHandler((payload) => {
-            hafazanRows = Array.isArray(payload?.rows) ? payload.rows.map(normalizeRowCuti) : [];
+        setSyncStatus('syncing', t().statusSyncing);
+        set(fbRowsRef, imported)
+          .then(() => {
+            hafazanRows = imported;
             safeStorageSet(STORAGE_KEY, JSON.stringify(hafazanRows));
-            setSyncStatus('connected', 'Synced with Google Sheet');
+            setSyncStatus('connected', t().statusSynced);
             refreshEntireUI();
-            showToast(`Appended ${imported.length} CSV rows to Sheet!`);
+            showToast(t().toastImported(imported.length));
           })
-          .withFailureHandler((err) => {
-            setSyncStatus('error', 'Import Error');
-            showToast('CSV import error: ' + (err?.message || 'Failed'));
-          })
-          .appendLogs(imported);
+          .catch((err) => {
+            setSyncStatus('error', t().statusSyncError);
+            showToast(t().statusSyncError + ': ' + (err?.message || ''));
+          });
       };
       reader.readAsText(file);
       event.target.value = '';
     }
+
 
     // =========================================================================
     // 12. TAB SWITCHING & TOAST NOTIFICATIONS
@@ -4159,6 +5321,7 @@
       if (tabName === 'stats') updateAllStats();
       if (tabName === 'history') renderHistoryTable();
     }
+
 
     let toastTimer = null;
     function showToast(msg) {
