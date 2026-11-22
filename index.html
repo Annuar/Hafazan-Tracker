@@ -4,22 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Hafazan Tracker — Saba · Pra Saba · Mukhtar · Murojaah</title>
-
- <!-- Open Graph / Social Link Preview -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Hafazan Tracker" />
-  <meta property="og:url" content="https://annuar.github.io/Hafazan-Tracker/" />
-  <meta property="og:title" content="Hafazan Tracker — Student Saba, Pra Saba &amp; Murojaah" />
-  <meta property="og:description" content="Track daily Saba, Pra Saba, Mukhtar, and Murojaah sessions together in real time—complete with monthly insights and 114-Surah progress." />
-  <meta property="og:image" content="https://annuar.github.io/Hafazan-Tracker/preview.png" />
-
-  <!-- Twitter / Large Card Preview -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://annuar.github.io/Hafazan-Tracker/" />
-  <meta name="twitter:title" content="Hafazan Tracker — Student Saba, Pra Saba &amp; Murojaah" />
-  <meta name="twitter:description" content="Track daily Saba, Pra Saba, Mukhtar, and Murojaah sessions together in real time—complete with monthly insights and 114-Surah progress." />
-  <meta name="twitter:image" content="https://annuar.github.io/Hafazan-Tracker/preview.png" />
-  
   <style>
     /* =========================================================================
        1. SELF-CONTAINED DESIGN TOKENS & RESET (ZERO EXTERNAL CDN DEPENDENCY)
@@ -719,6 +703,77 @@
       color: #ECFDF5;
       line-height: 1.4;
       word-break: break-word;
+    }
+
+    /* Hafazan Rank & Hasanah XP Progression Bar */
+    .rank-xp-box {
+      margin-top: 11px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: rgba(2, 44, 34, 0.52);
+      border: 1px solid rgba(252, 211, 77, 0.38);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .rank-xp-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .rank-title-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #FDE68A;
+      letter-spacing: 0.01em;
+    }
+
+    .rank-lvl-tag {
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: #F59E0B;
+      color: var(--emerald-950);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .rank-xp-counter {
+      font-size: 11px;
+      font-weight: 700;
+      color: #A7F3D0;
+      white-space: nowrap;
+    }
+
+    .rank-xp-track {
+      width: 100%;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      overflow: hidden;
+    }
+
+    .rank-xp-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #F59E0B 0%, #FDE68A 100%);
+      transition: width 0.35s ease;
+    }
+
+    .rank-xp-sub {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: rgba(236, 253, 245, 0.88);
     }
 
     .profile-badges-line {
@@ -2373,6 +2428,24 @@
                 </svg>
                 <span id="profileSummarySchool">Tap Edit to add student name, photo &amp; school</span>
               </div>
+
+              <!-- Rank & Hasanah XP Progression Bar -->
+              <div class="rank-xp-box">
+                <div class="rank-xp-top">
+                  <span class="rank-title-pill">
+                    <span id="dailyRankLevelTag" class="rank-lvl-tag">Lv. 1</span>
+                    <span id="dailyRankTitleText">Mubtadi'</span>
+                  </span>
+                  <span id="dailyRankXpCounter" class="rank-xp-counter">0 XP</span>
+                </div>
+                <div class="rank-xp-track">
+                  <div id="dailyRankXpFill" class="rank-xp-fill" style="width: 0%;"></div>
+                </div>
+                <div class="rank-xp-sub">
+                  <span id="dailyRankNextHint">Next: Talib Al-Quran</span>
+                  <span id="dailyRankStatsHint">0 Juz · 0 Ayat</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -3032,6 +3105,24 @@
                 </svg>
                 <span id="statProfileSchool">—</span>
               </div>
+
+              <!-- Rank & Hasanah XP Progression Bar (Synced on Progress Tab) -->
+              <div class="rank-xp-box">
+                <div class="rank-xp-top">
+                  <span class="rank-title-pill">
+                    <span id="statRankLevelTag" class="rank-lvl-tag">Lv. 1</span>
+                    <span id="statRankTitleText">Mubtadi'</span>
+                  </span>
+                  <span id="statRankXpCounter" class="rank-xp-counter">0 XP</span>
+                </div>
+                <div class="rank-xp-track">
+                  <div id="statRankXpFill" class="rank-xp-fill" style="width: 0%;"></div>
+                </div>
+                <div class="rank-xp-sub">
+                  <span id="statRankNextHint">Next: Talib Al-Quran</span>
+                  <span id="statRankStatsHint">0 Juz · 0 Ayat</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -3159,7 +3250,7 @@
             <div class="chip-row" id="quranViewFilterRow">
               <button type="button" class="chip-btn selected" data-qview="STARTED">Memorized</button>
               <button type="button" class="chip-btn" data-qview="ALL">All 114</button>
-              <button type="button" class="chip-btn" data-qview="JUZ30">Juz 30</button>
+              <button type="button" class="chip-btn" data-qview="BY_JUZ">By Juz (30)</button>
             </div>
           </div>
 
@@ -3816,10 +3907,24 @@
         wholeQuranSub: (done, ayat) => `${done} / 114 Surahs completed · ${ayat.toLocaleString()} / 6,236 Ayat`,
         qViewMemorized: 'Memorized',
         qViewAll114: 'All 114',
+        qViewByJuz30: 'By Juz (30)',
+        juzUnitWord: 'Juz',
         qLegendDone: 'Completed (100%)',
         qLegendProg: 'In Progress',
         qLegendTodo: 'Not Started',
         noMemorizedSurahsYet: 'No memorized Surahs logged yet. Log Saba or Full Surahs to see them here!',
+        rankNextLabel: (title, remXp) => `Next: ${title} (${remXp.toLocaleString()} XP left)`,
+        rankMaxLabel: 'Highest Tahfiz Rank Achieved!',
+        rankStatsLabel: (juzDone, ayatMem) => `${juzDone}/30 Juz · ${ayatMem.toLocaleString()} Ayat`,
+        rankTitles: [
+          "Mubtadi' (Beginner)",
+          "Talib Al-Quran",
+          "Hafiz Junior",
+          "Muqri' Muda",
+          "Mutqin",
+          "Hafiz Senior",
+          "Al-Hafiz / Al-Hafizah"
+        ],
         kpiTotalSaba: 'Total Saba',
         kpiPraSaba: 'Pra Saba',
         kpiMukhtar: 'Mukhtar',
@@ -4102,10 +4207,24 @@
         wholeQuranSub: (done, ayat) => `${done} / 114 Surah tamat · ${ayat.toLocaleString()} / 6,236 Ayat`,
         qViewMemorized: 'Sudah Hafaz',
         qViewAll114: 'Semua 114',
+        qViewByJuz30: 'Ikut Juzuk (30)',
+        juzUnitWord: 'Juzuk',
         qLegendDone: 'Tamat (100%)',
         qLegendProg: 'Sedang Hafaz',
         qLegendTodo: 'Belum Mula',
         noMemorizedSurahsYet: 'Belum ada Surah dihafaz direkodkan. Rekod Saba atau Surah Penuh untuk paparan di sini!',
+        rankNextLabel: (title, remXp) => `Seterusnya: ${title} (baki ${remXp.toLocaleString()} XP)`,
+        rankMaxLabel: 'Pangkat Tahfiz Tertinggi Dicapai!',
+        rankStatsLabel: (juzDone, ayatMem) => `${juzDone}/30 Juzuk · ${ayatMem.toLocaleString()} Ayat`,
+        rankTitles: [
+          "Mubtadi' (Permulaan)",
+          "Talib Al-Quran",
+          "Hafiz Junior",
+          "Muqri' Muda",
+          "Mutqin",
+          "Hafiz Senior",
+          "Al-Hafiz / Al-Hafizah"
+        ],
         kpiTotalSaba: 'Jumlah Saba',
         kpiPraSaba: 'Pra Saba',
         kpiMukhtar: 'Mukhtar',
@@ -4401,9 +4520,10 @@
       document.getElementById('lblHeroMilestone').textContent = tr.lblHeroMilestone;
       document.getElementById('lblWholeQuranTitle').textContent = tr.wholeQuranTitle;
       const qFilterBtns = document.querySelectorAll('#quranViewFilterRow [data-qview]');
-      if (qFilterBtns.length >= 2) {
+      if (qFilterBtns.length >= 3) {
         qFilterBtns[0].textContent = tr.qViewMemorized;
         qFilterBtns[1].textContent = tr.qViewAll114;
+        qFilterBtns[2].textContent = tr.qViewByJuz30;
       }
       document.getElementById('lblQuranLegendDone').innerHTML = `<strong style="color:var(--emerald-700);">■</strong> ${tr.qLegendDone}`;
       document.getElementById('lblQuranLegendProg').innerHTML = `<strong style="color:var(--amber-600);">■</strong> ${tr.qLegendProg}`;
@@ -4572,6 +4692,20 @@
       16: [302, 321], 17: [322, 341], 18: [342, 361], 19: [362, 381], 20: [382, 401],
       21: [402, 421], 22: [422, 441], 23: [442, 461], 24: [462, 481], 25: [482, 501],
       26: [502, 521], 27: [522, 541], 28: [542, 561], 29: [562, 581], 30: [582, 604]
+    };
+
+    // Exact Mushaf Madinah Surah & Ayat Boundaries for Juz 1..30: [startSurah, startAyat, endSurah, endAyat]
+    const MUSHAF_JUZ_SURAH_BOUNDS = {
+      1: [1, 1, 2, 141],     2: [2, 142, 2, 252],    3: [2, 253, 3, 92],
+      4: [3, 93, 4, 23],     5: [4, 24, 4, 147],     6: [4, 148, 5, 81],
+      7: [5, 82, 6, 110],    8: [6, 111, 7, 87],     9: [7, 88, 8, 40],
+      10: [8, 41, 9, 92],    11: [9, 93, 11, 5],     12: [11, 6, 12, 52],
+      13: [12, 53, 14, 52],  14: [15, 1, 16, 128],   15: [17, 1, 18, 74],
+      16: [18, 75, 20, 135], 17: [21, 1, 22, 78],    18: [23, 1, 25, 20],
+      19: [25, 21, 27, 55],  20: [27, 56, 29, 45],   21: [29, 46, 33, 30],
+      22: [33, 31, 36, 27],  23: [36, 28, 39, 31],   24: [39, 32, 41, 46],
+      25: [41, 47, 45, 37],  26: [46, 1, 51, 30],    27: [51, 31, 57, 29],
+      28: [58, 1, 66, 12],   29: [67, 1, 77, 50],    30: [78, 1, 114, 6]
     };
 
     function getJuzPageBounds(juzStr) {
@@ -4831,10 +4965,10 @@
     let currentDayStatus = 'Active';
     let isMurojaahDayActive = false;
 
-    let activeWorkspaceKey = 'luqmanaf';
-    let activeWorkspaceDisplayCode = DEFAULT_STUDENT_CODE;
+    let activeWorkspaceKey = '';
+    let activeWorkspaceDisplayCode = '';
     let activeWorkspacePin = '';
-    let isLoggedIn = true;
+    let isLoggedIn = false;
     let isAdminUnlocked = false;
     let isViewingAsAdmin = false;
     let workspacesIndexCache = {};
@@ -5098,18 +5232,21 @@
         if (savedWsRaw) {
           try {
             const parsed = JSON.parse(savedWsRaw);
-            if (parsed && parsed.loggedOut) {
-              setLoggedOutUIState(true);
-              return;
-            }
-            if (parsed && parsed.key) {
+            if (parsed && !parsed.loggedOut && parsed.key) {
               activeWorkspaceKey = normalizeCodeKey(parsed.key);
               activeWorkspaceDisplayCode = formatDisplayCode(parsed.displayCode, activeWorkspaceKey);
+              setLoggedOutUIState(false);
+              bindWorkspaceListeners(activeWorkspaceKey);
+              return;
             }
           } catch (e) {}
         }
-        setLoggedOutUIState(false);
-        bindWorkspaceListeners(activeWorkspaceKey);
+        setLoggedOutUIState(true);
+        return;
+      }
+
+      if (!isLoggedIn || !activeWorkspaceKey) {
+        setLoggedOutUIState(true);
         return;
       }
 
@@ -6459,6 +6596,128 @@
       // Sync Progress Tab Essential Summary Card (Name, School & Square Photo only)
       document.getElementById('statProfileName').textContent = hasName ? studentProfile.name : tr.studentProfileNotSet;
       document.getElementById('statProfileSchool').textContent = studentProfile.school || tr.tapEditStats;
+
+      renderRankAndXpBar();
+    }
+
+    // =========================================================================
+    // 6B. HAFAZAN RANK / LEVEL & HASANAH XP PROGRESSION CALCULATOR
+    // =========================================================================
+    const HAFAZAN_RANK_TIERS = [
+      { level: 1, minXp: 0,     minJuz: 0 },
+      { level: 2, minXp: 1200,  minJuz: 1 },
+      { level: 3, minXp: 4000,  minJuz: 3 },
+      { level: 4, minXp: 10000, minJuz: 5 },
+      { level: 5, minXp: 22000, minJuz: 10 },
+      { level: 6, minXp: 36000, minJuz: 15 },
+      { level: 7, minXp: 65000, minJuz: 30 }
+    ];
+
+    function renderRankAndXpBar() {
+      const tr = t();
+      const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
+
+      let sabaUnits = 0;
+      let revisionUnits = 0;
+      const activeDates = new Set();
+      const surahMemMap = {};
+      ALL_114_SURAHS.forEach(s => { surahMemMap[s.num] = 0; });
+
+      sorted.forEach(r => {
+        if (r.Day_Status !== 'Active') return;
+        if (r.Date) activeDates.add(r.Date);
+        const amt = Number(r.Total_Amount) || 0;
+        if (r.Category === 'Saba') sabaUnits += amt;
+        else if (['Pra Saba', 'Mukhtar', 'Murojaah'].includes(r.Category)) revisionUnits += amt;
+
+        if (!r.Surah_or_Juz) return;
+        const unit = r.Tracking_Unit || 'Ayat';
+        if (unit === 'Full Surah') {
+          r.Surah_or_Juz.split(',').map(x => x.trim()).filter(Boolean).forEach(sName => {
+            const sObj = findSurahObj(sName);
+            if (sObj) surahMemMap[sObj.num] = sObj.ayat;
+          });
+        } else if (unit === 'Ayat' && (r.Category === 'Saba' || r.Category === 'Pra Saba' || r.Category === 'Murojaah')) {
+          const sObj = findSurahObj(r.Surah_or_Juz);
+          const endVal = Math.min(sObj.ayat, parseInt(r.End_Unit, 10) || 0);
+          if (endVal > surahMemMap[sObj.num]) surahMemMap[sObj.num] = endVal;
+        } else if (unit === 'Page' && (r.Category === 'Saba' || r.Category === 'Pra Saba' || r.Category === 'Murojaah')) {
+          const endPg = Math.max(1, Math.min(604, parseInt(r.End_Unit, 10) || 0));
+          if (endPg > 0) {
+            const pos = getMushafPageEndPosition(endPg);
+            if (r.Category === 'Saba') {
+              for (let sNum = 1; sNum < pos.surahNum; sNum++) {
+                surahMemMap[sNum] = ALL_114_SURAHS[sNum - 1].ayat;
+              }
+            }
+            if (pos.ayat > surahMemMap[pos.surahNum]) surahMemMap[pos.surahNum] = pos.ayat;
+          }
+        }
+      });
+
+      let totalMemorizedAyat = 0;
+      ALL_114_SURAHS.forEach(s => { totalMemorizedAyat += (surahMemMap[s.num] || 0); });
+
+      let completedJuzCount = 0;
+      for (let j = 1; j <= 30; j++) {
+        const [sSurah, sAyat, eSurah, eAyat] = MUSHAF_JUZ_SURAH_BOUNDS[j];
+        let totalInJuz = 0;
+        let memInJuz = 0;
+        for (let sNum = sSurah; sNum <= eSurah; sNum++) {
+          const sObj = ALL_114_SURAHS[sNum - 1];
+          const low = sNum === sSurah ? sAyat : 1;
+          const high = sNum === eSurah ? eAyat : sObj.ayat;
+          totalInJuz += Math.max(0, high - low + 1);
+          const curMem = surahMemMap[sNum] || 0;
+          if (curMem >= low) memInJuz += Math.min(high, curMem) - low + 1;
+        }
+        if (totalInJuz > 0 && memInJuz >= totalInJuz) completedJuzCount++;
+      }
+
+      // Hasanah XP Formula: Memorized Ayat baseline + Daily Saba + Revision + Active Attendance
+      const totalXp = (totalMemorizedAyat * 10) + (sabaUnits * 5) + (revisionUnits * 2) + (activeDates.size * 25);
+
+      let tierIdx = 0;
+      for (let i = 0; i < HAFAZAN_RANK_TIERS.length; i++) {
+        const tier = HAFAZAN_RANK_TIERS[i];
+        if (totalXp >= tier.minXp || completedJuzCount >= tier.minJuz) {
+          tierIdx = i;
+        }
+      }
+
+      const currentTier = HAFAZAN_RANK_TIERS[tierIdx];
+      const nextTier = HAFAZAN_RANK_TIERS[tierIdx + 1] || null;
+      const rankName = tr.rankTitles[tierIdx] || tr.rankTitles[0];
+
+      let pctToNext = 100;
+      let nextHintText = tr.rankMaxLabel;
+      if (nextTier) {
+        const nextRankName = tr.rankTitles[tierIdx + 1];
+        const effectiveFloor = Math.min(currentTier.minXp, totalXp);
+        const span = Math.max(1, nextTier.minXp - effectiveFloor);
+        pctToNext = Math.min(99, Math.max(6, Math.round(((totalXp - effectiveFloor) / span) * 100)));
+        const remXp = Math.max(0, nextTier.minXp - totalXp);
+        nextHintText = tr.rankNextLabel(nextRankName, remXp);
+      }
+
+      const statsHintText = tr.rankStatsLabel(completedJuzCount, totalMemorizedAyat);
+      const xpCounterText = `${totalXp.toLocaleString()} XP`;
+
+      // Update both Daily Log and Progress Student Profile Cards
+      ['daily', 'stat'].forEach(prefix => {
+        const lvlEl = document.getElementById(`${prefix}RankLevelTag`);
+        const titleEl = document.getElementById(`${prefix}RankTitleText`);
+        const xpEl = document.getElementById(`${prefix}RankXpCounter`);
+        const fillEl = document.getElementById(`${prefix}RankXpFill`);
+        const nextEl = document.getElementById(`${prefix}RankNextHint`);
+        const statsEl = document.getElementById(`${prefix}RankStatsHint`);
+        if (lvlEl) lvlEl.textContent = `Lv. ${currentTier.level}`;
+        if (titleEl) titleEl.textContent = rankName;
+        if (xpEl) xpEl.textContent = xpCounterText;
+        if (fillEl) fillEl.style.width = `${pctToNext}%`;
+        if (nextEl) nextEl.textContent = nextHintText;
+        if (statsEl) statsEl.textContent = statsHintText;
+      });
     }
 
     // =========================================================================
@@ -7809,7 +8068,7 @@
       document.getElementById('mixBarMukhtar').style.width = `${mPct}%`;
       document.getElementById('mixBarMurojaah').style.width = `${murPct}%`;
 
-      renderJuzMatrix(sorted);
+      renderJuzMatrix(sorted, surahMemorizedAyatMap);
       render30DayHeatmap(dateStatusMap, murojaahOnlyDatesSet);
       renderHTMLBarChart(sorted);
       renderMonthlyInsightsAndChart();
@@ -7942,7 +8201,58 @@
     }
 
     function renderWholeQuranSurahGrid(surahMemorizedAyatMap) {
+      const tr = t();
       const gridEl = document.getElementById('wholeQuranSurahGrid');
+
+      if (wholeQuranViewFilter === 'BY_JUZ') {
+        const tiles = [];
+        for (let j = 1; j <= 30; j++) {
+          const [sSurah, sAyat, eSurah, eAyat] = MUSHAF_JUZ_SURAH_BOUNDS[j];
+          let totalAyatInJuz = 0;
+          let memAyatInJuz = 0;
+
+          for (let sNum = sSurah; sNum <= eSurah; sNum++) {
+            const sObj = ALL_114_SURAHS[sNum - 1];
+            const low = sNum === sSurah ? sAyat : 1;
+            const high = sNum === eSurah ? eAyat : sObj.ayat;
+            const span = Math.max(0, high - low + 1);
+            totalAyatInJuz += span;
+
+            const curMem = surahMemorizedAyatMap[sNum] || 0;
+            if (curMem >= low) {
+              memAyatInJuz += Math.min(high, curMem) - low + 1;
+            }
+          }
+
+          const pct = totalAyatInJuz > 0 ? Math.min(100, Math.round((memAyatInJuz / totalAyatInJuz) * 100)) : 0;
+          const isDone = memAyatInJuz >= totalAyatInJuz && totalAyatInJuz > 0;
+          const isPartial = memAyatInJuz > 0 && !isDone;
+          const stateCls = isDone ? 'is-complete' : (isPartial ? 'is-partial' : '');
+          const badgeTxt = isDone ? '✓ 100%' : `${pct}%`;
+
+          const startObj = ALL_114_SURAHS[sSurah - 1];
+          const endObj = ALL_114_SURAHS[eSurah - 1];
+          const spanLabel = sSurah === eSurah
+            ? `${startObj.name} (${sAyat}–${eAyat})`
+            : `${startObj.name} → ${endObj.name}`;
+
+          tiles.push(`
+            <div class="surah-prog-tile ${stateCls}">
+              <div class="surah-prog-top">
+                <span class="surah-prog-name">${escapeHTML(tr.juzUnitWord)} ${j}</span>
+                <span class="surah-prog-pct">${badgeTxt}</span>
+              </div>
+              <div class="surah-prog-mini-bar">
+                <div class="surah-prog-mini-fill" style="width:${pct}%;"></div>
+              </div>
+              <span class="surah-prog-sub">${escapeHTML(spanLabel)} · ${memAyatInJuz}/${totalAyatInJuz}</span>
+            </div>
+          `);
+        }
+        gridEl.innerHTML = tiles.join('');
+        return;
+      }
+
       const list = ALL_114_SURAHS.filter(s => {
         const mem = surahMemorizedAyatMap[s.num] || 0;
         if (wholeQuranViewFilter === 'STARTED') return mem > 0;
@@ -7978,7 +8288,7 @@
       }).join('');
     }
 
-    function renderJuzMatrix(sorted) {
+    function renderJuzMatrix(sorted, surahMemorizedAyatMap) {
       const juzMap = {};
       sorted.forEach(r => {
         if (r.Day_Status !== 'Active' || !r.Surah_or_Juz) return;
@@ -8001,6 +8311,25 @@
           }
         });
       });
+
+      // Also mark every Juz whose true Mushaf Surah/Ayat span has been reached or memorized (e.g., Juz 2 in Al-Baqarah)
+      if (surahMemorizedAyatMap) {
+        for (let j = 1; j <= 30; j++) {
+          const [sSurah, sAyat, eSurah, eAyat] = MUSHAF_JUZ_SURAH_BOUNDS[j];
+          let hasTouchedJuz = false;
+          for (let sNum = sSurah; sNum <= eSurah; sNum++) {
+            const low = sNum === sSurah ? sAyat : 1;
+            const curMem = surahMemorizedAyatMap[sNum] || 0;
+            if (curMem >= low) {
+              hasTouchedJuz = true;
+              break;
+            }
+          }
+          if (hasTouchedJuz && !juzMap[j]) {
+            juzMap[j] = 'saba';
+          }
+        }
+      }
 
       document.getElementById('juzTouchedCountBadge').textContent = `${Object.keys(juzMap).length} / 30 Juz`;
       let html = '';
