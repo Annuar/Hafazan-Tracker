@@ -242,6 +242,10 @@
       box-shadow: var(--shadow-xs);
     }
 
+    .desktop-nav-bar {
+      display: none;
+    }
+
     .sync-status-row {
       display: flex;
       align-items: center;
@@ -409,23 +413,31 @@
     .profile-identity {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 12px;
       min-width: 0;
       flex: 1;
     }
 
     .profile-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
       background: linear-gradient(145deg, var(--emerald-950) 0%, var(--emerald-850) 100%);
-      border: 1.5px solid #F59E0B;
+      border: 2px solid #F59E0B;
       color: #FCD34D;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 3px 8px rgba(6, 78, 59, 0.2);
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(6, 78, 59, 0.22);
+    }
+
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .profile-kicker {
@@ -446,6 +458,62 @@
       font-weight: 800;
       color: var(--emerald-950);
       line-height: 1.3;
+    }
+
+    /* Square Photo Upload & Cropper Box */
+    .photo-upload-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      background: var(--emerald-50);
+      border: 1.5px dashed #6EE7B7;
+    }
+
+    .photo-preview-square {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: linear-gradient(145deg, var(--emerald-950) 0%, var(--emerald-850) 100%);
+      border: 2px solid #F59E0B;
+      color: #FCD34D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .photo-preview-square img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .crop-stage-wrap {
+      width: 240px;
+      height: 240px;
+      margin: 0 auto;
+      border-radius: 16px;
+      border: 2.5px solid var(--emerald-850);
+      background: #0F172A;
+      overflow: hidden;
+      position: relative;
+      touch-action: none;
+      cursor: grab;
+      box-shadow: var(--shadow-md);
+    }
+
+    .crop-stage-wrap:active {
+      cursor: grabbing;
+    }
+
+    .crop-stage-wrap canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     .profile-actions-group {
@@ -1765,6 +1833,228 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* =========================================================================
+       9. RESPONSIVE DESKTOP LAYOUT & CRISP TYPOGRAPHY (>= 960px)
+       ========================================================================= */
+    @media (min-width: 960px) {
+      html, body {
+        font-size: 15px;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        padding-bottom: 36px;
+      }
+
+      /* Soften heavy mobile font weights so desktop text renders crisp & balanced */
+      .brand-title,
+      .profile-fullname,
+      .cat-title,
+      .kpi-val,
+      .num-input-center,
+      .total-box,
+      .murojaah-banner-title,
+      #statCurrentSurah {
+        font-weight: 600 !important;
+      }
+
+      .section-label,
+      .profile-kicker,
+      .kpi-label,
+      .btn,
+      .toggle-check-label,
+      .surah-trigger-name,
+      .surah-prog-name,
+      .surah-prog-pct,
+      .juz-cell,
+      .heat-cell,
+      .badge-tag,
+      .btn-back-admin,
+      .btn-murojaah-toggle,
+      .step-btn,
+      table.data-table th {
+        font-weight: 500 !important;
+      }
+
+      .field-label,
+      .cat-subtitle,
+      .profile-school-line,
+      .status-pill-btn,
+      .mode-tab-btn,
+      .btn-edit-profile,
+      .sync-badge,
+      .kpi-sub,
+      .surah-prog-sub,
+      input[type="number"],
+      input[type="text"],
+      input[type="password"],
+      input[type="date"],
+      select {
+        font-weight: 400 !important;
+      }
+
+      /* Expand header & main container for desktop */
+      .header-inner {
+        max-width: 1180px;
+        padding: 12px 24px;
+      }
+
+      .brand-title {
+        font-size: 18px;
+      }
+
+      /* Move navigation tabs into the sticky top header on desktop */
+      .desktop-nav-bar {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(2, 44, 34, 0.28);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        padding: 4px;
+      }
+
+      .desktop-nav-btn {
+        border: none;
+        background: transparent;
+        color: rgba(236, 253, 245, 0.88);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 7px 15px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.15s ease;
+      }
+
+      .desktop-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: var(--white);
+      }
+
+      .desktop-nav-btn.active {
+        background: var(--white);
+        color: var(--emerald-900);
+        font-weight: 700;
+        box-shadow: var(--shadow-xs);
+      }
+
+      .bottom-nav {
+        display: none !important;
+      }
+
+      .main-container {
+        max-width: 1180px;
+        padding: 20px 24px 0;
+      }
+
+      /* Center login gate & admin portal nicely on desktop */
+      #loggedOutLandingGate {
+        max-width: 480px;
+        margin: 28px auto 0;
+      }
+
+      #adminPortalPage {
+        max-width: 780px;
+        margin: 22px auto 0;
+        padding: 24px 26px;
+      }
+
+      /* 2-Column Split for Daily Log (compact top-aligned left column) */
+      #tab-daily:not(.hidden) {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      #tab-daily > #studentSessionTopBar {
+        grid-column: 1 / -1;
+      }
+
+      #tab-daily > .desktop-left-col {
+        grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: sticky;
+        top: 82px;
+      }
+
+      #tab-daily > #nonActivePanel,
+      #tab-daily > #activeSessionWrapper {
+        grid-column: 2;
+      }
+
+      /* Arrange the 4 Hafazan Category cards in a clean 2x2 grid on desktop */
+      #activeSessionWrapper:not(.hidden) {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+
+      #activeSessionWrapper > #murojaahDayBanner,
+      #activeSessionWrapper > .card-notes {
+        grid-column: 1 / -1;
+      }
+
+      /* 2-Column Split for Progress & Insights (compact top-aligned left column) */
+      #tab-stats:not(.hidden) {
+        display: grid;
+        grid-template-columns: 350px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      #tab-stats > #adminViewingBarStats {
+        grid-column: 1 / -1;
+      }
+
+      #tab-stats > .desktop-left-col {
+        grid-column: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: sticky;
+        top: 82px;
+      }
+
+      #tab-stats > .desktop-right-col {
+        grid-column: 2;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        align-items: start;
+      }
+
+      #tab-stats > .desktop-right-col > .card-saba,
+      #tab-stats > .desktop-right-col > .card:nth-child(2) {
+        grid-column: 1 / -1;
+      }
+
+      /* 2-Column Split for Sheet & Export (compact top-aligned left column) */
+      #tab-history:not(.hidden) {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .history-compact-bar {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 10px 14px !important;
+      }
+
+      .history-filter-toolbar {
+        grid-template-columns: 1fr 220px auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1785,6 +2075,35 @@
           <p class="brand-sub">Saba · Pra Saba · Mukhtar · Murojaah</p>
         </div>
       </div>
+
+      <!-- Desktop Top Navigation Bar (Shown on >= 960px when logged in) -->
+      <nav id="desktopNavBar" class="desktop-nav-bar" aria-label="Primary Navigation">
+        <button type="button" id="dnav-daily" class="desktop-nav-btn active" data-tab="daily">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+          </svg>
+          <span id="dnavLblDaily">Daily Log</span>
+        </button>
+
+        <button type="button" id="dnav-stats" class="desktop-nav-btn" data-tab="stats">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" x2="18" y1="20" y2="10"/>
+            <line x1="12" x2="12" y1="20" y2="4"/>
+            <line x1="6" x2="6" y1="20" y2="14"/>
+          </svg>
+          <span id="dnavLblStats">Progress</span>
+        </button>
+
+        <button type="button" id="dnav-history" class="desktop-nav-btn" data-tab="history">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M9 21V9"/>
+          </svg>
+          <span id="dnavLblHistory">Sheet &amp; Export</span>
+        </button>
+      </nav>
 
       <div class="lang-pill-switch" role="group" aria-label="Language Switch">
         <button type="button" id="btnLangMY" class="lang-opt-btn" data-lang="MY">MY</button>
@@ -1946,137 +2265,163 @@
         </div>
       </div>
 
-      <!-- 1. Islamic Student Profile Card (Only Daily Log has Edit button) -->
-      <div class="card card-profile">
-        <div class="profile-summary-box">
-          <!-- Subtle Islamic Geometric Star Watermark -->
-          <svg class="profile-islamic-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <rect x="20" y="20" width="60" height="60" />
-            <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
-            <circle cx="50" cy="50" r="18" />
-          </svg>
+      <!-- Desktop Left Column Wrapper (keeps Profile + Date/Status/Notes compact at top) -->
+      <div class="desktop-left-col stack-md">
+        <!-- 1. Islamic Student Profile Card (Shows Name, School & Square Photo only) -->
+        <div class="card card-profile">
+          <div class="profile-summary-box">
+            <!-- Subtle Islamic Geometric Star Watermark -->
+            <svg class="profile-islamic-watermark" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <rect x="20" y="20" width="60" height="60" />
+              <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
+              <circle cx="50" cy="50" r="18" />
+            </svg>
 
-          <div class="profile-islamic-ribbon">
-            <span lang="ar" dir="rtl" style="font-size:12px;">بِسْمِ اللَّهِ</span>
-            <span>·</span>
-            <span id="profileIslamicTag">Hafiz / Hafizah</span>
-          </div>
+            <div class="profile-islamic-ribbon">
+              <span lang="ar" dir="rtl" style="font-size:12px;">بِسْمِ اللَّهِ</span>
+              <span>·</span>
+              <span id="profileIslamicTag">Hafiz / Hafizah</span>
+            </div>
 
-          <div class="profile-top-row">
-            <div class="profile-identity">
-              <div class="profile-avatar" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
+            <div class="profile-top-row">
+              <div class="profile-identity">
+                <div id="profileAvatarContainer" class="profile-avatar" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <div style="min-width: 0; flex: 1;">
+                  <p id="profileKickerLabel" class="profile-kicker">Student Profile</p>
+                </div>
               </div>
-              <div style="min-width: 0; flex: 1;">
-                <p id="profileKickerLabel" class="profile-kicker">Student Profile</p>
+
+              <div class="profile-actions-group">
+                <button type="button" id="btnToggleProfileForm" class="btn-edit-profile">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                  </svg>
+                  <span id="btnToggleProfileLabel">Edit</span>
+                </button>
               </div>
             </div>
 
-            <div class="profile-actions-group">
-              <button type="button" id="btnToggleProfileForm" class="btn-edit-profile">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+            <h2 id="profileSummaryName" class="profile-fullname">Set Student Profile</h2>
+
+            <div class="profile-meta-block">
+              <div class="profile-school-line">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
+                  <path d="m4 6 8-4 8 4"/>
+                  <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
+                  <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
+                  <path d="M18 5v17"/>
+                  <path d="M6 5v17"/>
                 </svg>
-                <span id="btnToggleProfileLabel">Edit</span>
-              </button>
+                <span id="profileSummarySchool">Tap Edit to add student name, photo &amp; school</span>
+              </div>
             </div>
           </div>
 
-          <h2 id="profileSummaryName" class="profile-fullname">Set Student Profile</h2>
-
-          <div class="profile-meta-block">
-            <div class="profile-school-line">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
-                <path d="m4 6 8-4 8 4"/>
-                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
-                <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
-                <path d="M18 5v17"/>
-                <path d="M6 5v17"/>
-              </svg>
-              <span id="profileSummarySchool">Tap Edit to add student name, age, gender &amp; school</span>
-            </div>
-
-            <div id="profileSummaryBadgesRow" class="profile-badges-line hidden">
-              <span id="profileSummaryAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
-              <span id="profileSummaryGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Expandable Vertical Form (Includes Student Code & PIN Editor) -->
-        <div id="studentProfileFormBody" class="profile-form-body hidden">
-          <div>
-            <label for="profName" id="lblProfName" class="field-label">Student Full Name</label>
-            <input type="text" id="profName" placeholder="e.g., Ahmad Luqman bin Zulkifli" />
-          </div>
-
-          <div class="form-grid-2">
+          <!-- Expandable Vertical Form (Photo Upload + Square Cropper, Name, DOB, Gender, School, Code & PIN) -->
+          <div id="studentProfileFormBody" class="profile-form-body hidden">
+            <!-- Profile Photo Upload & Square Cropper -->
             <div>
-              <label for="profAge" id="lblProfAge" class="field-label">Age (Years)</label>
-              <input type="number" id="profAge" min="3" max="99" placeholder="e.g., 12" />
+              <label id="lblProfPhoto" class="field-label">Profile Photo (Square)</label>
+              <div class="photo-upload-row">
+                <div id="editPhotoPreviewSquare" class="photo-preview-square">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                  </svg>
+                </div>
+                <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
+                  <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                    <label for="profPhotoFileInput" class="btn btn-sm" style="background:var(--emerald-850); color:#fff; cursor:pointer; font-size:11.5px; padding:6px 11px;">
+                      <span id="lblUploadPhotoBtn">📷 Upload &amp; Crop</span>
+                      <input type="file" id="profPhotoFileInput" accept="image/*" style="display:none;" />
+                    </label>
+                    <button type="button" id="btnRemoveProfilePhoto" class="btn btn-secondary btn-sm hidden" style="color:var(--rose-700); border-color:#FECDD3; background:var(--rose-50); font-size:11.5px; padding:6px 10px;">Remove</button>
+                  </div>
+                  <span id="lblPhotoHint" style="font-size:11px; color:var(--slate-500);">Auto-crops to a crisp square avatar</span>
+                </div>
+              </div>
             </div>
+
             <div>
-              <label for="profGender" id="lblProfGender" class="field-label">Gender</label>
-              <select id="profGender">
-                <option value="" id="optGenderEmpty">Unspecified</option>
-                <option value="Male" id="optGenderMale">Male</option>
-                <option value="Female" id="optGenderFemale">Female</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label for="profSchool" id="lblProfSchool" class="field-label">School / Tahfiz Institution</label>
-            <input type="text" id="profSchool" placeholder="e.g., Maahad Tahfiz Sains" />
-          </div>
-
-          <div style="padding-top:10px; border-top:1px dashed var(--slate-300); display:flex; flex-direction:column; gap:10px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-              <span id="lblCredSectionTitle" style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--emerald-850);">Student Code &amp; PIN</span>
-              <span id="lblCaseNoteHint" style="font-size:10.5px; font-weight:600; color:var(--slate-500);">Case-insensitive</span>
+              <label for="profName" id="lblProfName" class="field-label">Student Full Name</label>
+              <input type="text" id="profName" placeholder="e.g., Ahmad Luqman bin Zulkifli" />
             </div>
 
             <div class="form-grid-2">
               <div>
-                <label for="profStudentCode" id="lblProfStudentCode" class="field-label">Student Code</label>
-                <input type="text" id="profStudentCode" autocomplete="off" spellcheck="false" placeholder="Student Code" />
+                <label for="profDob" id="lblProfDob" class="field-label">Date of Birth (DOB)</label>
+                <input type="date" id="profDob" />
               </div>
               <div>
-                <label for="profStudentPin" id="lblProfStudentPin" class="field-label">PIN / Password (Optional)</label>
-                <input type="text" id="profStudentPin" autocomplete="off" spellcheck="false" placeholder="Leave blank if none" />
+                <label for="profGender" id="lblProfGender" class="field-label">Gender</label>
+                <select id="profGender">
+                  <option value="" id="optGenderEmpty">Unspecified</option>
+                  <option value="Male" id="optGenderMale">Male</option>
+                  <option value="Female" id="optGenderFemale">Female</option>
+                </select>
               </div>
             </div>
-            <p id="credChangeFeedback" class="validation-alert-box hidden"></p>
-          </div>
 
-          <div class="form-actions-end">
-            <button type="button" id="btnCancelProfile" class="btn btn-secondary btn-sm">Cancel</button>
-            <button type="button" id="btnSaveProfile" class="btn btn-sm" style="background: var(--emerald-850); color: #fff;">Save Profile</button>
+            <div>
+              <label for="profSchool" id="lblProfSchool" class="field-label">School / Tahfiz Institution</label>
+              <input type="text" id="profSchool" placeholder="e.g., Maahad Tahfiz Sains" />
+            </div>
+
+            <div style="padding-top:10px; border-top:1px dashed var(--slate-300); display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+                <span id="lblCredSectionTitle" style="font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--emerald-850);">Student Code &amp; PIN</span>
+                <span id="lblCaseNoteHint" style="font-size:10.5px; font-weight:600; color:var(--slate-500);">Case-insensitive</span>
+              </div>
+
+              <div class="form-grid-2">
+                <div>
+                  <label for="profStudentCode" id="lblProfStudentCode" class="field-label">Student Code</label>
+                  <input type="text" id="profStudentCode" autocomplete="off" spellcheck="false" placeholder="Student Code" />
+                </div>
+                <div>
+                  <label for="profStudentPin" id="lblProfStudentPin" class="field-label">PIN / Password (Optional)</label>
+                  <input type="text" id="profStudentPin" autocomplete="off" spellcheck="false" placeholder="Leave blank if none" />
+                </div>
+              </div>
+              <p id="credChangeFeedback" class="validation-alert-box hidden"></p>
+            </div>
+
+            <div class="form-actions-end">
+              <button type="button" id="btnCancelProfile" class="btn btn-secondary btn-sm">Cancel</button>
+              <button type="button" id="btnSaveProfile" class="btn btn-sm" style="background: var(--emerald-850); color: #fff;">Save Profile</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 2. Date & Day Status Card -->
-      <div class="card card-neutral card-pad stack-md">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-          <label for="entryDate" class="section-label" style="margin:0;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
-              <line x1="16" x2="16" y1="2" y2="6"/>
-              <line x1="8" x2="8" y1="2" y2="6"/>
-              <line x1="3" x2="21" y1="10" y2="10"/>
-            </svg>
-            <span id="lblSessionDate">Session Date</span>
-          </label>
-          <input type="date" id="entryDate" style="max-width: 175px;" />
-        </div>
+        <!-- 2. Date, Day Status & Session Notes Card -->
+        <div class="card card-neutral card-pad stack-md">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+            <label for="entryDate" class="section-label" style="margin:0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0D9488" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                <line x1="16" x2="16" y1="2" y2="6"/>
+                <line x1="8" x2="8" y1="2" y2="6"/>
+                <line x1="3" x2="21" y1="10" y2="10"/>
+              </svg>
+              <span id="lblSessionDate">Session Date</span>
+            </label>
+            <input type="date" id="entryDate" style="max-width: 175px;" />
+          </div>
 
-        <div>
-          <span id="lblDayStatus" class="section-label">Day Status</span>
-          <div id="statusPills" class="status-grid"></div>
+          <div>
+            <span id="lblDayStatus" class="section-label">Day Status</span>
+            <div id="statusPills" class="status-grid"></div>
+          </div>
+
+          <div id="activeSessionNotesBlock" style="padding-top:10px; border-top:1px dashed var(--slate-200);">
+            <label for="sessionNotes" id="lblSessionNotes" class="field-label">Session Notes (Applies to logged rows)</label>
+            <input type="text" id="sessionNotes" placeholder="e.g., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz..." />
+          </div>
         </div>
       </div>
 
@@ -2092,7 +2437,12 @@
           <div id="cutiReasonChips" class="chip-row"></div>
         </div>
 
-        <div>
+        <div id="riadahActivitySection" class="hidden">
+          <span id="lblRiadahActivity" class="field-label">Quick-Tap Riadah Activity (Populates Notes)</span>
+          <div id="riadahActivityChips" class="chip-row"></div>
+        </div>
+
+        <div id="nonActiveNotesWrapper">
           <label for="nonActiveNotes" id="lblNonActiveNotes" class="field-label">Notes / Reason Details</label>
           <input type="text" id="nonActiveNotes" placeholder="e.g., Sakit, Raya, Awal Ramadan, Balik kampung..." />
         </div>
@@ -2572,13 +2922,8 @@
           </div>
         </div>
 
-        <!-- Session Notes & Save Button -->
-        <div class="card card-notes card-pad stack-md">
-          <div>
-            <label for="sessionNotes" id="lblSessionNotes" class="field-label">Session Notes (Applies to logged rows)</label>
-            <input type="text" id="sessionNotes" placeholder="e.g., Lancar, Murojaah sebelum ujian, Tasmi' Ustaz..." />
-          </div>
-
+        <!-- Save Session Button -->
+        <div class="card card-notes card-pad">
           <button type="button" id="btnSaveActiveSession" class="btn btn-primary">
             <span id="saveBtnLabel">Save Session to Sheet (3 Rows)</span>
           </button>
@@ -2599,210 +2944,211 @@
         </button>
       </div>
 
-      <!-- Essential Student Profile Summary Card (Read-only on Progress tab) -->
-      <div class="card card-profile">
-        <div class="profile-summary-box" style="padding:14px 16px;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div class="profile-avatar" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-              </svg>
-            </div>
-            <div style="min-width: 0; flex: 1;">
-              <p id="statProfileKicker" class="profile-kicker">Hafazan Student Record</p>
-              <h2 id="statProfileName" class="profile-fullname" style="margin:2px 0 0; font-size:16.5px;">Student Profile Not Set</h2>
-            </div>
-          </div>
-
-          <div class="profile-meta-block" style="margin-top:10px; padding-top:10px;">
-            <div class="profile-school-line">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
-                <path d="m4 6 8-4 8 4"/>
-                <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
-                <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
-                <path d="M18 5v17"/>
-                <path d="M6 5v17"/>
-              </svg>
-              <span id="statProfileSchool">—</span>
+      <!-- Desktop Left Column Wrapper (keeps Student Record + Milestone + KPIs compact at top) -->
+      <div class="desktop-left-col stack-md">
+        <!-- Essential Student Profile Summary Card (Name, School & Square Photo only) -->
+        <div class="card card-profile">
+          <div class="profile-summary-box" style="padding:14px 16px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div id="statProfileAvatarContainer" class="profile-avatar" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+              </div>
+              <div style="min-width: 0; flex: 1;">
+                <p id="statProfileKicker" class="profile-kicker">Hafazan Student Record</p>
+                <h2 id="statProfileName" class="profile-fullname" style="margin:2px 0 0; font-size:16.5px;">Student Profile Not Set</h2>
+              </div>
             </div>
 
-            <div id="statProfileBadgesRow" class="profile-badges-line hidden">
-              <span id="statProfileAgeBadge" class="meta-pill meta-pill-emerald hidden"></span>
-              <span id="statProfileGenderBadge" class="meta-pill meta-pill-slate hidden"></span>
+            <div class="profile-meta-block" style="margin-top:10px; padding-top:10px;">
+              <div class="profile-school-line">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px;">
+                  <path d="m4 6 8-4 8 4"/>
+                  <path d="m18 10 4 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-8l4-2"/>
+                  <path d="M14 22v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v4"/>
+                  <path d="M18 5v17"/>
+                  <path d="M6 5v17"/>
+                </svg>
+                <span id="statProfileSchool">—</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Hero Current Saba Milestone Card -->
-      <div class="hero-milestone">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-          <span id="lblHeroMilestone" style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#A7F3D0;">Current Saba Milestone</span>
-          <span id="statSurahPercent" style="font-size:12px; font-weight:800; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px;">0%</span>
+        <!-- Hero Current Saba Milestone Card -->
+        <div class="hero-milestone">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <span id="lblHeroMilestone" style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#A7F3D0;">Current Saba Milestone</span>
+            <span id="statSurahPercent" style="font-size:12px; font-weight:800; background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px;">0%</span>
+          </div>
+
+          <h2 id="statCurrentSurah" style="margin:6px 0 2px; font-size:22px; font-weight:800;">2. Al-Baqarah</h2>
+          <p id="statCurrentAyat" style="margin:0; font-size:13px; color:#D1FAE5;">Ayat 221 of 286 memorized</p>
+
+          <div class="progress-track">
+            <div id="statSurahProgressBar" class="progress-fill" style="width: 77%;"></div>
+          </div>
+
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:11px; color:#ECFDF5; border-top:1px solid rgba(255,255,255,0.18); padding-top:10px;">
+            <span id="statSurahEta">Est. Surah Finish: Calculating...</span>
+            <span id="statQuranOverallPct" style="font-weight:800; color:#FDE68A;">Al-Quran: 0%</span>
+          </div>
         </div>
 
-        <h2 id="statCurrentSurah" style="margin:6px 0 2px; font-size:22px; font-weight:800;">2. Al-Baqarah</h2>
-        <p id="statCurrentAyat" style="margin:0; font-size:13px; color:#D1FAE5;">Ayat 221 of 286 memorized</p>
+        <!-- 4-Category Color-Coded KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card kpi-card-saba">
+            <p id="kpiLabelSaba" class="kpi-label" style="color:var(--emerald-900);">Total Saba</p>
+            <p id="kpiTotalSaba" class="kpi-val" style="color:var(--emerald-850);">0</p>
+            <p id="kpiAvgSabaPace" class="kpi-sub" style="color:var(--emerald-700);">0.0 / active day</p>
+          </div>
 
-        <div class="progress-track">
-          <div id="statSurahProgressBar" class="progress-fill" style="width: 77%;"></div>
+          <div class="kpi-card kpi-card-prasaba">
+            <p id="kpiLabelPraSaba" class="kpi-label" style="color:var(--cyan-800);">Pra Saba</p>
+            <p id="kpiTotalPraSaba" class="kpi-val" style="color:var(--cyan-600);">0</p>
+            <p id="kpiAvgPraSabaPace" class="kpi-sub" style="color:var(--cyan-700);">0.0 / active day</p>
+          </div>
+
+          <div class="kpi-card kpi-card-mukhtar">
+            <p id="kpiLabelMukhtar" class="kpi-label" style="color:var(--amber-800);">Mukhtar</p>
+            <p id="kpiTotalMukhtar" class="kpi-val" style="color:var(--amber-600);">0</p>
+            <p id="kpiSubMukhtar" class="kpi-sub" style="color:var(--amber-700);">Selected revision</p>
+          </div>
+
+          <div class="kpi-card kpi-card-murojaah">
+            <p id="kpiLabelMurojaah" class="kpi-label" style="color:var(--indigo-800);">Murojaah</p>
+            <p id="kpiTotalMurojaah" class="kpi-val" style="color:var(--indigo-600);">0</p>
+            <p id="kpiMurojaahSessions" class="kpi-sub" style="color:var(--indigo-700);">0 revision logs</p>
+          </div>
         </div>
 
-        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px; font-size:11px; color:#ECFDF5; border-top:1px solid rgba(255,255,255,0.18); padding-top:10px;">
-          <span id="statSurahEta">Est. Surah Finish: Calculating...</span>
-          <span id="statQuranOverallPct" style="font-weight:800; color:#FDE68A;">Al-Quran: 0%</span>
-        </div>
-      </div>
-
-      <!-- Whole Al-Quran Memorized Surahs Overview (All 114 Surahs) -->
-      <div class="card card-saba card-pad stack-md">
-        <div class="quran-filter-row">
+        <!-- Attendance & Streaks Strip -->
+        <div class="card card-neutral card-pad" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
           <div>
-            <h3 id="lblWholeQuranTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Whole Al-Quran Progress (114 Surahs)</h3>
-            <p id="lblWholeQuranSub" style="margin:2px 0 0; font-size:11.5px; font-weight:600; color:var(--emerald-850);">0 / 114 Surahs completed · 0 / 6,236 Ayat</p>
+            <p id="kpiLabelAttendance" class="kpi-label">Overall Attendance</p>
+            <p style="margin:3px 0 0; font-size:18px; font-weight:800; color:var(--slate-900);">
+              <span id="kpiAttendanceRate">0%</span>
+              <span id="kpiCutiSummary" style="font-size:12px; font-weight:600; color:var(--slate-500); margin-left:6px;">Active: 0d • Cuti: 0d</span>
+            </p>
           </div>
-          <div class="chip-row" id="quranViewFilterRow">
-            <button type="button" class="chip-btn selected" data-qview="STARTED">Memorized</button>
-            <button type="button" class="chip-btn" data-qview="ALL">All 114</button>
-            <button type="button" class="chip-btn" data-qview="JUZ30">Juz 30</button>
-          </div>
-        </div>
-
-        <div class="progress-track" style="margin:0; background:var(--slate-200); height:8px;">
-          <div id="wholeQuranProgressBar" class="progress-fill" style="width:0%; background:var(--emerald-700);"></div>
-        </div>
-
-        <div id="wholeQuranSurahGrid" class="surah-progress-grid"></div>
-
-        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
-          <span id="lblQuranLegendDone"><strong style="color:var(--emerald-700);">■</strong> Completed (100%)</span>
-          <span id="lblQuranLegendProg"><strong style="color:var(--amber-600);">■</strong> In Progress</span>
-          <span id="lblQuranLegendTodo"><strong style="color:var(--slate-400);">■</strong> Not Started</span>
-        </div>
-      </div>
-
-      <!-- 4-Category Color-Coded KPI Grid -->
-      <div class="kpi-grid">
-        <div class="kpi-card kpi-card-saba">
-          <p id="kpiLabelSaba" class="kpi-label" style="color:var(--emerald-900);">Total Saba</p>
-          <p id="kpiTotalSaba" class="kpi-val" style="color:var(--emerald-850);">0</p>
-          <p id="kpiAvgSabaPace" class="kpi-sub" style="color:var(--emerald-700);">0.0 / active day</p>
-        </div>
-
-        <div class="kpi-card kpi-card-prasaba">
-          <p id="kpiLabelPraSaba" class="kpi-label" style="color:var(--cyan-800);">Pra Saba</p>
-          <p id="kpiTotalPraSaba" class="kpi-val" style="color:var(--cyan-600);">0</p>
-          <p id="kpiAvgPraSabaPace" class="kpi-sub" style="color:var(--cyan-700);">0.0 / active day</p>
-        </div>
-
-        <div class="kpi-card kpi-card-mukhtar">
-          <p id="kpiLabelMukhtar" class="kpi-label" style="color:var(--amber-800);">Mukhtar</p>
-          <p id="kpiTotalMukhtar" class="kpi-val" style="color:var(--amber-600);">0</p>
-          <p id="kpiSubMukhtar" class="kpi-sub" style="color:var(--amber-700);">Selected revision</p>
-        </div>
-
-        <div class="kpi-card kpi-card-murojaah">
-          <p id="kpiLabelMurojaah" class="kpi-label" style="color:var(--indigo-800);">Murojaah</p>
-          <p id="kpiTotalMurojaah" class="kpi-val" style="color:var(--indigo-600);">0</p>
-          <p id="kpiMurojaahSessions" class="kpi-sub" style="color:var(--indigo-700);">0 revision logs</p>
-        </div>
-      </div>
-
-      <!-- Attendance & Streaks Strip -->
-      <div class="card card-neutral card-pad" style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px;">
-        <div>
-          <p id="kpiLabelAttendance" class="kpi-label">Overall Attendance</p>
-          <p style="margin:3px 0 0; font-size:18px; font-weight:800; color:var(--slate-900);">
-            <span id="kpiAttendanceRate">0%</span>
-            <span id="kpiCutiSummary" style="font-size:12px; font-weight:600; color:var(--slate-500); margin-left:6px;">Active: 0d • Cuti: 0d</span>
-          </p>
-        </div>
-        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <span id="insightCurStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--emerald-50); color:var(--emerald-850); border:1px solid var(--emerald-100);">Streak: 0d</span>
-          <span id="insightBestStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--amber-50); color:var(--amber-700); border:1px solid #FDE68A;">Best: 0d</span>
-        </div>
-      </div>
-
-      <!-- Hafazan Insights & Rhythm Card -->
-      <div class="card card-pad stack-md">
-        <h3 id="lblRhythmTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Hafazan &amp; Murojaah Rhythm</h3>
-
-        <div class="insights-grid">
-          <div class="insight-tile">
-            <p id="lblInsightPeak" class="kpi-label" style="font-size:10px;">Peak Performance Day</p>
-            <p id="insightBestDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--slate-900);">—</p>
-            <p id="insightBestDaySub" class="kpi-sub">Highest avg Saba output</p>
-          </div>
-
-          <div class="insight-tile">
-            <p id="lblInsightBalance" class="kpi-label" style="font-size:10px;">Revision Balance</p>
-            <p id="insightRevisionRatio" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--indigo-700);">1 : 0</p>
-            <p id="lblInsightBalanceSub" class="kpi-sub">New vs. All Revision</p>
-          </div>
-
-          <div class="insight-tile">
-            <p id="lblInsightRecord" class="kpi-label" style="font-size:10px;">Personal Best Day</p>
-            <p id="insightRecordDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--emerald-850);">0 units</p>
-            <p id="insightRecordDate" class="kpi-sub">Highest single-day Saba</p>
-          </div>
-        </div>
-
-        <div>
-          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:11px; font-weight:700; color:var(--slate-600); margin-bottom:5px;">
-            <span id="lblWorkloadDist">Workload Distribution</span>
-            <span id="workloadMixLabels">Saba 0% · Pra 0% · Mukhtar 0% · Murojaah 0%</span>
-          </div>
-          <div class="mix-bar">
-            <div id="mixBarSaba" style="width:25%; background:var(--emerald-700);"></div>
-            <div id="mixBarPraSaba" style="width:25%; background:var(--cyan-600);"></div>
-            <div id="mixBarMukhtar" style="width:25%; background:var(--amber-500);"></div>
-            <div id="mixBarMurojaah" style="width:25%; background:var(--indigo-600);"></div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span id="insightCurStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--emerald-50); color:var(--emerald-850); border:1px solid var(--emerald-100);">Streak: 0d</span>
+            <span id="insightBestStreakBadge" style="font-size:11px; font-weight:800; padding:4px 10px; border-radius:999px; background:var(--amber-50); color:var(--amber-700); border:1px solid #FDE68A;">Best: 0d</span>
           </div>
         </div>
       </div>
 
-      <!-- 30-Juz Activity Coverage Matrix -->
-      <div class="card card-pad stack-md">
-        <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
-          <h3 id="lblJuzCoverageTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">30-Juz Activity Coverage</h3>
-          <span id="juzTouchedCountBadge" style="font-size:11px; font-weight:800; color:var(--emerald-850); background:var(--emerald-50); padding:3px 9px; border-radius:999px;">0 / 30 Juz</span>
-        </div>
-        <div id="juzCoverageGrid" class="juz-matrix"></div>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
-          <span><strong style="color:var(--emerald-850);">■</strong> Saba / Pra Saba</span>
-          <span><strong style="color:var(--amber-500);">■</strong> Mukhtar</span>
-          <span><strong style="color:var(--indigo-600);">■</strong> Murojaah</span>
-          <span id="lblLegendNotLogged"><strong style="color:var(--slate-400);">■</strong> Not Logged</span>
-        </div>
-      </div>
+      <!-- Desktop Right Column Wrapper -->
+      <div class="desktop-right-col stack-md">
+        <!-- Whole Al-Quran Memorized Surahs Overview (All 114 Surahs) -->
+        <div class="card card-saba card-pad stack-md">
+          <div class="quran-filter-row">
+            <div>
+              <h3 id="lblWholeQuranTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Whole Al-Quran Progress (114 Surahs)</h3>
+              <p id="lblWholeQuranSub" style="margin:2px 0 0; font-size:11.5px; font-weight:600; color:var(--emerald-850);">0 / 114 Surahs completed · 0 / 6,236 Ayat</p>
+            </div>
+            <div class="chip-row" id="quranViewFilterRow">
+              <button type="button" class="chip-btn selected" data-qview="STARTED">Memorized</button>
+              <button type="button" class="chip-btn" data-qview="ALL">All 114</button>
+              <button type="button" class="chip-btn" data-qview="JUZ30">Juz 30</button>
+            </div>
+          </div>
 
-      <!-- 30-Day Consistency Heatmap -->
-      <div class="card card-pad stack-md">
-        <h3 id="lblHeatmapTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Last 30 Days Consistency</h3>
-        <div id="heatmapGrid" class="heatmap-grid"></div>
-        <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
-          <span id="lblHeatActive"><strong style="color:var(--emerald-600);">■</strong> Active</span>
-          <span id="lblHeatMurojaah"><strong style="color:var(--indigo-600);">■</strong> Murojaah-Only</span>
-          <span id="lblHeatWeekend"><strong style="color:var(--slate-400);">■</strong> Weekend</span>
-          <span><strong style="color:var(--amber-500);">■</strong> Cuti</span>
-          <span><strong style="color:var(--sky-500);">■</strong> Riadah</span>
-        </div>
-      </div>
+          <div class="progress-track" style="margin:0; background:var(--slate-200); height:8px;">
+            <div id="wholeQuranProgressBar" class="progress-fill" style="width:0%; background:var(--emerald-700);"></div>
+          </div>
 
-      <!-- Daily Volume Bar Chart -->
-      <div class="card card-pad stack-md">
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px;">
-          <h3 id="lblVolumeChartTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Recent Active Sessions Volume</h3>
-          <span style="font-size:10.5px; font-weight:700; color:var(--slate-500);">
-            <span style="color:var(--emerald-700);">■ Saba</span> ·
-            <span style="color:var(--cyan-600);">■ Pra Saba</span> ·
-            <span style="color:var(--indigo-600);">■ Murojaah</span>
-          </span>
+          <div id="wholeQuranSurahGrid" class="surah-progress-grid"></div>
+
+          <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
+            <span id="lblQuranLegendDone"><strong style="color:var(--emerald-700);">■</strong> Completed (100%)</span>
+            <span id="lblQuranLegendProg"><strong style="color:var(--amber-600);">■</strong> In Progress</span>
+            <span id="lblQuranLegendTodo"><strong style="color:var(--slate-400);">■</strong> Not Started</span>
+          </div>
         </div>
-        <div>
-          <div id="volumeBarChart" class="bar-chart-wrap"></div>
-          <div id="volumeBarDates" class="bar-date-row"></div>
+
+        <!-- Hafazan Insights & Rhythm Card -->
+        <div class="card card-pad stack-md">
+          <h3 id="lblRhythmTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Hafazan &amp; Murojaah Rhythm</h3>
+
+          <div class="insights-grid">
+            <div class="insight-tile">
+              <p id="lblInsightPeak" class="kpi-label" style="font-size:10px;">Peak Performance Day</p>
+              <p id="insightBestDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--slate-900);">—</p>
+              <p id="insightBestDaySub" class="kpi-sub">Highest avg Saba output</p>
+            </div>
+
+            <div class="insight-tile">
+              <p id="lblInsightBalance" class="kpi-label" style="font-size:10px;">Revision Balance</p>
+              <p id="insightRevisionRatio" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--indigo-700);">1 : 0</p>
+              <p id="lblInsightBalanceSub" class="kpi-sub">New vs. All Revision</p>
+            </div>
+
+            <div class="insight-tile">
+              <p id="lblInsightRecord" class="kpi-label" style="font-size:10px;">Personal Best Day</p>
+              <p id="insightRecordDay" style="margin:4px 0 2px; font-size:15px; font-weight:800; color:var(--emerald-850);">0 units</p>
+              <p id="insightRecordDate" class="kpi-sub">Highest single-day Saba</p>
+            </div>
+          </div>
+
+          <div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:11px; font-weight:700; color:var(--slate-600); margin-bottom:5px;">
+              <span id="lblWorkloadDist">Workload Distribution</span>
+              <span id="workloadMixLabels">Saba 0% · Pra 0% · Mukhtar 0% · Murojaah 0%</span>
+            </div>
+            <div class="mix-bar">
+              <div id="mixBarSaba" style="width:25%; background:var(--emerald-700);"></div>
+              <div id="mixBarPraSaba" style="width:25%; background:var(--cyan-600);"></div>
+              <div id="mixBarMukhtar" style="width:25%; background:var(--amber-500);"></div>
+              <div id="mixBarMurojaah" style="width:25%; background:var(--indigo-600);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 30-Juz Activity Coverage Matrix -->
+        <div class="card card-pad stack-md">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+            <h3 id="lblJuzCoverageTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">30-Juz Activity Coverage</h3>
+            <span id="juzTouchedCountBadge" style="font-size:11px; font-weight:800; color:var(--emerald-850); background:var(--emerald-50); padding:3px 9px; border-radius:999px;">0 / 30 Juz</span>
+          </div>
+          <div id="juzCoverageGrid" class="juz-matrix"></div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
+            <span><strong style="color:var(--emerald-850);">■</strong> Saba / Pra Saba</span>
+            <span><strong style="color:var(--amber-500);">■</strong> Mukhtar</span>
+            <span><strong style="color:var(--indigo-600);">■</strong> Murojaah</span>
+            <span id="lblLegendNotLogged"><strong style="color:var(--slate-400);">■</strong> Not Logged</span>
+          </div>
+        </div>
+
+        <!-- 30-Day Consistency Heatmap -->
+        <div class="card card-pad stack-md">
+          <h3 id="lblHeatmapTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Last 30 Days Consistency</h3>
+          <div id="heatmapGrid" class="heatmap-grid"></div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:11px; font-weight:600; color:var(--slate-500);">
+            <span id="lblHeatActive"><strong style="color:var(--emerald-600);">■</strong> Active</span>
+            <span id="lblHeatMurojaah"><strong style="color:var(--indigo-600);">■</strong> Murojaah-Only</span>
+            <span id="lblHeatWeekend"><strong style="color:var(--slate-400);">■</strong> Weekend</span>
+            <span><strong style="color:var(--amber-500);">■</strong> Cuti</span>
+            <span><strong style="color:var(--sky-500);">■</strong> Riadah</span>
+          </div>
+        </div>
+
+        <!-- Daily Volume Bar Chart -->
+        <div class="card card-pad stack-md">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:6px;">
+            <h3 id="lblVolumeChartTitle" style="margin:0; font-size:14px; font-weight:800; color:var(--slate-900);">Recent Active Sessions Volume</h3>
+            <span style="font-size:10.5px; font-weight:700; color:var(--slate-500);">
+              <span style="color:var(--emerald-700);">■ Saba</span> ·
+              <span style="color:var(--cyan-600);">■ Pra Saba</span> ·
+              <span style="color:var(--indigo-600);">■ Murojaah</span>
+            </span>
+          </div>
+          <div>
+            <div id="volumeBarChart" class="bar-chart-wrap"></div>
+            <div id="volumeBarDates" class="bar-date-row"></div>
+          </div>
         </div>
       </div>
 
@@ -2821,37 +3167,35 @@
         </button>
       </div>
 
-      <div class="card card-neutral card-pad stack-md">
-        <div>
-          <h2 id="lblSyncTitle" style="margin:0; font-size:15px; font-weight:800; color:var(--slate-900);">Google Sheet Sync &amp; Export</h2>
-          <p id="syncModeDescription" style="margin:4px 0 0; font-size:12px; color:var(--slate-500);">Exact 9-column format matching your spreadsheet (Date through Notes).</p>
-        </div>
-
-        <div class="sync-status-row">
-          <div class="sync-badge">
-            <span id="syncStatusDot" class="sync-dot syncing"></span>
-            <span id="syncStatusText">Connecting...</span>
+      <!-- Compact Sync, Export & Actions Strip (Logs remain the primary focus below) -->
+      <div class="card card-neutral history-compact-bar" style="padding:11px 13px; display:flex; flex-direction:column; gap:9px;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px;">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div class="sync-badge">
+              <span id="syncStatusDot" class="sync-dot syncing"></span>
+              <span id="syncStatusText">Connecting...</span>
+            </div>
+            <button type="button" id="btnRefreshFromSheet" class="btn btn-secondary btn-sm" style="padding:5px 9px; font-size:11.5px;">Sync Now</button>
+            <span id="recordCountBadge" style="font-size:11px; font-weight:800; color:var(--slate-600); background:var(--slate-100); padding:3px 9px; border-radius:999px;">0 rows</span>
           </div>
-          <button type="button" id="btnRefreshFromSheet" class="btn btn-secondary btn-sm">Sync Now</button>
-        </div>
 
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <button type="button" id="btnCopyTSV" class="btn btn-primary" style="padding:12px 10px; font-size:13px;">Copy for Sheets</button>
-          <button type="button" id="btnDownloadCSV" class="btn btn-outline-teal" style="padding:12px 10px; font-size:13px;">Download CSV</button>
-        </div>
-
-        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; padding-top:10px; border-top:1px solid var(--slate-100);">
-          <label style="font-size:12px; font-weight:700; color:var(--teal-700); cursor:pointer; display:inline-flex; align-items:center; gap:5px;">
-            <span id="lblImportCSV">+ Import CSV to Sheet</span>
-            <input type="file" id="csvImportInput" accept=".csv,text/csv" style="display:none;" />
-          </label>
-
-          <span id="recordCountBadge" style="font-size:11px; font-weight:800; color:var(--slate-600); background:var(--slate-100); padding:3px 9px; border-radius:999px;">0 rows</span>
+          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:6px;">
+            <button type="button" id="btnCopyTSV" class="btn btn-primary btn-sm" style="width:auto; padding:6px 11px; font-size:12px;">Copy for Sheets</button>
+            <button type="button" id="btnDownloadCSV" class="btn btn-outline-teal btn-sm" style="width:auto; padding:6px 11px; font-size:12px;">Download CSV</button>
+            <label class="btn btn-secondary btn-sm" style="padding:6px 10px; font-size:12px; color:var(--teal-700); cursor:pointer;">
+              <span id="lblImportCSV">+ Import CSV</span>
+              <input type="file" id="csvImportInput" accept=".csv,text/csv" style="display:none;" />
+            </label>
+            <button type="button" id="btnClearAllData" class="btn btn-sm" style="padding:6px 10px; font-size:11.5px; color:var(--rose-700); border:1px solid #FECDD3; background:var(--rose-50);">
+              Clear All...
+            </button>
+            <button type="button" id="btnResetSampleData" class="btn btn-secondary btn-sm hidden">Reset Sample Data</button>
+          </div>
         </div>
       </div>
 
       <!-- Search & Filter Controls -->
-      <div style="display:grid; grid-template-columns: 1.4fr 1fr; gap:8px;">
+      <div class="history-filter-toolbar" style="display:grid; grid-template-columns: 1.4fr 1fr; gap:8px;">
         <input type="text" id="historySearch" placeholder="Search surah, date, notes..." />
         <select id="historyCategoryFilter">
           <option value="ALL" id="optFilterAll">All Entries</option>
@@ -2864,7 +3208,7 @@
         </select>
       </div>
 
-      <!-- Logged Entries Table -->
+      <!-- Full-Width Logged Entries Table -->
       <div class="card">
         <div class="table-scroll">
           <table class="data-table">
@@ -2884,32 +3228,6 @@
         </div>
         <div id="emptyHistoryState" class="hidden" style="padding:28px 16px; text-align:center; font-size:13px; color:var(--slate-400);">
           No matching records found.
-        </div>
-      </div>
-
-      <!-- Isolated Danger Zone (Placed at bottom away from daily action buttons) -->
-      <div class="card card-danger card-pad" style="margin-top:6px;">
-        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
-          <div style="min-width:0; flex:1;">
-            <div style="display:flex; align-items:center; gap:6px; color:var(--rose-700);">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M12 8v4"/>
-                <path d="M12 16h.01"/>
-              </svg>
-              <h3 id="lblDangerZoneTitle" style="margin:0; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em;">Danger Zone</h3>
-            </div>
-            <p id="lblDangerZoneDesc" style="margin:4px 0 0; font-size:11.5px; color:var(--slate-600); line-height:1.4;">
-              Permanently erase all logged records across all synced devices. Protected by keyword verification.
-            </p>
-          </div>
-
-          <div style="display:flex; flex-direction:column; gap:6px; flex-shrink:0;">
-            <button type="button" id="btnClearAllData" class="btn btn-sm" style="color:var(--rose-700); border:1.5px solid #FDA4AF; background:var(--white); font-weight:800;">
-              Clear All...
-            </button>
-            <button type="button" id="btnResetSampleData" class="btn btn-secondary btn-sm hidden">Reset Sample Data</button>
-          </div>
         </div>
       </div>
 
@@ -2975,6 +3293,38 @@
       </div>
 
       <div id="surahPickerList" class="modal-list-scroll"></div>
+    </div>
+  </div>
+
+  <!-- ==================== SQUARE PROFILE IMAGE CROPPER MODAL ==================== -->
+  <div id="imageCropperModal" class="modal-overlay hidden" style="z-index: 9999;">
+    <div class="modal-dialog-card" role="dialog" aria-modal="true" aria-labelledby="cropModalTitle" style="max-width:420px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+        <div>
+          <h3 id="cropModalTitle" style="margin:0; font-size:16px; font-weight:800; color:var(--slate-900);">Crop Profile Photo</h3>
+          <p id="cropModalSub" style="margin:2px 0 0; font-size:11.5px; color:var(--slate-500);">Drag photo to center &amp; adjust zoom</p>
+        </div>
+        <button type="button" id="btnCloseCropModal" class="modal-close-btn" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="cropStageWrap" class="crop-stage-wrap">
+        <canvas id="cropCanvas" width="320" height="320"></canvas>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:10px; padding:0 4px;">
+        <span style="font-size:12px; font-weight:800; color:var(--slate-500);">−</span>
+        <input type="range" id="cropZoomSlider" min="1" max="3" step="0.02" value="1" style="flex:1; accent-color:var(--emerald-850);" />
+        <span style="font-size:12px; font-weight:800; color:var(--slate-500);">+</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:8px;">
+        <button type="button" id="btnCancelCropModal" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="btnApplyCropPhoto" class="btn" style="background:var(--emerald-850); color:#fff; font-weight:800;">Use Square Photo</button>
+      </div>
     </div>
   </div>
 
@@ -3109,7 +3459,6 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
     import { getDatabase, ref, set, get, update, remove, onValue } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-database.js";
 
     const firebaseConfig = {
@@ -3124,7 +3473,6 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    try { getAnalytics(app); } catch (e) {}
     const db = getDatabase(app);
     const fbLegacyRowsRef = ref(db, 'hafazan_tracker/rows');
     const fbLegacyProfileRef = ref(db, 'hafazan_tracker/profile');
@@ -3168,6 +3516,13 @@
       return map;
     }
 
+    const DEFAULT_AVATAR_SVG = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+    `;
+
     // =========================================================================
     // 1. BILINGUAL DICTIONARY (ENGLISH & BAHASA MELAYU MALAYSIA)
     // =========================================================================
@@ -3182,25 +3537,30 @@
         islamicStudentTag: 'Hafiz / Hafizah',
         setStudentProfile: 'Set Student Profile',
         studentProfileNotSet: 'Student Profile Not Set',
-        tapEditProfile: 'Tap Edit to add student name, age, gender & school',
+        tapEditProfile: 'Tap Edit to add student name, photo & school',
         tapEditStats: '—',
         noSchoolSpec: 'No school / institution specified',
         edit: 'Edit',
         close: 'Close',
         lblProfName: 'Student Full Name',
         phProfName: 'e.g., Ahmad Luqman bin Zulkifli',
-        lblProfAge: 'Age (Years)',
-        phProfAge: 'e.g., 12',
+        lblProfDob: 'Date of Birth (DOB)',
         lblProfGender: 'Gender',
         optGenderEmpty: 'Unspecified',
         optGenderMale: 'Male',
         optGenderFemale: 'Female',
+        lblProfPhoto: 'Profile Photo (Square)',
+        lblUploadPhotoBtn: '📷 Upload & Crop',
+        removePhotoBtn: 'Remove',
+        lblPhotoHint: 'Auto-crops to a crisp square avatar',
+        cropModalTitle: 'Crop Profile Photo',
+        cropModalSub: 'Drag photo to center & adjust zoom',
+        useSquarePhotoBtn: 'Use Square Photo',
         lblProfSchool: 'School / Tahfiz Institution',
         phProfSchool: 'e.g., Maahad Tahfiz Sains',
         cancel: 'Cancel',
         saveProfile: 'Save Profile',
         saving: 'Saving...',
-        yearsOld: 'years old',
         lblSessionDate: 'Session Date',
         lblDayStatus: 'Day Status',
         statusLabels: {
@@ -3212,9 +3572,13 @@
         selectedSuffix: 'Selected',
         nonActiveDescPre: 'Logs 1 consolidated row (',
         nonActiveDescPost: ') while keeping your Saba sequence intact.',
+        weekendDesc: 'Logs 1 consolidated row (Weekend) — regular weekly rest day, keeping your Saba sequence intact.',
+        riadahDesc: 'Last Jumaat of the month — no Hafazan classes; students enjoy outdoor sports & recreation (football, badminton, futsal, etc.).',
         lblCutiReason: 'Quick-Tap Cuti Reason (Populates Notes)',
+        lblRiadahActivity: 'Quick-Tap Riadah Activity (Populates Notes)',
         lblNonActiveNotes: 'Notes / Reason Details',
         phNonActiveNotes: 'e.g., Sakit, Raya, Awal Ramadan, Balik kampung...',
+        phRiadahNotes: 'e.g., Last Jumaat of month — Football, Badminton, Futsal...',
         saveOffRow: (st) => `Save ${st} Row to Sheet`,
         murojaahDayOffTitle: 'Murojaah Day Mode',
         murojaahDayOffSub: 'Revision-only day? Tap to skip Saba & focus on Murojaah',
@@ -3444,25 +3808,30 @@
         islamicStudentTag: 'Hafiz / Hafizah',
         setStudentProfile: 'Tetapkan Profil Pelajar',
         studentProfileNotSet: 'Profil Pelajar Belum Diisi',
-        tapEditProfile: 'Tekan Edit untuk isi nama, umur, jantina & sekolah',
+        tapEditProfile: 'Tekan Edit untuk isi nama, gambar & sekolah',
         tapEditStats: '—',
         noSchoolSpec: 'Tiada sekolah / institusi dinyatakan',
         edit: 'Edit',
         close: 'Tutup',
         lblProfName: 'Nama Penuh Pelajar',
         phProfName: 'cth., Ahmad Luqman bin Zulkifli',
-        lblProfAge: 'Umur (Tahun)',
-        phProfAge: 'cth., 12',
+        lblProfDob: 'Tarikh Lahir (DOB)',
         lblProfGender: 'Jantina',
         optGenderEmpty: 'Tidak Dinyatakan',
         optGenderMale: 'Lelaki',
         optGenderFemale: 'Perempuan',
+        lblProfPhoto: 'Gambar Profil (Segi Empat)',
+        lblUploadPhotoBtn: '📷 Muat Naik & Potong',
+        removePhotoBtn: 'Padam',
+        lblPhotoHint: 'Dipotong kemas menjadi gambar segi empat sama',
+        cropModalTitle: 'Potong Gambar Profil',
+        cropModalSub: 'Seret gambar ke tengah & laraskan zum',
+        useSquarePhotoBtn: 'Guna Gambar Ini',
         lblProfSchool: 'Sekolah / Maahad Tahfiz',
         phProfSchool: 'cth., Maahad Tahfiz Sains',
         cancel: 'Batal',
         saveProfile: 'Simpan Profil',
         saving: 'Menyimpan...',
-        yearsOld: 'tahun',
         lblSessionDate: 'Tarikh Sesi',
         lblDayStatus: 'Status Hari',
         statusLabels: {
@@ -3474,9 +3843,13 @@
         selectedSuffix: 'Dipilih',
         nonActiveDescPre: 'Merekodkan 1 baris status (',
         nonActiveDescPost: ') tanpa mengganggu turutan ayat Saba.',
+        weekendDesc: 'Merekodkan 1 baris status (Weekend) — hari rehat hujung minggu biasa tanpa mengganggu turutan ayat Saba.',
+        riadahDesc: 'Jumaat terakhir setiap bulan — tiada kelas hafazan; pelajar melakukan aktiviti riadah (bola sepak, badminton, futsal, dll.).',
         lblCutiReason: 'Pilihan Pantas Sebab Cuti (Isi Catatan)',
+        lblRiadahActivity: 'Pilihan Pantas Aktiviti Riadah (Isi Catatan)',
         lblNonActiveNotes: 'Catatan / Sebab Terperinci',
         phNonActiveNotes: 'cth., Sakit, Raya, Awal Ramadan, Balik kampung...',
+        phRiadahNotes: 'cth., Jumaat terakhir bulan — Bola sepak, Badminton, Futsal...',
         saveOffRow: (st) => `Simpan Rekod ${st}`,
         murojaahDayOffTitle: 'Mod Hari Murojaah',
         murojaahDayOffSub: 'Hari ulang kaji sahaja? Tekan untuk langkau Saba',
@@ -3726,10 +4099,18 @@
       const formHidden = document.getElementById('studentProfileFormBody').classList.contains('hidden');
       document.getElementById('btnToggleProfileLabel').textContent = formHidden ? tr.edit : tr.close;
 
+      document.getElementById('lblProfPhoto').textContent = tr.lblProfPhoto;
+      document.getElementById('lblUploadPhotoBtn').textContent = tr.lblUploadPhotoBtn;
+      document.getElementById('btnRemoveProfilePhoto').textContent = tr.removePhotoBtn;
+      document.getElementById('lblPhotoHint').textContent = tr.lblPhotoHint;
+      document.getElementById('cropModalTitle').textContent = tr.cropModalTitle;
+      document.getElementById('cropModalSub').textContent = tr.cropModalSub;
+      document.getElementById('btnCancelCropModal').textContent = tr.cancel;
+      document.getElementById('btnApplyCropPhoto').textContent = tr.useSquarePhotoBtn;
+
       document.getElementById('lblProfName').textContent = tr.lblProfName;
       document.getElementById('profName').placeholder = tr.phProfName;
-      document.getElementById('lblProfAge').textContent = tr.lblProfAge;
-      document.getElementById('profAge').placeholder = tr.phProfAge;
+      document.getElementById('lblProfDob').textContent = tr.lblProfDob;
       document.getElementById('lblProfGender').textContent = tr.lblProfGender;
       document.getElementById('optGenderEmpty').textContent = tr.optGenderEmpty;
       document.getElementById('optGenderMale').textContent = tr.optGenderMale;
@@ -3751,11 +4132,10 @@
 
       const statusDisplay = tr.statusLabels[currentDayStatus] || currentDayStatus;
       document.getElementById('nonActiveTitle').textContent = `${statusDisplay} ${tr.selectedSuffix}`;
-      document.getElementById('nonActiveDesc').innerHTML =
-        `${tr.nonActiveDescPre}<strong id="nonActiveCodeLabel">${currentDayStatus}</strong>${tr.nonActiveDescPost}`;
+      updateNonActivePanelDetails();
       document.getElementById('lblCutiReason').textContent = tr.lblCutiReason;
+      document.getElementById('lblRiadahActivity').textContent = tr.lblRiadahActivity;
       document.getElementById('lblNonActiveNotes').textContent = tr.lblNonActiveNotes;
-      document.getElementById('nonActiveNotes').placeholder = tr.phNonActiveNotes;
       document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(statusDisplay);
 
       renderMurojaahBannerState();
@@ -3845,15 +4225,11 @@
       document.getElementById('lblHeatWeekend').innerHTML = `<strong style="color:var(--slate-400);">■</strong> ${tr.weekendLegend}`;
       document.getElementById('lblVolumeChartTitle').textContent = tr.volumeChartTitle;
 
-      // Sheet & Export Tab Labels + Danger Zone + Clear Modal
-      document.getElementById('lblSyncTitle').textContent = tr.syncTitle;
-      document.getElementById('syncModeDescription').textContent = IS_GAS_ENV ? tr.syncDescSheet : tr.syncDescLocal;
+      // Sheet & Export Tab Labels + Clear Modal
       document.getElementById('btnRefreshFromSheet').textContent = tr.syncNow;
       document.getElementById('btnCopyTSV').textContent = tr.copyForSheets;
       document.getElementById('btnDownloadCSV').textContent = tr.downloadCSV;
       document.getElementById('lblImportCSV').textContent = tr.importCSV;
-      document.getElementById('lblDangerZoneTitle').textContent = tr.dangerZoneTitle;
-      document.getElementById('lblDangerZoneDesc').textContent = tr.dangerZoneDesc;
       document.getElementById('btnClearAllData').textContent = tr.clearAllBtn;
       if (!resetArmed) document.getElementById('btnResetSampleData').textContent = tr.resetSampleBtn;
 
@@ -3879,10 +4255,13 @@
       document.getElementById('thDel').textContent = tr.thDel;
       document.getElementById('emptyHistoryState').textContent = tr.emptyHistory;
 
-      // Bottom Nav & Modal
+      // Bottom & Desktop Nav + Modal
       document.getElementById('navLblDaily').textContent = tr.navDaily;
       document.getElementById('navLblStats').textContent = tr.navStats;
       document.getElementById('navLblHistory').textContent = tr.navHistory;
+      document.getElementById('dnavLblDaily').textContent = tr.navDaily;
+      document.getElementById('dnavLblStats').textContent = tr.navStats;
+      document.getElementById('dnavLblHistory').textContent = tr.navHistory;
       document.getElementById('surahModalSub').textContent = tr.modalSub;
       document.getElementById('surahModalSearchInput').placeholder = tr.phModalSearch;
 
@@ -3961,6 +4340,13 @@
       'Akhir Bulan',
       'Cuti Umum',
       'Keluarga / Balik Kampung'
+    ];
+    const RIADAH_ACTIVITY_CHIPS = [
+      'Jumaat Akhir Bulan',
+      'Football / Bola Sepak',
+      'Badminton',
+      'Futsal',
+      'Jogging / Senaman'
     ];
 
     // Exact Mushaf Madinah (604 Pages) [startPage, endPage] for Juz 1..30
@@ -4225,7 +4611,8 @@
     // 2. STATE & SYNC STATUS MANAGEMENT
     // =========================================================================
     let hafazanRows = [];
-    let studentProfile = { name: '', age: '', gender: '', school: '' };
+    let studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '' };
+    let draftProfilePhotoUrl = '';
     let currentDayStatus = 'Active';
     let isMurojaahDayActive = false;
 
@@ -4331,6 +4718,18 @@
     let unsubscribeRowsListener = null;
     let unsubscribeProfileListener = null;
     let unsubscribeAuthListener = null;
+    let unsubscribeIndexListener = null;
+    let connectWatchdogTimer = null;
+
+    function ensureWorkspacesIndexListener() {
+      if (typeof unsubscribeIndexListener === 'function') return;
+      unsubscribeIndexListener = onValue(fbWorkspacesIndexRef, (snap) => {
+        workspacesIndexCache = snap.val() || {};
+        if (!document.getElementById('wsAdminDirectoryBox').classList.contains('hidden')) {
+          renderAdminStudentDirectory();
+        }
+      }, () => {});
+    }
 
     function registerWorkspaceInIndex(codeKey, displayCode, hasPin, profObj) {
       const entry = {
@@ -4368,6 +4767,7 @@
     }
 
     function detachWorkspaceListeners() {
+      clearTimeout(connectWatchdogTimer);
       if (typeof unsubscribeRowsListener === 'function') unsubscribeRowsListener();
       if (typeof unsubscribeProfileListener === 'function') unsubscribeProfileListener();
       if (typeof unsubscribeAuthListener === 'function') unsubscribeAuthListener();
@@ -4391,18 +4791,34 @@
       }
       const cachedProf = safeStorageGet(profStorageKey);
       if (cachedProf) {
-        try { studentProfile = { name: '', age: '', gender: '', school: '', ...JSON.parse(cachedProf) }; } catch (e) {}
+        try { studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '', ...JSON.parse(cachedProf) }; } catch (e) {}
       } else {
-        studentProfile = { name: '', age: '', gender: '', school: '' };
+        studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '' };
       }
 
       renderWorkspaceCodeBadges();
       refreshEntireUI();
       setSyncStatus('syncing', tr.statusConnecting);
 
-      migrateLegacyLuqmanIfNeeded(codeKey).catch(() => {});
+      if (codeKey === 'luqmanaf') {
+        migrateLegacyLuqmanIfNeeded(codeKey).catch(() => {});
+      }
+
+      // Watchdog fallback so UI never stays stuck on "Connecting..." if offline/sandboxed
+      connectWatchdogTimer = setTimeout(() => {
+        const dot = document.getElementById('syncStatusDot');
+        if (dot && dot.classList.contains('syncing')) {
+          if (hafazanRows.length === 0 && codeKey === 'luqmanaf' && !safeStorageGet(rowsStorageKey)) {
+            hafazanRows = FALLBACK_SAMPLE_ROWS.map(normalizeRowCuti);
+            refreshEntireUI();
+          }
+          setSyncStatus('local', t().statusLocal);
+        }
+      }, 4500);
 
       unsubscribeRowsListener = onValue(getWorkspaceRowsRef(codeKey), (snapshot) => {
+        clearTimeout(connectWatchdogTimer);
+        if (activeWorkspaceKey !== codeKey) return;
         const val = snapshot.val();
         if (val === null) {
           if (codeKey === 'luqmanaf' && !safeStorageGet(rowsStorageKey)) {
@@ -4420,21 +4836,24 @@
         setSyncStatus('connected', t().statusSynced);
         refreshEntireUI();
       }, (err) => {
+        clearTimeout(connectWatchdogTimer);
         console.error('Firebase rows sync error:', err);
         setSyncStatus('error', t().statusSyncError);
       });
 
       unsubscribeProfileListener = onValue(getWorkspaceProfileRef(codeKey), (snapshot) => {
+        if (activeWorkspaceKey !== codeKey) return;
         const profVal = snapshot.val();
         if (profVal) {
-          studentProfile = { name: '', age: '', gender: '', school: '', ...profVal };
+          studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '', ...profVal };
           safeStorageSet(profStorageKey, JSON.stringify(studentProfile));
           renderStudentProfileUI();
           registerWorkspaceInIndex(codeKey, activeWorkspaceDisplayCode, Boolean(activeWorkspacePin), studentProfile);
         }
-      });
+      }, () => {});
 
       unsubscribeAuthListener = onValue(getWorkspaceAuthRef(codeKey), (snapshot) => {
+        if (activeWorkspaceKey !== codeKey) return;
         const authVal = snapshot.val();
         if (authVal) {
           activeWorkspaceDisplayCode = formatDisplayCode(authVal.displayCode, codeKey);
@@ -4448,18 +4867,14 @@
           displayCode: activeWorkspaceDisplayCode
         }));
         renderWorkspaceCodeBadges();
-      });
+      }, () => {});
 
-      onValue(fbWorkspacesIndexRef, (snap) => {
-        workspacesIndexCache = snap.val() || {};
-        if (!document.getElementById('wsAdminDirectoryBox').classList.contains('hidden')) {
-          renderAdminStudentDirectory();
-        }
-      });
+      ensureWorkspacesIndexListener();
     }
 
     function syncFromGoogleSheet(showFeedbackToast = false) {
       const tr = t();
+      ensureWorkspacesIndexListener();
       if (!unsubscribeRowsListener) {
         const savedWsRaw = safeStorageGet(ACTIVE_WORKSPACE_STORAGE_KEY);
         if (savedWsRaw) {
@@ -4467,12 +4882,6 @@
             const parsed = JSON.parse(savedWsRaw);
             if (parsed && parsed.loggedOut) {
               setLoggedOutUIState(true);
-              onValue(fbWorkspacesIndexRef, (snap) => {
-                workspacesIndexCache = snap.val() || {};
-                if (!document.getElementById('wsAdminDirectoryBox').classList.contains('hidden')) {
-                  renderAdminStudentDirectory();
-                }
-              });
               return;
             }
             if (parsed && parsed.key) {
@@ -4486,7 +4895,6 @@
         return;
       }
 
-      if (!isLoggedIn) return;
       setSyncStatus('syncing', tr.statusSyncing);
       Promise.all([get(getWorkspaceRowsRef(activeWorkspaceKey)), get(getWorkspaceProfileRef(activeWorkspaceKey))])
         .then(([rowsSnap, profSnap]) => {
@@ -4500,7 +4908,7 @@
             safeStorageSet(`${STORAGE_KEY}_${activeWorkspaceKey}`, '[]');
           }
           if (profSnap.val()) {
-            studentProfile = { name: '', age: '', gender: '', school: '', ...profSnap.val() };
+            studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '', ...profSnap.val() };
             safeStorageSet(`${PROFILE_STORAGE_KEY}_${activeWorkspaceKey}`, JSON.stringify(studentProfile));
           }
           setSyncStatus('connected', tr.statusSynced);
@@ -4537,6 +4945,7 @@
 
       renderStatusPills();
       renderCutiReasonChips();
+      renderRiadahActivityChips();
       populateJuzDropdowns();
       renderMukhtarSurahChips();
       renderMurojaahSurahChips();
@@ -4544,6 +4953,13 @@
 
       setLanguage(currentLang);
       syncFromGoogleSheet(false);
+
+      // Re-sync automatically whenever the user returns to the browser tab or unlocks their phone
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && isLoggedIn && activeWorkspaceKey) {
+          syncFromGoogleSheet(false);
+        }
+      });
     });
 
     function bindAllEventListeners() {
@@ -4551,8 +4967,8 @@
       document.getElementById('btnLangMY').addEventListener('click', () => setLanguage('MY'));
       document.getElementById('btnLangEN').addEventListener('click', () => setLanguage('EN'));
 
-      // Bottom Navigation Tabs
-      document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+      // Bottom & Desktop Navigation Tabs
+      document.querySelectorAll('.nav-tab-btn, .desktop-nav-btn').forEach(btn => {
         btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
       });
 
@@ -4563,7 +4979,15 @@
       document.getElementById('btnToggleProfileForm').addEventListener('click', () => toggleStudentProfileEditor());
       document.getElementById('btnCancelProfile').addEventListener('click', () => toggleStudentProfileEditor(false));
       document.getElementById('btnSaveProfile').addEventListener('click', saveStudentProfile);
+      document.getElementById('profPhotoFileInput').addEventListener('change', handleProfilePhotoSelect);
+      document.getElementById('btnRemoveProfilePhoto').addEventListener('click', () => {
+        draftProfilePhotoUrl = '';
+        updateEditPhotoPreviewUI('');
+      });
       document.getElementById('btnOpenWorkspaceModal').addEventListener('click', openWorkspaceModal);
+
+      // Square Image Cropper Modal Listeners
+      initSquareImageCropper();
 
       // Workspace Log Out & Admin Modal Listeners
       document.getElementById('btnCloseWorkspaceModal').addEventListener('click', closeWorkspaceModal);
@@ -4998,6 +5422,7 @@
       if (isMurojaahDayActive) {
         document.getElementById('enableSaba').checked = false;
         document.getElementById('enablePraSaba').checked = false;
+        document.getElementById('enableMukhtar').checked = false;
         document.getElementById('enableMurojaah').checked = true;
       } else {
         document.getElementById('enableSaba').checked = true;
@@ -5017,8 +5442,9 @@
     function syncMurojaahBannerFromCheckboxes() {
       const sabaOn = document.getElementById('enableSaba').checked;
       const praOn = document.getElementById('enablePraSaba').checked;
+      const mukOn = document.getElementById('enableMukhtar').checked;
       const murOn = document.getElementById('enableMurojaah').checked;
-      isMurojaahDayActive = !sabaOn && !praOn && murOn;
+      isMurojaahDayActive = !sabaOn && !praOn && !mukOn && murOn;
       renderMurojaahBannerState();
     }
 
@@ -5042,8 +5468,172 @@
     }
 
     // =========================================================================
-    // 6. STUDENT PROFILE CARD, CODE/PIN CHANGE & MULTI-STUDENT ADMIN
+    // 6. STUDENT PROFILE CARD, SQUARE PHOTO CROPPER, CODE/PIN & ADMIN
     // =========================================================================
+    let cropperImgObj = null;
+    let cropOffsetX = 0;
+    let cropOffsetY = 0;
+    let cropZoom = 1;
+    let cropBaseScale = 1;
+    let isCropDragging = false;
+    let cropDragStartX = 0;
+    let cropDragStartY = 0;
+
+    function updateEditPhotoPreviewUI(photoUrl) {
+      const box = document.getElementById('editPhotoPreviewSquare');
+      const removeBtn = document.getElementById('btnRemoveProfilePhoto');
+      if (!box) return;
+      if (photoUrl) {
+        box.innerHTML = `<img src="${photoUrl}" alt="Preview" />`;
+        if (removeBtn) removeBtn.classList.remove('hidden');
+      } else {
+        box.innerHTML = DEFAULT_AVATAR_SVG;
+        if (removeBtn) removeBtn.classList.add('hidden');
+      }
+    }
+
+    function handleProfilePhotoSelect(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          cropperImgObj = img;
+          const canvasSize = 320;
+          cropBaseScale = Math.max(canvasSize / img.width, canvasSize / img.height);
+          cropZoom = 1;
+          cropOffsetX = 0;
+          cropOffsetY = 0;
+          document.getElementById('cropZoomSlider').value = '1';
+          document.getElementById('imageCropperModal').classList.remove('hidden');
+          drawSquareCropCanvas();
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = '';
+    }
+
+    function drawSquareCropCanvas() {
+      const canvas = document.getElementById('cropCanvas');
+      if (!canvas || !cropperImgObj) return;
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      const scale = cropBaseScale * cropZoom;
+      const drawW = cropperImgObj.width * scale;
+      const drawH = cropperImgObj.height * scale;
+
+      const maxPanX = Math.max(0, (drawW - size) / 2);
+      const maxPanY = Math.max(0, (drawH - size) / 2);
+      cropOffsetX = Math.max(-maxPanX, Math.min(maxPanX, cropOffsetX));
+      cropOffsetY = Math.max(-maxPanY, Math.min(maxPanY, cropOffsetY));
+
+      const x = (size - drawW) / 2 + cropOffsetX;
+      const y = (size - drawH) / 2 + cropOffsetY;
+
+      ctx.clearRect(0, 0, size, size);
+      ctx.fillStyle = '#0F172A';
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(cropperImgObj, x, y, drawW, drawH);
+
+      // Subtle rule-of-thirds square guide lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(size / 3, 0); ctx.lineTo(size / 3, size);
+      ctx.moveTo((size * 2) / 3, 0); ctx.lineTo((size * 2) / 3, size);
+      ctx.moveTo(0, size / 3); ctx.lineTo(size, size / 3);
+      ctx.moveTo(0, (size * 2) / 3); ctx.lineTo(size, (size * 2) / 3);
+      ctx.stroke();
+    }
+
+    function exportCroppedSquareDataUrl() {
+      if (!cropperImgObj) return '';
+      const outSize = 240;
+      const stageSize = 320;
+      const ratio = outSize / stageSize;
+      const outCanvas = document.createElement('canvas');
+      outCanvas.width = outSize;
+      outCanvas.height = outSize;
+      const ctx = outCanvas.getContext('2d');
+
+      const scale = cropBaseScale * cropZoom * ratio;
+      const drawW = cropperImgObj.width * scale;
+      const drawH = cropperImgObj.height * scale;
+      const x = (outSize - drawW) / 2 + cropOffsetX * ratio;
+      const y = (outSize - drawH) / 2 + cropOffsetY * ratio;
+
+      ctx.fillStyle = '#064E3B';
+      ctx.fillRect(0, 0, outSize, outSize);
+      ctx.drawImage(cropperImgObj, x, y, drawW, drawH);
+      return outCanvas.toDataURL('image/jpeg', 0.84);
+    }
+
+    function initSquareImageCropper() {
+      const stage = document.getElementById('cropStageWrap');
+      const slider = document.getElementById('cropZoomSlider');
+      const closeModal = () => {
+        document.getElementById('imageCropperModal').classList.add('hidden');
+        cropperImgObj = null;
+      };
+
+      document.getElementById('btnCloseCropModal').addEventListener('click', closeModal);
+      document.getElementById('btnCancelCropModal').addEventListener('click', closeModal);
+      document.getElementById('imageCropperModal').addEventListener('click', (e) => {
+        if (e.target.id === 'imageCropperModal') closeModal();
+      });
+
+      slider.addEventListener('input', () => {
+        cropZoom = parseFloat(slider.value) || 1;
+        drawSquareCropCanvas();
+      });
+
+      const getClientXY = (ev) => {
+        if (ev.touches && ev.touches.length > 0) return { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+        return { x: ev.clientX, y: ev.clientY };
+      };
+
+      const onDown = (ev) => {
+        if (!cropperImgObj) return;
+        isCropDragging = true;
+        const pt = getClientXY(ev);
+        cropDragStartX = pt.x;
+        cropDragStartY = pt.y;
+      };
+
+      const onMove = (ev) => {
+        if (!isCropDragging || !cropperImgObj) return;
+        ev.preventDefault();
+        const pt = getClientXY(ev);
+        const stageRect = stage.getBoundingClientRect();
+        const factor = 320 / Math.max(1, stageRect.width);
+        cropOffsetX += (pt.x - cropDragStartX) * factor;
+        cropOffsetY += (pt.y - cropDragStartY) * factor;
+        cropDragStartX = pt.x;
+        cropDragStartY = pt.y;
+        drawSquareCropCanvas();
+      };
+
+      const onUp = () => { isCropDragging = false; };
+
+      stage.addEventListener('mousedown', onDown);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+      stage.addEventListener('touchstart', onDown, { passive: true });
+      stage.addEventListener('touchmove', onMove, { passive: false });
+      stage.addEventListener('touchend', onUp);
+
+      document.getElementById('btnApplyCropPhoto').addEventListener('click', () => {
+        const cropped = exportCroppedSquareDataUrl();
+        if (cropped) {
+          draftProfilePhotoUrl = cropped;
+          updateEditPhotoPreviewUI(draftProfilePhotoUrl);
+        }
+        closeModal();
+      });
+    }
+
     function renderWorkspaceCodeBadges() {
       const tr = t();
       const loggedInTxt = document.getElementById('lblLoggedInAsText');
@@ -5072,17 +5662,20 @@
       const gateEl = document.getElementById('loggedOutLandingGate');
       const adminPageEl = document.getElementById('adminPortalPage');
       const navEl = document.getElementById('bottomNavBar');
+      const desktopNavEl = document.getElementById('desktopNavBar');
       const tabs = ['daily', 'stats', 'history'];
 
       if (loggedOut) {
         adminPageEl.classList.add('hidden');
         gateEl.classList.remove('hidden');
         navEl.classList.add('hidden');
+        if (desktopNavEl) desktopNavEl.classList.add('hidden');
         tabs.forEach(tab => document.getElementById(`tab-${tab}`).classList.add('hidden'));
       } else {
         adminPageEl.classList.add('hidden');
         gateEl.classList.add('hidden');
         navEl.classList.remove('hidden');
+        if (desktopNavEl) desktopNavEl.classList.remove('hidden');
         renderWorkspaceCodeBadges();
         switchTab('daily');
       }
@@ -5092,10 +5685,12 @@
       const gateEl = document.getElementById('loggedOutLandingGate');
       const adminPageEl = document.getElementById('adminPortalPage');
       const navEl = document.getElementById('bottomNavBar');
+      const desktopNavEl = document.getElementById('desktopNavBar');
       const tabs = ['daily', 'stats', 'history'];
 
       gateEl.classList.add('hidden');
       navEl.classList.add('hidden');
+      if (desktopNavEl) desktopNavEl.classList.add('hidden');
       tabs.forEach(tab => document.getElementById(`tab-${tab}`).classList.add('hidden'));
       adminPageEl.classList.remove('hidden');
       document.getElementById('wsAdminErrorMsg').classList.add('hidden');
@@ -5128,7 +5723,7 @@
     function returnToAdminPortalPage() {
       detachWorkspaceListeners();
       hafazanRows = [];
-      studentProfile = { name: '', age: '', gender: '', school: '' };
+      studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '' };
       activeWorkspacePin = '';
       isLoggedIn = false;
       safeStorageSet(ACTIVE_WORKSPACE_STORAGE_KEY, JSON.stringify({ loggedOut: true }));
@@ -5139,7 +5734,7 @@
       const tr = t();
       detachWorkspaceListeners();
       hafazanRows = [];
-      studentProfile = { name: '', age: '', gender: '', school: '' };
+      studentProfile = { name: '', dob: '', gender: '', school: '', photoDataUrl: '' };
       activeWorkspacePin = '';
       isViewingAsAdmin = false;
       safeStorageSet(ACTIVE_WORKSPACE_STORAGE_KEY, JSON.stringify({ loggedOut: true }));
@@ -5160,9 +5755,11 @@
 
       if (shouldOpen) {
         document.getElementById('profName').value = studentProfile.name || '';
-        document.getElementById('profAge').value = studentProfile.age || '';
+        document.getElementById('profDob').value = studentProfile.dob || '';
         document.getElementById('profGender').value = studentProfile.gender || '';
         document.getElementById('profSchool').value = studentProfile.school || '';
+        draftProfilePhotoUrl = studentProfile.photoDataUrl || '';
+        updateEditPhotoPreviewUI(draftProfilePhotoUrl);
         document.getElementById('profStudentCode').value = activeWorkspaceDisplayCode;
         document.getElementById('profStudentPin').value = activeWorkspacePin || '';
         document.getElementById('credChangeFeedback').classList.add('hidden');
@@ -5191,9 +5788,10 @@
 
       const updatedProfile = {
         name: document.getElementById('profName').value.trim(),
-        age: document.getElementById('profAge').value.trim(),
+        dob: document.getElementById('profDob').value.trim(),
         gender: document.getElementById('profGender').value.trim(),
-        school: document.getElementById('profSchool').value.trim()
+        school: document.getElementById('profSchool').value.trim(),
+        photoDataUrl: draftProfilePhotoUrl || ''
       };
 
       const saveBtn = document.getElementById('btnSaveProfile');
@@ -5389,7 +5987,7 @@
           return;
         }
 
-        const initialProfile = { name, age: '', gender: '', school };
+        const initialProfile = { name, dob: '', gender: '', school, photoDataUrl: '' };
         await set(getWorkspaceAuthRef(codeKey), { displayCode, pin });
         await set(getWorkspaceProfileRef(codeKey), initialProfile);
         registerWorkspaceInIndex(codeKey, displayCode, Boolean(pin), initialProfile);
@@ -5581,68 +6179,60 @@
     function renderStudentProfileUI() {
       const tr = t();
       const hasName = Boolean(studentProfile.name);
-      const genderLocalized = studentProfile.gender === 'Male'
-        ? tr.optGenderMale
-        : (studentProfile.gender === 'Female' ? tr.optGenderFemale : studentProfile.gender);
+      const photoUrl = studentProfile.photoDataUrl || '';
 
-      const islamicTitle = studentProfile.gender === 'Female'
-        ? 'Hafizah'
-        : (studentProfile.gender === 'Male' ? 'Hafiz' : tr.islamicStudentTag);
-      document.getElementById('profileIslamicTag').textContent = islamicTitle;
+      const ribbonTag = studentProfile.gender === 'Male'
+        ? 'Hafiz'
+        : (studentProfile.gender === 'Female' ? 'Hafizah' : tr.islamicStudentTag);
+      document.getElementById('profileIslamicTag').textContent = ribbonTag;
+
+      const avatarHTML = photoUrl
+        ? `<img src="${photoUrl}" alt="${escapeHTML(studentProfile.name || 'Student')}" />`
+        : DEFAULT_AVATAR_SVG;
+      document.getElementById('profileAvatarContainer').innerHTML = avatarHTML;
+      document.getElementById('statProfileAvatarContainer').innerHTML = avatarHTML;
 
       document.getElementById('profileSummaryName').textContent = hasName ? studentProfile.name : tr.setStudentProfile;
       document.getElementById('profileSummarySchool').textContent = studentProfile.school
         ? studentProfile.school
         : (hasName ? tr.noSchoolSpec : tr.tapEditProfile);
 
-      const badgesRow = document.getElementById('profileSummaryBadgesRow');
-      const ageBadge = document.getElementById('profileSummaryAgeBadge');
-      const genderBadge = document.getElementById('profileSummaryGenderBadge');
-
-      if (studentProfile.age) {
-        ageBadge.textContent = `${studentProfile.age} ${tr.yearsOld}`;
-        ageBadge.classList.remove('hidden');
-      } else {
-        ageBadge.classList.add('hidden');
-      }
-
-      if (studentProfile.gender) {
-        genderBadge.textContent = genderLocalized;
-        genderBadge.classList.remove('hidden');
-      } else {
-        genderBadge.classList.add('hidden');
-      }
-
-      badgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
-
-      // Sync Progress Tab Essential Summary Card
+      // Sync Progress Tab Essential Summary Card (Name, School & Square Photo only)
       document.getElementById('statProfileName').textContent = hasName ? studentProfile.name : tr.studentProfileNotSet;
       document.getElementById('statProfileSchool').textContent = studentProfile.school || tr.tapEditStats;
-
-      const statBadgesRow = document.getElementById('statProfileBadgesRow');
-      const statAge = document.getElementById('statProfileAgeBadge');
-      const statGender = document.getElementById('statProfileGenderBadge');
-
-      if (studentProfile.age) {
-        statAge.textContent = `${studentProfile.age} ${tr.yearsOld}`;
-        statAge.classList.remove('hidden');
-      } else {
-        statAge.classList.add('hidden');
-      }
-
-      if (studentProfile.gender) {
-        statGender.textContent = genderLocalized;
-        statGender.classList.remove('hidden');
-      } else {
-        statGender.classList.add('hidden');
-      }
-
-      statBadgesRow.classList.toggle('hidden', !studentProfile.age && !studentProfile.gender);
     }
 
     // =========================================================================
     // 7. DAY STATUS, CUTI CHIPS & 114-SURAH PICKER MODAL
     // =========================================================================
+    function updateNonActivePanelDetails() {
+      const tr = t();
+      const descEl = document.getElementById('nonActiveDesc');
+      const cutiSec = document.getElementById('cutiReasonSection');
+      const riadahSec = document.getElementById('riadahActivitySection');
+      const notesWrap = document.getElementById('nonActiveNotesWrapper');
+      const notesInp = document.getElementById('nonActiveNotes');
+
+      if (currentDayStatus === 'Weekend') {
+        descEl.textContent = tr.weekendDesc;
+        cutiSec.classList.add('hidden');
+        riadahSec.classList.add('hidden');
+        notesWrap.classList.add('hidden');
+      } else if (currentDayStatus === 'Riadah') {
+        descEl.textContent = tr.riadahDesc;
+        cutiSec.classList.add('hidden');
+        riadahSec.classList.remove('hidden');
+        notesWrap.classList.remove('hidden');
+        notesInp.placeholder = tr.phRiadahNotes;
+      } else {
+        descEl.innerHTML = `${tr.nonActiveDescPre}<strong id="nonActiveCodeLabel">${currentDayStatus}</strong>${tr.nonActiveDescPost}`;
+        cutiSec.classList.toggle('hidden', currentDayStatus !== 'Cuti');
+        riadahSec.classList.add('hidden');
+        notesWrap.classList.remove('hidden');
+        notesInp.placeholder = tr.phNonActiveNotes;
+      }
+    }
+
     function renderStatusPills() {
       const tr = t();
       const container = document.getElementById('statusPills');
@@ -5662,13 +6252,13 @@
           const isActive = currentDayStatus === 'Active';
           document.getElementById('activeSessionWrapper').classList.toggle('hidden', !isActive);
           document.getElementById('nonActivePanel').classList.toggle('hidden', isActive);
+          document.getElementById('activeSessionNotesBlock').classList.toggle('hidden', !isActive);
 
           if (!isActive) {
             const disp = tr.statusLabels[currentDayStatus] || currentDayStatus;
             document.getElementById('nonActiveTitle').textContent = `${disp} ${tr.selectedSuffix}`;
-            document.getElementById('nonActiveCodeLabel').textContent = currentDayStatus;
             document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(disp);
-            document.getElementById('cutiReasonSection').classList.toggle('hidden', currentDayStatus !== 'Cuti');
+            updateNonActivePanelDetails();
           }
         });
       });
@@ -5688,6 +6278,24 @@
         const cur = notesInput.value.trim();
         if (!cur) notesInput.value = reason;
         else if (!cur.toLowerCase().includes(reason.toLowerCase())) notesInput.value = `${reason} — ${cur}`;
+      });
+    }
+
+    function renderRiadahActivityChips() {
+      const container = document.getElementById('riadahActivityChips');
+      if (!container) return;
+      container.innerHTML = RIADAH_ACTIVITY_CHIPS.map(r =>
+        `<button type="button" class="chip-btn" data-riadah-act="${escapeHTML(r)}">${escapeHTML(r)}</button>`
+      ).join('');
+
+      container.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-riadah-act]');
+        if (!btn) return;
+        const act = btn.getAttribute('data-riadah-act');
+        const notesInput = document.getElementById('nonActiveNotes');
+        const cur = notesInput.value.trim();
+        if (!cur) notesInput.value = act;
+        else if (!cur.toLowerCase().includes(act.toLowerCase())) notesInput.value = `${act} — ${cur}`;
       });
     }
 
@@ -6239,7 +6847,7 @@
       let baseId = Date.now() * 10 + Math.floor(Math.random() * 10);
 
       if (currentDayStatus !== 'Active') {
-        const notes = document.getElementById('nonActiveNotes').value.trim();
+        const notes = currentDayStatus === 'Weekend' ? '' : document.getElementById('nonActiveNotes').value.trim();
         newRows.push({
           id: baseId,
           Date: dateVal,
@@ -7230,6 +7838,8 @@
       ['daily', 'stats', 'history'].forEach(t => {
         document.getElementById(`tab-${t}`).classList.toggle('hidden', t !== tabName);
         document.getElementById(`nav-${t}`).classList.toggle('active', t === tabName);
+        const dNav = document.getElementById(`dnav-${t}`);
+        if (dNav) dNav.classList.toggle('active', t === tabName);
       });
       if (tabName === 'stats') updateAllStats();
       if (tabName === 'history') renderHistoryTable();
