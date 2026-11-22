@@ -1635,6 +1635,35 @@
     /* =========================================================================
        8. STICKY BOTTOM NAVIGATION & MODALS (SURAH PICKER + SECURE CLEAR MODAL)
        ========================================================================= */
+    .app-brand-footer {
+      max-width: 680px;
+      margin: 22px auto 12px;
+      padding: 12px 16px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-500);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-top: 1px solid var(--slate-200);
+    }
+
+    .footer-version-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--emerald-50);
+      border: 1px solid #A7F3D0;
+      color: var(--emerald-850);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -1954,6 +1983,13 @@
       .main-container {
         max-width: 1180px;
         padding: 20px 24px 0;
+      }
+
+      .app-brand-footer {
+        max-width: 1180px;
+        margin: 28px auto 8px;
+        padding: 14px 24px;
+        font-weight: 500;
       }
 
       /* Center login gate & admin portal nicely on desktop */
@@ -3314,6 +3350,15 @@
     </section>
 
   </main>
+
+  <!-- ==================== BRAND & VERSION FOOTER ==================== -->
+  <footer class="app-brand-footer" aria-label="Application Footer">
+    <span>© 2026 <strong style="color:var(--emerald-900);">AnnuarFaiz</strong></span>
+    <span>·</span>
+    <span class="footer-version-pill">v0.7</span>
+    <span>·</span>
+    <span>Built with love ♥️</span>
+  </footer>
 
   <!-- ==================== STICKY BOTTOM NAVIGATION ==================== -->
   <nav id="bottomNavBar" class="bottom-nav">
