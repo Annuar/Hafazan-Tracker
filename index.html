@@ -91,7 +91,7 @@
       background-size: 48px 84px;
     }
 
-    /* Tactile Hard-Offset Card Shadows (Replaces soft liquid glass blur) */
+    /* Tactile Hard-Offset Card Shadows */
     .arch-card {
       background: #ffffff;
       border: 1.5px solid #cbd5e1;
@@ -612,6 +612,22 @@
          =================================================================== -->
     <section id="view-log" class="hidden max-w-5xl w-full mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-5 panel-enter">
 
+      <!-- Daily Target / Quest Indicator Card -->
+      <div id="dailyQuestCard" class="arch-card border-l-4 border-l-amber-500 p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div id="dailyQuestIconBox" class="w-10 h-10 rounded-lg bg-amber-100 border border-amber-300 text-amber-800 flex items-center justify-center text-lg shrink-0">🎯</div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 id="dailyQuestTitle" class="text-xs sm:text-sm font-extrabold text-slate-900" data-i18n="dailyQuestHeading">Daily Routine Quest</h2>
+              <span id="dailyQuestStatusPill" class="px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold uppercase">0 / 2 Done</span>
+            </div>
+            <p id="dailyQuestSub" class="text-[11px] font-medium text-slate-500 mt-0.5">Complete Saba + Pra Saba (or Murojaah) for the selected date</p>
+          </div>
+        </div>
+
+        <div id="dailyQuestChecklist" class="flex flex-wrap items-center gap-2"></div>
+      </div>
+
       <!-- Top Compact Control Bar: Date + Day Status Segmented Tabs + Murojaah Mode -->
       <div class="arch-card p-4 sm:p-5 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -882,7 +898,7 @@
                 <p id="mukhtarLastHint" class="text-[11px] font-bold text-amber-900/75 truncate">Last: Juz 1 Page 20</p>
               </div>
             </div>
-            <label class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-amber-300 cursor-pointer select-none">
+            <label class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-amber-300 cursor-pointer select-none shrink-0">
               <input type="checkbox" id="enableMukhtar" checked class="w-4 h-4 accent-amber-600" />
               <span class="text-xs font-extrabold text-slate-900" data-i18n="logCheck">Log</span>
             </label>
@@ -1002,7 +1018,7 @@
                 <p id="murojaahLastHint" class="text-[11px] font-bold text-indigo-900/75 truncate">Ayat range, Juz/Page, or Full Surahs</p>
               </div>
             </div>
-            <label class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-indigo-300 cursor-pointer select-none">
+            <label class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white border border-indigo-300 cursor-pointer select-none shrink-0">
               <input type="checkbox" id="enableMurojaah" class="w-4 h-4 accent-indigo-700" />
               <span class="text-xs font-extrabold text-slate-900" data-i18n="logCheck">Log</span>
             </label>
@@ -1127,7 +1143,7 @@
     </section>
 
     <!-- ===================================================================
-         SCREEN C: PROGRESS & INSIGHTS (114 SURAHS · 30 JUZ · MONTHLY)
+         SCREEN C: PROGRESS & INSIGHTS (114 SURAHS · 30 JUZ · BADGES · MONTHLY)
          =================================================================== -->
     <section id="view-progress" class="hidden max-w-6xl w-full mx-auto px-4 sm:px-6 pt-5 sm:pt-7 space-y-6 panel-enter">
 
@@ -1150,6 +1166,27 @@
         </div>
 
         <div id="wholeQuranSurahGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 max-h-80 overflow-y-auto pr-1"></div>
+      </div>
+
+      <!-- 3-Tier Achievement Badges Showcase Grid (Weekly · Monthly · Lifetime) -->
+      <div class="arch-card border-t-4 border-t-amber-500 p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
+          <div>
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="badgesSectionTitle">Achievement Badges</h3>
+              <span id="badgesUnlockedCountPill" class="px-2.5 py-0.5 rounded bg-amber-100 border border-amber-300 text-amber-950 text-[11px] font-extrabold">0 / 4 Unlocked</span>
+            </div>
+            <p id="badgesPeriodSubtitle" class="text-xs text-slate-500 font-semibold mt-0.5">This Week (Resets every Monday)</p>
+          </div>
+
+          <div id="badgeTierFilterRow" class="inline-flex bg-slate-100 p-1 rounded-lg border border-slate-300">
+            <button type="button" data-btier="WEEKLY" class="px-3 py-1.5 rounded text-xs font-extrabold bg-brand-900 text-white" data-i18n="tierWeeklyBtn">Weekly</button>
+            <button type="button" data-btier="MONTHLY" class="px-3 py-1.5 rounded text-xs font-bold text-slate-600" data-i18n="tierMonthlyBtn">Monthly</button>
+            <button type="button" data-btier="LIFETIME" class="px-3 py-1.5 rounded text-xs font-bold text-slate-600" data-i18n="tierLifetimeBtn">Lifetime</button>
+          </div>
+        </div>
+
+        <div id="achievementBadgesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5"></div>
       </div>
 
       <!-- Monthly Comparison & 30-Day Consistency Grid -->
@@ -1281,7 +1318,7 @@
                 <th class="py-3.5 px-3 text-center" data-i18n="thRange">Range</th>
                 <th class="py-3.5 px-3 text-center" data-i18n="thTotal">Total</th>
                 <th class="py-3.5 px-3" data-i18n="thNotes">Notes</th>
-                <th class="py-3.5 px-4 text-right" data-i18n="thDel">Del</th>
+                <th class="py-3.5 px-4 text-right" data-i18n="thAction">Edit / Del</th>
               </tr>
             </thead>
             <tbody id="historyTableBody" class="divide-y divide-slate-200"></tbody>
@@ -1442,7 +1479,7 @@
     </div>
   </div>
 
-  <!-- Save Session Confirmation Modal -->
+  <!-- Save Session Confirmation Modal (Includes Duplicate / Same-Day Entry Warning) -->
   <div id="confirmSaveModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white w-full max-w-md rounded-t-xl sm:rounded-xl border-2 border-slate-300 border-t-4 border-t-brand-800 p-6 shadow-2xl space-y-4 panel-enter">
       <div class="flex items-center justify-between">
@@ -1452,10 +1489,70 @@
         </div>
         <button type="button" id="btnCloseConfirmSaveModal" class="w-8 h-8 rounded bg-slate-100 border border-slate-300 text-slate-700 font-extrabold">✕</button>
       </div>
+
+      <!-- Same-Day / Duplicate Entry Warning Banner -->
+      <div id="duplicateEntryWarningBox" class="hidden p-3.5 rounded-lg bg-amber-50 border-2 border-amber-400 border-l-4 border-l-amber-600 space-y-1.5">
+        <div class="flex items-center gap-1.5 text-xs font-extrabold text-amber-950">
+          <span>⚠️</span>
+          <span id="duplicateWarningTitle">Same-Day Entry Already Exists</span>
+        </div>
+        <p id="duplicateWarningDesc" class="text-[11px] font-semibold text-amber-900 leading-relaxed"></p>
+      </div>
+
       <div id="confirmSaveSummaryList" class="p-4 rounded-lg bg-slate-50 border border-slate-300 space-y-2 text-xs text-slate-900"></div>
       <div class="grid grid-cols-2 gap-2.5">
         <button type="button" id="btnCancelConfirmSave" class="py-3 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-extrabold" data-i18n="cancel">Cancel</button>
         <button type="button" id="btnExecuteConfirmedSave" class="py-3 rounded-lg bg-brand-800 text-white text-xs font-extrabold uppercase tracking-wider shadow-[0_2px_0_#022c22]" data-i18n="confirmSaveBtn">Confirm &amp; Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Log Edit / Inline Correction Modal -->
+  <div id="quickEditRowModal" class="hidden fixed inset-0 z-50 bg-slate-950/75 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-md rounded-t-xl sm:rounded-xl border-2 border-slate-300 border-t-4 border-t-amber-500 p-6 shadow-2xl space-y-4 panel-enter">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="font-extrabold text-base text-slate-900" data-i18n="quickEditTitle">Quick Edit Log Entry</h3>
+          <p id="quickEditMetaSub" class="text-xs font-bold text-slate-500 mt-0.5">2026-11-23 · Saba</p>
+        </div>
+        <button type="button" id="btnCloseQuickEditModal" class="w-8 h-8 rounded bg-slate-100 border border-slate-300 text-slate-700 font-extrabold">✕</button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1" data-i18n="quickEditStatusLbl">Day Status</label>
+          <select id="quickEditDayStatus" class="w-full px-3.5 py-2.5 rounded-lg border-2 border-slate-300 text-sm font-extrabold bg-white">
+            <option value="Active">Active</option>
+            <option value="Weekend">Weekend</option>
+            <option value="Cuti">Cuti</option>
+            <option value="Riadah">Riadah</option>
+          </select>
+        </div>
+
+        <div id="quickEditRangeFields" class="grid grid-cols-3 gap-2.5 items-end">
+          <div>
+            <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1" data-i18n="quickEditStartLbl">Start Unit</label>
+            <input type="number" id="quickEditStartUnit" min="1" class="w-full py-2.5 px-2 rounded-lg border-2 border-slate-300 text-center font-extrabold text-base" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1" data-i18n="quickEditEndLbl">End Unit</label>
+            <input type="number" id="quickEditEndUnit" min="1" class="w-full py-2.5 px-2 rounded-lg border-2 border-amber-500 bg-amber-50/50 text-center font-extrabold text-base" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-extrabold uppercase text-slate-500 text-center mb-1" data-i18n="total">Total</label>
+            <div id="quickEditTotalPreview" class="py-2.5 rounded-lg bg-slate-900 text-white text-center font-extrabold text-base border-2 border-slate-950">0</div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-extrabold uppercase text-slate-700 mb-1" data-i18n="thNotes">Notes</label>
+          <input type="text" id="quickEditNotes" placeholder="Notes..." class="w-full px-3.5 py-2.5 rounded-lg border-2 border-slate-300 text-sm font-semibold" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2.5 pt-1">
+        <button type="button" id="btnCancelQuickEdit" class="py-2.5 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-extrabold" data-i18n="cancel">Cancel</button>
+        <button type="button" id="btnSaveQuickEdit" class="py-2.5 rounded-lg bg-brand-800 hover:bg-brand-900 text-white text-xs font-extrabold uppercase tracking-wider shadow-[0_2px_0_#022c22]" data-i18n="quickEditSaveBtn">Save Changes</button>
       </div>
     </div>
   </div>
@@ -1766,13 +1863,17 @@
     let murojaahSurahFilter = 'ALL';
     let selectedMurojaahSurahNums = [];
     let wholeQuranViewFilter = 'STARTED';
+    let badgeTierFilter = 'WEEKLY'; // 'WEEKLY' | 'MONTHLY' | 'LIFETIME'
     let historyCurrentPage = 1;
     let historyPageSize = 20;
     let pendingSessionRowsToSave = null;
     let pendingResetPinTarget = null;
     let pendingRemoveStudentTarget = null;
+    let editingRowTarget = null;
     let adminWorkspacesFullCache = {};
     let armedDeleteRowId = null;
+    let lastKnownUnlockedBadges = new Set();
+    let hasInitializedBadges = false;
 
     // Bilingual Translations
     const I18N = {
@@ -1873,6 +1974,62 @@
         subMurojaahTag: '(Revision)',
         praSabaHintSub: 'End auto-syncs with Saba',
         logCheck: 'Log',
+        dailyQuestHeading: 'Daily Routine Quest',
+        questSubDefault: (d) => `Checklist for ${d}: Log Saba + Pra Saba (or Murojaah revision)`,
+        questSubDone: (d) => `Routine complete for ${d}! May Allah bless your memorization.`,
+        questSubOffDay: (d, st) => `Marked as ${st} for ${d} — streak preserved.`,
+        questBadgeComplete: '✓ Quest Complete',
+        questBadgeOff: (st) => `✓ ${st} Logged`,
+        questBadgeProgress: (done, tot) => `${done} / ${tot} Done`,
+        questItemSaba: 'Saba',
+        questItemPraSaba: 'Pra Saba',
+        questItemRevision: 'Mukhtar / Murojaah',
+        badgesSectionTitle: 'Achievement Badges',
+        tierWeeklyBtn: 'Weekly',
+        tierMonthlyBtn: 'Monthly',
+        tierLifetimeBtn: 'Lifetime',
+        periodSubWeekly: (rangeStr) => `Current Week (${rangeStr}) · Resets every Monday`,
+        periodSubMonthly: (moLabel) => `Current Month (${moLabel}) · Resets on the 1st`,
+        periodSubLifetime: 'Permanent Al-Quran & Streak Hall of Fame',
+        badgesUnlockedCount: (u, tot) => `${u} / ${tot} Unlocked`,
+        badgeUnlockedTag: 'Unlocked',
+        badgeLockedTag: 'In Progress',
+        badgeEarnedTimes: (n) => `Earned ${n}×`,
+        badgeUnlockedToast: (name) => `🏅 Badge Unlocked: ${name}!`,
+        badgesCatalog: {
+          // Weekly (Resets Every Monday)
+          w_istiqamah5: { title: '5-Day Istiqamah', desc: 'Log Active sessions on 5 days this week' },
+          w_saba10: { title: 'Weekly Saba Target', desc: 'Memorize 10+ new Saba units this week' },
+          w_rev3: { title: 'Revision Guardian', desc: 'Complete 3+ Pra Saba, Mukhtar, or Murojaah logs' },
+          w_weekend: { title: 'Weekend Murojaah', desc: 'Log a revision session on Saturday or Sunday' },
+          // Monthly (Resets Every Month)
+          m_zeroCuti: { title: 'Zero-Cuti Month', desc: '10+ active days this month with 0 Cuti days' },
+          m_saba50: { title: 'Monthly 50-Unit Club', desc: 'Memorize 50+ new Saba units this month' },
+          m_rev8: { title: 'Murojaah Marathon', desc: 'Log 8+ Mukhtar or Murojaah sessions this month' },
+          m_mujahid20: { title: '20-Day Mujahid', desc: 'Accumulate 20+ active study days this month' },
+          // Lifetime (Permanent Milestones)
+          l_firstJuz: { title: 'First Juz Unlocked', desc: 'Complete 100% of your very first Juz' },
+          l_ammaChamp: { title: 'Amma Champion', desc: 'Complete 100% of Juz 30 (all 37 Surahs)' },
+          l_baqarahConq: { title: 'Al-Baqarah Conqueror', desc: 'Memorize all 286 Ayat of Surah Al-Baqarah' },
+          l_zahrawayn: { title: 'Zahrawayn Duo', desc: "Complete both Al-Baqarah & Ali 'Imran (486 Ayat)" },
+          l_sunnahGuard: { title: 'Sunnah Surahs Guardian', desc: 'Complete 2+ Surahs from Al-Kahf, Ya-Sin, Ar-Rahman, Al-Waqi\'ah & Al-Mulk' },
+          l_juz5: { title: '5-Juz Scholar', desc: 'Complete 100% of any 5 Juz in the Al-Quran' },
+          l_juz15: { title: 'Half Al-Quran (15 Juz)', desc: 'Reach 50% of the Al-Quran (15 Juz completed)' },
+          l_khatam30: { title: 'Khatam Al-Hafiz (30 Juz)', desc: 'Complete all 6,236 Ayat across all 114 Surahs' },
+          l_streak30: { title: '30-Day Unbroken Streak', desc: 'Maintain 30 consecutive active study days' },
+          l_saba1000: { title: '1,000-Unit Milestone', desc: 'Accumulate 1,000+ total new Saba units memorized' }
+        },
+        duplicateWarnTitle: 'Same-Day Entry Already Exists',
+        duplicateWarnSameCat: (dateStr, cats, existingList) =>
+          `Logs already exist on ${dateStr} (matching: ${cats}): ${existingList}. Confirm only if adding another session.`,
+        duplicateWarnOtherCat: (dateStr, existingList) =>
+          `Note: ${dateStr} already has existing entries (${existingList}).`,
+        quickEditTitle: 'Quick Edit Log Entry',
+        quickEditStatusLbl: 'Day Status',
+        quickEditStartLbl: 'Start Unit',
+        quickEditEndLbl: 'End Unit',
+        quickEditSaveBtn: 'Save Changes',
+        quickEditSavedToast: 'Log entry updated!',
         modeSurahAyat: 'Surah / Ayat',
         modeJuzPage: 'Juz / Page',
         modeAyatRange: 'Ayat Range',
@@ -1936,7 +2093,7 @@
         thRange: 'Range',
         thTotal: 'Total',
         thNotes: 'Notes',
-        thDel: 'Del',
+        thAction: 'Edit / Del',
         emptyHistory: 'No matching records found.',
         prevPageBtn: '← Prev',
         nextPageBtn: 'Next →',
@@ -2042,6 +2199,62 @@
         subMurojaahTag: '(Ulang Kaji)',
         praSabaHintSub: 'Tamat selaras dengan Saba',
         logCheck: 'Rekod',
+        dailyQuestHeading: 'Misi Rutin Harian',
+        questSubDefault: (d) => `Senarai semak ${d}: Rekod Saba + Pra Saba (atau ulang kaji Murojaah)`,
+        questSubDone: (d) => `Rutin lengkap untuk ${d}! Semoga Allah memberkati hafazan anda.`,
+        questSubOffDay: (d, st) => `Direkodkan sebagai ${st} pada ${d} — rekod berturut dikekalkan.`,
+        questBadgeComplete: '✓ Misi Selesai',
+        questBadgeOff: (st) => `✓ ${st} Direkod`,
+        questBadgeProgress: (done, tot) => `${done} / ${tot} Selesai`,
+        questItemSaba: 'Saba',
+        questItemPraSaba: 'Pra Saba',
+        questItemRevision: 'Mukhtar / Murojaah',
+        badgesSectionTitle: 'Lencana Pencapaian',
+        tierWeeklyBtn: 'Mingguan',
+        tierMonthlyBtn: 'Bulanan',
+        tierLifetimeBtn: 'Sepanjang Hayat',
+        periodSubWeekly: (rangeStr) => `Minggu Ini (${rangeStr}) · Set semula setiap Isnin`,
+        periodSubMonthly: (moLabel) => `Bulan Ini (${moLabel}) · Set semula setiap 1 haribulan`,
+        periodSubLifetime: 'Pencapaian Kekal Al-Quran & Istiqamah',
+        badgesUnlockedCount: (u, tot) => `${u} / ${tot} Terbuka`,
+        badgeUnlockedTag: 'Terbuka',
+        badgeLockedTag: 'Dalam Usaha',
+        badgeEarnedTimes: (n) => `Dicapai ${n}×`,
+        badgeUnlockedToast: (name) => `🏅 Lencana Baharu: ${name}!`,
+        badgesCatalog: {
+          // Mingguan
+          w_istiqamah5: { title: 'Istiqamah 5 Hari', desc: 'Rekod sesi Aktif sekurang-kurangnya 5 hari minggu ini' },
+          w_saba10: { title: 'Sasaran Saba Mingguan', desc: 'Hafaz 10+ unit Saba baharu minggu ini' },
+          w_rev3: { title: 'Penjaga Ulang Kaji', desc: 'Lengkapkan 3+ sesi Pra Saba, Mukhtar, atau Murojaah' },
+          w_weekend: { title: 'Murojaah Hujung Minggu', desc: 'Rekod sesi ulang kaji pada hari Sabtu atau Ahad' },
+          // Bulanan
+          m_zeroCuti: { title: 'Bulan Tanpa Cuti', desc: '10+ hari aktif bulan ini tanpa sebarang hari Cuti' },
+          m_saba50: { title: 'Kelab 50-Unit Bulanan', desc: 'Hafaz 50+ unit Saba baharu dalam bulan ini' },
+          m_rev8: { title: 'Maraton Murojaah', desc: 'Rekod 8+ sesi Mukhtar atau Murojaah bulan ini' },
+          m_mujahid20: { title: 'Mujahid 20 Hari', desc: 'Capai 20+ hari belajar aktif dalam bulan ini' },
+          // Sepanjang Hayat
+          l_firstJuz: { title: 'Juzuk Pertama Tamat', desc: 'Lengkapkan 100% mana-mana 1 Juzuk pertama anda' },
+          l_ammaChamp: { title: 'Juara Juzuk Amma', desc: 'Tamat 100% Juzuk 30 (semua 37 Surah)' },
+          l_baqarahConq: { title: 'Penakluk Al-Baqarah', desc: 'Hafaz kesemua 286 Ayat Surah Al-Baqarah' },
+          l_zahrawayn: { title: 'Gandingan Az-Zahrawayn', desc: "Tamat Surah Al-Baqarah & Ali 'Imran (486 Ayat)" },
+          l_sunnahGuard: { title: 'Penjaga Surah Sunnah', desc: 'Tamat 2+ Surah daripada Al-Kahf, Ya-Sin, Ar-Rahman, Al-Waqi\'ah & Al-Mulk' },
+          l_juz5: { title: 'Sarjana 5 Juzuk', desc: 'Lengkapkan 100% mana-mana 5 Juzuk Al-Quran' },
+          l_juz15: { title: 'Separuh Al-Quran (15 Juzuk)', desc: 'Capai 50% Al-Quran (15 Juzuk tamat sepenuhnya)' },
+          l_khatam30: { title: 'Khatam Al-Hafiz (30 Juzuk)', desc: 'Tamat kesemua 6,236 Ayat merentas 114 Surah' },
+          l_streak30: { title: 'Istiqamah 30 Hari', desc: 'Kekalkan 30 hari aktif berturut-turut' },
+          l_saba1000: { title: 'Pencapaian 1,000 Unit', desc: 'Kumpul 1,000+ jumlah unit Saba baharu dihafaz' }
+        },
+        duplicateWarnTitle: 'Rekod Tarikh Sama Sudah Wujud',
+        duplicateWarnSameCat: (dateStr, cats, existingList) =>
+          `Tarikh ${dateStr} sudah mempunyai rekod (kategori sama: ${cats}): ${existingList}. Sahkan hanya jika ingin menambah sesi baharu.`,
+        duplicateWarnOtherCat: (dateStr, existingList) =>
+          `Nota: Tarikh ${dateStr} sudah mempunyai rekod sedia ada (${existingList}).`,
+        quickEditTitle: 'Sunting Pantas Rekod',
+        quickEditStatusLbl: 'Status Hari',
+        quickEditStartLbl: 'Unit Mula',
+        quickEditEndLbl: 'Unit Tamat',
+        quickEditSaveBtn: 'Simpan Perubahan',
+        quickEditSavedToast: 'Rekod berjaya dikemas kini!',
         modeSurahAyat: 'Surah / Ayat',
         modeJuzPage: 'Juzuk / M/S',
         modeAyatRange: 'Julat Ayat',
@@ -2105,7 +2318,7 @@
         thRange: 'Julat',
         thTotal: 'Jumlah',
         thNotes: 'Catatan',
-        thDel: 'Padam',
+        thAction: 'Edit / Padam',
         emptyHistory: 'Tiada rekod sepadan ditemui.',
         prevPageBtn: '← Sebelum',
         nextPageBtn: 'Seterusnya →',
@@ -2281,6 +2494,9 @@
       if (unsubProf) unsubProf();
       if (unsubAuth) unsubAuth();
 
+      hasInitializedBadges = false;
+      lastKnownUnlockedBadges = new Set();
+
       const rowsKey = `${STORAGE_KEY}_${codeKey}`;
       const profKey = `${PROFILE_STORAGE_KEY}_${codeKey}`;
 
@@ -2434,13 +2650,14 @@
           : 'mobile-nav-btn py-2 rounded-lg flex flex-col items-center justify-center gap-1 text-slate-600 font-bold text-[11px]';
       });
 
+      if (tab === 'log') renderDailyQuestIndicator();
       if (tab === 'progress') renderProgressAnalytics();
       if (tab === 'history') renderHistoryTable();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // =======================================================================
-    // RENDER HOME DASHBOARD & PROFILE
+    // RENDER HOME DASHBOARD, DAILY QUEST & PROFILE
     // =======================================================================
     function updateHeaderIdentity() {
       document.getElementById('headerCodeText').textContent = activeWorkspaceDisplayCode;
@@ -2456,9 +2673,73 @@
     function refreshAllViews() {
       updateHeaderIdentity();
       applySmartAutoFill();
+      renderDailyQuestIndicator();
       renderHomeDashboard();
       renderProgressAnalytics();
       renderHistoryTable();
+    }
+
+    function renderDailyQuestIndicator() {
+      const tr = t();
+      const card = document.getElementById('dailyQuestCard');
+      const iconBox = document.getElementById('dailyQuestIconBox');
+      const pill = document.getElementById('dailyQuestStatusPill');
+      const sub = document.getElementById('dailyQuestSub');
+      const listEl = document.getElementById('dailyQuestChecklist');
+      if (!card || !listEl) return;
+
+      const dateVal = document.getElementById('entryDate').value || new Date().toISOString().split('T')[0];
+      const logsForDate = hafazanRows.filter(r => r.Date === dateVal);
+      const offEntry = logsForDate.find(r => r.Day_Status && r.Day_Status !== 'Active');
+
+      if (offEntry) {
+        const stLabel = tr.statusLabels[offEntry.Day_Status] || offEntry.Day_Status;
+        card.className = 'arch-card border-l-4 border-l-emerald-600 bg-emerald-50/50 p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+        iconBox.className = 'w-10 h-10 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg shrink-0';
+        iconBox.textContent = '🌙';
+        pill.className = 'px-2.5 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-extrabold uppercase';
+        pill.textContent = tr.questBadgeOff(stLabel);
+        sub.textContent = tr.questSubOffDay(dateVal, stLabel);
+        listEl.innerHTML = `<span class="px-3 py-1.5 rounded-md bg-white border border-emerald-300 text-emerald-900 text-xs font-extrabold">✓ ${escapeHTML(stLabel)}</span>`;
+        return;
+      }
+
+      const hasSaba = logsForDate.some(r => r.Day_Status === 'Active' && r.Category === 'Saba');
+      const hasPra = logsForDate.some(r => r.Day_Status === 'Active' && r.Category === 'Pra Saba');
+      const hasRev = logsForDate.some(r => r.Day_Status === 'Active' && (r.Category === 'Mukhtar' || r.Category === 'Murojaah'));
+      const isMurojaahOnlyComplete = !hasSaba && logsForDate.some(r => r.Day_Status === 'Active' && r.Category === 'Murojaah');
+      const isComplete = (hasSaba && hasPra) || isMurojaahOnlyComplete;
+
+      const coreDoneCount = (hasSaba ? 1 : 0) + (hasPra ? 1 : 0);
+
+      if (isComplete) {
+        card.className = 'arch-card border-l-4 border-l-emerald-600 bg-emerald-50/60 p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+        iconBox.className = 'w-10 h-10 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-lg shrink-0';
+        iconBox.textContent = '🏆';
+        pill.className = 'px-2.5 py-0.5 rounded bg-emerald-700 text-white text-[10px] font-extrabold uppercase';
+        pill.textContent = tr.questBadgeComplete;
+        sub.textContent = tr.questSubDone(dateVal);
+      } else {
+        card.className = 'arch-card border-l-4 border-l-amber-500 p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+        iconBox.className = 'w-10 h-10 rounded-lg bg-amber-100 border border-amber-300 text-amber-800 flex items-center justify-center text-lg shrink-0';
+        iconBox.textContent = '🎯';
+        pill.className = 'px-2.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold uppercase';
+        pill.textContent = tr.questBadgeProgress(coreDoneCount, 2);
+        sub.textContent = tr.questSubDefault(dateVal);
+      }
+
+      const pillHtml = (done, label, optional = false) => {
+        if (done) {
+          return `<span class="px-2.5 py-1 rounded-md bg-emerald-100 border border-emerald-400 text-emerald-950 text-[11px] font-extrabold">✓ ${escapeHTML(label)}</span>`;
+        }
+        return `<span class="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-300 text-slate-500 text-[11px] font-bold">${optional ? '○' : '☐'} ${escapeHTML(label)}</span>`;
+      };
+
+      listEl.innerHTML = [
+        pillHtml(hasSaba, tr.questItemSaba, false),
+        pillHtml(hasPra, tr.questItemPraSaba, false),
+        pillHtml(hasRev, tr.questItemRevision, true)
+      ].join('');
     }
 
     function renderHomeDashboard() {
@@ -2716,6 +2997,15 @@
         document.getElementById('mukhtarPageEnd').value = 1;
       }
 
+      const lastMurojaah = [...sorted].reverse().find(r => r.Category === 'Murojaah');
+      if (lastMurojaah) {
+        const uDisp = lastMurojaah.Tracking_Unit === 'Page'
+          ? 'Page'
+          : (lastMurojaah.Tracking_Unit === 'Full Surah' ? 'Full Surahs' : 'Ayat');
+        document.getElementById('murojaahLastHint').textContent =
+          `Last: ${lastMurojaah.Surah_or_Juz} (${lastMurojaah.Total_Amount} ${uDisp})`;
+      }
+
       updateSurahDisplayBadges();
       recalculateTotals();
     }
@@ -2882,9 +3172,10 @@
     }
 
     // =======================================================================
-    // SAVE DAILY SESSION (WITH CONFIRMATION MODAL)
+    // SAVE DAILY SESSION (WITH DUPLICATE / SAME-DAY ENTRY WARNING)
     // =======================================================================
     function prepareSaveDailySession() {
+      const tr = t();
       const dateVal = document.getElementById('entryDate').value;
       if (!dateVal) { showToast('Please choose a date'); return; }
       const newRows = [];
@@ -2967,6 +3258,30 @@
         if (newRows.length === 0) { showToast('Enable at least 1 category'); return; }
       }
 
+      // Check for existing entries on the same date (Duplicate / Same-Day Entry Warning)
+      const sameDateExisting = hafazanRows.filter(r => r.Date === dateVal);
+      const dupBox = document.getElementById('duplicateEntryWarningBox');
+      if (sameDateExisting.length > 0) {
+        const newCats = new Set(newRows.map(r => r.Day_Status === 'Active' ? r.Category : r.Day_Status));
+        const overlappingCats = Array.from(new Set(
+          sameDateExisting
+            .map(r => r.Day_Status === 'Active' ? r.Category : r.Day_Status)
+            .filter(cat => newCats.has(cat))
+        ));
+        const existingSummary = sameDateExisting.map(r => {
+          if (r.Day_Status !== 'Active') return r.Day_Status;
+          return `${r.Category} (${r.Surah_or_Juz} ${r.Start_Unit}–${r.End_Unit})`;
+        }).join(', ');
+
+        document.getElementById('duplicateWarningTitle').textContent = tr.duplicateWarnTitle;
+        document.getElementById('duplicateWarningDesc').textContent = overlappingCats.length > 0
+          ? tr.duplicateWarnSameCat(dateVal, overlappingCats.join(', '), existingSummary)
+          : tr.duplicateWarnOtherCat(dateVal, existingSummary);
+        dupBox.classList.remove('hidden');
+      } else {
+        dupBox.classList.add('hidden');
+      }
+
       pendingSessionRowsToSave = newRows;
       document.getElementById('confirmSaveModalSub').textContent = `${dateVal} · ${currentDayStatus} (${newRows.length} rows)`;
       document.getElementById('confirmSaveSummaryList').innerHTML = newRows.map(r => {
@@ -3001,8 +3316,362 @@
     }
 
     // =======================================================================
-    // PROGRESS ANALYTICS & HISTORY TABLE RENDERERS
+    // QUICK LOG EDIT / INLINE CORRECTION MODAL
     // =======================================================================
+    function openQuickEditModal(rowId) {
+      const target = hafazanRows.find(r => r.id === rowId);
+      if (!target) return;
+      editingRowTarget = { ...target };
+
+      const catLabel = target.Day_Status === 'Active' ? `${target.Category} · ${target.Surah_or_Juz}` : target.Day_Status;
+      document.getElementById('quickEditMetaSub').textContent = `${target.Date} · ${catLabel}`;
+      document.getElementById('quickEditDayStatus').value = target.Day_Status || 'Active';
+      document.getElementById('quickEditStartUnit').value = target.Start_Unit || 1;
+      document.getElementById('quickEditEndUnit').value = target.End_Unit || 1;
+      document.getElementById('quickEditNotes').value = target.Notes || '';
+
+      syncQuickEditModalFields();
+      document.getElementById('quickEditRowModal').classList.remove('hidden');
+    }
+
+    function syncQuickEditModalFields() {
+      if (!editingRowTarget) return;
+      const statusVal = document.getElementById('quickEditDayStatus').value;
+      const hasRange = statusVal === 'Active' && editingRowTarget.Category && editingRowTarget.Tracking_Unit !== 'Full Surah';
+      document.getElementById('quickEditRangeFields').classList.toggle('hidden', !hasRange);
+
+      if (hasRange) {
+        const s = parseInt(document.getElementById('quickEditStartUnit').value, 10) || 0;
+        const e = parseInt(document.getElementById('quickEditEndUnit').value, 10) || 0;
+        const tot = e >= s && s > 0 ? (e - s + 1) : 0;
+        document.getElementById('quickEditTotalPreview').textContent = tot;
+      }
+    }
+
+    async function saveQuickEditRow() {
+      if (!editingRowTarget) return;
+      const tr = t();
+      const newStatus = document.getElementById('quickEditDayStatus').value;
+      const newNotes = document.getElementById('quickEditNotes').value.trim();
+
+      let updatedRow = {
+        ...editingRowTarget,
+        Day_Status: newStatus,
+        Notes: newNotes
+      };
+
+      if (newStatus !== 'Active') {
+        updatedRow.Category = '';
+        updatedRow.Surah_or_Juz = '';
+        updatedRow.Tracking_Unit = '';
+        updatedRow.Start_Unit = '';
+        updatedRow.End_Unit = '';
+        updatedRow.Total_Amount = 0;
+      } else if (updatedRow.Tracking_Unit !== 'Full Surah') {
+        const s = parseInt(document.getElementById('quickEditStartUnit').value, 10) || 1;
+        const e = parseInt(document.getElementById('quickEditEndUnit').value, 10) || s;
+        if (e < s) {
+          showToast('End Unit must be >= Start Unit');
+          return;
+        }
+        updatedRow.Start_Unit = s;
+        updatedRow.End_Unit = e;
+        updatedRow.Total_Amount = e - s + 1;
+      }
+
+      const btn = document.getElementById('btnSaveQuickEdit');
+      btn.disabled = true;
+      setSyncStatus('syncing', 'Saving...');
+
+      try {
+        await set(ref(db, `hafazan_tracker/workspaces/${activeWorkspaceKey}/rows/${updatedRow.id}`), updatedRow);
+        const idx = hafazanRows.findIndex(r => r.id === updatedRow.id);
+        if (idx >= 0) hafazanRows[idx] = updatedRow;
+        localStorage.setItem(`${STORAGE_KEY}_${activeWorkspaceKey}`, JSON.stringify(hafazanRows));
+        document.getElementById('quickEditRowModal').classList.add('hidden');
+        editingRowTarget = null;
+        setSyncStatus('connected', 'Cloud Synced');
+        refreshAllViews();
+        showToast(tr.quickEditSavedToast);
+      } catch (err) {
+        setSyncStatus('error', 'Save Error');
+        showToast('Error updating row: ' + (err?.message || ''));
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    // =======================================================================
+    // 3-TIER ACHIEVEMENT BADGES (WEEKLY · MONTHLY · LIFETIME)
+    // =======================================================================
+    function getLocalISO(dateObj) {
+      return new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000).toISOString().split('T')[0];
+    }
+
+    function getCurrentWeekBounds() {
+      const now = new Date();
+      const dayOfWeek = now.getDay(); // 0=Sun, 1=Mon..6=Sat
+      const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+      const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + diffToMonday);
+      const sunday = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + 6);
+      const startIso = getLocalISO(monday);
+      const endIso = getLocalISO(sunday);
+      const locale = currentLang === 'MY' ? 'ms-MY' : 'en-MY';
+      const rangeStr = `${monday.toLocaleDateString(locale, { day: 'numeric', month: 'short' })} – ${sunday.toLocaleDateString(locale, { day: 'numeric', month: 'short' })}`;
+      return { startIso, endIso, rangeStr };
+    }
+
+    function renderAchievementBadges(sorted, surahMemMap) {
+      const tr = t();
+      const gridEl = document.getElementById('achievementBadgesGrid');
+      const countPill = document.getElementById('badgesUnlockedCountPill');
+      const periodSubEl = document.getElementById('badgesPeriodSubtitle');
+      if (!gridEl || !countPill || !periodSubEl) return;
+
+      const locale = currentLang === 'MY' ? 'ms-MY' : 'en-MY';
+      const now = new Date();
+      const currentYm = getLocalISO(now).slice(0, 7);
+      const currentMonthLabel = now.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+      const weekBounds = getCurrentWeekBounds();
+
+      // 1. WEEKLY CALCULATIONS (Current Monday–Sunday)
+      const weekRows = sorted.filter(r => r.Date >= weekBounds.startIso && r.Date <= weekBounds.endIso);
+      const weekActiveDays = new Set();
+      let weekSabaUnits = 0;
+      let weekRevSessions = 0;
+      let weekWeekendRev = false;
+
+      weekRows.forEach(r => {
+        if (r.Day_Status !== 'Active') return;
+        weekActiveDays.add(r.Date);
+        const amt = Number(r.Total_Amount) || 0;
+        if (r.Category === 'Saba') weekSabaUnits += amt;
+        if (['Pra Saba', 'Mukhtar', 'Murojaah'].includes(r.Category)) {
+          weekRevSessions++;
+          const dt = new Date(`${r.Date}T00:00:00`);
+          if (!isNaN(dt.getTime()) && (dt.getDay() === 0 || dt.getDay() === 6)) {
+            weekWeekendRev = true;
+          }
+        }
+      });
+
+      const weeklyBadges = [
+        { id: 'w_istiqamah5', icon: '🔥', cur: weekActiveDays.size, target: 5, unlocked: weekActiveDays.size >= 5, earnedCount: 0 },
+        { id: 'w_saba10', icon: '📖', cur: weekSabaUnits, target: 10, unlocked: weekSabaUnits >= 10, earnedCount: 0 },
+        { id: 'w_rev3', icon: '🔁', cur: weekRevSessions, target: 3, unlocked: weekRevSessions >= 3, earnedCount: 0 },
+        { id: 'w_weekend', icon: '🌙', cur: weekWeekendRev ? 1 : 0, target: 1, unlocked: weekWeekendRev, earnedCount: 0 }
+      ];
+
+      // 2. MONTHLY CALCULATIONS (Current Month + Historical "Earned X×" Counter)
+      const byMonthMap = {};
+      sorted.forEach(r => {
+        if (!r.Date || r.Date.length < 7) return;
+        const ym = r.Date.slice(0, 7);
+        if (!byMonthMap[ym]) byMonthMap[ym] = { activeDays: new Set(), cutiDays: new Set(), sabaUnits: 0, revLogs: 0 };
+        if (r.Day_Status === 'Active') {
+          byMonthMap[ym].activeDays.add(r.Date);
+          if (r.Category === 'Saba') byMonthMap[ym].sabaUnits += (Number(r.Total_Amount) || 0);
+          if (['Mukhtar', 'Murojaah'].includes(r.Category)) byMonthMap[ym].revLogs++;
+        } else if (r.Day_Status === 'Cuti') {
+          byMonthMap[ym].cutiDays.add(r.Date);
+        }
+      });
+
+      const curMoStats = byMonthMap[currentYm] || { activeDays: new Set(), cutiDays: new Set(), sabaUnits: 0, revLogs: 0 };
+      const allMonthsArr = Object.values(byMonthMap);
+
+      const zeroCutiWins = allMonthsArr.filter(m => m.activeDays.size >= 10 && m.cutiDays.size === 0).length;
+      const saba50Wins = allMonthsArr.filter(m => m.sabaUnits >= 50).length;
+      const rev8Wins = allMonthsArr.filter(m => m.revLogs >= 8).length;
+      const mujahid20Wins = allMonthsArr.filter(m => m.activeDays.size >= 20).length;
+
+      const monthlyBadges = [
+        {
+          id: 'm_zeroCuti',
+          icon: '💎',
+          cur: curMoStats.cutiDays.size > 0 ? 0 : curMoStats.activeDays.size,
+          target: 10,
+          unlocked: curMoStats.activeDays.size >= 10 && curMoStats.cutiDays.size === 0,
+          earnedCount: zeroCutiWins
+        },
+        {
+          id: 'm_saba50',
+          icon: '📚',
+          cur: curMoStats.sabaUnits,
+          target: 50,
+          unlocked: curMoStats.sabaUnits >= 50,
+          earnedCount: saba50Wins
+        },
+        {
+          id: 'm_rev8',
+          icon: '🔄',
+          cur: curMoStats.revLogs,
+          target: 8,
+          unlocked: curMoStats.revLogs >= 8,
+          earnedCount: rev8Wins
+        },
+        {
+          id: 'm_mujahid20',
+          icon: '🏅',
+          cur: curMoStats.activeDays.size,
+          target: 20,
+          unlocked: curMoStats.activeDays.size >= 20,
+          earnedCount: mujahid20Wins
+        }
+      ];
+
+      // 3. LIFETIME MILESTONES (10 Permanent Hall of Fame Trophies)
+      const dateStatusMap = {};
+      let lifetimeSabaTotal = 0;
+      sorted.forEach(r => {
+        dateStatusMap[r.Date] = r.Day_Status;
+        if (r.Day_Status === 'Active' && r.Category === 'Saba') {
+          lifetimeSabaTotal += (Number(r.Total_Amount) || 0);
+        }
+      });
+      const ascDates = Object.keys(dateStatusMap).sort();
+      let bestStreak = 0, run = 0;
+      for (const d of ascDates) {
+        if (dateStatusMap[d] === 'Active') {
+          run++;
+          if (run > bestStreak) bestStreak = run;
+        } else if (!['Weekend', 'Cuti', 'Riadah'].includes(dateStatusMap[d])) {
+          run = 0;
+        }
+      }
+
+      // Compute completed Juz count across all 30 Juz using Mushaf boundaries
+      let completedJuzCount = 0;
+      for (let j = 1; j <= 30; j++) {
+        const [sS, sA, eS, eA] = MUSHAF_JUZ_SURAH_BOUNDS[j];
+        let tot = 0, mem = 0;
+        for (let n = sS; n <= eS; n++) {
+          const low = n === sS ? sA : 1;
+          const high = n === eS ? eA : ALL_114_SURAHS[n - 1].ayat;
+          tot += (high - low + 1);
+          if ((surahMemMap[n] || 0) >= low) mem += Math.min(high, surahMemMap[n]) - low + 1;
+        }
+        if (tot > 0 && mem >= tot) completedJuzCount++;
+      }
+
+      let juz30CompletedCount = 0;
+      for (let n = 78; n <= 114; n++) {
+        if ((surahMemMap[n] || 0) >= ALL_114_SURAHS[n - 1].ayat) juz30CompletedCount++;
+      }
+      const baqarahAyat = Math.min(286, surahMemMap[2] || 0);
+      const aliImranAyat = Math.min(200, surahMemMap[3] || 0);
+      const zahrawaynAyat = baqarahAyat + aliImranAyat;
+
+      const sunnahNums = [18, 36, 55, 56, 67]; // Al-Kahf, Ya-Sin, Ar-Rahman, Al-Waqi'ah, Al-Mulk
+      const sunnahCompletedCount = sunnahNums.filter(n => (surahMemMap[n] || 0) >= ALL_114_SURAHS[n - 1].ayat).length;
+
+      const lifetimeBadges = [
+        { id: 'l_firstJuz', icon: '🌱', cur: completedJuzCount, target: 1, unlocked: completedJuzCount >= 1, earnedCount: 0 },
+        { id: 'l_ammaChamp', icon: '🌟', cur: juz30CompletedCount, target: 37, unlocked: juz30CompletedCount >= 37, earnedCount: 0 },
+        { id: 'l_baqarahConq', icon: '👑', cur: baqarahAyat, target: 286, unlocked: baqarahAyat >= 286, earnedCount: 0 },
+        { id: 'l_zahrawayn', icon: '✨', cur: zahrawaynAyat, target: 486, unlocked: zahrawaynAyat >= 486, earnedCount: 0 },
+        { id: 'l_sunnahGuard', icon: '🕌', cur: sunnahCompletedCount, target: 2, unlocked: sunnahCompletedCount >= 2, earnedCount: 0 },
+        { id: 'l_juz5', icon: '📘', cur: completedJuzCount, target: 5, unlocked: completedJuzCount >= 5, earnedCount: 0 },
+        { id: 'l_juz15', icon: '🌗', cur: completedJuzCount, target: 15, unlocked: completedJuzCount >= 15, earnedCount: 0 },
+        { id: 'l_khatam30', icon: '🎓', cur: completedJuzCount, target: 30, unlocked: completedJuzCount >= 30, earnedCount: 0 },
+        { id: 'l_streak30', icon: '🏆', cur: bestStreak, target: 30, unlocked: bestStreak >= 30, earnedCount: 0 },
+        { id: 'l_saba1000', icon: '💎', cur: lifetimeSabaTotal, target: 1000, unlocked: lifetimeSabaTotal >= 1000, earnedCount: 0 }
+      ];
+
+      // Check newly unlocked badges across all 3 tiers for celebratory toast
+      const allBadgesCombined = [...weeklyBadges, ...monthlyBadges, ...lifetimeBadges];
+      const currentUnlockedSet = new Set();
+      allBadgesCombined.forEach(b => {
+        if (b.unlocked) {
+          currentUnlockedSet.add(b.id);
+          if (hasInitializedBadges && !lastKnownUnlockedBadges.has(b.id)) {
+            const title = tr.badgesCatalog[b.id]?.title || b.id;
+            setTimeout(() => showToast(tr.badgeUnlockedToast(title)), 600);
+          }
+        }
+      });
+      lastKnownUnlockedBadges = currentUnlockedSet;
+      hasInitializedBadges = true;
+
+      // Select active tier to render
+      const activeList = badgeTierFilter === 'MONTHLY'
+        ? monthlyBadges
+        : badgeTierFilter === 'LIFETIME'
+          ? lifetimeBadges
+          : weeklyBadges;
+
+      periodSubEl.textContent = badgeTierFilter === 'MONTHLY'
+        ? tr.periodSubMonthly(currentMonthLabel)
+        : badgeTierFilter === 'LIFETIME'
+          ? tr.periodSubLifetime
+          : tr.periodSubWeekly(weekBounds.rangeStr);
+
+      const unlockedInTier = activeList.filter(b => b.unlocked).length;
+      countPill.textContent = tr.badgesUnlockedCount(unlockedInTier, activeList.length);
+
+      gridEl.innerHTML = activeList.map(b => {
+        const meta = tr.badgesCatalog[b.id] || { title: b.id, desc: '' };
+        const clampedCur = Math.min(b.target, b.cur);
+        const pct = Math.min(100, Math.round((clampedCur / Math.max(1, b.target)) * 100));
+        const progressText = b.isPct ? `${pct}%` : `${clampedCur} / ${b.target}`;
+        const historyPill = (badgeTierFilter === 'MONTHLY' && b.earnedCount > 0)
+          ? `<span class="px-2 py-0.5 rounded bg-indigo-100 border border-indigo-300 text-indigo-900 text-[9px] font-extrabold">${escapeHTML(tr.badgeEarnedTimes(b.earnedCount))}</span>`
+          : '';
+
+        if (b.unlocked) {
+          return `
+            <div class="p-4 rounded-lg bg-emerald-50 border-2 border-emerald-500 shadow-[0_2px_0_#a7f3d0] flex flex-col justify-between gap-2.5">
+              <div class="flex items-center justify-between gap-1">
+                <span class="w-9 h-9 rounded-lg bg-brand-900 border border-amber-400 text-lg flex items-center justify-center shadow-xs shrink-0">${b.icon}</span>
+                <div class="flex flex-wrap justify-end gap-1">
+                  ${historyPill}
+                  <span class="px-2 py-0.5 rounded bg-amber-400 text-brand-950 text-[9px] font-extrabold uppercase tracking-wider">✓ ${escapeHTML(tr.badgeUnlockedTag)}</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-xs text-slate-900 leading-snug">${escapeHTML(meta.title)}</h4>
+                <p class="text-[10px] font-medium text-slate-600 mt-0.5 leading-snug">${escapeHTML(meta.desc)}</p>
+              </div>
+              <div class="space-y-1 pt-0.5">
+                <div class="flex justify-between text-[10px] font-extrabold text-emerald-900">
+                  <span>${escapeHTML(progressText)}</span>
+                  <span>100%</span>
+                </div>
+                <div class="w-full h-1.5 bg-emerald-200 rounded overflow-hidden">
+                  <div class="h-full bg-brand-700" style="width: 100%"></div>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="p-4 rounded-lg bg-slate-50 border border-slate-300 flex flex-col justify-between gap-2.5">
+            <div class="flex items-center justify-between gap-1">
+              <span class="w-9 h-9 rounded-lg bg-slate-200 border border-slate-300 text-base flex items-center justify-center shrink-0">${b.icon}</span>
+              <div class="flex flex-wrap justify-end gap-1">
+                ${historyPill}
+                <span class="px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[9px] font-extrabold uppercase tracking-wider">${escapeHTML(tr.badgeLockedTag)}</span>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-xs text-slate-800 leading-snug">${escapeHTML(meta.title)}</h4>
+              <p class="text-[10px] font-medium text-slate-500 mt-0.5 leading-snug">${escapeHTML(meta.desc)}</p>
+            </div>
+            <div class="space-y-1 pt-0.5">
+              <div class="flex justify-between text-[10px] font-extrabold text-slate-600">
+                <span>${escapeHTML(progressText)}</span>
+                <span>${pct}%</span>
+              </div>
+              <div class="w-full h-1.5 bg-slate-200 rounded overflow-hidden">
+                <div class="h-full bg-amber-500 transition-all duration-300" style="width: ${pct}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function renderProgressAnalytics() {
       const sorted = [...hafazanRows].sort((a, b) => a.Date.localeCompare(b.Date) || a.id - b.id);
       const surahMemMap = {};
@@ -3036,6 +3705,8 @@
 
       document.getElementById('lblWholeQuranSub').textContent = t().wholeQuranSub(doneSurahs, totalMemAyat);
       document.getElementById('wholeQuranProgressBar').style.width = `${Math.min(100, (totalMemAyat / 6236) * 100)}%`;
+
+      renderAchievementBadges(sorted, surahMemMap);
 
       const gridEl = document.getElementById('wholeQuranSurahGrid');
       if (wholeQuranViewFilter === 'BY_JUZ') {
@@ -3209,15 +3880,16 @@
           : r.Category === 'Murojaah' ? 'bg-indigo-100 text-indigo-900'
           : 'bg-amber-100 text-amber-900';
         const range = isOff ? '—' : r.Tracking_Unit === 'Full Surah' ? tr.modeFullSurahs : `${r.Start_Unit}–${r.End_Unit}`;
-        return `<tr class="hover:bg-slate-50/80">
+        return `<tr data-edit-row="${r.id}" class="hover:bg-amber-50/50 cursor-pointer transition">
           <td class="py-3 px-4 font-bold text-slate-900 whitespace-nowrap">${escapeHTML(r.Date)}</td>
           <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${pill}">${escapeHTML(isOff ? statusLabel : r.Category)}</span></td>
           <td class="py-3 px-3 font-bold text-slate-800 max-w-[150px] truncate">${escapeHTML(r.Surah_or_Juz || '—')}</td>
           <td class="py-3 px-3 text-center font-semibold text-slate-600 whitespace-nowrap">${escapeHTML(range)}</td>
           <td class="py-3 px-3 text-center font-extrabold text-slate-900">${isOff ? '0' : r.Total_Amount}</td>
           <td class="py-3 px-3 text-slate-500 max-w-[140px] truncate">${escapeHTML(r.Notes || '')}</td>
-          <td class="py-3 px-4 text-right">
-            <button type="button" data-del-id="${r.id}" class="px-2 py-1 rounded-lg text-rose-600 hover:bg-rose-50 font-extrabold">✕</button>
+          <td class="py-3 px-4 text-right whitespace-nowrap space-x-1">
+            <button type="button" data-edit-id="${r.id}" class="px-2 py-1 rounded-lg text-amber-800 hover:bg-amber-100 font-extrabold" title="Edit">✎</button>
+            <button type="button" data-del-id="${r.id}" class="px-2 py-1 rounded-lg text-rose-600 hover:bg-rose-50 font-extrabold" title="Delete">✕</button>
           </td>
         </tr>`;
       }).join('');
@@ -3525,7 +4197,8 @@
       document.getElementById('btnCloseSessionModal').addEventListener('click', () => document.getElementById('sessionAccountModal').classList.add('hidden'));
       document.getElementById('btnLogoutWorkspace').addEventListener('click', logoutToLanding);
 
-      // Daily Log Controls
+      // Daily Log Controls & Date Listener for Daily Quest
+      document.getElementById('entryDate').addEventListener('change', renderDailyQuestIndicator);
       document.getElementById('btnToggleMurojaahDay').addEventListener('click', () => toggleMurojaahDayMode());
       ['enableSaba', 'enablePraSaba', 'enableMukhtar', 'enableMurojaah'].forEach((id, idx) => {
         const key = ['saba', 'prasaba', 'mukhtar', 'murojaah'][idx];
@@ -3728,13 +4401,22 @@
       document.getElementById('btnCancelConfirmSave').addEventListener('click', () => document.getElementById('confirmSaveModal').classList.add('hidden'));
       document.getElementById('btnExecuteConfirmedSave').addEventListener('click', executeConfirmedSessionSave);
 
-      // Progress Filters
+      // Progress Filters & Achievement Tier Tabs
       document.getElementById('quranViewFilterRow').addEventListener('click', e => {
         const b = e.target.closest('[data-qview]');
         if (!b) return;
         wholeQuranViewFilter = b.getAttribute('data-qview');
         document.querySelectorAll('#quranViewFilterRow [data-qview]').forEach(btn => {
           btn.className = btn === b ? 'px-3 py-1 rounded text-xs font-extrabold bg-brand-900 text-white' : 'px-3 py-1 rounded text-xs font-bold text-slate-600';
+        });
+        renderProgressAnalytics();
+      });
+      document.getElementById('badgeTierFilterRow').addEventListener('click', e => {
+        const b = e.target.closest('[data-btier]');
+        if (!b) return;
+        badgeTierFilter = b.getAttribute('data-btier');
+        document.querySelectorAll('#badgeTierFilterRow [data-btier]').forEach(btn => {
+          btn.className = btn === b ? 'px-3 py-1.5 rounded text-xs font-extrabold bg-brand-900 text-white' : 'px-3 py-1.5 rounded text-xs font-bold text-slate-600';
         });
         renderProgressAnalytics();
       });
@@ -3751,24 +4433,42 @@
       document.getElementById('btnDownloadCSV').addEventListener('click', downloadCSV);
       document.getElementById('csvImportInput').addEventListener('change', handleCSVImport);
 
-      // Delete Single Row (2-tap)
+      // Quick Edit & Delete Single Row in Records Table
       document.getElementById('historyTableBody').addEventListener('click', async e => {
         const del = e.target.closest('[data-del-id]');
-        if (!del) return;
-        const id = Number(del.getAttribute('data-del-id'));
-        if (armedDeleteRowId !== id) {
-          armedDeleteRowId = id;
-          del.textContent = 'Confirm?';
-          del.className = 'px-2.5 py-1 rounded-lg bg-rose-600 text-white font-extrabold text-[11px]';
-          setTimeout(() => { armedDeleteRowId = null; renderHistoryTable(); }, 3000);
+        if (del) {
+          e.stopPropagation();
+          const id = Number(del.getAttribute('data-del-id'));
+          if (armedDeleteRowId !== id) {
+            armedDeleteRowId = id;
+            del.textContent = 'Confirm?';
+            del.className = 'px-2.5 py-1 rounded-lg bg-rose-600 text-white font-extrabold text-[11px]';
+            setTimeout(() => { armedDeleteRowId = null; renderHistoryTable(); }, 3000);
+            return;
+          }
+          armedDeleteRowId = null;
+          await remove(ref(db, `hafazan_tracker/workspaces/${activeWorkspaceKey}/rows/${id}`));
+          hafazanRows = hafazanRows.filter(r => r.id !== id);
+          refreshAllViews();
+          showToast('Row deleted');
           return;
         }
-        armedDeleteRowId = null;
-        await remove(ref(db, `hafazan_tracker/workspaces/${activeWorkspaceKey}/rows/${id}`));
-        hafazanRows = hafazanRows.filter(r => r.id !== id);
-        refreshAllViews();
-        showToast('Row deleted');
+
+        const editBtn = e.target.closest('[data-edit-id]');
+        const editRow = e.target.closest('[data-edit-row]');
+        const targetId = editBtn ? Number(editBtn.getAttribute('data-edit-id')) : (editRow ? Number(editRow.getAttribute('data-edit-row')) : null);
+        if (targetId != null) {
+          openQuickEditModal(targetId);
+        }
       });
+
+      // Quick Edit Modal Controls
+      document.getElementById('btnCloseQuickEditModal').addEventListener('click', () => document.getElementById('quickEditRowModal').classList.add('hidden'));
+      document.getElementById('btnCancelQuickEdit').addEventListener('click', () => document.getElementById('quickEditRowModal').classList.add('hidden'));
+      document.getElementById('quickEditDayStatus').addEventListener('change', syncQuickEditModalFields);
+      document.getElementById('quickEditStartUnit').addEventListener('input', syncQuickEditModalFields);
+      document.getElementById('quickEditEndUnit').addEventListener('input', syncQuickEditModalFields);
+      document.getElementById('btnSaveQuickEdit').addEventListener('click', saveQuickEditRow);
 
       // Clear All Modal
       document.getElementById('btnClearAllData').addEventListener('click', () => {
