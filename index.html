@@ -5,24 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Hafazan Tracker — Saba · Pra Saba · Mukhtar · Murojaah</title>
 
-  <!-- Browser Tab Favicon & Apple Touch Icon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23064E3B'/%3E%3Cpath d='M16 16h12a6 6 0 0 1 6 6v26a4 4 0 0 0-4-4H16zm32 0H36a6 6 0 0 0-6 6v26a4 4 0 0 1 4-4h14z' fill='none' stroke='%23FCD34D' stroke-width='3.5' stroke-linejoin='round'/%3E%3C/svg%3E" />
-
-  <!-- Open Graph / Social Link Preview -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Hafazan Tracker" />
-  <meta property="og:url" content="https://annuar.github.io/Hafazan-Tracker/" />
-  <meta property="og:title" content="Hafazan Tracker — Student Saba, Pra Saba &amp; Murojaah" />
-  <meta property="og:description" content="Track daily Saba, Pra Saba, Mukhtar, and Murojaah sessions together in real time—complete with monthly insights and 114-Surah progress." />
-  <meta property="og:image" content="https://annuar.github.io/Hafazan-Tracker/preview.png" />
-
-  <!-- Twitter / Large Card Preview -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://annuar.github.io/Hafazan-Tracker/" />
-  <meta name="twitter:title" content="Hafazan Tracker — Student Saba, Pra Saba &amp; Murojaah" />
-  <meta name="twitter:description" content="Track daily Saba, Pra Saba, Mukhtar, and Murojaah sessions together in real time—complete with monthly insights and 114-Surah progress." />
-  <meta name="twitter:image" content="https://annuar.github.io/Hafazan-Tracker/preview.png" />
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -258,22 +240,22 @@
        ======================================================================= -->
   <div id="adminPortalView" class="hidden min-h-screen pb-16">
     <header class="bg-indigo-950 text-white sticky top-0 z-30 border-b-4 border-indigo-500">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-indigo-500/25 border border-indigo-400/50 flex items-center justify-center text-lg">🛡️</div>
           <div>
-            <h1 class="font-extrabold text-base sm:text-lg leading-tight" data-i18n="adminPageTitle">Teacher &amp; Admin Portal</h1>
+            <h1 class="font-extrabold text-base sm:text-lg leading-tight" data-i18n="adminPageTitle">Portal Admin</h1>
             <p class="text-xs text-indigo-200" data-i18n="adminPageSub">Manage student accounts, PINs &amp; trackers</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
           <button type="button" id="btnBackToStudentLogin" class="px-3.5 py-2 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold transition" data-i18n="backToSignIn">← Sign In</button>
-          <button type="button" id="btnAdminLogout" class="hidden px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-xs font-bold transition" data-i18n="logOutBtn">Log Out</button>
+          <button type="button" id="btnAdminLogout" class="hidden px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-xs font-extrabold transition" data-i18n="logOutBtn">Log Out</button>
         </div>
       </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-6 space-y-6">
       <!-- Admin Passkey Gate -->
       <div id="wsAdminAuthBox" class="max-w-md mx-auto arch-card border-t-4 border-t-indigo-600 p-7 space-y-4 panel-enter">
         <h2 class="text-lg font-extrabold text-slate-900" data-i18n="adminUnlockTitle">Enter Admin Passkey</h2>
@@ -284,8 +266,67 @@
         <button type="button" id="btnUnlockAdmin" class="w-full py-3.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider shadow-[0_3px_0_#312e81] transition" data-i18n="unlockAdminBtn">Unlock Directory</button>
       </div>
 
-      <!-- Admin Directory -->
+      <!-- Admin Directory & Cohort Insights -->
       <div id="wsAdminDirectoryBox" class="hidden space-y-5 panel-enter">
+        <!-- Overall Cohort Progress & Insights Card -->
+        <div class="arch-card border-t-4 border-t-indigo-600 p-5 sm:p-6 space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+            <div>
+              <h2 class="text-base sm:text-lg font-extrabold text-slate-900" data-i18n="adminCohortTitle">Overall Students Progress &amp; Insights</h2>
+              <p class="text-xs text-slate-500 font-medium" data-i18n="adminCohortSub">Live cohort comparison across all registered students</p>
+            </div>
+            <span id="adminCohortSyncBadge" class="px-2.5 py-1 rounded bg-indigo-50 border border-indigo-200 text-indigo-800 text-[11px] font-extrabold">Live Analytics</span>
+          </div>
+
+          <!-- 4 Cohort Summary KPIs -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="p-3.5 rounded-lg bg-indigo-50 border border-indigo-200 border-l-4 border-l-indigo-600">
+              <span class="text-[10px] font-extrabold uppercase text-indigo-950" data-i18n="adminKpiStudents">Total Students</span>
+              <p id="adminKpiTotalStudents" class="text-2xl font-extrabold text-indigo-900 mt-0.5">0</p>
+              <span id="adminKpiActiveStudentsSub" class="text-[11px] font-bold text-indigo-700">0 active</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-emerald-50 border border-emerald-200 border-l-4 border-l-emerald-600">
+              <span class="text-[10px] font-extrabold uppercase text-emerald-950" data-i18n="adminKpiTotalAyat">Cohort Ayat</span>
+              <p id="adminKpiTotalAyat" class="text-2xl font-extrabold text-emerald-900 mt-0.5">0</p>
+              <span id="adminKpiAvgQuranSub" class="text-[11px] font-bold text-emerald-700">Avg 0.0% Quran</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-amber-50 border border-amber-200 border-l-4 border-l-amber-500">
+              <span class="text-[10px] font-extrabold uppercase text-amber-950" data-i18n="adminKpiLogs">Total Logs</span>
+              <p id="adminKpiTotalLogs" class="text-2xl font-extrabold text-amber-900 mt-0.5">0</p>
+              <span id="adminKpiActiveDaysSub" class="text-[11px] font-bold text-amber-700">0 active days</span>
+            </div>
+            <div class="p-3.5 rounded-lg bg-cyan-50 border border-cyan-200 border-l-4 border-l-cyan-600">
+              <span class="text-[10px] font-extrabold uppercase text-cyan-950" data-i18n="adminKpiTopStudent">Top Milestone</span>
+              <p id="adminKpiTopStudent" class="text-sm sm:text-base font-extrabold text-cyan-900 mt-1 truncate">—</p>
+              <span id="adminKpiTopStudentSub" class="text-[11px] font-bold text-cyan-700">0% Al-Quran</span>
+            </div>
+          </div>
+
+          <!-- Dual Visual Charts: Al-Quran Completion % Bar Chart + Activity Volume Stacked Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-1">
+            <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800" data-i18n="adminChartQuranTitle">Al-Quran Mastery (%) by Student</h3>
+                <span class="text-[10px] font-bold text-emerald-800">0–100%</span>
+              </div>
+              <div id="adminQuranCompletionChart" class="space-y-2.5"></div>
+            </div>
+
+            <div class="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800" data-i18n="adminChartVolumeTitle">Session Volume Breakdown</h3>
+                <div class="flex items-center gap-2 text-[10px] font-bold text-slate-600">
+                  <span><strong class="text-emerald-600">■</strong> Saba</span>
+                  <span><strong class="text-cyan-600">■</strong> Pra</span>
+                  <span><strong class="text-amber-500">■</strong> Mukhtar</span>
+                  <span><strong class="text-indigo-600">■</strong> Murojaah</span>
+                </div>
+              </div>
+              <div id="adminVolumeBreakdownChart" class="space-y-2.5"></div>
+            </div>
+          </div>
+        </div>
+
         <div class="arch-card p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <h2 class="text-lg font-extrabold text-slate-900" data-i18n="adminDirTitle">All Student Workspaces</h2>
@@ -1461,6 +1502,31 @@
     </div>
   </div>
 
+  <!-- Admin Remove Student Confirmation Modal -->
+  <div id="adminRemoveStudentModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-xl border-2 border-slate-300 border-t-4 border-t-rose-600 p-6 shadow-2xl space-y-4 panel-enter">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-extrabold text-base text-rose-700" data-i18n="removeStudentModalTitle">Remove Student Account?</h3>
+          <p id="removeStudentTargetSubtitle" class="text-xs font-extrabold text-slate-800 mt-0.5">Code: —</p>
+        </div>
+        <button type="button" id="btnCloseRemoveStudentModal" class="w-8 h-8 rounded bg-slate-100 border border-slate-300 text-slate-700 font-extrabold">✕</button>
+      </div>
+      <div class="p-3.5 rounded-lg bg-rose-50 border-l-4 border-rose-600 text-xs text-rose-900 font-semibold leading-relaxed" data-i18n="removeStudentWarnBody">
+        This will permanently delete this student's profile, PIN, and all logged Hafazan records from the database. This action cannot be undone.
+      </div>
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="removeStudentTypePrompt">Type <strong>DELETE</strong> below to confirm removal:</label>
+        <input type="text" id="removeStudentConfirmInput" autocomplete="off" spellcheck="false" placeholder="DELETE"
+          class="w-full px-4 py-2.5 rounded-lg border-2 border-rose-300 text-center font-extrabold uppercase tracking-widest text-sm focus:outline-none focus:border-rose-600" />
+      </div>
+      <div class="grid grid-cols-2 gap-2.5">
+        <button type="button" id="btnCancelRemoveStudentModal" class="py-2.5 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-extrabold" data-i18n="cancel">Cancel</button>
+        <button type="button" id="btnConfirmExecuteRemoveStudent" disabled class="py-2.5 rounded-lg bg-rose-600 disabled:opacity-40 text-white text-xs font-extrabold uppercase tracking-wider" data-i18n="confirmRemoveStudentBtn">Remove Student</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Toast Notification -->
   <div id="toastBanner" class="fixed top-20 left-1/2 -translate-x-1/2 z-[70] bg-slate-950 text-amber-300 border border-amber-400/50 px-5 py-2.5 rounded-lg text-xs font-extrabold shadow-xl opacity-0 pointer-events-none transition-all duration-200">
     <span id="toastMessage">Saved!</span>
@@ -1686,6 +1752,8 @@
     let historyPageSize = 20;
     let pendingSessionRowsToSave = null;
     let pendingResetPinTarget = null;
+    let pendingRemoveStudentTarget = null;
+    let adminWorkspacesFullCache = {};
     let armedDeleteRowId = null;
 
     // Bilingual Translations
@@ -1705,14 +1773,27 @@
         phWsCode: 'Enter Student Code',
         openTrackerBtn: 'Open Student Dashboard',
         ustazPortalHint: 'Teacher / Ustaz Access',
-        adminModeBtn: 'Admin Portal',
-        adminPageTitle: 'Teacher & Admin Portal',
+        adminModeBtn: 'Portal Admin',
+        adminPageTitle: 'Portal Admin',
         adminPageSub: 'Manage student accounts, PINs & trackers',
         backToSignIn: '← Sign In',
         backToAdminBtn: 'Admin',
         adminUnlockTitle: 'Enter Admin Passkey',
         adminUnlockSub: 'Unlock the student directory to inspect trackers, create accounts, or reset forgotten PINs.',
         unlockAdminBtn: 'Unlock Directory',
+        adminCohortTitle: 'Overall Students Progress & Insights',
+        adminCohortSub: 'Live cohort comparison across all registered students',
+        adminKpiStudents: 'Total Students',
+        adminKpiTotalAyat: 'Cohort Ayat',
+        adminKpiLogs: 'Total Logs',
+        adminKpiTopStudent: 'Top Milestone',
+        adminChartQuranTitle: 'Al-Quran Mastery (%) by Student',
+        adminChartVolumeTitle: 'Session Volume Breakdown',
+        removeStudentBtn: 'Remove',
+        removeStudentModalTitle: 'Remove Student Account?',
+        removeStudentWarnBody: 'This will permanently delete this student\'s profile, PIN, and all logged Hafazan records from the database. This action cannot be undone.',
+        removeStudentTypePrompt: 'Type DELETE below to confirm removal:',
+        confirmRemoveStudentBtn: 'Remove Student',
         adminDirTitle: 'All Student Workspaces',
         adminNewStudentBtn: '+ New Student',
         adminCreateTitle: 'Create New Student Account',
@@ -1862,13 +1943,26 @@
         openTrackerBtn: 'Buka Papan Pemuka',
         ustazPortalHint: 'Akses Guru / Ustaz',
         adminModeBtn: 'Portal Admin',
-        adminPageTitle: 'Portal Guru & Admin',
+        adminPageTitle: 'Portal Admin',
         adminPageSub: 'Urus akaun pelajar, PIN & rekod hafazan',
         backToSignIn: '← Log Masuk',
         backToAdminBtn: 'Admin',
         adminUnlockTitle: 'Masukkan Kata Laluan Admin',
         adminUnlockSub: 'Buka direktori pelajar untuk menyemak rekod, cipta akaun, atau set semula PIN.',
         unlockAdminBtn: 'Buka Direktori',
+        adminCohortTitle: 'Prestasi & Analisis Keseluruhan Pelajar',
+        adminCohortSub: 'Perbandingan langsung semua akaun pelajar berdaftar',
+        adminKpiStudents: 'Jumlah Pelajar',
+        adminKpiTotalAyat: 'Ayat Keseluruhan',
+        adminKpiLogs: 'Jumlah Rekod',
+        adminKpiTopStudent: 'Pencapaian Tertinggi',
+        adminChartQuranTitle: 'Penguasaan Al-Quran (%) Mengikut Pelajar',
+        adminChartVolumeTitle: 'Pecahan Jumlah Sesi',
+        removeStudentBtn: 'Padam',
+        removeStudentModalTitle: 'Padam Akaun Pelajar?',
+        removeStudentWarnBody: 'Tindakan ini akan memadamkan profil, PIN, dan semua rekod Hafazan pelajar ini secara kekal daripada pangkalan data. Tindakan ini tidak boleh dibatalkan.',
+        removeStudentTypePrompt: 'Taip DELETE di bawah untuk mengesahkan:',
+        confirmRemoveStudentBtn: 'Padam Pelajar',
         adminDirTitle: 'Semua Ruang Pelajar',
         adminNewStudentBtn: '+ Pelajar Baharu',
         adminCreateTitle: 'Daftar Akaun Pelajar Baharu',
@@ -3166,6 +3260,7 @@
       document.getElementById('btnLandingOpenAdmin').addEventListener('click', () => {
         document.getElementById('wsAdminKeyInput').value = '';
         document.getElementById('wsAdminErrorMsg').classList.add('hidden');
+        document.getElementById('btnBackToStudentLogin').classList.toggle('hidden', isAdminUnlocked);
         document.getElementById('landingView').classList.add('hidden');
         document.getElementById('adminPortalView').classList.remove('hidden');
       });
@@ -3177,6 +3272,7 @@
       });
       document.getElementById('btnBackToAdminGlobal').addEventListener('click', () => {
         document.getElementById('appShell').classList.add('hidden');
+        document.getElementById('btnBackToStudentLogin').classList.add('hidden');
         document.getElementById('adminPortalView').classList.remove('hidden');
       });
       document.getElementById('btnUnlockAdmin').addEventListener('click', async () => {
@@ -3198,9 +3294,14 @@
         document.getElementById('wsAdminErrorMsg').classList.add('hidden');
         document.getElementById('wsAdminAuthBox').classList.add('hidden');
         document.getElementById('wsAdminDirectoryBox').classList.remove('hidden');
+        document.getElementById('btnBackToStudentLogin').classList.add('hidden');
         document.getElementById('btnAdminLogout').classList.remove('hidden');
         onValue(fbWorkspacesIndexRef, snap => {
           workspacesIndexCache = snap.val() || {};
+          renderAdminDirectory();
+        });
+        onValue(ref(db, 'hafazan_tracker/workspaces'), snap => {
+          adminWorkspacesFullCache = snap.val() || {};
           renderAdminDirectory();
         });
       });
@@ -3215,6 +3316,9 @@
         document.getElementById('wsAdminAuthBox').classList.remove('hidden');
         document.getElementById('wsAdminDirectoryBox').classList.add('hidden');
         document.getElementById('btnAdminLogout').classList.add('hidden');
+        document.getElementById('btnBackToStudentLogin').classList.remove('hidden');
+        document.getElementById('adminPortalView').classList.add('hidden');
+        document.getElementById('landingView').classList.remove('hidden');
       });
       document.getElementById('btnToggleAdminCreateForm').addEventListener('click', () => {
         document.getElementById('wsAdminCreateForm').classList.toggle('hidden');
@@ -3258,6 +3362,17 @@
           document.getElementById('chkConfirmResetPin').checked = false;
           document.getElementById('btnConfirmExecuteResetPin').disabled = true;
           document.getElementById('adminResetPinModal').classList.remove('hidden');
+          return;
+        }
+        const removeBtn = e.target.closest('[data-admin-remove-student]');
+        if (removeBtn) {
+          const key = removeBtn.getAttribute('data-admin-remove-student');
+          const info = workspacesIndexCache[key] || {};
+          pendingRemoveStudentTarget = key;
+          document.getElementById('removeStudentTargetSubtitle').textContent = `Code: ${info.code || key}${info.name ? ' · ' + info.name : ''}`;
+          document.getElementById('removeStudentConfirmInput').value = '';
+          document.getElementById('btnConfirmExecuteRemoveStudent').disabled = true;
+          document.getElementById('adminRemoveStudentModal').classList.remove('hidden');
         }
       });
       document.getElementById('chkConfirmResetPin').addEventListener('change', e => {
@@ -3270,6 +3385,48 @@
         await update(ref(db, `hafazan_tracker/workspaces_index/${pendingResetPinTarget}`), { hasPin: false });
         document.getElementById('adminResetPinModal').classList.add('hidden');
         showToast('PIN reset!');
+      });
+
+      // Remove Student Confirmation Modal Listeners
+      const closeRemoveStudentModal = () => {
+        pendingRemoveStudentTarget = null;
+        document.getElementById('removeStudentConfirmInput').value = '';
+        document.getElementById('btnConfirmExecuteRemoveStudent').disabled = true;
+        document.getElementById('adminRemoveStudentModal').classList.add('hidden');
+      };
+      document.getElementById('btnCloseRemoveStudentModal').addEventListener('click', closeRemoveStudentModal);
+      document.getElementById('btnCancelRemoveStudentModal').addEventListener('click', closeRemoveStudentModal);
+      document.getElementById('removeStudentConfirmInput').addEventListener('input', e => {
+        const typed = e.target.value.trim().toUpperCase();
+        document.getElementById('btnConfirmExecuteRemoveStudent').disabled = !(typed === 'DELETE' || typed === 'PADAM');
+      });
+      document.getElementById('btnConfirmExecuteRemoveStudent').addEventListener('click', async () => {
+        if (!pendingRemoveStudentTarget) return;
+        const targetKey = pendingRemoveStudentTarget;
+        const targetCode = workspacesIndexCache[targetKey]?.code || targetKey;
+        const btn = document.getElementById('btnConfirmExecuteRemoveStudent');
+        btn.disabled = true;
+        try {
+          await Promise.all([
+            remove(ref(db, `hafazan_tracker/workspaces/${targetKey}`)),
+            remove(ref(db, `hafazan_tracker/workspaces_index/${targetKey}`))
+          ]);
+          delete workspacesIndexCache[targetKey];
+          delete adminWorkspacesFullCache[targetKey];
+          try {
+            localStorage.removeItem(`${STORAGE_KEY}_${targetKey}`);
+            localStorage.removeItem(`${PROFILE_STORAGE_KEY}_${targetKey}`);
+            let recent = JSON.parse(localStorage.getItem(RECENT_CODES_KEY) || '[]');
+            recent = recent.filter(c => normalizeCodeKey(c) !== targetKey);
+            localStorage.setItem(RECENT_CODES_KEY, JSON.stringify(recent));
+          } catch (e) {}
+          closeRemoveStudentModal();
+          renderAdminDirectory();
+          showToast(`Removed student: ${targetCode}`);
+        } catch (err) {
+          btn.disabled = false;
+          showToast('Error removing student: ' + (err?.message || ''));
+        }
       });
 
       // Navigation & Home Quick Actions
@@ -3653,20 +3810,148 @@
       `).join('');
     }
 
+    function computeStudentSummaryStats(rowsObj) {
+      const list = rowsObj
+        ? (Array.isArray(rowsObj) ? rowsObj.filter(Boolean) : Object.values(rowsObj).filter(Boolean)).map(normalizeRowCuti)
+        : [];
+      const surahMemMap = {};
+      ALL_114_SURAHS.forEach(s => { surahMemMap[s.num] = 0; });
+
+      let saba = 0, pra = 0, mukhtar = 0, murojaah = 0;
+      const activeDates = new Set();
+
+      list.forEach(r => {
+        if (r.Day_Status !== 'Active') return;
+        activeDates.add(r.Date);
+        const amt = Number(r.Total_Amount) || 0;
+        if (r.Category === 'Saba') saba += amt;
+        else if (r.Category === 'Pra Saba') pra += amt;
+        else if (r.Category === 'Mukhtar') mukhtar += amt;
+        else if (r.Category === 'Murojaah') murojaah += amt;
+
+        if (!r.Surah_or_Juz) return;
+        if (r.Tracking_Unit === 'Full Surah') {
+          r.Surah_or_Juz.split(',').map(x => x.trim()).filter(Boolean).forEach(n => {
+            const s = findSurahObj(n);
+            if (s) surahMemMap[s.num] = s.ayat;
+          });
+        } else if (r.Tracking_Unit === 'Ayat') {
+          const s = findSurahObj(r.Surah_or_Juz);
+          const e = Math.min(s.ayat, parseInt(r.End_Unit, 10) || 0);
+          if (e > surahMemMap[s.num]) surahMemMap[s.num] = e;
+        } else if (r.Tracking_Unit === 'Page') {
+          const pos = getMushafPageEndPosition(parseInt(r.End_Unit, 10) || 1);
+          if (r.Category === 'Saba') {
+            for (let n = 1; n < pos.surahNum; n++) surahMemMap[n] = ALL_114_SURAHS[n - 1].ayat;
+          }
+          if (pos.ayat > surahMemMap[pos.surahNum]) surahMemMap[pos.surahNum] = pos.ayat;
+        }
+      });
+
+      let memAyat = 0;
+      ALL_114_SURAHS.forEach(s => { memAyat += (surahMemMap[s.num] || 0); });
+      const quranPct = Number(((memAyat / 6236) * 100).toFixed(1));
+      return {
+        memAyat,
+        quranPct,
+        saba,
+        pra,
+        mukhtar,
+        murojaah,
+        totalVolume: saba + pra + mukhtar + murojaah,
+        totalLogs: list.length,
+        activeDays: activeDates.size
+      };
+    }
+
     function renderAdminDirectory() {
+      const tr = t();
       const q = document.getElementById('adminSearchStudentInput').value.toLowerCase().trim();
       const all = Object.values(workspacesIndexCache || {}).filter(Boolean).sort((a, b) => (a.code || '').localeCompare(b.code || ''));
       document.getElementById('lblAdminCountSub').textContent = `${all.length} registered student(s)`;
-      const list = q ? all.filter(i => `${i.code} ${i.name} ${i.school}`.toLowerCase().includes(q)) : all;
+
+      // Compute cohort stats & charts across all registered students
+      const enriched = all.map(item => {
+        const wsData = adminWorkspacesFullCache[item.key] || {};
+        return { ...item, stats: computeStudentSummaryStats(wsData.rows) };
+      });
+
+      const activeStudentsCount = enriched.filter(s => s.stats.totalLogs > 0).length;
+      const cohortAyat = enriched.reduce((sum, s) => sum + s.stats.memAyat, 0);
+      const avgQuranPct = enriched.length ? (enriched.reduce((sum, s) => sum + s.stats.quranPct, 0) / enriched.length).toFixed(1) : '0.0';
+      const cohortLogs = enriched.reduce((sum, s) => sum + s.stats.totalLogs, 0);
+      const cohortActiveDays = enriched.reduce((sum, s) => sum + s.stats.activeDays, 0);
+      const topStudent = [...enriched].sort((a, b) => b.stats.quranPct - a.stats.quranPct)[0];
+
+      document.getElementById('adminKpiTotalStudents').textContent = enriched.length;
+      document.getElementById('adminKpiActiveStudentsSub').textContent = `${activeStudentsCount} active`;
+      document.getElementById('adminKpiTotalAyat').textContent = cohortAyat.toLocaleString();
+      document.getElementById('adminKpiAvgQuranSub').textContent = `Avg ${avgQuranPct}% Quran`;
+      document.getElementById('adminKpiTotalLogs').textContent = cohortLogs.toLocaleString();
+      document.getElementById('adminKpiActiveDaysSub').textContent = `${cohortActiveDays} active days`;
+      document.getElementById('adminKpiTopStudent').textContent = topStudent ? (topStudent.name || topStudent.code) : '—';
+      document.getElementById('adminKpiTopStudentSub').textContent = topStudent ? `${topStudent.stats.quranPct}% Al-Quran` : '0% Al-Quran';
+
+      const quranChartEl = document.getElementById('adminQuranCompletionChart');
+      const volChartEl = document.getElementById('adminVolumeBreakdownChart');
+
+      if (enriched.length === 0) {
+        quranChartEl.innerHTML = `<p class="text-xs text-slate-400 py-4 text-center">No students registered yet.</p>`;
+        volChartEl.innerHTML = `<p class="text-xs text-slate-400 py-4 text-center">No session data available.</p>`;
+      } else {
+        const sortedByQuran = [...enriched].sort((a, b) => b.stats.quranPct - a.stats.quranPct);
+        quranChartEl.innerHTML = sortedByQuran.map(s => {
+          const barW = Math.min(100, Math.max(s.stats.quranPct > 0 ? 4 : 0, s.stats.quranPct));
+          return `
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-extrabold text-slate-800 truncate">${escapeHTML(s.name || s.code)} <span class="text-[10px] font-semibold text-slate-500">(${escapeHTML(s.code)})</span></span>
+                <span class="font-extrabold text-emerald-800 shrink-0">${s.stats.quranPct}% · ${s.stats.memAyat.toLocaleString()} Ayat</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded overflow-hidden">
+                <div class="h-full bg-brand-700 transition-all duration-300" style="width:${barW}%"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const maxVol = Math.max(...enriched.map(s => s.stats.totalVolume), 1);
+        const sortedByVol = [...enriched].sort((a, b) => b.stats.totalVolume - a.stats.totalVolume);
+        volChartEl.innerHTML = sortedByVol.map(s => {
+          const st = s.stats;
+          const sW = (st.saba / maxVol) * 100;
+          const pW = (st.pra / maxVol) * 100;
+          const mukW = (st.mukhtar / maxVol) * 100;
+          const murW = (st.murojaah / maxVol) * 100;
+          return `
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-extrabold text-slate-800 truncate">${escapeHTML(s.name || s.code)}</span>
+                <span class="font-bold text-slate-600 shrink-0">${st.totalVolume.toLocaleString()} units · ${st.activeDays}d</span>
+              </div>
+              <div class="w-full h-2.5 bg-slate-200 rounded overflow-hidden flex">
+                <div class="h-full bg-emerald-600" style="width:${sW}%" title="Saba: ${st.saba}"></div>
+                <div class="h-full bg-cyan-600" style="width:${pW}%" title="Pra Saba: ${st.pra}"></div>
+                <div class="h-full bg-amber-500" style="width:${mukW}%" title="Mukhtar: ${st.mukhtar}"></div>
+                <div class="h-full bg-indigo-600" style="width:${murW}%" title="Murojaah: ${st.murojaah}"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      const list = q ? enriched.filter(i => `${i.code} ${i.name} ${i.school}`.toLowerCase().includes(q)) : enriched;
       document.getElementById('wsAdminStudentList').innerHTML = list.map(i => `
         <div class="arch-card p-4 flex items-center justify-between gap-3">
           <div class="min-w-0">
             <div class="font-extrabold text-sm text-slate-900">${escapeHTML(i.code)} <span class="text-[11px] font-extrabold text-indigo-700 ml-1">${i.hasPin ? '🔒 PIN' : '🔓 Open'}</span></div>
             <div class="text-xs font-medium text-slate-500 truncate">${escapeHTML(i.name || '—')}${i.school ? ' · ' + escapeHTML(i.school) : ''}</div>
+            <div class="text-[11px] font-bold text-emerald-800 mt-1">${i.stats.quranPct}% Al-Quran · ${i.stats.activeDays} active days</div>
           </div>
-          <div class="flex gap-1.5 shrink-0">
-            <button type="button" data-admin-open="${escapeHTML(i.key)}" class="px-3 py-1.5 rounded bg-brand-800 text-white text-xs font-extrabold">Open</button>
-            ${i.hasPin ? `<button type="button" data-admin-reset-pin="${escapeHTML(i.key)}" class="px-2.5 py-1.5 rounded bg-rose-50 text-rose-800 border border-rose-300 text-xs font-extrabold">Reset PIN</button>` : ''}
+          <div class="flex flex-wrap justify-end gap-1.5 shrink-0">
+            <button type="button" data-admin-open="${escapeHTML(i.key)}" class="px-3 py-1.5 rounded bg-brand-800 hover:bg-brand-900 text-white text-xs font-extrabold">Open</button>
+            ${i.hasPin ? `<button type="button" data-admin-reset-pin="${escapeHTML(i.key)}" class="px-2.5 py-1.5 rounded bg-amber-50 text-amber-900 border border-amber-300 text-xs font-extrabold">Reset PIN</button>` : ''}
+            <button type="button" data-admin-remove-student="${escapeHTML(i.key)}" class="px-2.5 py-1.5 rounded bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-300 text-xs font-extrabold">${escapeHTML(tr.removeStudentBtn)}</button>
           </div>
         </div>
       `).join('');
