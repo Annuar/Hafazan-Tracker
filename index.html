@@ -185,11 +185,11 @@
           <div id="recentLoginsList" class="flex flex-wrap gap-2"></div>
         </div>
 
-        <form id="landingSignInForm" class="space-y-4">
+        <form id="landingSignInForm" onsubmit="return false;" class="space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label for="landingInputCode" class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 mb-1.5" data-i18n="lblWsCode">Student Code</label>
-              <input type="text" id="landingInputCode" autocomplete="off" spellcheck="false" placeholder="e.g., LuqmanAF"
+              <input type="text" id="landingInputCode" autocomplete="off" spellcheck="false" placeholder="Enter Student Code"
                 class="w-full px-4 py-3 rounded-lg border-2 border-slate-300 bg-slate-50 focus:bg-white text-slate-900 font-bold text-base focus:outline-none focus:border-brand-800 transition" />
             </div>
 
@@ -550,7 +550,7 @@
         <!-- Active Session Notes + Murojaah Day Switch -->
         <div id="activeTopToolbar" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-3 border-t border-slate-200">
           <div class="flex-1 relative">
-            <input type="text" id="sessionNotes" placeholder="Session notes (e.g., Lancar, Tasmi' Ustaz)..."
+            <input type="text" id="sessionNotes" data-i18n-ph="phSessionNotes" placeholder="Session notes (e.g., Lancar, Tasmi' Ustaz)..."
               class="w-full pl-9 pr-4 py-2.5 rounded-lg border-2 border-slate-300 bg-slate-50 focus:bg-white text-sm font-semibold focus:outline-none focus:border-brand-800" />
             <span class="absolute left-3 top-2.5 text-slate-500 text-sm">📝</span>
           </div>
@@ -566,7 +566,7 @@
         <div id="nonActivePanel" class="hidden pt-3 border-t border-slate-200 space-y-4">
           <div class="p-4 rounded-lg bg-amber-50 border-l-4 border-amber-500 text-amber-950">
             <h3 id="nonActiveTitle" class="font-extrabold text-sm">Cuti Selected</h3>
-            <p id="nonActiveDesc" class="text-xs text-amber-900 mt-1">Logs 1 consolidated row while preserving your Saba sequence.</p>
+            <p id="nonActiveDesc" class="text-xs text-amber-900 mt-1" data-i18n="nonActiveDesc">Logs 1 consolidated row while preserving your Saba sequence.</p>
           </div>
 
           <div id="cutiReasonSection" class="space-y-2">
@@ -580,7 +580,7 @@
           </div>
 
           <div id="nonActiveNotesWrapper">
-            <input type="text" id="nonActiveNotes" placeholder="Details / notes..."
+            <input type="text" id="nonActiveNotes" data-i18n-ph="phNonActiveNotes" placeholder="Details / notes..."
               class="w-full px-4 py-3 rounded-lg border-2 border-slate-300 text-sm font-semibold" />
           </div>
 
@@ -812,9 +812,49 @@
           </div>
 
           <div id="body-mukhtar" class="p-5 space-y-4 flex-1">
-            <div class="grid grid-cols-2 gap-1 bg-slate-100 p-1 rounded-lg border border-slate-300">
+            <div class="grid grid-cols-3 gap-1 bg-slate-100 p-1 rounded-lg border border-slate-300">
+              <button type="button" id="btnMukhtarModeAyat" class="py-1.5 rounded text-xs font-bold text-slate-600" data-i18n="modeAyatRange">Ayat Range</button>
               <button type="button" id="btnMukhtarModePage" class="py-1.5 rounded text-xs font-extrabold bg-amber-600 text-white" data-i18n="modeJuzPage">Juz / Page</button>
-              <button type="button" id="btnMukhtarModeSurah" class="py-1.5 rounded text-xs font-bold text-slate-600" data-i18n="modeFullSurahs114">Full Surahs (114)</button>
+              <button type="button" id="btnMukhtarModeSurah" class="py-1.5 rounded text-xs font-bold text-slate-600" data-i18n="modeFullSurahs">Full Surahs</button>
+            </div>
+
+            <!-- Mukhtar Ayat Range -->
+            <div id="mukhtarAyatPanel" class="hidden space-y-3.5">
+              <button type="button" id="btnOpenMukhtarSurah"
+                class="w-full px-4 py-3 rounded-lg bg-slate-50 hover:bg-amber-50 border-2 border-amber-600 flex items-center justify-between gap-2 text-left transition">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span id="mukhtarSurahDisplay" class="font-extrabold text-sm text-slate-900 truncate">2. Al-Baqarah</span>
+                  <span id="mukhtarSurahMaxBadge" class="px-2 py-0.5 rounded bg-amber-100 text-amber-950 text-[11px] font-extrabold shrink-0">286 Ayat</span>
+                </div>
+                <span class="text-xs font-extrabold text-amber-800 shrink-0" data-i18n="change">Change ▾</span>
+              </button>
+
+              <div class="grid grid-cols-3 gap-2.5 items-end">
+                <div>
+                  <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1" data-i18n="startAyat">Start Ayat</label>
+                  <input type="number" id="mukhtarAyatStart" min="1" value="1" class="w-full py-2.5 px-2 rounded-lg border-2 border-slate-300 text-center font-extrabold text-lg" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-extrabold uppercase text-slate-500 mb-1" data-i18n="endAyat">End Ayat</label>
+                  <input type="number" id="mukhtarAyatEnd" min="1" value="20" class="w-full py-2.5 px-2 rounded-lg border-2 border-amber-600 bg-amber-50/60 text-center font-extrabold text-lg" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-extrabold uppercase text-slate-500 text-center mb-1" data-i18n="total">Total</label>
+                  <div id="mukhtarAyatTotalBadge" class="py-2.5 rounded-lg bg-amber-600 text-white text-center font-extrabold text-lg border-2 border-amber-800">20</div>
+                </div>
+              </div>
+
+              <p id="mukhtarValidationMsg" class="hidden text-xs font-bold text-rose-700 bg-rose-50 px-3 py-2 rounded-lg border-l-4 border-rose-600"></p>
+
+              <div class="flex items-center justify-between gap-1.5">
+                <span class="text-[11px] font-extrabold uppercase text-slate-500" data-i18n="quickSpan">Span:</span>
+                <div class="flex gap-1.5">
+                  <button type="button" data-mukhtar-ayat-step="10" class="px-2.5 py-1.5 rounded bg-amber-100 border border-amber-300 text-amber-950 font-extrabold text-xs">+10</button>
+                  <button type="button" data-mukhtar-ayat-step="25" class="px-2.5 py-1.5 rounded bg-amber-100 border border-amber-300 text-amber-950 font-extrabold text-xs">+25</button>
+                  <button type="button" data-mukhtar-ayat-step="50" class="px-2.5 py-1.5 rounded bg-amber-100 border border-amber-300 text-amber-950 font-extrabold text-xs">+50</button>
+                  <button type="button" id="btnMukhtarFullSurahAyat" class="px-2.5 py-1.5 rounded bg-amber-600 text-white font-extrabold text-xs" data-i18n="fullSurahBtn">Full</button>
+                </div>
+              </div>
             </div>
 
             <!-- Mukhtar Juz/Page -->
@@ -859,12 +899,12 @@
                 <span class="font-extrabold text-slate-700"><span data-i18n="selectSurahs">Selected</span>: <strong id="selectedSurahCount" class="text-amber-700">0</strong></span>
                 <button type="button" id="btnClearMukhtarSurahs" class="font-extrabold text-rose-600 hover:underline" data-i18n="clearAll">Clear</button>
               </div>
-              <input type="text" id="mukhtarSurahSearch" placeholder="Filter 114 Surahs..." class="w-full px-3.5 py-2 rounded-lg border-2 border-slate-300 text-xs font-bold" />
+              <input type="text" id="mukhtarSurahSearch" data-i18n-ph="phFilterSurahs" placeholder="Filter 114 Surahs..." class="w-full px-3.5 py-2 rounded-lg border-2 border-slate-300 text-xs font-bold" />
               <div class="flex flex-wrap gap-1">
-                <button type="button" data-mfilter="ALL" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-600 text-white">All 114</button>
-                <button type="button" data-mfilter="JUZ30" class="px-2.5 py-1 rounded text-[11px] font-bold bg-slate-200 text-slate-800">Juz 30</button>
-                <button type="button" id="btnPresetFullJuz30" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-100 border border-amber-300 text-amber-950">+ Full Juz 30</button>
-                <button type="button" id="btnPresetLast10" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-100 border border-amber-300 text-amber-950">+ Last 10</button>
+                <button type="button" data-mfilter="ALL" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-600 text-white" data-i18n="all114Btn">All 114</button>
+                <button type="button" data-mfilter="JUZ30" class="px-2.5 py-1 rounded text-[11px] font-bold bg-slate-200 text-slate-800" data-i18n="juz30Btn">Juz 30</button>
+                <button type="button" id="btnPresetFullJuz30" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-100 border border-amber-300 text-amber-950" data-i18n="fullJuz30">+ Full Juz 30</button>
+                <button type="button" id="btnPresetLast10" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-amber-100 border border-amber-300 text-amber-950" data-i18n="last10">+ Last 10</button>
               </div>
               <div id="mukhtarSurahChipsGrid" class="max-h-40 overflow-y-auto p-2 rounded-lg border border-slate-300 bg-slate-50 flex flex-wrap gap-1.5"></div>
               <div class="p-2.5 rounded-lg bg-amber-50 border border-amber-300 flex items-center justify-between gap-2">
@@ -978,11 +1018,11 @@
                 <span class="font-extrabold text-slate-700"><span data-i18n="surahsRevised">Selected</span>: <strong id="murojaahSelectedCount" class="text-indigo-700">0</strong></span>
                 <button type="button" id="btnClearMurojaahSurahs" class="font-extrabold text-rose-600 hover:underline" data-i18n="clearAll">Clear</button>
               </div>
-              <input type="text" id="murojaahSurahSearch" placeholder="Filter 114 Surahs..." class="w-full px-3.5 py-2 rounded-lg border-2 border-slate-300 text-xs font-bold" />
+              <input type="text" id="murojaahSurahSearch" data-i18n-ph="phFilterSurahs" placeholder="Filter 114 Surahs..." class="w-full px-3.5 py-2 rounded-lg border-2 border-slate-300 text-xs font-bold" />
               <div class="flex flex-wrap gap-1">
-                <button type="button" data-murfilter="ALL" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-indigo-700 text-white">All 114</button>
-                <button type="button" data-murfilter="JUZ30" class="px-2.5 py-1 rounded text-[11px] font-bold bg-slate-200 text-slate-800">Juz 30</button>
-                <button type="button" id="btnMurPresetFullJuz30" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-indigo-100 border border-indigo-300 text-indigo-950">+ Full Juz 30</button>
+                <button type="button" data-murfilter="ALL" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-indigo-700 text-white" data-i18n="all114Btn">All 114</button>
+                <button type="button" data-murfilter="JUZ30" class="px-2.5 py-1 rounded text-[11px] font-bold bg-slate-200 text-slate-800" data-i18n="juz30Btn">Juz 30</button>
+                <button type="button" id="btnMurPresetFullJuz30" class="px-2.5 py-1 rounded text-[11px] font-extrabold bg-indigo-100 border border-indigo-300 text-indigo-950" data-i18n="fullJuz30">+ Full Juz 30</button>
               </div>
               <div id="murojaahSurahChipsGrid" class="max-h-40 overflow-y-auto p-2 rounded-lg border border-slate-300 bg-slate-50 flex flex-wrap gap-1.5"></div>
               <div class="p-2.5 rounded-lg bg-indigo-50 border border-indigo-300 flex items-center justify-between gap-2">
@@ -1086,9 +1126,9 @@
           <div id="heatmapGrid" class="grid grid-cols-10 gap-1.5"></div>
 
           <div class="flex flex-wrap gap-3 text-[11px] font-bold text-slate-600">
-            <span><strong class="text-emerald-600">■</strong> Active</span>
+            <span><strong class="text-emerald-600">■</strong> <span data-i18n="activeLegend">Active</span></span>
             <span><strong class="text-indigo-600">■</strong> Murojaah</span>
-            <span><strong class="text-slate-400">■</strong> Weekend</span>
+            <span><strong class="text-slate-400">■</strong> <span data-i18n="weekendLegend">Weekend</span></span>
             <span><strong class="text-amber-500">■</strong> Cuti</span>
             <span><strong class="text-sky-500">■</strong> Riadah</span>
           </div>
@@ -1136,19 +1176,19 @@
 
       <!-- Search & Filters -->
       <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
-        <input type="text" id="historySearch" placeholder="Search surah, date, notes..."
+        <input type="text" id="historySearch" data-i18n-ph="phSearchHistory" placeholder="Search surah, date, notes..."
           class="sm:col-span-2 px-4 py-2.5 rounded-lg border-2 border-slate-300 bg-white text-xs sm:text-sm font-semibold focus:outline-none focus:border-brand-800" />
         <select id="historyMonthFilter" class="px-3.5 py-2.5 rounded-lg border-2 border-slate-300 bg-white text-xs font-extrabold">
           <option value="ALL">All Months</option>
         </select>
         <select id="historyCategoryFilter" class="px-3.5 py-2.5 rounded-lg border-2 border-slate-300 bg-white text-xs font-extrabold">
-          <option value="ALL">All Entries</option>
+          <option value="ALL" data-i18n="filterAll">All Entries</option>
           <option value="Saba">Saba</option>
           <option value="Pra Saba">Pra Saba</option>
           <option value="Mukhtar">Mukhtar</option>
           <option value="Murojaah">Murojaah</option>
-          <option value="CUTI_ONLY">Cuti Days</option>
-          <option value="NON_ACTIVE">All Off Days</option>
+          <option value="CUTI_ONLY" data-i18n="filterCuti">Cuti Days</option>
+          <option value="NON_ACTIVE" data-i18n="filterOff">All Off Days</option>
         </select>
       </div>
 
@@ -1176,9 +1216,9 @@
         <div id="historyPaginationBar" class="hidden px-4 py-3 bg-slate-100 border-t-2 border-slate-200 flex items-center justify-between gap-3 text-xs">
           <span id="historyPageRangeSummary" class="font-extrabold text-slate-600">1–20 / 20</span>
           <div class="flex items-center gap-2">
-            <button type="button" id="btnHistoryPrevPage" class="px-3 py-1.5 rounded bg-white border border-slate-300 font-extrabold text-slate-800 disabled:opacity-40">← Prev</button>
+            <button type="button" id="btnHistoryPrevPage" class="px-3 py-1.5 rounded bg-white border border-slate-300 font-extrabold text-slate-800 disabled:opacity-40" data-i18n="prevPageBtn">← Prev</button>
             <span id="historyPageIndicator" class="font-extrabold text-slate-900">1 / 1</span>
-            <button type="button" id="btnHistoryNextPage" class="px-3 py-1.5 rounded bg-white border border-slate-300 font-extrabold text-slate-800 disabled:opacity-40">Next →</button>
+            <button type="button" id="btnHistoryNextPage" class="px-3 py-1.5 rounded bg-white border border-slate-300 font-extrabold text-slate-800 disabled:opacity-40" data-i18n="nextPageBtn">Next →</button>
           </div>
         </div>
       </div>
@@ -1330,15 +1370,15 @@
     <div class="bg-white w-full max-w-md rounded-t-xl sm:rounded-xl border-2 border-slate-300 border-t-4 border-t-brand-800 p-6 shadow-2xl space-y-4 panel-enter">
       <div class="flex items-center justify-between">
         <div>
-          <h3 id="confirmSaveModalTitle" class="font-extrabold text-base text-slate-900">Confirm Save Session?</h3>
+          <h3 id="confirmSaveModalTitle" class="font-extrabold text-base text-slate-900" data-i18n="confirmSaveTitle">Confirm Save Session?</h3>
           <p id="confirmSaveModalSub" class="text-xs font-extrabold text-brand-800 mt-0.5">2026-11-23 · Active</p>
         </div>
         <button type="button" id="btnCloseConfirmSaveModal" class="w-8 h-8 rounded bg-slate-100 border border-slate-300 text-slate-700 font-extrabold">✕</button>
       </div>
       <div id="confirmSaveSummaryList" class="p-4 rounded-lg bg-slate-50 border border-slate-300 space-y-2 text-xs text-slate-900"></div>
       <div class="grid grid-cols-2 gap-2.5">
-        <button type="button" id="btnCancelConfirmSave" class="py-3 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-extrabold">Cancel</button>
-        <button type="button" id="btnExecuteConfirmedSave" class="py-3 rounded-lg bg-brand-800 text-white text-xs font-extrabold uppercase tracking-wider shadow-[0_2px_0_#022c22]">Confirm &amp; Save</button>
+        <button type="button" id="btnCancelConfirmSave" class="py-3 rounded-lg bg-slate-100 border border-slate-300 text-slate-800 text-xs font-extrabold" data-i18n="cancel">Cancel</button>
+        <button type="button" id="btnExecuteConfirmedSave" class="py-3 rounded-lg bg-brand-800 text-white text-xs font-extrabold uppercase tracking-wider shadow-[0_2px_0_#022c22]" data-i18n="confirmSaveBtn">Confirm &amp; Save</button>
       </div>
     </div>
   </div>
@@ -1614,6 +1654,7 @@
 
     let sabaSelectedSurah = ALL_114_SURAHS[1];
     let praSabaSelectedSurah = ALL_114_SURAHS[1];
+    let mukhtarSelectedSurah = ALL_114_SURAHS[1];
     let murojaahSelectedSurah = ALL_114_SURAHS[1];
     let activeSurahPickerTarget = 'saba';
     let surahModalJuzFilter = 'ALL';
@@ -1643,15 +1684,44 @@
         quickResumeLabel: 'Quick Resume',
         lblWsCode: 'Student Code',
         lblWsPin: 'PIN / Password (Optional)',
+        phWsCode: 'Enter Student Code',
         openTrackerBtn: 'Open Student Dashboard',
         ustazPortalHint: 'Teacher / Ustaz Access',
         adminModeBtn: 'Admin Portal',
+        adminPageTitle: 'Teacher & Admin Portal',
+        adminPageSub: 'Manage student accounts, PINs & trackers',
+        backToSignIn: '← Sign In',
+        backToAdminBtn: 'Admin',
+        adminUnlockTitle: 'Enter Admin Passkey',
+        adminUnlockSub: 'Unlock the student directory to inspect trackers, create accounts, or reset forgotten PINs.',
+        unlockAdminBtn: 'Unlock Directory',
+        adminDirTitle: 'All Student Workspaces',
+        adminNewStudentBtn: '+ New Student',
+        adminCreateTitle: 'Create New Student Account',
+        lblAdminNewCode: 'Student Code *',
+        lblAdminNewPin: 'PIN (Optional)',
+        lblAdminNewName: 'Student Name',
+        lblAdminNewSchool: 'School / Tahfiz',
+        createStudentBtn: 'Create Account',
+        logOutBtn: 'Log Out',
+        cancel: 'Cancel',
         navHome: 'Home',
         navQuickLog: 'Quick Log',
         navStats: 'Progress',
         navHistory: 'Records',
         logTodaySessionBtn: "Log Today's Session",
         editProfileBtn: 'Edit Profile',
+        editProfileTitle: 'Student Profile & Security',
+        lblUploadPhotoBtn: '📷 Upload & Crop',
+        lblPhotoHint: 'Auto-crops to a square avatar',
+        lblProfName: 'Student Full Name',
+        lblProfDob: 'Date of Birth',
+        lblProfGender: 'Gender',
+        lblProfSchool: 'School / Tahfiz Institution',
+        lblProfStudentCode: 'Student Code',
+        lblProfStudentPin: 'PIN (Optional)',
+        saveProfile: 'Save Profile',
+        tapEditSchoolHint: 'Tap Edit Profile to add school & photo',
         quickActionsHeading: 'Quick Actions',
         quickActionsSub: 'Tap a shortcut to begin',
         qaStandardTitle: 'Full Session',
@@ -1661,8 +1731,99 @@
         qaOffTitle: 'Cuti / Off Day',
         qaOffSub: 'Weekend, Cuti, or Riadah',
         qaQuranTitle: '114 Surahs',
+        lblHeroMilestone: 'Current Saba Milestone',
+        kpiTotalSaba: 'Saba',
+        kpiPraSaba: 'Pra Saba',
+        kpiMukhtar: 'Mukhtar',
+        kpiMurojaah: 'Murojaah',
+        selectedRevisionSub: 'Selected',
         recentLogsTitle: 'Recent Logs',
         viewAllLogsBtn: 'View All →',
+        noRecentLogs: 'No logs recorded yet. Tap "Log Today\'s Session" to start!',
+        lblSessionDate: 'Date',
+        phSessionNotes: "Session notes (e.g., Lancar, Tasmi' Ustaz)...",
+        murojaahDayOff: 'Murojaah Day: OFF',
+        murojaahDayOn: 'Murojaah Day: ON',
+        selectedSuffix: 'Selected',
+        nonActiveDesc: 'Logs 1 consolidated row while preserving your Saba sequence.',
+        lblCutiReason: 'Quick-Tap Reason',
+        lblRiadahActivity: 'Quick-Tap Riadah Activity',
+        phNonActiveNotes: 'Details / notes...',
+        saveOffRow: (st) => `Save ${st} Row`,
+        subSabaTag: '(New)',
+        subPraSabaTag: '(Recent)',
+        subMukhtarTag: '(Selected)',
+        subMurojaahTag: '(Revision)',
+        praSabaHintSub: 'End auto-syncs with Saba',
+        logCheck: 'Log',
+        modeSurahAyat: 'Surah / Ayat',
+        modeJuzPage: 'Juz / Page',
+        modeAyatRange: 'Ayat Range',
+        modeFullSurahs: 'Full Surahs',
+        change: 'Change ▾',
+        startAyat: 'Start Ayat',
+        endAyat: 'End Ayat',
+        total: 'Total',
+        quickEnd: 'Quick End:',
+        shiftStart: 'Shift Start:',
+        startPage: 'Start Pg',
+        endPage: 'End Pg',
+        pagesCol: 'Pages',
+        quickPages: 'Pages:',
+        quickSpan: 'Span:',
+        fullSurahBtn: 'Full',
+        fullJuz20Btn: 'Full Juz',
+        selectSurahs: 'Selected',
+        surahsRevised: 'Selected',
+        clearAll: 'Clear',
+        phFilterSurahs: 'Filter 114 Surahs...',
+        all114Btn: 'All 114',
+        juz30Btn: 'Juz 30',
+        fullJuz30: '+ Full Juz 30',
+        last10: '+ Last 10',
+        noSurahsSelected: 'No surahs selected yet...',
+        readyToLogLabel: 'Ready to Sync',
+        noCatSelected: 'No category selected',
+        confirmSaveTitle: 'Confirm Save Session?',
+        confirmSaveBtn: 'Confirm & Save',
+        wholeQuranTitle: 'Whole Al-Quran Progress (114 Surahs)',
+        wholeQuranSub: (done, ayat) => `${done} / 114 Surahs completed · ${ayat.toLocaleString()} / 6,236 Ayat`,
+        qViewMemorized: 'Memorized',
+        qViewAll114: 'All 114',
+        qViewByJuz30: 'By Juz (30)',
+        monthlyInsightsTitle: 'Monthly Progress',
+        monthlyInsightsSub: 'Volume breakdown by month',
+        monthSabaLbl: 'Month Saba',
+        monthPraLbl: 'Month Pra Saba',
+        monthMukhtarMurLbl: 'Mukhtar + Murojaah',
+        monthAttendLbl: 'Attendance',
+        heatmapTitle: 'Last 30 Days Consistency',
+        activeLegend: 'Active',
+        weekendLegend: 'Weekend',
+        peakDayTitle: 'Peak Day',
+        revisionBalanceTitle: 'Rev Ratio',
+        personalBestTitle: 'Best Day',
+        syncNow: '↻ Sync Now',
+        copyForSheets: 'Copy for Sheets',
+        downloadCSV: 'Download CSV',
+        importCSV: '+ Import CSV',
+        clearAllBtn: 'Clear All...',
+        phSearchHistory: 'Search surah, date, notes...',
+        filterMonthAll: 'All Months',
+        filterAll: 'All Entries',
+        filterCuti: 'Cuti Days',
+        filterOff: 'All Off Days',
+        thDate: 'Date',
+        thStatusCat: 'Category',
+        thSurahJuz: 'Surah / Juz',
+        thRange: 'Range',
+        thTotal: 'Total',
+        thNotes: 'Notes',
+        thDel: 'Del',
+        emptyHistory: 'No matching records found.',
+        prevPageBtn: '← Prev',
+        nextPageBtn: 'Next →',
+        rowsSuffix: (n) => `${n} rows`,
         rankTitles: ["Mubtadi'", "Talib Al-Quran", "Hafiz Junior", "Muqri' Muda", "Mutqin", "Hafiz Senior", "Al-Hafiz / Al-Hafizah"],
         statusLabels: { Active: 'Active', Weekend: 'Weekend', Cuti: 'Cuti', Riadah: 'Riadah' },
         saveSessionRows: (n) => n === 1 ? 'Save Session (1 Row)' : `Save Session (${n} Rows)`
@@ -1679,15 +1840,44 @@
         quickResumeLabel: 'Sambung Pantas',
         lblWsCode: 'Kod Pelajar',
         lblWsPin: 'PIN / Kata Laluan (Pilihan)',
+        phWsCode: 'Masukkan Kod Pelajar',
         openTrackerBtn: 'Buka Papan Pemuka',
         ustazPortalHint: 'Akses Guru / Ustaz',
         adminModeBtn: 'Portal Admin',
+        adminPageTitle: 'Portal Guru & Admin',
+        adminPageSub: 'Urus akaun pelajar, PIN & rekod hafazan',
+        backToSignIn: '← Log Masuk',
+        backToAdminBtn: 'Admin',
+        adminUnlockTitle: 'Masukkan Kata Laluan Admin',
+        adminUnlockSub: 'Buka direktori pelajar untuk menyemak rekod, cipta akaun, atau set semula PIN.',
+        unlockAdminBtn: 'Buka Direktori',
+        adminDirTitle: 'Semua Ruang Pelajar',
+        adminNewStudentBtn: '+ Pelajar Baharu',
+        adminCreateTitle: 'Daftar Akaun Pelajar Baharu',
+        lblAdminNewCode: 'Kod Pelajar *',
+        lblAdminNewPin: 'PIN (Pilihan)',
+        lblAdminNewName: 'Nama Pelajar',
+        lblAdminNewSchool: 'Sekolah / Maahad',
+        createStudentBtn: 'Cipta Akaun',
+        logOutBtn: 'Log Keluar',
+        cancel: 'Batal',
         navHome: 'Utama',
         navQuickLog: 'Rekod Pantas',
         navStats: 'Prestasi',
         navHistory: 'Jadual',
         logTodaySessionBtn: 'Rekod Sesi Hari Ini',
         editProfileBtn: 'Edit Profil',
+        editProfileTitle: 'Profil & Keselamatan Pelajar',
+        lblUploadPhotoBtn: '📷 Muat Naik & Potong',
+        lblPhotoHint: 'Dipotong automatik menjadi gambar segi empat',
+        lblProfName: 'Nama Penuh Pelajar',
+        lblProfDob: 'Tarikh Lahir',
+        lblProfGender: 'Jantina',
+        lblProfSchool: 'Sekolah / Maahad Tahfiz',
+        lblProfStudentCode: 'Kod Pelajar',
+        lblProfStudentPin: 'PIN (Pilihan)',
+        saveProfile: 'Simpan Profil',
+        tapEditSchoolHint: 'Tekan Edit Profil untuk tambah sekolah & gambar',
         quickActionsHeading: 'Tindakan Pantas',
         quickActionsSub: 'Tekan pintasan untuk mula',
         qaStandardTitle: 'Sesi Penuh',
@@ -1697,8 +1887,99 @@
         qaOffTitle: 'Hari Cuti / Rehat',
         qaOffSub: 'Weekend, Cuti, atau Riadah',
         qaQuranTitle: '114 Surah',
+        lblHeroMilestone: 'Pencapaian Saba Semasa',
+        kpiTotalSaba: 'Saba',
+        kpiPraSaba: 'Pra Saba',
+        kpiMukhtar: 'Mukhtar',
+        kpiMurojaah: 'Murojaah',
+        selectedRevisionSub: 'Terpilih',
         recentLogsTitle: 'Rekod Terkini',
         viewAllLogsBtn: 'Lihat Semua →',
+        noRecentLogs: 'Belum ada rekod lagi. Tekan "Rekod Sesi Hari Ini" untuk mula!',
+        lblSessionDate: 'Tarikh',
+        phSessionNotes: "Catatan sesi (cth., Lancar, Tasmi' Ustaz)...",
+        murojaahDayOff: 'Hari Murojaah: TIDAK AKTIF',
+        murojaahDayOn: 'Hari Murojaah: AKTIF',
+        selectedSuffix: 'Dipilih',
+        nonActiveDesc: 'Merekodkan 1 baris status tanpa mengganggu turutan Saba anda.',
+        lblCutiReason: 'Pilihan Pantas Sebab',
+        lblRiadahActivity: 'Pilihan Pantas Aktiviti Riadah',
+        phNonActiveNotes: 'Butiran / catatan...',
+        saveOffRow: (st) => `Simpan Rekod ${st}`,
+        subSabaTag: '(Baharu)',
+        subPraSabaTag: '(Terkini)',
+        subMukhtarTag: '(Terpilih)',
+        subMurojaahTag: '(Ulang Kaji)',
+        praSabaHintSub: 'Tamat selaras dengan Saba',
+        logCheck: 'Rekod',
+        modeSurahAyat: 'Surah / Ayat',
+        modeJuzPage: 'Juzuk / M/S',
+        modeAyatRange: 'Julat Ayat',
+        modeFullSurahs: 'Surah Penuh',
+        change: 'Tukar ▾',
+        startAyat: 'Ayat Mula',
+        endAyat: 'Ayat Tamat',
+        total: 'Jumlah',
+        quickEnd: 'Tamat Pantas:',
+        shiftStart: 'Anjak Mula:',
+        startPage: 'M/S Mula',
+        endPage: 'M/S Tamat',
+        pagesCol: 'M/S',
+        quickPages: 'M/S:',
+        quickSpan: 'Tambah:',
+        fullSurahBtn: 'Penuh',
+        fullJuz20Btn: '1 Juzuk',
+        selectSurahs: 'Dipilih',
+        surahsRevised: 'Dipilih',
+        clearAll: 'Padam',
+        phFilterSurahs: 'Cari 114 Surah...',
+        all114Btn: 'Semua 114',
+        juz30Btn: 'Juzuk 30',
+        fullJuz30: '+ Penuh Juzuk 30',
+        last10: '+ 10 Akhir',
+        noSurahsSelected: 'Tiada surah dipilih lagi...',
+        readyToLogLabel: 'Sedia Disimpan',
+        noCatSelected: 'Tiada kategori dipilih',
+        confirmSaveTitle: 'Sahkan Simpan Sesi?',
+        confirmSaveBtn: 'Sahkan & Simpan',
+        wholeQuranTitle: 'Pencapaian Al-Quran (114 Surah)',
+        wholeQuranSub: (done, ayat) => `${done} / 114 Surah tamat · ${ayat.toLocaleString()} / 6,236 Ayat`,
+        qViewMemorized: 'Sudah Hafaz',
+        qViewAll114: 'Semua 114',
+        qViewByJuz30: 'Ikut Juzuk (30)',
+        monthlyInsightsTitle: 'Prestasi Bulanan',
+        monthlyInsightsSub: 'Pecahan jumlah mengikut bulan',
+        monthSabaLbl: 'Saba Bulan Ini',
+        monthPraLbl: 'Pra Saba Bulan Ini',
+        monthMukhtarMurLbl: 'Mukhtar + Murojaah',
+        monthAttendLbl: 'Kehadiran',
+        heatmapTitle: 'Konsistensi 30 Hari Terakhir',
+        activeLegend: 'Aktif',
+        weekendLegend: 'Hujung Minggu',
+        peakDayTitle: 'Hari Terbaik',
+        revisionBalanceTitle: 'Nisbah Ulang Kaji',
+        personalBestTitle: 'Rekod Tertinggi',
+        syncNow: '↻ Segerak',
+        copyForSheets: 'Salin untuk Sheets',
+        downloadCSV: 'Muat Turun CSV',
+        importCSV: '+ Import CSV',
+        clearAllBtn: 'Padam Semua...',
+        phSearchHistory: 'Cari surah, tarikh, catatan...',
+        filterMonthAll: 'Semua Bulan',
+        filterAll: 'Semua Rekod',
+        filterCuti: 'Hari Cuti',
+        filterOff: 'Semua Hari Cuti/Rehat',
+        thDate: 'Tarikh',
+        thStatusCat: 'Kategori',
+        thSurahJuz: 'Surah / Juzuk',
+        thRange: 'Julat',
+        thTotal: 'Jumlah',
+        thNotes: 'Catatan',
+        thDel: 'Padam',
+        emptyHistory: 'Tiada rekod sepadan ditemui.',
+        prevPageBtn: '← Sebelum',
+        nextPageBtn: 'Seterusnya →',
+        rowsSuffix: (n) => `${n} baris`,
         rankTitles: ["Mubtadi'", "Talib Al-Quran", "Hafiz Junior", "Muqri' Muda", "Mutqin", "Hafiz Senior", "Al-Hafiz / Al-Hafizah"],
         statusLabels: { Active: 'Aktif', Weekend: 'Hujung Minggu', Cuti: 'Cuti', Riadah: 'Riadah' },
         saveSessionRows: (n) => n === 1 ? 'Simpan Sesi (1 Baris)' : `Simpan Sesi (${n} Baris)`
@@ -1720,7 +2001,20 @@
         const k = el.getAttribute('data-i18n');
         if (t()[k] && typeof t()[k] === 'string') el.textContent = t()[k];
       });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        const k = el.getAttribute('data-i18n-ph');
+        if (t()[k] && typeof t()[k] === 'string') el.placeholder = t()[k];
+      });
+      document.getElementById('landingInputCode').placeholder = t().phWsCode;
+      document.getElementById('murojaahDayBtnText').textContent = isMurojaahDayActive ? t().murojaahDayOn : t().murojaahDayOff;
       renderStatusPills();
+      if (currentDayStatus !== 'Active') {
+        const stDisp = t().statusLabels[currentDayStatus] || currentDayStatus;
+        document.getElementById('nonActiveTitle').textContent = `${stDisp} ${t().selectedSuffix}`;
+        document.getElementById('saveNonActiveBtnLabel').textContent = t().saveOffRow(stDisp);
+      }
+      renderMukhtarSurahChips();
+      renderMurojaahSurahChips();
       refreshAllViews();
     }
 
@@ -1821,8 +2115,7 @@
 
     function renderRecentLogins() {
       try {
-        const list = JSON.parse(localStorage.getItem(RECENT_CODES_KEY) || '[]');
-        if (!list.includes(DEFAULT_STUDENT_CODE)) list.push(DEFAULT_STUDENT_CODE);
+        const list = JSON.parse(localStorage.getItem(RECENT_CODES_KEY) || '[]').filter(Boolean);
         const box = document.getElementById('recentLoginsBox');
         const container = document.getElementById('recentLoginsList');
         if (list.length > 0) {
@@ -1833,6 +2126,9 @@
               👤 ${escapeHTML(code)}
             </button>
           `).join('');
+        } else {
+          box.classList.add('hidden');
+          container.innerHTML = '';
         }
       } catch (e) {}
     }
@@ -2041,7 +2337,7 @@
 
       // Profile Info
       document.getElementById('homeStudentName').textContent = studentProfile.name || activeWorkspaceDisplayCode;
-      document.getElementById('homeStudentSchool').textContent = studentProfile.school || 'Tap Edit Profile to add school & photo';
+      document.getElementById('homeStudentSchool').textContent = studentProfile.school || tr.tapEditSchoolHint;
       document.getElementById('homeIslamicTag').textContent = studentProfile.gender === 'Male' ? 'Hafiz' : studentProfile.gender === 'Female' ? 'Hafizah' : 'Hafiz / Hafizah';
 
       const avatarBox = document.getElementById('homeAvatarBox');
@@ -2106,39 +2402,42 @@
 
       // KPIs
       document.getElementById('homeKpiSaba').textContent = totalSaba.toLocaleString();
-      document.getElementById('homeKpiSabaSub').textContent = `${activeDates.size ? (totalSaba / activeDates.size).toFixed(1) : '0.0'} / day`;
+      document.getElementById('homeKpiSabaSub').textContent = `${activeDates.size ? (totalSaba / activeDates.size).toFixed(1) : '0.0'} / ${currentLang === 'MY' ? 'hari' : 'day'}`;
       document.getElementById('homeKpiPra').textContent = totalPra.toLocaleString();
+      document.getElementById('homeKpiPraSub').textContent = currentLang === 'MY' ? 'Ulang kaji' : 'Recent rev';
       document.getElementById('homeKpiMukhtar').textContent = totalMukhtar.toLocaleString();
       document.getElementById('homeKpiMurojaah').textContent = totalMur.toLocaleString();
-      document.getElementById('homeKpiMurSub').textContent = `${murLogs} logs`;
+      document.getElementById('homeKpiMurSub').textContent = `${murLogs} ${currentLang === 'MY' ? 'rekod' : 'logs'}`;
 
       // Current Milestone
       const lastSaba = [...sorted].reverse().find(r => r.Category === 'Saba');
       if (lastSaba) {
         const curEnd = parseInt(lastSaba.End_Unit, 10) || 0;
+        const unitWord = currentLang === 'MY' ? (lastSaba.Tracking_Unit === 'Page' ? 'M/S' : 'Ayat') : lastSaba.Tracking_Unit;
+        const nextPrefix = currentLang === 'MY' ? 'Seterusnya:' : 'Next:';
         if (lastSaba.Tracking_Unit === 'Page') {
           const pct = Math.min(100, Math.round((curEnd / 604) * 100));
-          document.getElementById('homeCurrentSurahTitle').textContent = `${lastSaba.Surah_or_Juz} · Page ${curEnd}`;
-          document.getElementById('homeCurrentSurahSub').textContent = `Page ${curEnd} of 604`;
+          document.getElementById('homeCurrentSurahTitle').textContent = `${lastSaba.Surah_or_Juz} · ${unitWord} ${curEnd}`;
+          document.getElementById('homeCurrentSurahSub').textContent = currentLang === 'MY' ? `Muka Surat ${curEnd} daripada 604` : `Page ${curEnd} of 604`;
           document.getElementById('homeSurahPctBadge').textContent = `${pct}%`;
           document.getElementById('homeSurahProgressFill').style.width = `${pct}%`;
-          document.getElementById('homeNextUpSummary').textContent = `Next: ${lastSaba.Surah_or_Juz} Page ${Math.min(604, curEnd + 1)}`;
+          document.getElementById('homeNextUpSummary').textContent = `${nextPrefix} ${lastSaba.Surah_or_Juz} ${unitWord} ${Math.min(604, curEnd + 1)}`;
         } else {
           const sObj = findSurahObj(lastSaba.Surah_or_Juz);
           const pct = Math.min(100, Math.round((curEnd / sObj.ayat) * 100));
           document.getElementById('homeCurrentSurahTitle').textContent = `${sObj.num}. ${sObj.name}`;
-          document.getElementById('homeCurrentSurahSub').textContent = `Ayat ${curEnd} of ${sObj.ayat}`;
+          document.getElementById('homeCurrentSurahSub').textContent = currentLang === 'MY' ? `Ayat ${curEnd} daripada ${sObj.ayat}` : `Ayat ${curEnd} of ${sObj.ayat}`;
           document.getElementById('homeSurahPctBadge').textContent = `${pct}%`;
           document.getElementById('homeSurahProgressFill').style.width = `${pct}%`;
-          document.getElementById('homeNextUpSummary').textContent = `Next: ${sObj.name} Ayat ${Math.min(sObj.ayat, curEnd + 1)}`;
+          document.getElementById('homeNextUpSummary').textContent = `${nextPrefix} ${sObj.name} Ayat ${Math.min(sObj.ayat, curEnd + 1)}`;
         }
-        document.getElementById('homeEtaText').textContent = `Active Days: ${activeDates.size}`;
+        document.getElementById('homeEtaText').textContent = currentLang === 'MY' ? `Hari Aktif: ${activeDates.size}` : `Active Days: ${activeDates.size}`;
       } else {
         document.getElementById('homeCurrentSurahTitle').textContent = '2. Al-Baqarah';
-        document.getElementById('homeCurrentSurahSub').textContent = 'Ready to begin';
+        document.getElementById('homeCurrentSurahSub').textContent = currentLang === 'MY' ? 'Sedia untuk bermula' : 'Ready to begin';
         document.getElementById('homeSurahPctBadge').textContent = '0%';
         document.getElementById('homeSurahProgressFill').style.width = '0%';
-        document.getElementById('homeNextUpSummary').textContent = 'Start: Al-Baqarah Ayat 1';
+        document.getElementById('homeNextUpSummary').textContent = currentLang === 'MY' ? 'Mula: Al-Baqarah Ayat 1' : 'Start: Al-Baqarah Ayat 1';
       }
 
       // Streak calculation
@@ -2150,28 +2449,28 @@
         else if (['Weekend', 'Cuti', 'Riadah'].includes(dateStatusMap[d])) continue;
         else break;
       }
-      document.getElementById('homeStreakText').textContent = `🔥 ${streak}d Streak`;
+      document.getElementById('homeStreakText').textContent = currentLang === 'MY' ? `🔥 ${streak}h Berturut` : `🔥 ${streak}d Streak`;
 
       // Recent 5 Logs Feed
       const recentList = document.getElementById('homeRecentLogsList');
       const recentFive = [...sorted].reverse().slice(0, 5);
       if (recentFive.length === 0) {
-        recentList.innerHTML = `<div class="py-10 text-center text-xs text-slate-400">No logs recorded yet. Tap "Log Today's Session" to start!</div>`;
+        recentList.innerHTML = `<div class="py-10 text-center text-xs text-slate-400">${escapeHTML(tr.noRecentLogs)}</div>`;
       } else {
         recentList.innerHTML = recentFive.map(r => {
           const isOff = r.Day_Status !== 'Active';
+          const statusLabel = tr.statusLabels[r.Day_Status] || r.Day_Status;
           const badgeCls = isOff ? 'bg-amber-100 text-amber-800'
             : r.Category === 'Saba' ? 'bg-emerald-100 text-emerald-900'
             : r.Category === 'Pra Saba' ? 'bg-cyan-100 text-cyan-900'
             : r.Category === 'Murojaah' ? 'bg-indigo-100 text-indigo-900'
             : 'bg-amber-100 text-amber-900';
-          const title = isOff ? r.Day_Status : `${r.Category}: ${r.Surah_or_Juz}`;
-          const detail = isOff ? (r.Notes || 'Off day') : `${r.Start_Unit}–${r.End_Unit} (${r.Total_Amount} ${r.Tracking_Unit})`;
+          const detail = isOff ? (r.Notes || (currentLang === 'MY' ? 'Hari tidak aktif' : 'Off day')) : `${r.Start_Unit}–${r.End_Unit} (${r.Total_Amount} ${r.Tracking_Unit})`;
           return `
             <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between gap-2">
               <div class="min-w-0">
                 <div class="flex items-center gap-2">
-                  <span class="px-2 py-0.5 rounded text-[10px] font-extrabold ${badgeCls}">${escapeHTML(isOff ? r.Day_Status : r.Category)}</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-extrabold ${badgeCls}">${escapeHTML(isOff ? statusLabel : r.Category)}</span>
                   <span class="text-xs font-extrabold text-slate-900 truncate">${escapeHTML(isOff ? (r.Notes || '—') : r.Surah_or_Juz)}</span>
                 </div>
                 <span class="text-[11px] text-slate-500 font-medium block mt-0.5">${escapeHTML(r.Date)} · ${escapeHTML(detail)}</span>
@@ -2187,6 +2486,7 @@
     // FAST DAILY LOG CONTROLS & SMART AUTO-FILL
     // =======================================================================
     function setDayStatus(statusVal) {
+      const tr = t();
       currentDayStatus = statusVal;
       renderStatusPills();
       const isAct = currentDayStatus === 'Active';
@@ -2196,8 +2496,9 @@
       document.getElementById('nonActivePanel').classList.toggle('hidden', isAct);
 
       if (!isAct) {
-        document.getElementById('nonActiveTitle').textContent = `${currentDayStatus} Selected`;
-        document.getElementById('saveNonActiveBtnLabel').textContent = `Save ${currentDayStatus} Row`;
+        const stDisp = tr.statusLabels[currentDayStatus] || currentDayStatus;
+        document.getElementById('nonActiveTitle').textContent = `${stDisp} ${tr.selectedSuffix}`;
+        document.getElementById('saveNonActiveBtnLabel').textContent = tr.saveOffRow(stDisp);
         document.getElementById('cutiReasonSection').classList.toggle('hidden', currentDayStatus !== 'Cuti');
         document.getElementById('riadahActivitySection').classList.toggle('hidden', currentDayStatus !== 'Riadah');
         document.getElementById('nonActiveNotesWrapper').classList.toggle('hidden', currentDayStatus === 'Weekend');
@@ -2249,16 +2550,18 @@
           document.getElementById('praSabaEnd').value = nextE;
         }
       } else {
+        setSabaMode('Ayat');
         sabaSelectedSurah = ALL_114_SURAHS[1];
-        praSabaSelectedSurah = ALL_114_SURAHS[1];
         document.getElementById('sabaStart').value = 1;
         document.getElementById('sabaEnd').value = 2;
+        praSabaSelectedSurah = ALL_114_SURAHS[1];
         document.getElementById('praSabaStart').value = 1;
         document.getElementById('praSabaEnd').value = 2;
       }
 
-      const lastMukhtar = [...sorted].reverse().find(r => r.Category === 'Mukhtar' && r.Tracking_Unit === 'Page');
-      if (lastMukhtar) {
+      const lastMukhtar = [...sorted].reverse().find(r => r.Category === 'Mukhtar');
+      if (lastMukhtar && lastMukhtar.Tracking_Unit === 'Page') {
+        setMukhtarMode('Page');
         const j = lastMukhtar.Surah_or_Juz || 'Juz 1';
         const b = getJuzPageBounds(j);
         const nextPg = Math.min(b.end, Math.max(b.start, (parseInt(lastMukhtar.End_Unit, 10) || 0) + 1));
@@ -2266,6 +2569,17 @@
         document.getElementById('mukhtarPageStart').value = nextPg;
         document.getElementById('mukhtarPageEnd').value = nextPg;
         document.getElementById('mukhtarLastHint').textContent = `Last: ${j} Page ${lastMukhtar.End_Unit}`;
+      } else if (lastMukhtar && lastMukhtar.Tracking_Unit === 'Ayat') {
+        setMukhtarMode('Ayat');
+        mukhtarSelectedSurah = findSurahObj(lastMukhtar.Surah_or_Juz);
+        document.getElementById('mukhtarAyatStart').value = parseInt(lastMukhtar.Start_Unit, 10) || 1;
+        document.getElementById('mukhtarAyatEnd').value = parseInt(lastMukhtar.End_Unit, 10) || 1;
+        document.getElementById('mukhtarLastHint').textContent = `Last: ${mukhtarSelectedSurah.name} (${lastMukhtar.Start_Unit}–${lastMukhtar.End_Unit})`;
+      } else if (lastMukhtar) {
+        document.getElementById('mukhtarJuzSelect').value = 'Juz 1';
+        document.getElementById('mukhtarPageStart').value = 1;
+        document.getElementById('mukhtarPageEnd').value = 1;
+        document.getElementById('mukhtarLastHint').textContent = `Last: ${lastMukhtar.Total_Amount} Full Surahs`;
       } else {
         document.getElementById('mukhtarJuzSelect').value = 'Juz 1';
         document.getElementById('mukhtarPageStart').value = 1;
@@ -2281,6 +2595,8 @@
       document.getElementById('sabaSurahMaxBadge').textContent = `${sabaSelectedSurah.ayat} Ayat`;
       document.getElementById('praSabaSurahDisplay').textContent = `${praSabaSelectedSurah.num}. ${praSabaSelectedSurah.name}`;
       document.getElementById('praSabaSurahMaxBadge').textContent = `${praSabaSelectedSurah.ayat} Ayat`;
+      document.getElementById('mukhtarSurahDisplay').textContent = `${mukhtarSelectedSurah.num}. ${mukhtarSelectedSurah.name}`;
+      document.getElementById('mukhtarSurahMaxBadge').textContent = `${mukhtarSelectedSurah.ayat} Ayat`;
       document.getElementById('murojaahSurahDisplay').textContent = `${murojaahSelectedSurah.num}. ${murojaahSelectedSurah.name}`;
       document.getElementById('murojaahSurahMaxBadge').textContent = `${murojaahSelectedSurah.ayat} Ayat`;
     }
@@ -2305,8 +2621,10 @@
 
     function setMukhtarMode(mode) {
       mukhtarMode = mode;
+      document.getElementById('btnMukhtarModeAyat').className = mode === 'Ayat' ? 'py-1.5 rounded text-xs font-extrabold bg-amber-600 text-white' : 'py-1.5 rounded text-xs font-bold text-slate-600';
       document.getElementById('btnMukhtarModePage').className = mode === 'Page' ? 'py-1.5 rounded text-xs font-extrabold bg-amber-600 text-white' : 'py-1.5 rounded text-xs font-bold text-slate-600';
       document.getElementById('btnMukhtarModeSurah').className = mode === 'Full Surah' ? 'py-1.5 rounded text-xs font-extrabold bg-amber-600 text-white' : 'py-1.5 rounded text-xs font-bold text-slate-600';
+      document.getElementById('mukhtarAyatPanel').classList.toggle('hidden', mode !== 'Ayat');
       document.getElementById('mukhtarPagePanel').classList.toggle('hidden', mode !== 'Page');
       document.getElementById('mukhtarSurahPanel').classList.toggle('hidden', mode !== 'Full Surah');
       if (mode === 'Full Surah') renderMukhtarSurahChips();
@@ -2334,6 +2652,11 @@
       const pE = parseInt(document.getElementById('praSabaEnd').value, 10) || 0;
       document.getElementById('praSabaTotalBadge').textContent = pE >= pS && pS > 0 ? (pE - pS + 1) : 0;
 
+      // Mukhtar Ayat
+      const mukAS = parseInt(document.getElementById('mukhtarAyatStart').value, 10) || 0;
+      const mukAE = parseInt(document.getElementById('mukhtarAyatEnd').value, 10) || 0;
+      document.getElementById('mukhtarAyatTotalBadge').textContent = mukAE >= mukAS && mukAS > 0 ? (mukAE - mukAS + 1) : 0;
+
       // Murojaah Ayat
       const mS = parseInt(document.getElementById('murojaahAyatStart').value, 10) || 0;
       const mE = parseInt(document.getElementById('murojaahAyatEnd').value, 10) || 0;
@@ -2357,16 +2680,18 @@
     }
 
     function updateStickySaveSummary() {
+      const tr = t();
       const activeCats = [];
       if (document.getElementById('enableSaba').checked) activeCats.push('Saba');
       if (document.getElementById('enablePraSaba').checked) activeCats.push('Pra Saba');
       if (document.getElementById('enableMukhtar').checked) activeCats.push('Mukhtar');
       if (document.getElementById('enableMurojaah').checked) activeCats.push('Murojaah');
-      document.getElementById('stickySummaryText').textContent = activeCats.length ? activeCats.join(' · ') : 'No category selected';
-      document.getElementById('saveBtnLabel').textContent = t().saveSessionRows(activeCats.length);
+      document.getElementById('stickySummaryText').textContent = activeCats.length ? activeCats.join(' · ') : tr.noCatSelected;
+      document.getElementById('saveBtnLabel').textContent = tr.saveSessionRows(activeCats.length);
     }
 
     function toggleMurojaahDayMode(forceState) {
+      const tr = t();
       isMurojaahDayActive = typeof forceState === 'boolean' ? forceState : !isMurojaahDayActive;
       document.getElementById('enableSaba').checked = !isMurojaahDayActive;
       document.getElementById('enablePraSaba').checked = !isMurojaahDayActive;
@@ -2382,15 +2707,16 @@
       const txt = document.getElementById('murojaahDayBtnText');
       if (isMurojaahDayActive) {
         btn.className = 'px-4 py-2.5 rounded-lg bg-indigo-700 border-2 border-indigo-900 text-white text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 transition shrink-0';
-        txt.textContent = 'Murojaah Day: ON';
+        txt.textContent = tr.murojaahDayOn;
       } else {
         btn.className = 'px-4 py-2.5 rounded-lg border-2 border-indigo-300 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 transition shrink-0';
-        txt.textContent = 'Murojaah Day: OFF';
+        txt.textContent = tr.murojaahDayOff;
       }
       updateStickySaveSummary();
     }
 
     function renderMukhtarSurahChips() {
+      const tr = t();
       const q = document.getElementById('mukhtarSurahSearch').value.toLowerCase().trim();
       const filtered = ALL_114_SURAHS.filter(s => {
         if (mukhtarSurahFilter === 'JUZ30' && s.juz !== 30) return false;
@@ -2404,10 +2730,11 @@
       document.getElementById('selectedSurahCount').textContent = selectedMukhtarSurahNums.length;
       document.getElementById('mukhtarSurahTotalBadge').textContent = selectedMukhtarSurahNums.length;
       const names = selectedMukhtarSurahNums.map(n => ALL_114_SURAHS[n - 1]?.name).filter(Boolean);
-      document.getElementById('selectedSurahPreview').textContent = names.length ? names.join(', ') : 'No surahs selected yet...';
+      document.getElementById('selectedSurahPreview').textContent = names.length ? names.join(', ') : tr.noSurahsSelected;
     }
 
     function renderMurojaahSurahChips() {
+      const tr = t();
       const q = document.getElementById('murojaahSurahSearch').value.toLowerCase().trim();
       const filtered = ALL_114_SURAHS.filter(s => {
         if (murojaahSurahFilter === 'JUZ30' && s.juz !== 30) return false;
@@ -2421,7 +2748,7 @@
       document.getElementById('murojaahSelectedCount').textContent = selectedMurojaahSurahNums.length;
       document.getElementById('murojaahSurahTotalBadge').textContent = selectedMurojaahSurahNums.length;
       const names = selectedMurojaahSurahNums.map(n => ALL_114_SURAHS[n - 1]?.name).filter(Boolean);
-      document.getElementById('murojaahSelectedPreview').textContent = names.length ? names.join(', ') : 'No surahs selected yet...';
+      document.getElementById('murojaahSelectedPreview').textContent = names.length ? names.join(', ') : tr.noSurahsSelected;
     }
 
     // =======================================================================
@@ -2472,7 +2799,11 @@
         }
 
         if (document.getElementById('enableMukhtar').checked) {
-          if (mukhtarMode === 'Page') {
+          if (mukhtarMode === 'Ayat') {
+            const s = parseInt(document.getElementById('mukhtarAyatStart').value, 10) || 1;
+            const e = parseInt(document.getElementById('mukhtarAyatEnd').value, 10) || s;
+            newRows.push({ id: baseId++, Date: dateVal, Day_Status: 'Active', Category: 'Mukhtar', Surah_or_Juz: mukhtarSelectedSurah.name, Tracking_Unit: 'Ayat', Start_Unit: s, End_Unit: e, Total_Amount: e - s + 1, Notes: !noteAttached ? notes : '' });
+          } else if (mukhtarMode === 'Page') {
             const j = document.getElementById('mukhtarJuzSelect').value;
             const s = parseInt(document.getElementById('mukhtarPageStart').value, 10) || 1;
             const e = parseInt(document.getElementById('mukhtarPageEnd').value, 10) || s;
@@ -2573,7 +2904,7 @@
         if (surahMemMap[s.num] >= s.ayat) doneSurahs++;
       });
 
-      document.getElementById('lblWholeQuranSub').textContent = `${doneSurahs} / 114 Surahs completed · ${totalMemAyat.toLocaleString()} / 6,236 Ayat`;
+      document.getElementById('lblWholeQuranSub').textContent = t().wholeQuranSub(doneSurahs, totalMemAyat);
       document.getElementById('wholeQuranProgressBar').style.width = `${Math.min(100, (totalMemAyat / 6236) * 100)}%`;
 
       const gridEl = document.getElementById('wholeQuranSurahGrid');
@@ -2692,18 +3023,18 @@
     }
 
     function renderHistoryTable() {
+      const tr = t();
       const q = document.getElementById('historySearch').value.toLowerCase().trim();
       const cat = document.getElementById('historyCategoryFilter').value;
-      const mo = document.getElementById('historyMonthFilter').value;
 
       // Sync month filter options
       const monthSet = new Set(hafazanRows.map(r => r.Date?.slice(0, 7)).filter(Boolean));
       const moSel = document.getElementById('historyMonthFilter');
       const prevMo = moSel.value;
-      moSel.innerHTML = '<option value="ALL">All Months</option>' + Array.from(monthSet).sort().reverse().map(m => `<option value="${m}">${m}</option>`).join('');
+      moSel.innerHTML = `<option value="ALL">${escapeHTML(tr.filterMonthAll)}</option>` + Array.from(monthSet).sort().reverse().map(m => `<option value="${m}">${m}</option>`).join('');
       moSel.value = monthSet.has(prevMo) ? prevMo : 'ALL';
 
-      document.getElementById('recordCountBadge').textContent = `${hafazanRows.length} rows`;
+      document.getElementById('recordCountBadge').textContent = tr.rowsSuffix(hafazanRows.length);
 
       const filtered = [...hafazanRows]
         .sort((a, b) => b.Date.localeCompare(a.Date) || b.id - a.id)
@@ -2741,15 +3072,16 @@
 
       tbody.innerHTML = pageRows.map(r => {
         const isOff = r.Day_Status !== 'Active';
+        const statusLabel = tr.statusLabels[r.Day_Status] || r.Day_Status;
         const pill = isOff ? 'bg-amber-100 text-amber-800'
           : r.Category === 'Saba' ? 'bg-emerald-100 text-emerald-900'
           : r.Category === 'Pra Saba' ? 'bg-cyan-100 text-cyan-900'
           : r.Category === 'Murojaah' ? 'bg-indigo-100 text-indigo-900'
           : 'bg-amber-100 text-amber-900';
-        const range = isOff ? '—' : r.Tracking_Unit === 'Full Surah' ? 'Full Surah' : `${r.Start_Unit}–${r.End_Unit}`;
+        const range = isOff ? '—' : r.Tracking_Unit === 'Full Surah' ? tr.modeFullSurahs : `${r.Start_Unit}–${r.End_Unit}`;
         return `<tr class="hover:bg-slate-50/80">
           <td class="py-3 px-4 font-bold text-slate-900 whitespace-nowrap">${escapeHTML(r.Date)}</td>
-          <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${pill}">${escapeHTML(isOff ? r.Day_Status : r.Category)}</span></td>
+          <td class="py-3 px-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-extrabold ${pill}">${escapeHTML(isOff ? statusLabel : r.Category)}</span></td>
           <td class="py-3 px-3 font-bold text-slate-800 max-w-[150px] truncate">${escapeHTML(r.Surah_or_Juz || '—')}</td>
           <td class="py-3 px-3 text-center font-semibold text-slate-600 whitespace-nowrap">${escapeHTML(range)}</td>
           <td class="py-3 px-3 text-center font-extrabold text-slate-900">${isOff ? '0' : r.Total_Amount}</td>
@@ -3014,6 +3346,7 @@
       document.getElementById('btnSabaModePage').addEventListener('click', () => setSabaMode('Page'));
       document.getElementById('btnPraSabaModeSurah').addEventListener('click', () => setPraSabaMode('Ayat'));
       document.getElementById('btnPraSabaModePage').addEventListener('click', () => setPraSabaMode('Page'));
+      document.getElementById('btnMukhtarModeAyat').addEventListener('click', () => setMukhtarMode('Ayat'));
       document.getElementById('btnMukhtarModePage').addEventListener('click', () => setMukhtarMode('Page'));
       document.getElementById('btnMukhtarModeSurah').addEventListener('click', () => setMukhtarMode('Full Surah'));
       document.getElementById('btnMurojaahModeAyat').addEventListener('click', () => setMurojaahMode('Ayat'));
@@ -3021,7 +3354,7 @@
       document.getElementById('btnMurojaahModeSurah').addEventListener('click', () => setMurojaahMode('Full Surah'));
 
       // Inputs & Steppers
-      ['sabaStart', 'sabaEnd', 'praSabaStart', 'praSabaEnd', 'murojaahAyatStart', 'murojaahAyatEnd',
+      ['sabaStart', 'sabaEnd', 'praSabaStart', 'praSabaEnd', 'mukhtarAyatStart', 'mukhtarAyatEnd', 'murojaahAyatStart', 'murojaahAyatEnd',
        'sabaPageStart', 'sabaPageEnd', 'praSabaPageStart', 'praSabaPageEnd', 'mukhtarPageStart', 'mukhtarPageEnd',
        'murojaahPageStart', 'murojaahPageEnd'].forEach(id => {
         document.getElementById(id).addEventListener('input', () => {
@@ -3070,19 +3403,29 @@
           const isSaba = btn.hasAttribute('data-saba-page-offset');
           const isPra = btn.hasAttribute('data-prasaba-page-offset');
           const isMuk = btn.hasAttribute('data-mukhtar-offset');
+          const offset = parseInt(btn.getAttribute(isSaba ? 'data-saba-page-offset' : isPra ? 'data-prasaba-page-offset' : isMuk ? 'data-mukhtar-offset' : 'data-murojaah-page-offset'), 10) || 0;
           const prefix = isSaba ? 'saba' : isPra ? 'praSaba' : isMuk ? 'mukhtar' : 'murojaah';
-          const off = parseInt(btn.getAttribute(isSaba ? 'data-saba-page-offset' : isPra ? 'data-prasaba-page-offset' : isMuk ? 'data-mukhtar-offset' : 'data-murojaah-page-offset'), 10);
           const b = getJuzPageBounds(document.getElementById(`${prefix}JuzSelect`).value);
-          if (off >= 19) {
-            document.getElementById(`${prefix}PageStart`).value = b.start;
-            document.getElementById(`${prefix}PageEnd`).value = b.end;
-          } else {
-            const s = Math.max(b.start, parseInt(document.getElementById(`${prefix}PageStart`).value, 10) || b.start);
-            document.getElementById(`${prefix}PageStart`).value = s;
-            document.getElementById(`${prefix}PageEnd`).value = Math.min(b.end, s + off);
-          }
+          const curStart = Math.max(b.start, Math.min(b.end, parseInt(document.getElementById(`${prefix}PageStart`).value, 10) || b.start));
+          document.getElementById(`${prefix}PageStart`).value = curStart;
+          document.getElementById(`${prefix}PageEnd`).value = Math.min(b.end, curStart + offset);
           recalculateTotals();
         });
+      });
+
+      document.querySelectorAll('[data-mukhtar-ayat-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const d = parseInt(btn.getAttribute('data-mukhtar-ayat-step'), 10);
+          const s = parseInt(document.getElementById('mukhtarAyatStart').value, 10) || 1;
+          const e = parseInt(document.getElementById('mukhtarAyatEnd').value, 10) || s;
+          document.getElementById('mukhtarAyatEnd').value = Math.min(mukhtarSelectedSurah.ayat, Math.max(s, e + d));
+          recalculateTotals();
+        });
+      });
+      document.getElementById('btnMukhtarFullSurahAyat').addEventListener('click', () => {
+        document.getElementById('mukhtarAyatStart').value = 1;
+        document.getElementById('mukhtarAyatEnd').value = mukhtarSelectedSurah.ayat;
+        recalculateTotals();
       });
 
       document.querySelectorAll('[data-murojaah-ayat-step]').forEach(btn => {
@@ -3147,6 +3490,7 @@
       };
       document.getElementById('btnOpenSabaSurah').addEventListener('click', () => openSurahModal('saba'));
       document.getElementById('btnOpenPraSabaSurah').addEventListener('click', () => openSurahModal('prasaba'));
+      document.getElementById('btnOpenMukhtarSurah').addEventListener('click', () => openSurahModal('mukhtar'));
       document.getElementById('btnOpenMurojaahSurah').addEventListener('click', () => openSurahModal('murojaah'));
       document.getElementById('btnCloseSurahModal').addEventListener('click', () => document.getElementById('surahPickerModal').classList.add('hidden'));
       document.getElementById('surahModalSearchInput').addEventListener('input', renderSurahPickerList);
@@ -3170,6 +3514,10 @@
           document.getElementById('praSabaEnd').value = Math.min(sObj.ayat, 2);
         } else if (activeSurahPickerTarget === 'prasaba') {
           praSabaSelectedSurah = sObj;
+        } else if (activeSurahPickerTarget === 'mukhtar') {
+          mukhtarSelectedSurah = sObj;
+          document.getElementById('mukhtarAyatStart').value = 1;
+          document.getElementById('mukhtarAyatEnd').value = sObj.ayat;
         } else {
           murojaahSelectedSurah = sObj;
           document.getElementById('murojaahAyatStart').value = 1;
