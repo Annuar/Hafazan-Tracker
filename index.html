@@ -467,7 +467,11 @@
             <div class="min-w-0">
               <div class="flex flex-wrap items-center gap-2 mb-1.5">
                 <span id="homeIslamicTag" class="px-2 py-0.5 rounded bg-amber-400 text-brand-950 text-[10px] font-extrabold uppercase tracking-wider">Hafiz / Hafizah</span>
-                <span id="homeRankPill" class="px-2.5 py-0.5 rounded bg-brand-950/90 border border-emerald-500/40 text-emerald-200 text-[11px] font-bold">Lv. 1 · Mubtadi'</span>
+                <button type="button" id="homeRankPill" title="View Rank Roadmap"
+                  class="px-2.5 py-0.5 rounded bg-brand-950/90 hover:bg-black border border-emerald-400/60 hover:border-amber-400 text-emerald-200 hover:text-amber-300 text-[11px] font-bold transition inline-flex items-center gap-1.5 cursor-pointer">
+                  <span id="homeRankPillText">Lv. 1 · Mubtadi'</span>
+                  <span class="text-amber-400 text-[10px]">▾</span>
+                </button>
               </div>
               <h1 id="homeStudentName" class="text-xl sm:text-2xl font-extrabold tracking-tight truncate">Set Student Profile</h1>
               <p id="homeStudentSchool" class="text-xs sm:text-sm text-emerald-100/85 truncate mt-0.5">Tap Edit Profile to personalize</p>
@@ -1642,6 +1646,53 @@
     </div>
   </div>
 
+  <!-- Hafazan Rank & Hasanah XP Roadmap Modal -->
+  <div id="rankRoadmapModal" class="hidden fixed inset-0 z-50 bg-slate-950/80 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white w-full max-w-lg rounded-t-xl sm:rounded-xl border-2 border-slate-300 border-t-4 border-t-amber-500 p-6 shadow-2xl space-y-4 max-h-[88vh] overflow-y-auto panel-enter">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <div>
+          <h3 class="font-extrabold text-base sm:text-lg text-slate-900" data-i18n="rankModalTitle">Hafazan Rank &amp; Next Level</h3>
+          <p class="text-xs text-slate-500 font-medium" data-i18n="rankModalSub">Your Hasanah XP progress &amp; 7-level Tahfiz roadmap</p>
+        </div>
+        <button type="button" id="btnCloseRankModal" class="w-8 h-8 rounded bg-slate-100 border border-slate-300 text-slate-700 font-extrabold">✕</button>
+      </div>
+
+      <!-- Current -> Next Level Progress Box -->
+      <div class="islamic-pattern rounded-xl p-4 sm:p-5 text-white border-2 border-brand-950 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-300 block" data-i18n="rankModalCurrentLbl">Current Rank</span>
+            <strong id="rankModalCurrentTitle" class="text-base sm:text-lg font-extrabold text-white">Lv. 1 · Mubtadi'</strong>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-200 block">Hasanah XP</span>
+            <strong id="rankModalCurrentXp" class="text-base sm:text-lg font-extrabold text-amber-300">0 XP</strong>
+          </div>
+        </div>
+
+        <div class="w-full h-3 bg-brand-950 border border-emerald-500/40 rounded overflow-hidden">
+          <div id="rankModalProgressFill" class="h-full bg-amber-400 transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-bold">
+          <span id="rankModalNextTargetText" class="text-amber-200">Next: Lv. 2 · Talib Al-Quran</span>
+          <span id="rankModalRemainingText" class="text-emerald-200">1,200 XP needed</span>
+        </div>
+        <p id="rankModalStatsLine" class="text-[11px] text-emerald-100/80 pt-2 border-t border-white/15">
+          0 / 30 Juz completed · 0 Ayat memorized
+        </p>
+      </div>
+
+      <!-- Overall 7-Level Ladder List -->
+      <div class="space-y-2">
+        <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-600 block" data-i18n="rankModalAllLevelsLbl">All 7 Tahfiz Ranks</span>
+        <div id="rankRoadmapList" class="space-y-2"></div>
+      </div>
+
+      <button type="button" id="btnDoneRankModal" class="w-full py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 text-xs font-extrabold uppercase tracking-wider" data-i18n="closeBtn">Close</button>
+    </div>
+  </div>
+
   <!-- Floating Toast Notification -->
   <div id="toastBanner" class="fixed top-20 left-1/2 -translate-x-1/2 z-[70] bg-slate-950 text-amber-300 border border-amber-400/50 px-5 py-2.5 rounded-lg text-xs font-extrabold shadow-xl opacity-0 pointer-events-none transition-all duration-200">
     <span id="toastMessage">Saved!</span>
@@ -2099,6 +2150,27 @@
         nextPageBtn: 'Next →',
         rowsSuffix: (n) => `${n} rows`,
         rankTitles: ["Mubtadi'", "Talib Al-Quran", "Hafiz Junior", "Muqri' Muda", "Mutqin", "Hafiz Senior", "Al-Hafiz / Al-Hafizah"],
+        rankModalTitle: 'Hafazan Rank & Next Level',
+        rankModalSub: 'Your Hasanah XP progress & 7-level Tahfiz roadmap',
+        rankModalCurrentLbl: 'Current Rank',
+        rankModalAllLevelsLbl: 'All 7 Tahfiz Ranks',
+        rankNextLabel: (lvl, title) => `Next: Lv. ${lvl} · ${title}`,
+        rankRemXpLabel: (rem) => `${rem.toLocaleString()} XP to go`,
+        rankMaxAchieved: 'Highest Tahfiz Rank Achieved!',
+        rankStatsSummary: (juz, ayat) => `${juz} / 30 Juz completed · ${ayat.toLocaleString()} Ayat memorized`,
+        rankReqDesc: [
+          'Starting milestone (0 XP)',
+          '1,200 XP or 1 Juz completed',
+          '4,000 XP or 3 Juz completed',
+          '10,000 XP or 5 Juz completed',
+          '22,000 XP or 10 Juz completed',
+          '36,000 XP or 15 Juz completed',
+          '65,000 XP or 30 Juz (Full Al-Quran)'
+        ],
+        rankStatusDone: 'Achieved',
+        rankStatusCurrent: 'Current',
+        rankStatusLocked: 'Upcoming',
+        closeBtn: 'Close',
         statusLabels: { Active: 'Active', Weekend: 'Weekend', Cuti: 'Cuti', Riadah: 'Riadah' },
         saveSessionRows: (n) => n === 1 ? 'Save Session (1 Row)' : `Save Session (${n} Rows)`
       },
@@ -2324,6 +2396,27 @@
         nextPageBtn: 'Seterusnya →',
         rowsSuffix: (n) => `${n} baris`,
         rankTitles: ["Mubtadi'", "Talib Al-Quran", "Hafiz Junior", "Muqri' Muda", "Mutqin", "Hafiz Senior", "Al-Hafiz / Al-Hafizah"],
+        rankModalTitle: 'Pangkat Hafazan & Tahap Seterusnya',
+        rankModalSub: 'Kemajuan Hasanah XP & 7 tahap pencapaian Tahfiz',
+        rankModalCurrentLbl: 'Pangkat Semasa',
+        rankModalAllLevelsLbl: 'Semua 7 Tahap Tahfiz',
+        rankNextLabel: (lvl, title) => `Seterusnya: Lv. ${lvl} · ${title}`,
+        rankRemXpLabel: (rem) => `Baki ${rem.toLocaleString()} XP lagi`,
+        rankMaxAchieved: 'Pangkat Tahfiz Tertinggi Dicapai!',
+        rankStatsSummary: (juz, ayat) => `${juz} / 30 Juzuk tamat · ${ayat.toLocaleString()} Ayat dihafaz`,
+        rankReqDesc: [
+          'Tahap permulaan (0 XP)',
+          '1,200 XP atau 1 Juzuk tamat',
+          '4,000 XP atau 3 Juzuk tamat',
+          '10,000 XP atau 5 Juzuk tamat',
+          '22,000 XP atau 10 Juzuk tamat',
+          '36,000 XP atau 15 Juzuk tamat',
+          '65,000 XP atau 30 Juzuk (Khatam Al-Quran)'
+        ],
+        rankStatusDone: 'Dicapai',
+        rankStatusCurrent: 'Semasa',
+        rankStatusLocked: 'Akan Datang',
+        closeBtn: 'Tutup',
         statusLabels: { Active: 'Aktif', Weekend: 'Hujung Minggu', Cuti: 'Cuti', Riadah: 'Riadah' },
         saveSessionRows: (n) => n === 1 ? 'Simpan Sesi (1 Baris)' : `Simpan Sesi (${n} Baris)`
       }
@@ -2804,12 +2897,32 @@
       const quranPct = ((memAyat / 6236) * 100).toFixed(1);
       document.getElementById('homeQuranQuickPct').textContent = `${quranPct}% Al-Quran`;
 
-      // XP & Rank
+      // Completed Juz Count (using Mushaf boundaries)
+      let completedJuzCount = 0;
+      for (let j = 1; j <= 30; j++) {
+        const [sS, sA, eS, eA] = MUSHAF_JUZ_SURAH_BOUNDS[j];
+        let tot = 0, mem = 0;
+        for (let n = sS; n <= eS; n++) {
+          const low = n === sS ? sA : 1;
+          const high = n === eS ? eA : ALL_114_SURAHS[n - 1].ayat;
+          tot += (high - low + 1);
+          if ((surahMemMap[n] || 0) >= low) mem += Math.min(high, surahMemMap[n]) - low + 1;
+        }
+        if (tot > 0 && mem >= tot) completedJuzCount++;
+      }
+
+      // XP & Rank (checks both XP and completed Juz requirements)
       const xp = (memAyat * 10) + (totalSaba * 5) + ((totalPra + totalMukhtar + totalMur) * 2) + (activeDates.size * 25);
       let tierIdx = 0;
-      HAFAZAN_RANK_TIERS.forEach((tier, i) => { if (xp >= tier.minXp) tierIdx = i; });
-      document.getElementById('homeRankPill').textContent = `Lv. ${HAFAZAN_RANK_TIERS[tierIdx].level} · ${tr.rankTitles[tierIdx]}`;
+      HAFAZAN_RANK_TIERS.forEach((tier, i) => {
+        if (xp >= tier.minXp || completedJuzCount >= tier.minJuz) tierIdx = i;
+      });
+      document.getElementById('homeRankPillText').textContent = `Lv. ${HAFAZAN_RANK_TIERS[tierIdx].level} · ${tr.rankTitles[tierIdx]}`;
       document.getElementById('homeXpLabel').textContent = `${xp.toLocaleString()} XP`;
+      window._latestRankState = { xp, tierIdx, completedJuzCount, memAyat };
+      if (!document.getElementById('rankRoadmapModal').classList.contains('hidden')) {
+        renderRankRoadmapModal();
+      }
 
       // KPIs
       document.getElementById('homeKpiSaba').textContent = totalSaba.toLocaleString();
@@ -4161,6 +4274,12 @@
       };
       document.getElementById('btnHomeEditProfile').addEventListener('click', openProfModal);
       document.getElementById('btnModalEditProfile').addEventListener('click', openProfModal);
+      document.getElementById('homeRankPill').addEventListener('click', () => {
+        renderRankRoadmapModal();
+        document.getElementById('rankRoadmapModal').classList.remove('hidden');
+      });
+      document.getElementById('btnCloseRankModal').addEventListener('click', () => document.getElementById('rankRoadmapModal').classList.add('hidden'));
+      document.getElementById('btnDoneRankModal').addEventListener('click', () => document.getElementById('rankRoadmapModal').classList.add('hidden'));
       document.getElementById('btnCloseProfileModal').addEventListener('click', () => document.getElementById('profileEditorModal').classList.add('hidden'));
       document.getElementById('btnCancelProfile').addEventListener('click', () => document.getElementById('profileEditorModal').classList.add('hidden'));
       document.getElementById('btnRemoveProfilePhoto').addEventListener('click', () => {
@@ -4503,6 +4622,71 @@
         }
       } catch (e) {}
     });
+
+    function renderRankRoadmapModal() {
+      const tr = t();
+      const st = window._latestRankState || { xp: 0, tierIdx: 0, completedJuzCount: 0, memAyat: 0 };
+      const curTier = HAFAZAN_RANK_TIERS[st.tierIdx];
+      const nextTier = HAFAZAN_RANK_TIERS[st.tierIdx + 1] || null;
+      const curName = tr.rankTitles[st.tierIdx];
+
+      document.getElementById('rankModalCurrentTitle').textContent = `Lv. ${curTier.level} · ${curName}`;
+      document.getElementById('rankModalCurrentXp').textContent = `${st.xp.toLocaleString()} XP`;
+      document.getElementById('rankModalStatsLine').textContent = tr.rankStatsSummary(st.completedJuzCount, st.memAyat);
+
+      if (nextTier) {
+        const nextName = tr.rankTitles[st.tierIdx + 1];
+        const floorXp = Math.min(curTier.minXp, st.xp);
+        const span = Math.max(1, nextTier.minXp - floorXp);
+        const pct = Math.min(99, Math.max(5, Math.round(((st.xp - floorXp) / span) * 100)));
+        const remXp = Math.max(0, nextTier.minXp - st.xp);
+
+        document.getElementById('rankModalProgressFill').style.width = `${pct}%`;
+        document.getElementById('rankModalNextTargetText').textContent = tr.rankNextLabel(nextTier.level, nextName);
+        document.getElementById('rankModalRemainingText').textContent = tr.rankRemXpLabel(remXp);
+      } else {
+        document.getElementById('rankModalProgressFill').style.width = '100%';
+        document.getElementById('rankModalNextTargetText').textContent = tr.rankMaxAchieved;
+        document.getElementById('rankModalRemainingText').textContent = '100%';
+      }
+
+      const listEl = document.getElementById('rankRoadmapList');
+      listEl.innerHTML = HAFAZAN_RANK_TIERS.map((tier, idx) => {
+        const isCurrent = idx === st.tierIdx;
+        const isAchieved = idx < st.tierIdx;
+        const title = tr.rankTitles[idx];
+        const reqText = tr.rankReqDesc[idx] || `${tier.minXp.toLocaleString()} XP`;
+
+        let cardCls = 'p-3 rounded-lg border flex items-center justify-between gap-3 ';
+        let badgeHtml = '';
+
+        if (isCurrent) {
+          cardCls += 'bg-amber-50 border-2 border-amber-500 shadow-[0_2px_0_#fde68a]';
+          badgeHtml = `<span class="px-2 py-0.5 rounded bg-amber-400 text-brand-950 text-[10px] font-extrabold uppercase shrink-0">★ ${escapeHTML(tr.rankStatusCurrent)}</span>`;
+        } else if (isAchieved) {
+          cardCls += 'bg-emerald-50/70 border-emerald-300';
+          badgeHtml = `<span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 text-[10px] font-extrabold uppercase shrink-0">✓ ${escapeHTML(tr.rankStatusDone)}</span>`;
+        } else {
+          cardCls += 'bg-slate-50 border-slate-200 opacity-85';
+          badgeHtml = `<span class="px-2 py-0.5 rounded bg-slate-200 text-slate-600 text-[10px] font-bold uppercase shrink-0">${escapeHTML(tr.rankStatusLocked)}</span>`;
+        }
+
+        return `
+          <div class="${cardCls}">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <span class="w-8 h-8 rounded-lg ${isCurrent ? 'bg-brand-900 text-amber-300' : isAchieved ? 'bg-emerald-700 text-white' : 'bg-slate-200 text-slate-700'} font-extrabold text-xs flex items-center justify-center shrink-0">
+                Lv.${tier.level}
+              </span>
+              <div class="min-w-0">
+                <span class="font-extrabold text-xs sm:text-sm text-slate-900 block truncate">${escapeHTML(title)}</span>
+                <span class="text-[11px] font-medium text-slate-500 block truncate">${escapeHTML(reqText)}</span>
+              </div>
+            </div>
+            ${badgeHtml}
+          </div>
+        `;
+      }).join('');
+    }
 
     function renderSurahPickerList() {
       const q = document.getElementById('surahModalSearchInput').value.toLowerCase().trim();
